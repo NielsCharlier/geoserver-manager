@@ -829,8 +829,8 @@ public class GeoServerRESTPublisher {
      * @throws IllegalArgumentException if any of the mandatory {@code workspace}, {@code dsType}, {@code storeName}, {@code method},
      *         {@code extension}, {@code mimeType} or {@code uri} parameters are {@code null}.
      */
-    private boolean createStore(String workspace, StoreType dsType, String storeName,
-            UploadMethod method, Enum extension, String mimeType, URI uri,
+    public boolean createStore(String workspace, StoreType dsType, String storeName,
+            UploadMethod method, String extension, String mimeType, URI uri,
             ParameterConfigure configure, NameValuePair... params) throws FileNotFoundException,
             IllegalArgumentException {
         if (workspace == null || dsType == null || storeName == null || method == null
@@ -900,7 +900,7 @@ public class GeoServerRESTPublisher {
     private boolean createDataStore(String workspace, String storeName, UploadMethod method,
             DataStoreExtension extension, String mimeType, URI uri, ParameterConfigure configure,
             NameValuePair... params) throws FileNotFoundException, IllegalArgumentException {
-        return createStore(workspace, StoreType.DATASTORES, storeName, method, extension, mimeType,
+        return createStore(workspace, StoreType.DATASTORES, storeName, method, extension.toString(), mimeType,
                 uri, configure, params);
     }
 
@@ -929,7 +929,7 @@ public class GeoServerRESTPublisher {
             CoverageStoreExtension extension, String mimeType, URI uri,
             ParameterConfigure configure, NameValuePair... params) throws FileNotFoundException,
             IllegalArgumentException {
-        return createStore(workspace, StoreType.COVERAGESTORES, storeName, method, extension,
+        return createStore(workspace, StoreType.COVERAGESTORES, storeName, method, extension.toString(),
                 mimeType, uri, configure, params);
     }
 
@@ -1365,7 +1365,7 @@ public class GeoServerRESTPublisher {
 
         // Create store, upload data, and publish layers
         return createStore(workspace, StoreType.DATASTORES, storeName, method,
-                DataStoreExtension.SHP, mime, resource, ParameterConfigure.ALL,
+                DataStoreExtension.SHP.toString(), mime, resource, ParameterConfigure.ALL,
                 new NameValuePair[0]);
     }
 
@@ -2349,7 +2349,7 @@ public class GeoServerRESTPublisher {
      * @throws IllegalArgumentException if workspace or storename are null or empty
      * @return <TT>true</TT> if the store was successfully removed.
      */
-    private boolean removeStore(String workspace, String storename, StoreType type,
+    public boolean removeStore(String workspace, String storename, StoreType type,
             final boolean recurse, final Purge purge) throws IllegalArgumentException {
         try {
             if (workspace == null || storename == null)
@@ -2858,7 +2858,7 @@ public class GeoServerRESTPublisher {
      * @return true if success
      * @throws IllegalArgumentException if arguments are null or empty
      */
-    private boolean createResource(String workspace, StoreType dsType, String storeName,
+    public boolean createResource(String workspace, StoreType dsType, String storeName,
             GSResourceEncoder re) throws IllegalArgumentException {
         if (workspace == null || dsType == null || storeName == null || re == null) {
             throw new IllegalArgumentException("Null argument");
@@ -2870,7 +2870,7 @@ public class GeoServerRESTPublisher {
         final String resourceName = re.getName();
         if (resourceName == null) {
             throw new IllegalArgumentException(
-                    "Unable to configure a coverage using unnamed coverage encoder");
+                    "Unable to configure a coverage using unnamed resource encoder");
         }
 
         final String xmlBody = re.toString();
@@ -2882,7 +2882,100 @@ public class GeoServerRESTPublisher {
             }
         } else {
             if (LOGGER.isErrorEnabled())
-                LOGGER.error("Error creating coverage " + workspace + ":" + storeName + ":"
+                LOGGER.error("Error creating resource " + workspace + ":" + storeName + ":"
+                        + resourceName + " (" + sendResult + ")");
+        }
+
+        return sendResult != null;
+    }
+    
+    /**
+     * Configure resource in a given workspace and store
+     * 
+     * @param wsname the workspace to search for existent coverage
+     * @param storeName an existent store name to use as data source
+     * @param re contains the coverage name to create and the configuration to apply
+     * 
+     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+     *       values configured, available, or all.
+     * 
+     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+     *       includes feature types that have a geometry granule. all - The union of configured and available.
+     * 
+     * 
+     * @return true if success
+     * @throws IllegalArgumentException if arguments are null or empty
+     */
+    public boolean removeResource(String workspace, StoreType dsType, String storeName, String resName) throws IllegalArgumentException {
+        if (workspace == null || dsType == null || storeName == null) {
+            throw new IllegalArgumentException("Null argument");
+        }        
+        StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
+                .append(workspace).append("/").append(dsType).append("/").append(storeName)
+                .append("/").append(dsType.getTypeName()).append("/").append(resName)
+                .append(".xml");
+
+        final boolean sendResult = HTTPUtils.delete(sbUrl.toString(), gsuser, gspass);
+        if (sendResult) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(dsType + " successfully delete " + workspace + ":" + storeName + ":"
+                        + resName);
+            }
+        } else {
+            if (LOGGER.isErrorEnabled())
+                LOGGER.error("Error deleting coverage " + workspace + ":" + storeName + ":"
+                        + resName + " (" + sendResult + ")");
+        }
+
+        return sendResult;
+    }
+    
+    /**
+     * Delete a resource 
+     * 
+     * @param wsname the workspace to search for existent coverage
+     * @param storeName an existent store name to use as data source
+     * @param re contains the coverage name to create and the configuration to apply
+     * 
+     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+     *       values configured, available, or all.
+     * 
+     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+     *       includes feature types that have a geometry granule. all - The union of configured and available.
+     * 
+     * 
+     * @return true if success
+     * @throws IllegalArgumentException if arguments are null or empty
+     */
+    public boolean configureResource(String workspace, StoreType dsType, String storeName,
+            GSResourceEncoder re) throws IllegalArgumentException {
+        if (workspace == null || dsType == null || storeName == null || re == null) {
+            throw new IllegalArgumentException("Null argument");
+        }        
+
+        final String resourceName = re.getName();
+        if (resourceName == null) {
+            throw new IllegalArgumentException(
+                    "Unable to configure a coverage using unnamed coverage encoder");
+        }
+
+        StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
+                .append(workspace).append("/").append(dsType).append("/").append(storeName)
+                .append("/").append(dsType.getTypeName()).append("/").append(resourceName)
+                .append(".xml");
+
+        final String xmlBody = re.toString();
+        final String sendResult = HTTPUtils.putXml(sbUrl.toString(), xmlBody, gsuser, gspass);
+        if (sendResult != null) {
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug(dsType + " successfully configured " + workspace + ":" + storeName + ":"
+                        + resourceName);
+            }
+        } else {
+            if (LOGGER.isErrorEnabled())
+                LOGGER.error("Error configuring coverage " + workspace + ":" + storeName + ":"
                         + resourceName + " (" + sendResult + ")");
         }
 
