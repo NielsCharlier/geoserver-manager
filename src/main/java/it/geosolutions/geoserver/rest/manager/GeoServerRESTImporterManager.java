@@ -33,7 +33,6 @@ import java.net.URL;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 
-import org.restlet.data.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +42,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
 
+    private static final String MEDIA_TYPE_APPLICATION_ZIP = "application/zip";
     private final static Logger LOGGER = LoggerFactory.getLogger(GeoServerRESTImporterManager.class);
     
     /**
@@ -253,7 +253,8 @@ public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
     public int putNewTask(int imp, String path) throws Exception {
         File zip = new File(path);
 
-        String resp = HTTPUtils.put(buildUrl()+"/" + imp + "/tasks/" + zip.getName(), zip, MediaType.APPLICATION_ZIP.toString(), gsuser, gspass);
+        String resp = HTTPUtils.put(buildUrl()+"/" + imp + "/tasks/" + zip.getName(), zip, 
+                MEDIA_TYPE_APPLICATION_ZIP, gsuser, gspass);
 
         JSONObject json = (JSONObject) HTTPUtils.json(resp);
 
