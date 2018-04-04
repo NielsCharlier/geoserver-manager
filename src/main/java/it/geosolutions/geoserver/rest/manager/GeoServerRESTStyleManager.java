@@ -585,6 +585,22 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         String result = HTTPUtils.post(sUrl, sldFile, GeoServerRESTPublisher.Format.SLD.getContentType(), gsuser, gspass);
         return result != null;
     }
+    
+    /**
+     * Store and publish a Style, assigning it a name.
+     *
+     * @param sldFile the File containing the SLD document.
+     * @param name the Style name.
+     *
+     * @return <TT>true</TT> if the operation completed successfully.
+     * @since GeoServer 2.2
+     */
+    public boolean publishStyleZippedInWorkspace(final String workspace, File zipFile, String name) {
+        String sUrl = buildPostUrl(workspace, name);
+        LOGGER.debug("POSTing new style " + name + " to " + sUrl);
+        String result = HTTPUtils.post(sUrl, zipFile, GeoServerRESTPublisher.Format.ZIP.getContentType(), gsuser, gspass);
+        return result != null;
+    }
 
     /**
      * Update a Style.
