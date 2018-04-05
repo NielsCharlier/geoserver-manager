@@ -2934,11 +2934,11 @@ public class GeoServerRESTPublisher {
     }
     
     /**
-     * Delete a resource 
+     * Configure a resource 
      * 
      * @param wsname the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
-     * @param re contains the coverage name to create and the configuration to apply
+     * @param re contains the configuration to apply with the resource name 
      * 
      * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
      *       values configured, available, or all.
@@ -2952,12 +2952,35 @@ public class GeoServerRESTPublisher {
      * @throws IllegalArgumentException if arguments are null or empty
      */
     public boolean configureResource(String workspace, StoreType dsType, String storeName,
-            GSResourceEncoder re) throws IllegalArgumentException {
+             GSResourceEncoder re) throws IllegalArgumentException {
+        return configureResource(workspace, dsType, storeName, re.getName(), re);
+    }
+    
+    /**
+     * Configure a resource 
+     * 
+     * @param wsname the workspace to search for existent coverage
+     * @param storeName an existent store name to use as data source
+     * @param resourceName an existent resource name
+     * @param re contains the configuration to apply, possibly new resource name
+     * 
+     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+     *       values configured, available, or all.
+     * 
+     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+     *       includes feature types that have a geometry granule. all - The union of configured and available.
+     * 
+     * 
+     * @return true if success
+     * @throws IllegalArgumentException if arguments are null or empty
+     */
+    public boolean configureResource(String workspace, StoreType dsType, String storeName,
+            String resourceName, GSResourceEncoder re) throws IllegalArgumentException {
         if (workspace == null || dsType == null || storeName == null || re == null) {
             throw new IllegalArgumentException("Null argument");
         }        
 
-        final String resourceName = re.getName();
         if (resourceName == null) {
             throw new IllegalArgumentException(
                     "Unable to configure a coverage using unnamed coverage encoder");
