@@ -635,7 +635,7 @@ public class GeoServerRESTPublisher {
             case COVERAGESTORES:
                 return "coverages"; // Format
             case DATASTORES:
-                return "featureTypes";
+                return "featuretypes";
             default:
                 return "coverages";
             }
