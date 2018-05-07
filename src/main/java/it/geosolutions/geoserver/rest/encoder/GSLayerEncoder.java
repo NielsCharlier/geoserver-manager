@@ -82,12 +82,48 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 	final private Element authorityURLListEncoder = new Element(AUTHORITY_URLS);
 	final private Element identifierListEncoder = new Element(IDENTIFIERS);
 	
-    public GSLayerEncoder() {
+	public GSLayerEncoder() {
+	    this(true);
+	}
+	
+    public GSLayerEncoder(boolean encodeLists) {
         super("layer");
         addEnabled();
-        addContent(stylesEncoder);
-        addContent(authorityURLListEncoder);
-        addContent(identifierListEncoder); 
+        if (encodeLists) {
+            addContent(stylesEncoder);
+            addContent(authorityURLListEncoder);
+            addContent(identifierListEncoder);
+        }
+    }
+    
+    void encodeStyles(boolean encoded) {
+        if (encoded) {
+            if (this.get(stylesEncoder.getName()) == null) {
+                addContent(stylesEncoder);            
+            }
+        } else {
+            remove(stylesEncoder.getName());
+        }
+    }
+    
+    void encodeAuthorityURLs(boolean encoded) {
+        if (encoded) {
+            if (this.get(authorityURLListEncoder.getName()) == null) {
+                addContent(authorityURLListEncoder);            
+            }
+        } else {
+            remove(authorityURLListEncoder.getName());
+        }
+    }
+    
+    void encodeIdentifiers(boolean encoded) {
+        if (encoded) {
+            if (this.get(identifierListEncoder.getName()) == null) {
+                addContent(identifierListEncoder);            
+            }
+        } else {
+            remove(identifierListEncoder.getName());
+        }
     }
     
     /**

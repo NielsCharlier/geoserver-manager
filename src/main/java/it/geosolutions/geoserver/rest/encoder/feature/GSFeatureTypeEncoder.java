@@ -46,8 +46,24 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
     final private Element attributes = new Element(ATTRIBUTES);
 
     public GSFeatureTypeEncoder() {
+        this(true);
+    }
+    
+    public GSFeatureTypeEncoder(boolean encodeLists) {
         super("featureType");
-        addContent(attributes);
+        if (encodeLists) {
+            addContent(attributes);
+        }
+    }
+
+    void encodeAttributes(boolean encoded) {
+        if (encoded) {
+            if (this.get(attributes.getName()) == null) {
+                addContent(attributes);            
+            }
+        } else {
+            remove(attributes.getName());
+        }
     }
 
 

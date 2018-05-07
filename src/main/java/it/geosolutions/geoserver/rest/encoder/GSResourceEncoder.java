@@ -72,20 +72,56 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
             super(METADATA);
         }
     }
+    
+    protected GSResourceEncoder(final String rootName) {
+        this(rootName, true);        
+    }
 
     /**
      * @param rootName Actually 'feature' or 'coverage'
      * @see GSFeatureTypeEncoder
      * @see GSCoverageEncoder
      */
-    protected GSResourceEncoder(final String rootName) {
+    protected GSResourceEncoder(final String rootName, boolean encodeLists) {
         super(rootName);
         add("enabled", "true");
 
-        // Link members to the parent
-        addContent(metadata.getRoot());
-        addContent(keywordsListEncoder);
-        addContent(metadataLinksListEncoder);
+        if (encodeLists) {
+            // Link members to the parent
+            addContent(metadata.getRoot());
+            addContent(keywordsListEncoder);
+            addContent(metadataLinksListEncoder);
+        }
+    }
+    
+    void encodeMetadata(boolean encoded) {
+        if (encoded) {
+            if (this.get(metadata.getRoot().getName()) == null) {
+                addContent(metadata.getRoot());            
+            }
+        } else {
+            remove(metadata.getRoot().getName());
+        }
+    }
+    
+    void encodeKeywords(boolean encoded) {
+        if (encoded) {
+            if (this.get(keywordsListEncoder.getName()) == null) {
+                addContent(keywordsListEncoder);            
+            }
+        } else {
+            remove(keywordsListEncoder.getName());
+        }
+    }
+    
+    void encodeMetadatalinks(boolean encoded) {
+        if (encoded) {
+            if (this.get(metadataLinksListEncoder.getName()) == null) {
+                addContent(metadataLinksListEncoder);            
+            }
+        } else {
+            remove(metadataLinksListEncoder.getName());
+        }
     }
 
     public void setEnabled(boolean enabled) {
