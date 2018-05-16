@@ -50,7 +50,7 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
     }
     
     public GSFeatureTypeEncoder(boolean encodeLists) {
-        super("featureType");
+        super("featureType", encodeLists);
         if (encodeLists) {
             addContent(attributes);
         }
