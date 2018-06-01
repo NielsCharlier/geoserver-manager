@@ -30,7 +30,7 @@
 
     <groupId>it.geosolutions</groupId>
     <artifactId>geoserver-manager</artifactId>
-    <version>1.8-dov-0.3-SNAPSHOT</version>
+    <version>1.8-dov-0.3</version>
 
     <packaging>jar</packaging>
 
@@ -252,7 +252,7 @@
     </reporting>
 
     <properties>
-        <slf4j.version>1.5.11</slf4j.version>
+        <slf4j.version>1.6.4</slf4j.version>
      	<acd.issueManagement.system>Jira</acd.issueManagement.system>
 	<acd.issueManagement.url>https://www.milieuinfo.be/jira</acd.issueManagement.url>
 	<acd.ciManagement.system>Bamboo</acd.ciManagement.system>
@@ -337,7 +337,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8.2</version>
+            <version>4.12</version>
             <scope>test</scope>
         </dependency>
 
