@@ -585,6 +585,22 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         String result = HTTPUtils.post(sUrl, sldFile, GeoServerRESTPublisher.Format.SLD.getContentType(), gsuser, gspass);
         return result != null;
     }
+    
+    /**
+     * Store and publish a Style, assigning it a name.
+     *
+     * @param sldFile the File containing the SLD document.
+     * @param name the Style name.
+     *
+     * @return <TT>true</TT> if the operation completed successfully.
+     * @since GeoServer 2.2
+     */
+    public boolean publishStyleZippedInWorkspace(final String workspace, File zipFile, String name) {
+        String sUrl = buildPostUrl(workspace, name);
+        LOGGER.debug("POSTing new style " + name + " to " + sUrl);
+        String result = HTTPUtils.post(sUrl, zipFile, GeoServerRESTPublisher.Format.ZIP.getContentType(), gsuser, gspass);
+        return result != null;
+    }
 
     /**
      * Update a Style.
@@ -634,6 +650,32 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
         final String result = HTTPUtils.put(sUrl, sldFile,
                 "application/vnd.ogc.sld+xml", gsuser, gspass);
+        return result != null;
+    }
+    
+    /**
+     * Update a Style.
+     *
+     * @param sldFile the File containing the SLD document.
+     * @param name the Style name.
+     *
+     * @return <TT>true</TT> if the operation completed successfully.
+     * @throws IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @since GeoServer 2.2
+     */
+    public boolean updateStyleZippedInWorkspace(final String workspace, final File zipFile, final String name)
+            throws IllegalArgumentException {
+
+        if (zipFile == null) {
+            throw new IllegalArgumentException("Unable to updateStyle using a null parameter file");
+        } else if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The style name may not be null or empty");
+        }
+
+        final String sUrl = buildUrl(workspace, name, null);
+
+        final String result = HTTPUtils.put(sUrl, zipFile,
+                GeoServerRESTPublisher.Format.ZIP.getContentType(), gsuser, gspass);
         return result != null;
     }
 
