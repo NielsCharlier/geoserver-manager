@@ -27,8 +27,12 @@ package it.geosolutions.geoserver.rest.manager;
 import it.geosolutions.geoserver.rest.HTTPUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
@@ -140,7 +144,7 @@ public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
      */
     public void putTask(int imp, int task, final String json) throws Exception {
         //HTTPUtils.putJson(String.format(buildUrl()+"/%d/tasks/%d", imp, task), json, gsuser, gspass);
-        HTTPUtils.put(String.format(buildUrl()+"/%d/tasks/%d", imp, task), json, "text/plain", gsuser, gspass);
+        HTTPUtils.put(String.format(buildUrl()+"/%d/tasks/%d", imp, task), json, "application/json", gsuser, gspass);
     }
 
     /**
@@ -208,7 +212,7 @@ public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
      * @throws Exception
      */
     public int postNewImport(String body) throws Exception {
-        String resp = body == null ? HTTPUtils.post(buildUrl(), "", "text/plain", gsuser, gspass)
+        String resp = body == null ? HTTPUtils.post(buildUrl(), "", "application/json", gsuser, gspass)
             : HTTPUtils.postJson(buildUrl(), body, gsuser, gspass);
         
         JSONObject json = (JSONObject) HTTPUtils.json(resp);
@@ -223,7 +227,7 @@ public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
      * @throws Exception
      */
     public void postImport(int imp) throws Exception {
-        HTTPUtils.post(buildUrl()+"/" + imp + "?exec=true", "", "text/plain", gsuser, gspass);
+        HTTPUtils.post(buildUrl()+"/" + imp + "?exec=true", "", "application/json", gsuser, gspass);
     }
 
     /**
@@ -311,11 +315,27 @@ public class GeoServerRESTImporterManager extends GeoServerRESTAbstractManager {
         
         File file = new File(path);
         
-        //new VFSWorker().extractTo(file, dir);
-        if (!file.delete()) {
+        byte[] buffer = new byte[1024];
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
+        ZipEntry zipEntry = zis.getNextEntry();
+        while(zipEntry != null){
+            String fileName = zipEntry.getName();
+            File newFile = new File(dir, fileName);
+            FileOutputStream fos = new FileOutputStream(newFile);
+            int len;
+            while ((len = zis.read(buffer)) > 0) {
+                fos.write(buffer, 0, len);
+            }
+            fos.close();
+            zipEntry = zis.getNextEntry();
+        }
+        zis.closeEntry();
+        zis.close();
+        
+        /*if (!file.delete()) {
             // fail early as tests will expect it's deleted
             throw new IOException("deletion failed during extraction");
-        }
+        }*/
         
         return dir;
     }

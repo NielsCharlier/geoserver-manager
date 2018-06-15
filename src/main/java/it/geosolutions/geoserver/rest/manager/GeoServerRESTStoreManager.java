@@ -73,7 +73,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
         String result = HTTPUtils.postXml(sUrl, xml, gsuser, gspass);
         return result != null;
     }
-
+    
     /**
      * Update a store.
      * 
@@ -84,8 +84,23 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      *         <TT>false</TT> otherwise
      */
     public boolean update(String workspace, GSAbstractStoreEncoder store) {
-        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", workspace,"/", store.getStoreType().toString(),"/",
-                store.getName(),".",Format.XML.toString()).toString();
+        return update(workspace, store.getName(), store);
+    }
+    
+
+    /**
+     * Update a store.
+     * 
+     * @param workspace Name of the workspace that contains the store.
+     * @param datastore the set of parameters to be set to the store
+     *            (including connection parameters).
+     * @return <TT>true</TT> if the store has been successfully updated,
+     *         <TT>false</TT> otherwise
+     */
+    public boolean update(String workspace, String storeName, GSAbstractStoreEncoder store) {
+        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", workspace,"/", 
+                store.getStoreType().toString(),"/",
+                storeName,".",Format.XML.toString()).toString();
         String xml = store.toString();
         String result = HTTPUtils.putXml(sUrl, xml, gsuser, gspass);
         return result != null;
