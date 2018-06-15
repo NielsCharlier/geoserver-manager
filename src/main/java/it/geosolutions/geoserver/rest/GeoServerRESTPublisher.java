@@ -635,7 +635,7 @@ public class GeoServerRESTPublisher {
             case COVERAGESTORES:
                 return "coverages"; // Format
             case DATASTORES:
-                return "featuretypes";
+                return "featureTypes";
             default:
                 return "coverages";
             }
@@ -2915,7 +2915,7 @@ public class GeoServerRESTPublisher {
         }        
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
                 .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType.getTypeName()).append("/").append(resName)
+                .append("/").append(dsType).append("/").append(resName)
                 .append(".xml");
 
         final boolean sendResult = HTTPUtils.delete(sbUrl.toString(), gsuser, gspass);
@@ -2988,7 +2988,7 @@ public class GeoServerRESTPublisher {
 
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
                 .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType.getTypeName()).append("/").append(resourceName)
+                .append("/").append(dsType).append("/").append(resourceName)
                 .append(".xml");
 
         final String xmlBody = re.toString();

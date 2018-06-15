@@ -65,7 +65,7 @@ public class GeoserverRESTStyleTest extends GeoserverRESTTest {
         }
         deleteAll();
 
-        assertEquals(0, reader.getStyles().size());
+        assertEquals(5, reader.getStyles().size());
 
         final String STYLENAME = "restteststyle";
         File sldFile = new ClassPathResource("testdata/restteststyle.sld").getFile();
@@ -110,7 +110,7 @@ public class GeoserverRESTStyleTest extends GeoserverRESTTest {
         }
 
         // assertEquals(1475, sld.length());
-        assertEquals(2, reader.getStyles().size());
+        assertEquals(7, reader.getStyles().size());
     }
 
     protected void cleanupTestStyle(final String styleName)
@@ -306,7 +306,7 @@ public class GeoserverRESTStyleTest extends GeoserverRESTTest {
 
         publisher.createWorkspace(WORKSPACE);
 
-        assertEquals(0, reader.getStyles().size());
+        assertEquals(5, reader.getStyles().size());
         assertEquals(0, reader.getStyles(WORKSPACE).size());
 
         // insert style
@@ -348,7 +348,7 @@ public class GeoserverRESTStyleTest extends GeoserverRESTTest {
         }
 
         // assertEquals(1475, sld.length());
-        assertEquals(0, reader.getStyles().size());
+        assertEquals(5, reader.getStyles().size());
         assertEquals(1, reader.getStyles(WORKSPACE).size());
     }
 

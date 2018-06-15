@@ -72,8 +72,8 @@ public class GeoserverRESTWorldImageTest extends GeoserverRESTTest {
 		assertTrue("Unpublish() failed", publisher.removeCoverageStore(DEFAULT_WS, storeName, true));
 		
         // create default style
-        File sldFile = new ClassPathResource("testdata/restteststyle.sld").getFile();
-        assertTrue(publisher.publishStyle(sldFile,"raster"));
+        //File sldFile = new ClassPathResource("testdata/restteststyle.sld").getFile();
+        //assertTrue(publisher.publishStyle(sldFile,"raster"));
 		
 		wp = publisher.publishWorldImage(DEFAULT_WS, storeName,
 				worldImageFile, ParameterConfigure.FIRST, new NameValuePair("coverageName", "worldImage_test"));
