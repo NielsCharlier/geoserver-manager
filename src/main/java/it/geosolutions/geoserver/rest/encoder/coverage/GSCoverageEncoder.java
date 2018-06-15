@@ -55,8 +55,24 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     final private Element dimensionsEncoder = new Element(DIMENSIONS);
     
     public GSCoverageEncoder() {
-        super("coverage");
-        addContent(supportedFormatsListEncoder);
+        this(true);
+    }
+    
+    public GSCoverageEncoder(boolean encodeLists) {
+        super("coverage", encodeLists);
+        if (encodeLists) {
+            addContent(supportedFormatsListEncoder);
+        }
+    }
+    
+    void encodeSupportedFormats(boolean encoded) {
+        if (encoded) {
+            if (this.get(supportedFormatsListEncoder.getName()) == null) {
+                addContent(supportedFormatsListEncoder);            
+            }
+        } else {
+            remove(supportedFormatsListEncoder.getName());
+        }
     }
 
     /**
