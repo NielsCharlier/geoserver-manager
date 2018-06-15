@@ -33,7 +33,7 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
- * Layer encoder for Geoserver >= 2.2
+ * Layer encoder for Geoserver &gt;= 2.2
  *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
@@ -174,7 +174,7 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
 
     /**
-     * @see {@link GSLayerEncoder#setWmsPath(String)}
+     * @see #setWmsPath(String)
      * 
      * @param path the wms path to set
      */
@@ -196,7 +196,7 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
 
     /**
-     * @see {@link GSLayerEncoder#setDefaultStyle(String)}
+     * @see #setDefaultStyle(String)
      * @param defaultStyle 
      */
     protected void addDefaultStyle(String defaultStyle) {
@@ -204,7 +204,7 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
     
     /**
-     * @see {@link GSLayerEncoder#setDefaultStyle(String)}
+     * @see #setDefaultStyle(String)
      * @param defaultStyle 
      */
     protected void addDefaultStyle(String workspace, String defaultStyle) {
@@ -228,7 +228,7 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
     
     /**
-     * @see {@link GSLayerEncoder#setDefaultStyle(String)}
+     * @see GSLayerEncoder#setDefaultStyle(String)
      * @param defaultStyle 
      */
     public void setDefaultStyle(String workspace, String defaultStyle) {

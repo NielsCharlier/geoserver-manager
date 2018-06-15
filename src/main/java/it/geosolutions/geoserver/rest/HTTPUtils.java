@@ -73,9 +73,8 @@ public class HTTPUtils {
      * @param url The URL where to connect to.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      */
-    public static String get(String url) throws MalformedURLException {
+    public static String get(String url) {
         return get(url, null, null);
     }
 
@@ -88,7 +87,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      */
     public static String get(String url, String username, String pw) {
 
@@ -129,7 +127,6 @@ public class HTTPUtils {
     /**
      * Executes a request using the GET method and parses the result as a json object.
      * 
-     * @param path The path to request.
      *  
      * @return The result parsed as json.
      */
@@ -153,7 +150,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, File file, String contentType, String username, String pw) {
@@ -171,7 +167,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, String content, String contentType, String username, String pw) {
@@ -193,7 +188,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String putXml(String url, String content, String username, String pw) {
@@ -210,7 +204,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String putJson(String url, String content, String username, String pw) {
@@ -227,7 +220,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, RequestEntity requestEntity, String username, String pw) {
@@ -245,7 +237,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, File file, String contentType, String username, String pw) {
@@ -263,7 +254,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, String content, String contentType, String username, String pw) {
@@ -285,7 +275,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postMultipartForm(String url, File dir, String username, String pw) {
@@ -317,7 +306,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postXml(String url, String content, String username, String pw) {
@@ -334,7 +322,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postJson(String url, String content, String username, String pw) {
@@ -351,7 +338,6 @@ public class HTTPUtils {
      * @param pw Basic auth credential. No basic auth if null.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
-     * @throws MalformedURLException
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, RequestEntity requestEntity, String username, String pw) {

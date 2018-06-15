@@ -90,7 +90,7 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param the absolute path to the file to upload
+     * @param path the absolute path to the file to upload
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
@@ -107,7 +107,7 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param the absolute path to the file to upload
+     * @param path the absolute path to the file to upload
      * @param configureOpt tells GeoServer whether to configure all coverages in this mosaic (ALL) or none of them (NONE).
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
@@ -166,7 +166,7 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param format the format of the file to upload
-     * @param the absolute path to the file to upload
+     * @param path the absolute path to the file to upload
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
@@ -216,7 +216,6 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
      * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
@@ -233,10 +232,6 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
         RESTStructuredCoverageGranulesList granulesList = null;
         try {
             granulesList = getGranules(workspace, coverageStore, coverage, filter, null, 1);
-        } catch (MalformedURLException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
         } catch (UnsupportedEncodingException e) {
             if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace(e.getMessage(), e);
@@ -262,10 +257,6 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
         granulesList = null;
         try {
             granulesList = getGranules(workspace, coverageStore, coverage, filter, null, 1);
-        } catch (MalformedURLException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
         } catch (UnsupportedEncodingException e) {
             if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace(e.getMessage(), e);
@@ -283,12 +274,9 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
-     * @param filter the absolute path to the file to upload
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -301,18 +289,8 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
         checkString(coverageStore);
 
         // does it exist?
-        RESTStructuredCoverageGranulesList granule = null;
-        try {
-            granule = getGranuleById(workspace, coverageStore, coverage, granuleId);
-        } catch (MalformedURLException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
-        } catch (UnsupportedEncodingException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
-        }
+        RESTStructuredCoverageGranulesList granule = getGranuleById(workspace, coverageStore, coverage, granuleId);
+        
         if (granule == null) {
             if (LOGGER.isTraceEnabled()) {
                 LOGGER.trace("Granule for id: " + granuleId + " does not exist for coverage "
@@ -331,18 +309,7 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
         // has it been canceled?
         // does it exist?
-        granule = null;
-        try {
-            granule = getGranuleById(workspace, coverageStore, coverage, granuleId);
-        } catch (MalformedURLException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
-        } catch (UnsupportedEncodingException e) {
-            if (LOGGER.isTraceEnabled()) {
-                LOGGER.trace(e.getMessage(), e);
-            }
-        }
+        granule = getGranuleById(workspace, coverageStore, coverage, granuleId);
         if (granule == null) {
             return true;
         }
@@ -355,17 +322,14 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param format the format of the file to upload
+     * @param coverage the format of the file to upload
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageIndexSchema getGranuleIndexSchema(final String workspace,
-            String coverageStore, String coverage) throws MalformedURLException {
+            String coverageStore, String coverage) {
         // checks
         checkString(workspace);
         checkString(coverage);
@@ -390,14 +354,13 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
      * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace,
             String coverageStore, String coverage)
-            throws MalformedURLException, UnsupportedEncodingException {
+            throws  UnsupportedEncodingException {
         return getGranules(workspace, coverageStore, coverage, null, null, null);
     }
     
@@ -413,14 +376,13 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
      * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace,
             String coverageStore, String coverage, String filter, Integer offset, Integer limit)
-            throws MalformedURLException, UnsupportedEncodingException {
+            throws UnsupportedEncodingException {
         // checks
         checkString(workspace);
         checkString(coverage);
@@ -462,20 +424,15 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param format the format of the file to upload
-     * @param the absolute path to the file to upload
      * @param id the ID of the granule to get information for
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
      * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageGranulesList getGranuleById(final String workspace,
-            String coverageStore, String coverage, String id) throws MalformedURLException,
-            UnsupportedEncodingException {
+            String coverageStore, String coverage, String id) {
         // checks
         checkString(workspace);
         checkString(coverage);

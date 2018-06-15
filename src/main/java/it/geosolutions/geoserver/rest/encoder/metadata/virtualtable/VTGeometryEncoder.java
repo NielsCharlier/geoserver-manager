@@ -35,8 +35,7 @@ import org.jdom.filter.Filter;
  * GeoServer featureType, as follows:
  * 
  * <pre>
- * {
- * 	@code
+ * {@code
  * 	final VTGeometryEncoder vtGeom = new VTGeometryEncoder();
  * 	vtGeom.setName("the_geom");
  * 	vtGeom.setType("MultiPolygon");

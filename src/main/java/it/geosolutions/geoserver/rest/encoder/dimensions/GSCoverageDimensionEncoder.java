@@ -220,7 +220,6 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Deletes the name
      * 
-     * @param name
      * @return true if removed
      */
     public boolean delName() {
@@ -248,7 +247,6 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Deletes the description
      * 
-     * @param description
      * @return true if removed
      */
     public boolean delDescription() {
@@ -267,7 +265,8 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Set the range
      * 
-     * @param range
+     * @param rangeMin
+     * @param rangeMax
      */
     public void setRange(String rangeMin, String rangeMax) {
         if (rangeMin != null && !rangeMin.isEmpty() && rangeMax != null && !rangeMax.isEmpty()) {
@@ -287,7 +286,6 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Deletes the range
      * 
-     * @param range
      * @return true if removed
      */
     public boolean delRange() {
@@ -334,7 +332,6 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Deletes the type
      * 
-     * @param type
      * @return true if removed
      */
     public boolean delUnit() {
@@ -353,7 +350,7 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Set the dimensionType
      * 
-     * @param dimensionType
+     * @param dimensionTypeName
      */
     public void setDimensionType(String dimensionTypeName) {
         if (dimensionTypeName != null && !dimensionTypeName.isEmpty()) {
@@ -370,7 +367,6 @@ public class GSCoverageDimensionEncoder extends XmlElement {
     /**
      * Deletes the dimensionType
      * 
-     * @param dimensionType
      * @return true if removed
      */
     public boolean delDimensionType() {

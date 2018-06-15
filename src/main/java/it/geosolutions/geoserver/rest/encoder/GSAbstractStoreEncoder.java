@@ -106,7 +106,7 @@ public abstract class GSAbstractStoreEncoder extends PropertyXMLEncoder {
      * Check type validity.
      * 
      * @param type the type.
-     * @throws IllegalArgumentException if type is not {@value #TYPE}
+     * @throws IllegalArgumentException if type is not valid
      */
     protected void ensureValidType(String type) {
         if (!type.equals(getValidType())) {

@@ -63,7 +63,6 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
-     * @throws MalformedURLException {@link GeoServerRESTAbstractManager#GeoServerRESTAbstractManager(URL, String, String)}
      * @throws IllegalArgumentException {@link GeoServerRESTAbstractManager#GeoServerRESTAbstractManager(URL, String, String)}
      */
     public GeoServerRESTManager(URL restURL, String username, String password)

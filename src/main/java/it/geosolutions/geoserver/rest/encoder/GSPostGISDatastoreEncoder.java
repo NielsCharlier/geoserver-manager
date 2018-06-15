@@ -52,7 +52,6 @@ public class GSPostGISDatastoreEncoder extends PropertyXMLEncoder {
     
     /**
      * Set some initial defaults.
-     * <br/><br/>
      * The default parameters are as follows: <ul>
      * <li>maximum connections: 10, </li>
      * <li>minimum connections: 1,</li>

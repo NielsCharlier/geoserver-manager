@@ -450,7 +450,7 @@ public class GeoServerRESTReader {
      * Checks if the selected Coverage store is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
      * 
      * @param workspace workspace of the coveragestore
-     * @param dsName name of the coveragestore
+     * @param csName name of the coveragestore
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the coveragestore exists
      */
@@ -464,7 +464,7 @@ public class GeoServerRESTReader {
      * Checks if the selected Coverage store is present.
      * 
      * @param workspace workspace of the coveragestore
-     * @param dsName name of the coveragestore
+     * @param csName name of the coveragestore
      * @return boolean indicating if the coveragestore exists
      */
     public boolean existsCoveragestore(String workspace, String csName){
@@ -511,7 +511,7 @@ public class GeoServerRESTReader {
      * Checks if the selected Coverage is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
      * 
      * @param workspace workspace of the coveragestore
-     * @param dsName name of the coveragestore
+     * @param store name of the coveragestore
      * @param name name of the coverage
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the coverage exists
@@ -647,7 +647,7 @@ public class GeoServerRESTReader {
      * @param workspace The name of the workspace
      * @param store The name of the WmsStore
      * @param name The name of the Wms
-     * @return wms details as a {@link RESTwms}
+     * @return wms details as a {@link RESTWms}
      */
     public RESTWms getWms(String workspace, String store, String name) {
         String url = "/rest/workspaces/" + workspace + "/wmsstores/" + store + "/wmslayers/"+name+".xml";
@@ -661,7 +661,6 @@ public class GeoServerRESTReader {
      * Checks if the selected Wms is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
      * 
      * @param workspace workspace of the wmsstore
-     * @param wsName name of the wmsstore
      * @param name name of the wms
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the coverage exists
@@ -1054,8 +1053,6 @@ public class GeoServerRESTReader {
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param format the format of the file to upload
-     * @param the absolute path to the file to upload
      * @param id the ID of the granule to get information for
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
@@ -1119,14 +1116,11 @@ public class GeoServerRESTReader {
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param format the format of the file to upload
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
      */
-     public RESTStructuredCoverageIndexSchema getGranuleIndexSchema(final String workspace, String coverageStore, String coverage) throws MalformedURLException {
+     public RESTStructuredCoverageIndexSchema getGranuleIndexSchema(final String workspace, String coverageStore, String coverage) {
          try {
              GeoServerRESTStructuredGridCoverageReaderManager manager = 
                  new GeoServerRESTStructuredGridCoverageReaderManager(new URL(baseurl), username, password);
@@ -1155,11 +1149,9 @@ public class GeoServerRESTReader {
       * 
       * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
       * 
-      * @throws MalformedURLException
-      * @throws UnsupportedEncodingException
       */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace, String coverageStore, String coverage, String filter, Integer offset, Integer limit)
-             throws MalformedURLException, UnsupportedEncodingException {
+             throws  UnsupportedEncodingException {
          try {
              GeoServerRESTStructuredGridCoverageReaderManager manager = 
                  new GeoServerRESTStructuredGridCoverageReaderManager(new URL(baseurl), username, password);

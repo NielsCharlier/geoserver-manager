@@ -32,7 +32,7 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
- * Encodes lists of entries with key attribute. <br/>
+ * Encodes lists of entries with key attribute. 
  * e.g.:
  * 
  * <PRE>
@@ -42,10 +42,9 @@ import org.jdom.filter.Filter;
  *   <entry key="k2">val2</entry>
  *   <entry key="k3">val3</entry>
  * </listName>}
+ * </PRE>
  * 
- * <PRE>
- * 
- * This can be also add compounded Elements <br/>
+ * This can be also add compounded Elements 
  * e.g.:
  * 
  * <PRE>
@@ -64,9 +63,12 @@ import org.jdom.filter.Filter;
  * 		</dimensionInfo>
  * 	</entry>
  * </listName>}
+ * </PRE>
  * 
- * This can be also add list of compounded Elements <br/>
+ * This can be also add list of compounded Elements 
  * 
+ * <PRE>
+ * {@code 
  * <listName>
  *  <entry>
  *   	<String>AllowMultithreading</String>
@@ -79,9 +81,9 @@ import org.jdom.filter.Filter;
  * 			<presentation>LIST</presentation>
  * 		</dimensionInfo>
  * 	</entry>
- * </listName>}
- * 
- * <PRE>
+ * </listName>
+ * }
+ * </PRE>
  * 
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it

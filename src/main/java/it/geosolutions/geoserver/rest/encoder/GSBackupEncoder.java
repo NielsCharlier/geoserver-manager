@@ -49,7 +49,7 @@ public class GSBackupEncoder extends PropertyXMLEncoder
     }
 
     /**
-     * @param path the task path
+     * @param name 
      */
     public GSBackupEncoder(String name)
     {

@@ -98,7 +98,7 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
     }
 
     /**
-     * @param list
+     * @param featureCollection
      */
     @SuppressWarnings("unchecked")
     protected RESTStructuredCoverageGranulesList(Element featureCollection) {
@@ -157,29 +157,30 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
     /**
      * Generic granule of the index.
      *  
- * <P>This is the XML REST representation:
- * <PRE>
-  {@code
-  <gml:featureMember>
-    <gf:V fid="V.1">
-      <gf:the_geom>
-        <gml:Polygon>
-          <gml:outerBoundaryIs>
-            <gml:LinearRing>
-              <gml:coordinates>5.0,45.0 5.0,50.9375 14.875,50.9375 14.875,45.0 5.0,45.0</gml:coordinates>
-            </gml:LinearRing>
-          </gml:outerBoundaryIs>
-        </gml:Polygon>
-      </gf:the_geom>
-      <gf:location>polyphemus_20130301.nc</gf:location>
-      <gf:imageindex>672</gf:imageindex>
-      <gf:time>2013-02-28T23:00:00Z</gf:time>
-      <gf:elevation>10.0</gf:elevation>
-      <gf:fileDate>2013-02-28T23:00:00Z</gf:fileDate>
-      <gf:updated>2013-04-08T06:18:41.597Z</gf:updated>
-    </gf:V>
-  </gml:featureMember>
-
+     * <P>This is the XML REST representation:
+     * <PRE>
+     * {@code
+     * <gml:featureMember>
+     * <gf:V fid="V.1">
+     *   <gf:the_geom>
+     *      <gml:Polygon>
+     *           <gml:outerBoundaryIs>
+     *              <gml:LinearRing>
+     *              <gml:coordinates>5.0,45.0 5.0,50.9375 14.875,50.9375 14.875,45.0 5.0,45.0</gml:coordinates>
+     *             </gml:LinearRing>
+     *          </gml:outerBoundaryIs>
+     *         </gml:Polygon>
+     *       </gf:the_geom>
+     *       <gf:location>polyphemus_20130301.nc</gf:location>
+     *       <gf:imageindex>672</gf:imageindex>
+     *       <gf:time>2013-02-28T23:00:00Z</gf:time>
+     *       <gf:elevation>10.0</gf:elevation>
+     *       <gf:fileDate>2013-02-28T23:00:00Z</gf:fileDate>
+     *       <gf:updated>2013-04-08T06:18:41.597Z</gf:updated>
+     *     </gf:V>
+     *   </gml:featureMember>
+     * }
+     * </PRE>
      * @author Simone Giannecchini, GeoSolutions SAS
      *
      */

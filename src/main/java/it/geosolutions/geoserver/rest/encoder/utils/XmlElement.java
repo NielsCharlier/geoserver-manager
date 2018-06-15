@@ -55,8 +55,8 @@ public class XmlElement{
     }
     
     /**
-     * Empty constructor:<br/>
-     * Use {@link #setRoot()} to initialize the root
+     * Empty constructor:
+     * Use {@link #setRoot(String)} or {@link #setRoot(Element)} to initialize the root
      */
     protected XmlElement() {
     }

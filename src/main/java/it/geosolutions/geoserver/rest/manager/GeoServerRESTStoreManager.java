@@ -48,7 +48,6 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
-     * @throws MalformedURLException
      * @throws IllegalArgumentException
      */
     public GeoServerRESTStoreManager(URL restURL, String username, String password)
@@ -62,8 +61,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * @param workspace Name of the workspace to contain the store. This
      *            will also be the prefix of any layer names contained in the
      *            store.
-     * @param datastore the set of parameters to be set to the store
-     *            (including connection parameters).
+     * @param store the set of parameters to be set to the store (including connection parameters).
      * @return <TT>true</TT> if the store has been successfully created,
      *         <TT>false</TT> otherwise
      */
@@ -78,8 +76,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * Update a store.
      * 
      * @param workspace Name of the workspace that contains the store.
-     * @param datastore the set of parameters to be set to the store
-     *            (including connection parameters).
+     * @param store the set of parameters to be set to the store (including connection parameters).
      * @return <TT>true</TT> if the store has been successfully updated,
      *         <TT>false</TT> otherwise
      */
@@ -92,8 +89,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * Update a store.
      * 
      * @param workspace Name of the workspace that contains the store.
-     * @param datastore the set of parameters to be set to the store
-     *            (including connection parameters).
+     * @param store the set of parameters to be set to the store (including connection parameters).
      * @return <TT>true</TT> if the store has been successfully updated,
      *         <TT>false</TT> otherwise
      */
@@ -110,13 +106,12 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * Remove a given CoverageStore in a given Workspace.
      * 
      * @param workspace The name of the workspace
-     * @param storename The name of the CoverageStore to remove.
+     * @param store the set of parameters of the store
      * @param recurse if remove should be performed recursively
      * @return <TT>true</TT> if the CoverageStore was successfully removed.
-     * @throws MalformedURLException 
      */
     public boolean remove(final String workspace, final GSAbstractStoreEncoder store,
-            final boolean recurse) throws IllegalArgumentException, MalformedURLException {
+            final boolean recurse) throws IllegalArgumentException {
 //            if (workspace == null || storename == null)
 //                throw new IllegalArgumentException("Arguments may not be null!");
 //            if (workspace.isEmpty() || storename.isEmpty())
@@ -125,7 +120,12 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
             final StringBuilder url=HTTPUtils.append(gsBaseUrl,"/rest/workspaces/",workspace,"/", store.getStoreType().toString(), "/",store.getName());
             if (recurse)
                 url.append("?recurse=true");
-            final URL deleteStore = new URL(url.toString());
+            URL deleteStore;
+            try {
+                deleteStore = new URL(url.toString());
+            } catch (MalformedURLException e) {
+                throw new IllegalStateException(e);
+            }
 
             boolean deleted = HTTPUtils.delete(deleteStore.toExternalForm(), gsuser, gspass);
 //            if (!deleted) {

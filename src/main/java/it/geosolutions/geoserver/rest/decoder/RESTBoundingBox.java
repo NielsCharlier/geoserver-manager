@@ -5,11 +5,15 @@ import org.jdom.Element;
 /**
  * Parse a Boundingbox of the following structure
  * 
+ * <PRE>
+ * {@code
  * <minx>472800.0</minx>
  * <maxx>817362.0</maxx>
  * <miny>35053.40625</miny>
  * <maxy>301500.0</maxy>
  * <crs class="projected">EPSG:21781</crs>
+ * }
+ * </PRE>
  * 
  * @author nmandery
  */
