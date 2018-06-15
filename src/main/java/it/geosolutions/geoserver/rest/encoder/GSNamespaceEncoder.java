@@ -31,15 +31,7 @@ import java.net.URI;
 
 /**
  * Namespace XML encoder. Namespaces must contain a non empty prefix and a URI:
- * 
- * <pre>
- * &lt;namespace>
- *   &lt;prefix>example&lt;/prefix>
- *   &lt;uri>http://example.com&lt;/uri>
- * &lt;/namespace>
- * </pre>
- * 
- * @see <a href="http://docs.geoserver.org/stable/en/user/restconfig/rest-config-api.html#namespaces"> GeoServer Documentation</a>
+ *
  * @author Oscar Fonts
  */
 public class GSNamespaceEncoder extends PropertyXMLEncoder {
@@ -94,7 +86,7 @@ public class GSNamespaceEncoder extends PropertyXMLEncoder {
     
     /**
      * change the nampespace uri.
-     * @param URI the new uri
+     * @param uri the new uri
      * @throws IllegalArgumentException if uri is null or empty
      */
     public void setURI(final URI uri) {

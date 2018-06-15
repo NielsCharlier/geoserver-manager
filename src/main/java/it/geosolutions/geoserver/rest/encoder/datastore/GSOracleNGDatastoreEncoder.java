@@ -62,8 +62,7 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
      * </ul>
      * 
      * @param name New datastore name
-     * @param server New server name
-     * @param user New user name
+     * @param database 
      */
     public GSOracleNGDatastoreEncoder(String name, String database) {
         super(name);

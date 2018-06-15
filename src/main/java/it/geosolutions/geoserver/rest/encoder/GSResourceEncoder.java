@@ -216,12 +216,15 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     }
 
     /**
-     * {@code
+     * <PRE>{@code
      * <keywords>
-     *          <string>WCS</string>
-     *          <string>ImageMosaic</string>
-     *          <string>srtm30</string> <string> KEYWORD}\@language={LANGUAGE}\;\@vocabulary={VOCABULARY}\;</string>
-     * <string>{KEYWORD_2}\@vocabulary={VOCABULARY_2}\;</string> <string>{KEYWORD_3}\@language={LANGUAGE_3}\;</string> </keywords> }
+     *  <string>WCS</string>
+     *  <string>ImageMosaic</string>
+     *  <string>srtm30</string> 
+     *  <string>KEYWORD\@language=LANGUAGE\;\@vocabulary=VOCABULARY\;</string>
+     *  <string>KEYWORD_2\@vocabulary=VOCABULARY_2\;</string> 
+     *  <string>KEYWORD_3\@language=LANGUAGE_3\;</string> </keywords> 
+     * }</PRE>
      * 
      * @param keyword mandatory keyword ('\' characters are not permitted)
      * @param language optional parameter
@@ -296,7 +299,7 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     /**
      * Adds a MetadataLinkInfo to the GeoServer Resource
      * 
-     * @param MetadataLink
+     * @param  metadataLinkInfo
      * 
      */
     public void addMetadataLinkInfo(GSMetadataLinkInfoEncoder metadataLinkInfo) {
@@ -365,7 +368,7 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     /**
      * Add the 'name' node with a text value from 'name'
      * 
-     * @note REQUIRED to configure a resource
+     * REQUIRED to configure a resource
      */
     protected void addName(final String name) {
         add(NAME, name);
@@ -374,7 +377,7 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     /**
      * Set or modify the 'name' node with a text value from 'name'
      * 
-     * @note REQUIRED to configure a resource
+     * REQUIRED to configure a resource
      */
     public void setName(final String name) {
         set(NAME, name);
@@ -400,7 +403,7 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     /**
      * Set or modify the 'nativename' node with a text value from 'name'
      * 
-     * @note if not specified, the nativeName will be set with the value of the 'name' node.
+     * if not specified, the nativeName will be set with the value of the 'name' node.
      * 
      */
     public void setNativeName(final String nativename) {

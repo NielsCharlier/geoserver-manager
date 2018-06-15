@@ -28,13 +28,11 @@ package it.geosolutions.geoserver.rest.encoder.utils;
 import org.jdom.Element;
 
 /**
- * Creates an XML document by mapping properties to XML nodes.<br/>
+ * Creates an XML document by mapping properties to XML nodes.
  * You can set the root element name in the constructor. Any key/value pair will
- * be encoded as {@code <key>value</key>} node. <br/>
- * <br/>
+ * be encoded as {@code <key>value</key>} node.
  * 
- * <h4>Nested nodes</h4> Any key containing one or more slash ("/") will be
- * encoded as nested nodes; <br/>
+ * Any key containing one or more slash ("/") will be encoded as nested nodes; 
  * e.g.:
  * 
  * <PRE>

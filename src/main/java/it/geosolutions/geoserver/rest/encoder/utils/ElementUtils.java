@@ -80,12 +80,11 @@ public abstract class ElementUtils {
 	}
 
 	/**
+	 * Use {@link #contains(Element, Filter)} for an infinite depth search
 	 * 
 	 * @param root
 	 * @param filter
-	 * @param depth
-	 *            the max depth to search. Use {@link contains(final Element
-	 *            root, final Filter filter)} for an infinite depth search
+	 * @param depth the max depth to search. 
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
@@ -152,8 +151,7 @@ public abstract class ElementUtils {
 
 	/**
 	 * @param root
-	 * @param name
-	 * @param val
+	 * @param filter
 	 * @return the FIRST element matching the passed filter or null
 	 */
 	public static Element contains(final Element root, final Filter filter) throws IllegalArgumentException {

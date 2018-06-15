@@ -58,9 +58,8 @@ public class GSDimensionInfoEncoder extends XmlElement{
 	}
 	
 	/**
-	 * Build a dimension
+	 * Build a dimension. An enabled dimension also need a presentation mode set.
 	 * @param enabled enable dimension if true
-	 * @note a enabled dimension also need a presentation mode set.
 	 */
 	public GSDimensionInfoEncoder(final boolean enabled) {
 		super(DIMENSIONINFO);
@@ -140,7 +139,7 @@ public class GSDimensionInfoEncoder extends XmlElement{
          * 
          * <code>null</code> is acceptable and leave this UoM blank.
          * 
-         * @param unit UoM for this dimension.
+         * @param unitSymbol UoM for this dimension.
          */
         public void setUnitSymbol(final String unitSymbol){
             if(unitSymbol==null||unitSymbol.length()<=0){

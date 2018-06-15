@@ -46,7 +46,7 @@ import org.jdom.filter.Filter;
  * For this example, the XML output is:
  * 
  * <pre>
- * { @code
+ * {@code
  * <parameter>
  * 	<name>fieldname</name>
  * 	<defaultValue>default_value</defaultValue>

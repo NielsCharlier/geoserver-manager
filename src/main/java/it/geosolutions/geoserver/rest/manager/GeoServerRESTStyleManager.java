@@ -589,7 +589,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     /**
      * Store and publish a Style, assigning it a name.
      *
-     * @param sldFile the File containing the SLD document.
+     * @param zipFile the ZIP file.
      * @param name the Style name.
      *
      * @return <TT>true</TT> if the operation completed successfully.
@@ -656,7 +656,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     /**
      * Update a Style.
      *
-     * @param sldFile the File containing the SLD document.
+     * @param zipFile the zip file.
      * @param name the Style name.
      *
      * @return <TT>true</TT> if the operation completed successfully.

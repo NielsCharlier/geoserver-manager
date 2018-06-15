@@ -60,7 +60,7 @@ import org.jdom.Element;
  * }
  * </PRE>
  *
- * <I>Note: the whole XML fragment is stored in memory. At the moment, there are
+ * Note: the whole XML fragment is stored in memory. At the moment, there are
  * methods to retrieve only the more useful data.
  * 
  * @author etj

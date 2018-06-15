@@ -195,11 +195,11 @@ public class RESTFeatureType extends RESTResource {
     /**
      * Get the URL to retrieve the featuretype.
      * <PRE>{@code
-        <resource class="featureType">
-        <name>tasmania_cities</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
-    </resource>
-     * }</CODE>
+     *  <resource class="featureType">
+     *   <name>tasmania_cities</name>
+     *   <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
+     * </resource>
+     * }</PRE>
      */
 //    public String getStoreUrl() {
 //		Element store = rootElem.getChild("store");

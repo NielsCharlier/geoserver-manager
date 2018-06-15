@@ -31,7 +31,7 @@ import java.util.Set;
 import org.jdom.Element;
 
 /**
- * LayerGroup encoder for GeoServer >= 2.3
+ * LayerGroup encoder for GeoServer &gt;= 2.3
  * 
  * @author Davide Savazzi (geo-solutions.it)
  */

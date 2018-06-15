@@ -134,7 +134,7 @@ public class GSVersionDecoder extends XmlElement {
     }
     
     /**
-     * @see {@link Enum#compareTo(Enum)}
+     * @see Enum#compareTo(Enum)
      * @param v
      * @return
      */

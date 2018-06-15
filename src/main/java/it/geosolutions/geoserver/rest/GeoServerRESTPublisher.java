@@ -481,7 +481,6 @@ public class GeoServerRESTPublisher {
 
     /**
      * @since GeoServer 2.2
-     * @see GeoServerRESTStyleManager#
      */
     public boolean publishStyleInWorkspace(String workspace, String sldBody) {
         return styleManager.publishStyleInWorkspace(workspace, sldBody);
@@ -489,7 +488,6 @@ public class GeoServerRESTPublisher {
 
     /**
      * @since GeoServer 2.2
-     * @see GeoServerRESTStyleManager#
      */
     public boolean publishStyleInWorkspace(String workspace, String sldBody, String name) throws IllegalArgumentException {
         return styleManager.publishStyleInWorkspace(workspace, sldBody, name);
@@ -616,7 +614,6 @@ public class GeoServerRESTPublisher {
         /**
          * Get the type name of a StoreType with the specified format.
          * 
-         * @param type the StoreType.
          * @param format see {@link Format}
          * @return "featuretypes.{xml|html|...}" for DATASTORES, "coverages.{xml|html|...}" otherwise.
          */
@@ -670,7 +667,6 @@ public class GeoServerRESTPublisher {
         /**
          * Get the type of a StoreType.
          * 
-         * @param type the StoreType.
          * @return "dataStore" for DATASTORES, "coverageStore" otherwise.
          */
         public String getType() {
@@ -936,7 +932,8 @@ public class GeoServerRESTPublisher {
     /**
      * Create a PostGIS datastore.
      * 
-     * @deprecated Will be deleted in next version 1.5.x, use {@link GeoServerRESTDatastoreManager} instead.
+     * @deprecated Will be deleted in next version 1.5.x, 
+     * use {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager} instead.
      * 
      * @param workspace Name of the workspace to contain the database. This will also be the prefix of any layer names created from tables in the
      *        database.
@@ -1039,11 +1036,11 @@ public class GeoServerRESTPublisher {
      * <P>
      * The SRS will be set to EPSG:4326.
      * 
-     * @see {@link #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)}
+     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
      * 
      * @param workspace The workspace name.
      * @param storename The store name.
-     * @param layername The layer name.
+     * @param datasetname The layer name.
      * @param zipFile The zipped file to publish.
      * 
      * @return {@code true} if the operation completed successfully.
@@ -1059,15 +1056,15 @@ public class GeoServerRESTPublisher {
      * Publish a shapefile.
      * 
      * @param workspace the name of the workspace to use
-     * @param storename the name of the store to create
+     * @param storeName the name of the store to create
      * @param storeParams parameters to append to the url (can be null).<br>
      *        Accepted parameters are:<br>
      *        <ul>
      *        <li><b>charset</b> used to set the charset</li>
      *        </ul>
-     * @param layername the name of the layer to configure
+     * @param storeName the name of the layer to configure
      * @param method {@link UploadMethod}
-     * @param fileUri the uri of the file containing the shapefile.It should be:
+     * @param shapefile the uri of the file containing the shapefile.It should be:
      *        <ul>
      *        <li>A zip file if 'method' is file</li>
      *        <li>A shp file if 'method' is external</li>
@@ -1184,15 +1181,14 @@ public class GeoServerRESTPublisher {
      * Publish a shapefile.
      * 
      * @param workspace the name of the workspace to use
-     * @param storename the name of the store to create
+     * @param storeName the name of the store to create
      * @param storeParams parameters to append to the url (can be null).<br>
      *        Accepted parameters are:<br>
      *        <ul>
      *        <li><b>charset</b> used to set the charset</li>
      *        </ul>
-     * @param layername the name of the layer to configure
      * @param method {@link UploadMethod}
-     * @param fileUri the uri of the file containing the shapefile.It should be:
+     * @param shapefile the uri of the file containing the shapefile.It should be:
      *        <ul>
      *        <li>A zip file if 'method' is file</li>
      *        <li>A shp file if 'method' is external</li>
@@ -1221,15 +1217,14 @@ public class GeoServerRESTPublisher {
      * Publish a shapefile.
      * 
      * @param workspace the name of the workspace to use
-     * @param storename the name of the store to create
+     * @param storeName the name of the store to create
      * @param storeParams parameters to append to the url (can be null).<br>
      *        Accepted parameters are:<br>
      *        <ul>
      *        <li><b>charset</b> used to set the charset</li>
      *        </ul>
-     * @param layername the name of the layer to configure
      * @param method {@link UploadMethod}
-     * @param fileUri the uri of the file containing the shapefile.It should be:
+     * @param shapefile the uri of the file containing the shapefile.It should be:
      *        <ul>
      *        <li>A zip file if 'method' is file</li>
      *        <li>A shp file if 'method' is external</li>
@@ -1252,7 +1247,7 @@ public class GeoServerRESTPublisher {
     /**
      * Publish a zipped shapefile.
      * 
-     * @see {@link #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)}
+     * @see  #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
      * 
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
@@ -1275,7 +1270,7 @@ public class GeoServerRESTPublisher {
     /**
      * Publish a zipped shapefile forcing the srs to the one provided.
      * 
-     * @see {@link #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)}
+     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
      * 
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
@@ -1296,7 +1291,7 @@ public class GeoServerRESTPublisher {
     /**
      * Publish a zipped shapefile.
      * 
-     * @see {@link #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)}
+     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
      * 
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
@@ -1447,7 +1442,6 @@ public class GeoServerRESTPublisher {
         /**
          * Gets the mime type from a format.
          * 
-         * @param f the format key.
          * @return The content-type (mime), or {@code null} if not in the enum.
          */
         public String getContentType() {
@@ -2345,7 +2339,7 @@ public class GeoServerRESTPublisher {
      * 
      * @param workspace The name of the workspace
      * @param storename The name of the Datastore to remove.
-     * @param the {@link StoreType} type
+     * @param type the {@link StoreType} type
      * @param recurse if remove should be performed recursively
      * @param purge the purge method
      * @throws IllegalArgumentException if workspace or storename are null or empty
@@ -2386,7 +2380,7 @@ public class GeoServerRESTPublisher {
     /**
      * Remove the workspace given Workspace using default parameters
      * 
-     * @see {@link GeoServerRESTPublisher#removeWorkspace(String, boolean)}
+     * @see #removeWorkspace(String, boolean)
      * @param workspace the workspace to remove
      * @return true if success, false otherwise
      * @deprecated {@link #removeWorkspace(String, boolean)}
@@ -2545,18 +2539,15 @@ public class GeoServerRESTPublisher {
 
     /**
      * 
-     * /workspaces/<ws>/datastores/<ds>.xml /workspaces/<ws>/coveragestores/<ds>.xml
      * 
      * @param workspace
      * @param storeName
-     * @param mosaicDir
+     * @param storeType
      * @return true if successfully reloaded
-     * @throws FileNotFoundException
      * @throws IllegalArgumentException
-     * @throws MalformedURLException
      */
     public boolean reloadStore(String workspace, final String storeName, StoreType storeType)
-            throws IllegalArgumentException, MalformedURLException {
+            throws IllegalArgumentException {
         final String url = HTTPUtils.append(this.restURL, "/rest/workspaces/", workspace, "/",
                 storeType.toString(), "/", storeName, ".xml").toString();
         final String store = HTTPUtils.get(url, this.gsuser, this.gspass);
@@ -2623,10 +2614,11 @@ public class GeoServerRESTPublisher {
      * @return true if success
      * @throws IllegalArgumentException if some arguments are null or empty
      * 
-     * @TODO WmsPath
      */
     public boolean configureLayer(final String workspace, final String resourceName,
             final GSLayerEncoder layer) throws IllegalArgumentException {
+
+        //@TODO WmsPath 
 
         if (workspace == null || resourceName == null || layer == null) {
             throw new IllegalArgumentException("Null argument");
@@ -2845,16 +2837,9 @@ public class GeoServerRESTPublisher {
     /**
      * Create a new resource in a given workspace and store
      * 
-     * @param wsname the workspace to search for existent coverage
+     * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param re contains the coverage name to create and the configuration to apply
-     * 
-     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
-     *       values configured, available, or all.
-     * 
-     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
-     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
-     *       includes feature types that have a geometry granule. all - The union of configured and available.
      * 
      * 
      * @return true if success
@@ -2862,6 +2847,13 @@ public class GeoServerRESTPublisher {
      */
     public boolean createResource(String workspace, StoreType dsType, String storeName,
             GSResourceEncoder re) throws IllegalArgumentException {
+        /* @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+        *       values configured, available, or all.
+        * 
+        *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+        *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+        *       includes feature types that have a geometry granule. all - The union of configured and available.
+        */
         if (workspace == null || dsType == null || storeName == null || re == null) {
             throw new IllegalArgumentException("Null argument");
         }
@@ -2894,22 +2886,23 @@ public class GeoServerRESTPublisher {
     /**
      * Configure resource in a given workspace and store
      * 
-     * @param wsname the workspace to search for existent coverage
+     * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
-     * @param re contains the coverage name to create and the configuration to apply
-     * 
-     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
-     *       values configured, available, or all.
-     * 
-     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
-     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
-     *       includes feature types that have a geometry granule. all - The union of configured and available.
-     * 
+     * @param resName contains the coverage name to create and the configuration to apply
+     *  
      * 
      * @return true if success
      * @throws IllegalArgumentException if arguments are null or empty
      */
     public boolean removeResource(String workspace, StoreType dsType, String storeName, String resName) throws IllegalArgumentException {
+        /* @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+        *       values configured, available, or all.
+        * 
+        *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+        *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+        *       includes feature types that have a geometry granule. all - The union of configured and available.
+        */
+        
         if (workspace == null || dsType == null || storeName == null) {
             throw new IllegalArgumentException("Null argument");
         }        
@@ -2936,16 +2929,10 @@ public class GeoServerRESTPublisher {
     /**
      * Configure a resource 
      * 
-     * @param wsname the workspace to search for existent coverage
+     * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param re contains the configuration to apply with the resource name 
      * 
-     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
-     *       values configured, available, or all.
-     * 
-     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
-     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
-     *       includes feature types that have a geometry granule. all - The union of configured and available.
      * 
      * 
      * @return true if success
@@ -2953,23 +2940,23 @@ public class GeoServerRESTPublisher {
      */
     public boolean configureResource(String workspace, StoreType dsType, String storeName,
              GSResourceEncoder re) throws IllegalArgumentException {
+        /* @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+        *       values configured, available, or all.
+        * 
+        *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+        *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+        *       includes feature types that have a geometry granule. all - The union of configured and available.
+        */
         return configureResource(workspace, dsType, storeName, re.getName(), re);
     }
     
     /**
      * Configure a resource 
      * 
-     * @param wsname the workspace to search for existent coverage
+     * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param resourceName an existent resource name
      * @param re contains the configuration to apply, possibly new resource name
-     * 
-     * @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
-     *       values configured, available, or all.
-     * 
-     *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
-     *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
-     *       includes feature types that have a geometry granule. all - The union of configured and available.
      * 
      * 
      * @return true if success
@@ -2977,6 +2964,14 @@ public class GeoServerRESTPublisher {
      */
     public boolean configureResource(String workspace, StoreType dsType, String storeName,
             String resourceName, GSResourceEncoder re) throws IllegalArgumentException {
+        /* @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
+        *       values configured, available, or all.
+        * 
+        *       configured - Only setup or configured feature types are returned. This is the default value. available - Only unconfigured feature types
+        *       (not yet setup) but are available from the specified datastore will be returned. available_with_geom - Same as available but only
+        *       includes feature types that have a geometry granule. all - The union of configured and available.
+        */
+        
         if (workspace == null || dsType == null || storeName == null || re == null) {
             throw new IllegalArgumentException("Null argument");
         }        
@@ -3089,7 +3084,7 @@ public class GeoServerRESTPublisher {
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param format the format of the file to upload
-     * @param the absolut path to the file to upload
+     * @param path the absolute path to the file to upload
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      */
@@ -3119,7 +3114,7 @@ public class GeoServerRESTPublisher {
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param the absolute path to the file to upload
+     * @param path the absolute path to the file to upload
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
@@ -3136,7 +3131,7 @@ public class GeoServerRESTPublisher {
      * 
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
-     * @param the absolute path to the file to upload
+     * @param path the absolute path to the file to upload
      * @param configureOpt tells GeoServer whether to configure all coverages in this mosaic (ALL) or none of them (NONE).
      * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
@@ -3195,12 +3190,9 @@ public class GeoServerRESTPublisher {
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
-     * @param filter the absolute path to the file to upload
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
      */
     public boolean removeGranuleById(final String workspace, String coverageStore, String coverage,
             String granuleId) {
@@ -3230,7 +3222,6 @@ public class GeoServerRESTPublisher {
      * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
      * 
-     * @throws MalformedURLException
      * @throws UnsupportedEncodingException
      */
     public boolean removeGranulesByCQL(final String workspace, String coverageStore,

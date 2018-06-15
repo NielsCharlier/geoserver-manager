@@ -37,12 +37,10 @@ import org.jdom.filter.Filter;
  * featureType.
  * 
  * Example (based on the example provided in the Geoserver documentation - see
- * {@link http://docs.geoserver.org/latest/en/user/data/database/sqlview.html#
- * parameterizing-sql-views}):
+ *  http://docs.geoserver.org/latest/en/user/data/database/sqlview.html#parameterizing-sql-views):
  * 
  * <pre>
- * {
- * 	@code
+ * {@code
  * 	// Set-up the vtGeom
  * 	final VTGeometryEncoder vtGeom = new VTGeometryEncoder();
  * 	vtGeom.setName("the_geom");
@@ -167,7 +165,7 @@ public class GSVirtualTableEncoder extends XmlElement {
 	/**
 	 * Add the 'name' node with a text value from 'name'
 	 * 
-	 * @note REQUIRED to configure a virtual table
+	 * REQUIRED to configure a virtual table
 	 */
 	protected void addName(final String name){
 		add(NAME, name);
@@ -176,7 +174,7 @@ public class GSVirtualTableEncoder extends XmlElement {
 	/**
 	 * Set or modify the 'name' node with a text value from 'name'
 	 * 
-	 * @note REQUIRED to configure a virtual table
+	 * REQUIRED to configure a virtual table
 	 */
 	public void setName(final String name) {
 		set(NAME, name);
@@ -198,7 +196,7 @@ public class GSVirtualTableEncoder extends XmlElement {
 	/**
 	 * Add the 'sql' node with a text value from 'sql'
 	 * 
-	 * @note REQUIRED to configure a virtual table
+	 * REQUIRED to configure a virtual table
 	 */
 	protected void addSql(final String sql){
 		add(SQL, sql);
@@ -207,7 +205,7 @@ public class GSVirtualTableEncoder extends XmlElement {
 	/**
 	 * Set or modify the 'sql' node with a text value from 'sql'
 	 * 
-	 * @note REQUIRED to configure a virtual table
+	 * REQUIRED to configure a virtual table
 	 */
 	public void setSql(final String sql) {
 		set(SQL, sql);

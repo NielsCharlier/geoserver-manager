@@ -176,7 +176,6 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	/**
 	 * Deletes the type
 	 * 
-	 * @param type
 	 * @return true if removed
 	 */
 	public boolean delType(){
@@ -186,7 +185,6 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	/**
 	 * Deletes the metadata type
 	 * 
-	 * @param metadata type
 	 * @return true if removed
 	 */
 	public boolean delMetadataType(){
@@ -196,7 +194,6 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	/**
 	 * Deletes the content
 	 * 
-	 * @param content
 	 * @return true if removed
 	 */
 	public boolean delContent(){

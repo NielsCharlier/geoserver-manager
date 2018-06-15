@@ -42,7 +42,7 @@ import org.jdom.Namespace;
 /**
  * Parse a resource (FeatureType or Coverage) returned as XML REST objects.
  * 
- * @author Emanuele Tajariol <etj at geo-solutions.it>
+ * @author Emanuele Tajariol etj@geo-solutions.it
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com | emmanuel.blondel@fao.org
  * @author Henry Rotzoll
  * 
