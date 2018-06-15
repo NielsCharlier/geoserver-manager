@@ -97,11 +97,11 @@ public class ConfigTest extends GeoserverRESTTest {
     	deleteAll();
     	
     	publisher.createWorkspace(DEFAULT_WS);
-    	publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),"default_point.sld"));
+    	//publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),"default_point.sld"));
     	
         File zipFile = new ClassPathResource("testdata/resttestshp.zip").getFile();
 
-        boolean published = publisher.publishShp(DEFAULT_WS, "anyname", "cities", zipFile, "EPSG:41001", "default_point");
+        boolean published = publisher.publishShp(DEFAULT_WS, "anyname", "cities", zipFile, "EPSG:41001", "point");
         assertTrue("publish() failed", published);
 
         //test delete

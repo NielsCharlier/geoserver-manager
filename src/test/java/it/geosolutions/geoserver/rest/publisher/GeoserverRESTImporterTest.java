@@ -26,6 +26,8 @@
 package it.geosolutions.geoserver.rest.publisher;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import it.geosolutions.geoserver.rest.GeoserverRESTTest;
 import net.sf.json.JSONObject;
 
@@ -56,6 +58,8 @@ public class GeoserverRESTImporterTest extends GeoserverRESTTest {
         if (!enabled())
             return;
         
+        publisher.createWorkspace(DEFAULT_WS);
+        
         // Creates a new Importer Context and gets back the ID
         int i = publisher.postNewImport();
 
@@ -77,7 +81,7 @@ public class GeoserverRESTImporterTest extends GeoserverRESTTest {
         // Double check that the Task is in the READY state
         task = publisher.getTask(i, t);
         assertEquals("READY", task.getString("state"));
-        assertEquals("nurc_10m_populated_places", task.getJSONObject("layer").getJSONObject("style").getString("name"));
+        assertEquals("geosolutions_10m_populated_places", task.getJSONObject("layer").getJSONObject("style").getString("name"));
 
         // Prepare the JSON String instructing the Task avout the SLD to use for the new Layer
         json = "{\"layer\":{\"style\":{\"name\": \"point\"}}}"; 
@@ -92,6 +96,8 @@ public class GeoserverRESTImporterTest extends GeoserverRESTTest {
 
         // Finally starts the Import ...
         publisher.postImport(i);
+        
+        publisher.removeWorkspace(DEFAULT_WS, false);
     }
 
 }

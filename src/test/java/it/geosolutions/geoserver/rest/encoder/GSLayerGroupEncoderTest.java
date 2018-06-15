@@ -76,7 +76,7 @@ public class GSLayerGroupEncoderTest extends GeoserverRESTTest {
         assertTrue(layers.contains("boundaries"));        
         
         // Publish style
-        publisher.publishStyle(new ClassPathResource("testdata/default_line.sld").getFile(), "default_line");
+        //publisher.publishStyle(new ClassPathResource("testdata/default_line.sld").getFile(), "default_line");
 
     }
     
@@ -300,7 +300,7 @@ public class GSLayerGroupEncoderTest extends GeoserverRESTTest {
             groupWriter.setTitle("my title");
             groupWriter.setAbstract("my abstract");
             groupWriter.setMode(GSLayerGroupEncoder23.MODE_EO);
-            groupWriter.setRootLayer("topp:boundaries", "default_line");
+            groupWriter.setRootLayer("topp:boundaries", "line");
             groupWriter.setBounds("EPSG:26713", 589425.93423656, 609518.6719560538, 4913959.224611808, 4928082.949945881);
             groupWriter.addLayer("topp:cities");
             groupWriter.addLayerGroup("tasmania");

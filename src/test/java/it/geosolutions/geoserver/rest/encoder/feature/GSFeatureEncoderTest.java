@@ -83,8 +83,8 @@ public class GSFeatureEncoderTest extends GeoserverRESTTest {
         assertTrue("publish() failed", published);
         assertTrue(existsLayer(layerName));
 
-        publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),
-                "default_point.sld"));
+        //publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),
+        //        "default_point.sld"));
 
         GSFeatureTypeEncoder fte = new GSFeatureTypeEncoder();
         fte.setNativeName(layerName);
@@ -300,8 +300,8 @@ public class GSFeatureEncoderTest extends GeoserverRESTTest {
         boolean published = publisher.publishShp(DEFAULT_WS, storeName, layerName, zipFile);
         assertTrue("publish() failed", published);
 
-        publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),
-                "default_point.sld"));
+        //publisher.publishStyle(new File(new ClassPathResource("testdata").getFile(),
+        //        "default_point.sld"));
 
         String nativeName = layerName;
         layerName=layerName+"_NEW";
