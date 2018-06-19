@@ -2908,7 +2908,7 @@ public class GeoServerRESTPublisher {
         }        
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
                 .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType).append("/").append(resName)
+                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(resName)
                 .append(".xml");
 
         final boolean sendResult = HTTPUtils.delete(sbUrl.toString(), gsuser, gspass);
@@ -2983,7 +2983,7 @@ public class GeoServerRESTPublisher {
 
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
                 .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType).append("/").append(resourceName)
+                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(resourceName)
                 .append(".xml");
 
         final String xmlBody = re.toString();
