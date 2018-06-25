@@ -127,6 +127,15 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     public void setEnabled(boolean enabled) {
         set("enabled", (enabled) ? "true" : "false");
     }
+    
+    /**
+     * 
+     * @param advertised
+     *            true if the resource should be advertised
+     */
+    public void setAdvertised(boolean advertised) {
+        set("advertised", (advertised) ? "true" : "false");
+    }
 
     /**
      * @param key
