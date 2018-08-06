@@ -54,6 +54,8 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
     private final GeoServerRESTStyleManager styleManager;
     
     private final GeoServerRESTStructuredGridCoverageReaderManager structuredGridCoverageReader;
+    
+    private final GeoWebCacheREST geoWebCacheRest;
 
     /**
      * Default constructor.
@@ -75,6 +77,7 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
         structuredGridCoverageReader = new GeoServerRESTStructuredGridCoverageReaderManager(restURL, username, password);
         storeManager = new GeoServerRESTStoreManager(restURL, gsuser, gspass);
         styleManager = new GeoServerRESTStyleManager(restURL, gsuser, gspass);
+        geoWebCacheRest = new GeoWebCacheREST(restURL, gsuser, gspass);
     }
 
     public GeoServerRESTPublisher getPublisher() {
@@ -96,5 +99,11 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
     public GeoServerRESTStructuredGridCoverageReaderManager getStructuredGridCoverageReader() {
         return structuredGridCoverageReader;
     }
+
+    public GeoWebCacheREST getGeoWebCacheRest() {
+        return geoWebCacheRest;
+    }
+    
+    
 
 }
