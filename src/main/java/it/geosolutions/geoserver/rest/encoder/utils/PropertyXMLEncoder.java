@@ -57,7 +57,11 @@ public class PropertyXMLEncoder extends XmlElement {
 		super(rootName);
 	}
 
-	protected Element get(final String key, int deep) {
+        public PropertyXMLEncoder(Element root) {
+            super(root);
+    }
+
+    protected Element get(final String key, int deep) {
             return get(getRoot(), key);
         }
 	
