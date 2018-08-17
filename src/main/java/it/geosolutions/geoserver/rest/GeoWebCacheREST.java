@@ -137,7 +137,7 @@ public class GeoWebCacheREST {
         return GSCachedLayerEncoder.build(HTTPUtils.get(url, gsuser, gspass));
     }
     
-    public void deleteLayer(final String layerName) {
+    public boolean deleteLayer(final String layerName) {
         if (layerName == null) {
             throw new IllegalArgumentException("Null argument");
         }
@@ -147,7 +147,36 @@ public class GeoWebCacheREST {
 
         final String url = restURL + "/gwc/rest/layers/" + layerName + ".xml";
 
-        HTTPUtils.delete(url, gsuser, gspass);
+        boolean sendResult = HTTPUtils.delete(url, gsuser, gspass);
+        
+        if (sendResult) {
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Successfully deleted cached layer: " + layerName);
+            }
+        } else {
+            if (LOGGER.isWarnEnabled()) {
+                LOGGER.warn("Error deleting cached layer " + layerName);
+            }
+        }
+        return sendResult;
+    }
+    
+    public boolean truncateLayer(final String layerName) {
+        final String url = restURL + "/gwc/rest/masstruncate";
+        final String xml = "<truncateLayer><layerName>" + layerName + "</layerName></truncateLayer>";
+        
+        String sendResult = HTTPUtils.postXml(url, xml, gsuser, gspass);
+        if (sendResult != null) {
+            if (LOGGER.isInfoEnabled()) {
+                LOGGER.info("Successfully mass truncated layer: " + layerName);
+            }
+            return true;
+        } else {
+            if (LOGGER.isWarnEnabled()) {
+                LOGGER.warn("Error mass truncating layer " + layerName + " (" + sendResult + ")");
+            }
+            return false;
+        }
     }
 
 }
