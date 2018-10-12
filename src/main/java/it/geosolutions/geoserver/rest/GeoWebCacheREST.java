@@ -31,6 +31,12 @@ import org.slf4j.LoggerFactory;
 
 import it.geosolutions.geoserver.rest.encoder.GSCachedLayerEncoder;
 
+/**
+ * <p>GeoWebCacheREST class.</p>
+ *
+ * @author niels
+ * @version $Id: $
+ */
 public class GeoWebCacheREST {
 
     /** The logger for this class */
@@ -53,7 +59,7 @@ public class GeoWebCacheREST {
     
     /**
      * Creates a <TT>GeoServerRESTPublisher</TT> to connect against a GeoServer instance with the given URL and user credentials.
-     * 
+     *
      * @param restURL the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
      * @param username auth credential
      * @param password auth credential
@@ -64,6 +70,13 @@ public class GeoWebCacheREST {
         this.gspass = password;
     }
     
+    /**
+     * <p>configureLayer</p>
+     *
+     * @param layer a {@link it.geosolutions.geoserver.rest.encoder.GSCachedLayerEncoder} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
+     */
     public boolean configureLayer(final GSCachedLayerEncoder layer) 
             throws IllegalArgumentException {
         if (layer == null) {
@@ -94,6 +107,13 @@ public class GeoWebCacheREST {
         return sendResult != null;
     }
     
+    /**
+     * <p>updateLayer</p>
+     *
+     * @param layer a {@link it.geosolutions.geoserver.rest.encoder.GSCachedLayerEncoder} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
+     */
     public boolean updateLayer(final GSCachedLayerEncoder layer) 
             throws IllegalArgumentException {
         if (layer == null) {
@@ -124,6 +144,12 @@ public class GeoWebCacheREST {
         return sendResult != null;
     }
     
+    /**
+     * <p>getLayer</p>
+     *
+     * @param layerName a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.encoder.GSCachedLayerEncoder} object.
+     */
     public GSCachedLayerEncoder getLayer(final String layerName) {
         if (layerName == null) {
             throw new IllegalArgumentException("Null argument");
@@ -137,6 +163,12 @@ public class GeoWebCacheREST {
         return GSCachedLayerEncoder.build(HTTPUtils.get(url, gsuser, gspass));
     }
     
+    /**
+     * <p>deleteLayer</p>
+     *
+     * @param layerName a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean deleteLayer(final String layerName) {
         if (layerName == null) {
             throw new IllegalArgumentException("Null argument");
@@ -161,6 +193,12 @@ public class GeoWebCacheREST {
         return sendResult;
     }
     
+    /**
+     * <p>truncateLayer</p>
+     *
+     * @param layerName a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public boolean truncateLayer(final String layerName) {
         final String url = restURL + "/gwc/rest/masstruncate";
         final String xml = "<truncateLayer><layerName>" + layerName + "</layerName></truncateLayer>";

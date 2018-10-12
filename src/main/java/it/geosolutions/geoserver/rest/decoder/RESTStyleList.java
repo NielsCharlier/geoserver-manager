@@ -35,30 +35,42 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>
-  {@code <styles>
-      <style>
-        <name>pophatch</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/pophatch.xml" type="application/xml"/>
-      </style>
-      <style>
-        <name>point</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/point.xml" type="application/xml"/>
-      </style>
-      <style>
-        <name>population</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/population.xml" type="application/xml"/>
-      </style>
-}</PRE>
+ *  {@code <styles>
+ *      <style>
+ *        <name>pophatch</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/pophatch.xml" type="application/xml"/>
+ *      </style>
+ *      <style>
+ *        <name>point</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/point.xml" type="application/xml"/>
+ *      </style>
+ *      <style>
+ *        <name>population</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/population.xml" type="application/xml"/>
+ *      </style>
+ *}</PRE>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTStyleList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyleList} object.
+     */
     public static RESTStyleList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTStyleList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTStyleList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTStyleList(Element list) {
         super(list);
     }

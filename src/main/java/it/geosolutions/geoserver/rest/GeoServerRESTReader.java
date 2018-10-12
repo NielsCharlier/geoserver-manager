@@ -73,6 +73,7 @@ import org.slf4j.LoggerFactory;
  * wrapped in proper parsers (e.g.: {@link RESTLayer}, {@link RESTCoverageStore}, ...).
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class GeoServerRESTReader {
 
@@ -103,6 +104,7 @@ public class GeoServerRESTReader {
      * default, if not otherwise configured. </I></B>.
      *
      * @param gsUrl the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @throws java.net.MalformedURLException if any.
      */
     public GeoServerRESTReader(String gsUrl) throws MalformedURLException {
         baseurl = init(gsUrl, null, null);
@@ -115,6 +117,7 @@ public class GeoServerRESTReader {
      * @param gsUrl the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
      * @param username username auth credential
      * @param password password auth credential
+     * @throws java.net.MalformedURLException if any.
      */
     public GeoServerRESTReader(String gsUrl, String username, String password) throws MalformedURLException {
         baseurl = init(gsUrl, username, password);
@@ -179,6 +182,8 @@ public class GeoServerRESTReader {
     
     /**
      * Return the version of the target GeoServer
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.about.GSVersionDecoder} object.
      */
     public GSVersionDecoder getGeoserverVersion() {
         final String url = "/rest/about/version.xml";
@@ -198,9 +203,10 @@ public class GeoServerRESTReader {
 
     /**
      * Check if a Style exists in the configured GeoServer instance.
+     *
      * @param styleName the name of the style to check for.
      * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
-     * @throws RuntimeException if any other HTTP code than 200 or 404 was retrieved.
+     * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String styleName) throws RuntimeException {
         return styleManager.existsStyle(styleName);
@@ -208,34 +214,50 @@ public class GeoServerRESTReader {
     
     /**
      * Check if a Style exists in the configured GeoServer instance.
+     *
      * @param styleName the name of the style to check for.
      * @param quietOnNotFound if true, mute exception if false is returned
      * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
-     * @throws RuntimeException if any other HTTP code than 200 or 404 was retrieved.
+     * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String styleName, boolean quietOnNotFound) throws RuntimeException {
         return styleManager.existsStyle(styleName, quietOnNotFound);
     }
 
     /**
-     * @see GeoServerRESTStyleManager#existsStyle(java.lang.String, java.lang.String) 
+     * <p>existsStyle</p>
+     *
+     * @see GeoServerRESTStyleManager#existsStyle(java.lang.String, java.lang.String)
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param styleName a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws java.lang.RuntimeException if any.
      */
     public boolean existsStyle(String workspace, String styleName) throws RuntimeException {
         return styleManager.existsStyle(workspace, styleName);
     }
 
     /**
+     * <p>getStyle</p>
+     *
      * @see GeoServerRESTStyleManager#getStyle(java.lang.String)
      * @since GeoServer 2.2
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyle} object.
      */
     public RESTStyle getStyle(String name) {
         return styleManager.getStyle(name);
     }
 
     /**
+     * <p>getStyle</p>
+     *
      * @see GeoServerRESTStyleManager#getStyle(java.lang.String, java.lang.String)
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyle} object.
      */
     public RESTStyle getStyle(String workspace, String name) {
         return styleManager.getStyle(workspace, name);
@@ -251,8 +273,12 @@ public class GeoServerRESTReader {
     }
 
     /**
+     * <p>getStyles</p>
+     *
      * @see GeoServerRESTStyleManager#getStyles(java.lang.String)
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyleList} object.
      */
     public RESTStyleList getStyles(String workspace) {
         return styleManager.getStyles(workspace);
@@ -260,14 +286,22 @@ public class GeoServerRESTReader {
 
     /**
      * Get the SLD body of a Style.
+     *
+     * @param styleName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     public String getSLD(String styleName) {
         return styleManager.getSLD(styleName);
     }
 
     /**
-     * @see GeoServerRESTStyleManager#getSLD(java.lang.String, java.lang.String) 
+     * <p>getSLD</p>
+     *
+     * @see GeoServerRESTStyleManager#getSLD(java.lang.String, java.lang.String)
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param styleName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     public String getSLD(String workspace, String styleName) {
         return styleManager.getSLD(workspace, styleName);
@@ -279,9 +313,8 @@ public class GeoServerRESTReader {
 
     /**
      * Get summary info about all DataStores in a WorkSpace.
-     * 
+     *
      * @param workspace The name of the workspace
-     * 
      * @return summary info about Datastores as a {@link RESTDataStoreList}
      */
     public RESTDataStoreList getDatastores(String workspace) {
@@ -312,7 +345,7 @@ public class GeoServerRESTReader {
     /**
      * Get detailed info about a FeatureType's Datastore.
      *
-     * @param featureType the RESTFeatureType 
+     * @param featureType the RESTFeatureType
      * @return DataStore details as a {@link RESTDataStore}
      */
     public RESTDataStore getDatastore(RESTFeatureType featureType) {
@@ -327,7 +360,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected DataStore is present
-     * 
+     *
      * @param workspace workspace of the datastore
      * @param dsName name of the datastore
      * @return boolean indicating if the datastore exists
@@ -338,7 +371,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected DataStore is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the datastore
      * @param dsName name of the datastore
      * @param quietOnNotFound if true, no exception is logged
@@ -360,7 +393,6 @@ public class GeoServerRESTReader {
      * @param layer A layer publishing the FeatureType
      * @return FeatureType details as a {@link RESTCoverage}
      */
-
     public RESTFeatureType getFeatureType(RESTLayer layer) {
         if(layer.getType() != RESTLayer.Type.VECTOR)
             throw new RuntimeException("Bad layer type for layer " + layer.getName());
@@ -371,7 +403,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected FeatureType is present.
-     * 
+     *
      * @param workspace workspace of the datastore
      * @param dsName name of the datastore
      * @param ftName name of the featuretype
@@ -383,7 +415,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected FeatureType is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the datastore
      * @param dsName name of the datastore
      * @param ftName name of the featuretype
@@ -404,7 +436,6 @@ public class GeoServerRESTReader {
      * Get summary info about all CoverageStores in a WorkSpace.
      *
      * @param workspace The name of the workspace
-     *
      * @return summary info about CoverageStores as a {@link RESTDataStoreList}
      */
     public RESTCoverageStoreList getCoverageStores(String workspace) {
@@ -448,7 +479,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Coverage store is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the coveragestore
      * @param csName name of the coveragestore
      * @param quietOnNotFound if true, no exception is logged
@@ -462,7 +493,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Coverage store is present.
-     * 
+     *
      * @param workspace workspace of the coveragestore
      * @param csName name of the coveragestore
      * @return boolean indicating if the coveragestore exists
@@ -509,7 +540,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Coverage is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the coveragestore
      * @param store name of the coveragestore
      * @param name name of the coverage
@@ -524,7 +555,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Coverage is present.
-     * 
+     *
      * @param workspace workspace of the coveragestore
      * @param store name of the coveragestore
      * @param name name of the coverage
@@ -556,7 +587,6 @@ public class GeoServerRESTReader {
      * Get summary info about all WmsStore in a WorkSpace.
      *
      * @param workspace The name of the workspace
-     *
      * @return summary info about CoverageStores as a {@link RESTWmsStoreList}
      */
     public RESTWmsStoreList getWmsStores(String workspace) {
@@ -599,7 +629,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Wms store is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the wmsstore
      * @param wsName name of the wmsstore
      * @param quietOnNotFound if true, no exception is logged
@@ -613,7 +643,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected wms store is present.
-     * 
+     *
      * @param workspace workspace of the wmsstore
      * @param wsName name of the wmsstore
      * @return boolean indicating if the wmsstore exists
@@ -659,11 +689,12 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Wms is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the wmsstore
      * @param name name of the wms
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the coverage exists
+     * @param store a {@link java.lang.String} object.
      */
     public boolean existsWms(String workspace, String store, String name, boolean quietOnNotFound){
         String url = baseurl + "/rest/workspaces/" + workspace + "/wmsstores/" + store + "/wmslayers/"+name+".xml";
@@ -673,7 +704,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected wms is present.
-     * 
+     *
      * @param workspace workspace of the wmsstore
      * @param store name of the wmsstore
      * @param name name of the wms
@@ -702,6 +733,7 @@ public class GeoServerRESTReader {
      * The Resource can then be converted to RESTCoverage or RESTFeatureType
      *
      * @return Resource details as a {@link RESTResource}
+     * @param layer a {@link it.geosolutions.geoserver.rest.decoder.RESTLayer} object.
      */
     public RESTResource getResource(RESTLayer layer) {
         String response = loadFullURL(layer.getResourceUrl());
@@ -774,7 +806,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected LayerGroup is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the LayerGroup
      * @param name name of the LayerGroup
      * @param quietOnNotFound if true, no exception is logged
@@ -793,7 +825,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected LayerGroup is present.
-     * 
+     *
      * @param workspace workspace of the LayerGroup
      * @param name name of the LayerGroup
      * @return boolean indicating if the LayerGroup exists
@@ -819,10 +851,11 @@ public class GeoServerRESTReader {
         return RESTLayerList.build(load(url));
     }
 	
-	/**
+    /**
      * Get summary info about all FeatureTypes of a workspace.
      *
      * @return summary info about Layers as a {@link RESTLayerList}
+     * @param workspace a {@link java.lang.String} object.
      */
     public RESTFeatureTypeList getFeatureTypes(String workspace) {
         String url = "/rest/workspaces/" + workspace + "/featuretypes.xml";
@@ -834,9 +867,8 @@ public class GeoServerRESTReader {
 
     /**
      * Get detailed info about a given Layer.
-     * 
-     * @deprecated use {@link #getLayer(String, String)}
      *
+     * @deprecated use {@link #getLayer(String, String)}
      * @param name The name of the Layer
      * @return Layer details as a {@link RESTLayer}
      */
@@ -850,7 +882,7 @@ public class GeoServerRESTReader {
 
     /**
      * Get detailed info about a given Layer.
-     * 
+     *
      * @param workspace the workspace name
      * @param name the layer name
      * @return a RESTLayer with layer information or null
@@ -877,7 +909,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Layer is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the Layer
      * @param name name of the Layer
      * @param quietOnNotFound if true, no exception is logged
@@ -896,7 +928,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Layer is present.
-     * 
+     *
      * @param workspace workspace of the Layer
      * @param name name of the Layer
      * @return boolean indicating if the Layer exists
@@ -911,9 +943,8 @@ public class GeoServerRESTReader {
 
     /**
      * Get a namespace.
-     * 
+     *
      * @param prefix namespace prefix.
-     * 
      * @return a RESTNamespace, or null if couldn't be created.
      */
     public RESTNamespace getNamespace(String prefix) {
@@ -945,6 +976,7 @@ public class GeoServerRESTReader {
      * Get the names of all the Namespaces.
      * <BR>
      * This is a shortcut call: These info could be retrieved using {@link #getNamespaces getNamespaces}
+     *
      * @return the list of the names of all Namespaces.
      */
     public List<String> getNamespaceNames() {
@@ -958,7 +990,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Namespace is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param prefix namespace prefix.
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the Namespace exists
@@ -974,7 +1006,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Namespace is present.
-     * 
+     *
      * @param prefix namespace prefix.
      * @return boolean indicating if the Namespace exists
      */
@@ -1004,6 +1036,7 @@ public class GeoServerRESTReader {
      * Get the names of all the Workspaces.
      * <BR>
      * This is a shortcut call: These info could be retrieved using {@link #getWorkspaces getWorkspaces}
+     *
      * @return the list of the names of all Workspaces or an empty list.
      */
     public List<String> getWorkspaceNames() {
@@ -1020,7 +1053,7 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Workspace is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param prefix Workspace prefix.
      * @param quietOnNotFound if true, no exception is logged
      * @return boolean indicating if the Workspace exists
@@ -1036,7 +1069,7 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Workspace is present.
-     * 
+     *
      * @param prefix Workspace prefix.
      * @return boolean indicating if the Workspace exists
      */
@@ -1050,15 +1083,14 @@ public class GeoServerRESTReader {
     
     /**
      * Get information about a granule for a structured coverage.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param id the ID of the granule to get information for
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws MalformedURLException
-     * @throws UnsupportedEncodingException
+     * @throws java.net.MalformedURLException if any.
+     * @throws java.io.UnsupportedEncodingException if any.
+     * @param coverage a {@link java.lang.String} object.
      */
     public RESTStructuredCoverageGranulesList getGranuleById(final String workspace,
             String coverageStore, String coverage, String id) throws MalformedURLException,
@@ -1081,8 +1113,9 @@ public class GeoServerRESTReader {
     
     /**
      * Checks if the selected Granule is present. Parameter quietOnNotFound can be used for controlling the logging when 404 is returned.
-     * 
+     *
      * @param workspace workspace of the coveragestore
+     * @param coverageStore name of the coveragestore
      * @param coverageStore name of the coveragestore
      * @param coverage name of the coverage
      * @param id id of the granule
@@ -1099,8 +1132,9 @@ public class GeoServerRESTReader {
 
     /**
      * Checks if the selected Granule is present.
-     * 
+     *
      * @param workspace workspace of the coveragestore
+     * @param coverageStore name of the coveragestore
      * @param coverageStore name of the coveragestore
      * @param coverage name of the coverage
      * @param id id of the granule
@@ -1111,15 +1145,14 @@ public class GeoServerRESTReader {
                 Util.DEFAULT_QUIET_ON_NOT_FOUND);
     }
 
-    /**
-     * Get information about the schema of the index for a structured coverage.
-     * 
-     * @param workspace the GeoServer workspace
-     * @param coverageStore the GeoServer coverageStore
-     * 
-     * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     */
+     /**
+      * Get information about the schema of the index for a structured coverage.
+      *
+      * @param workspace the GeoServer workspace
+      * @param coverageStore the GeoServer coverageStore
+      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
+      * @param coverage a {@link java.lang.String} object.
+      */
      public RESTStructuredCoverageIndexSchema getGranuleIndexSchema(final String workspace, String coverageStore, String coverage) {
          try {
              GeoServerRESTStructuredGridCoverageReaderManager manager = 
@@ -1138,18 +1171,18 @@ public class GeoServerRESTReader {
      }
 
     /**
-      * Get information about the granules for a coverage with optional filter and paging.
-      * 
-      * @param workspace the GeoServer workspace
-      * @param coverageStore the GeoServer coverageStore
-      * @param coverage the name of the target coverage
-      * @param filter the format of the file to upload, can be <code>null</code> to include all the granules
-      * @param offset the start page, can be <code>null</code> or an integer
-      * @param limit the dimension of the page, can be <code>null</code> or a positive integer
-      * 
-      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-      * 
-      */
+     * Get information about the granules for a coverage with optional filter and paging.
+     *
+     * @param workspace the GeoServer workspace
+     * @param coverageStore the GeoServer coverageStore
+     * @param coverageStore the GeoServer coverageStore
+     * @param coverage the name of the target coverage
+     * @param filter the format of the file to upload, can be <code>null</code> to include all the granules
+     * @param offset the start page, can be <code>null</code> or an integer
+     * @param limit the dimension of the page, can be <code>null</code> or a positive integer
+     * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
+     * @throws java.io.UnsupportedEncodingException if any.
+     */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace, String coverageStore, String coverage, String filter, Integer offset, Integer limit)
              throws  UnsupportedEncodingException {
          try {

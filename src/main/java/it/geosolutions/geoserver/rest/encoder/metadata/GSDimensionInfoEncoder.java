@@ -30,20 +30,26 @@ import it.geosolutions.geoserver.rest.encoder.utils.XmlElement;
 import java.math.BigDecimal;
 
 /**
- * 
+ * <p>GSDimensionInfoEncoder class.</p>
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
  * @author Simone Giannecchini, GeoSolutions
- *
+ * @version $Id: $
  */
 public class GSDimensionInfoEncoder extends XmlElement{
+	/** Constant <code>DIMENSIONINFO="dimensionInfo"</code> */
 	public final static String DIMENSIONINFO="dimensionInfo";
 	
+	/** Constant <code>RESOLUTION="resolution"</code> */
 	public final static String RESOLUTION="resolution";
 	
+	/** Constant <code>PRESENTATION="presentation"</code> */
 	public final static String PRESENTATION="presentation";
 	
+	/** Constant <code>UNITS="units"</code> */
 	public final static String UNITS="units";
 	
+	/** Constant <code>UNIT_SYMBOL="unitSymbol"</code> */
 	public final static String UNIT_SYMBOL="unitSymbol";
 	
 	private boolean enabled;
@@ -59,6 +65,7 @@ public class GSDimensionInfoEncoder extends XmlElement{
 	
 	/**
 	 * Build a dimension. An enabled dimension also need a presentation mode set.
+	 *
 	 * @param enabled enable dimension if true
 	 */
 	public GSDimensionInfoEncoder(final boolean enabled) {
@@ -76,18 +83,30 @@ public class GSDimensionInfoEncoder extends XmlElement{
 		this.enabled=Boolean.FALSE;
 	}
 	
+	/**
+	 * <p>Setter for the field <code>enabled</code>.</p>
+	 *
+	 * @param enabled a boolean.
+	 */
 	public void setEnabled(final boolean enabled){
 		set("enabled", "true");
 		this.enabled=Boolean.TRUE;
 	}
 	
+	/**
+	 * <p>setPresentation</p>
+	 *
+	 * @param pres a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder.Presentation} object.
+	 */
 	public void setPresentation(final Presentation pres){
 		setPresentation(pres, null);
 	}
 	
 	/**
-	 * @param pres
-	 * @param interval
+	 * <p>addPresentation</p>
+	 *
+	 * @param pres a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder.Presentation} object.
+	 * @param interval a {@link java.math.BigDecimal} object.
 	 */
 	protected void addPresentation(final Presentation pres, final BigDecimal interval){
 		if (enabled){
@@ -103,6 +122,12 @@ public class GSDimensionInfoEncoder extends XmlElement{
 		}
 	}
 	
+	/**
+	 * <p>setPresentation</p>
+	 *
+	 * @param pres a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder.Presentation} object.
+	 * @param interval a {@link java.math.BigDecimal} object.
+	 */
 	public void setPresentation(final Presentation pres, final BigDecimal interval){
             if (enabled){
                 set(PRESENTATION,pres.toString());
@@ -120,9 +145,9 @@ public class GSDimensionInfoEncoder extends XmlElement{
 	
 	/**
 	 * Set UoM for this dimension.
-	 * 
+	 *
 	 * <code>null</code> is acceptable and leave this UoM blank.
-	 * 
+	 *
 	 * @param unit UoM for this dimension.
 	 */
 	public void setUnit(final String unit){
@@ -134,11 +159,11 @@ public class GSDimensionInfoEncoder extends XmlElement{
             }
 	}
 	
-	/**
+        /**
          * Set UoM for this dimension.
-         * 
+         *
          * <code>null</code> is acceptable and leave this UoM blank.
-         * 
+         *
          * @param unitSymbol UoM for this dimension.
          */
         public void setUnitSymbol(final String unitSymbol){

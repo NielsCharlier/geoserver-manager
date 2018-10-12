@@ -34,7 +34,7 @@ import org.jdom.Element;
  * <P>
  * This is the XML document returned by GeoServer when requesting a CoverageStore:
  * <PRE>
- * {@code 
+ * {@code
  * <coverageStore>
  *      <name>testRESTStoreGeotiff</name>
  *      <type>GeoTIFF</type>
@@ -55,17 +55,29 @@ import org.jdom.Element;
  *
  * Note: the whole XML fragment is stored in memory. At the moment, there are
  * methods to retrieve only the more useful data.
- * 
+ *
  * @author etj
+ * @version $Id: $
  */
 public class RESTCoverageStore {
 	private final Element cs;
 
 
+	/**
+	 * <p>Constructor for RESTCoverageStore.</p>
+	 *
+	 * @param cs a {@link org.jdom.Element} object.
+	 */
 	public RESTCoverageStore(Element cs) {
 		this.cs = cs;
 	}
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTCoverageStore} object.
+     */
     public static RESTCoverageStore build(String response) {
         if(response == null)
             return null;
@@ -79,22 +91,47 @@ public class RESTCoverageStore {
             return null;
     }
 
+    /**
+     * <p>getName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return cs.getChildText("name");
     }
 
+    /**
+     * <p>getWorkspaceName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getWorkspaceName() {
         return cs.getChild("workspace").getChildText("name");
     }
 
+    /**
+     * <p>getURL</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getURL() {
         return cs.getChildText("url");
     }
     
+    /**
+     * <p>getType</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getType() {
         return cs.getChildText("type");
     }
 
+    /**
+     * <p>toString</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder(getClass().getSimpleName())
                 .append('[');

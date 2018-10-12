@@ -35,63 +35,85 @@ import org.jdom.Element;
  * <P>This is the XML REST representation:
  * <PRE>
  * {@code
-<layerGroup>
-  <name>tasmania</name>
-  <layers>
-    <layer>
-      <name>tasmania_state_boundaries</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_state_boundaries.xml" type="application/xml"/>
-    </layer>
-    <layer>
-      <name>tasmania_water_bodies</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_water_bodies.xml" type="application/xml"/>
-    </layer>
-    <layer>
-      <name>tasmania_roads</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_roads.xml" type="application/xml"/>
-    </layer>
-    <layer>
-      <name>tasmania_cities</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_cities.xml" type="application/xml"/>
-    </layer>
-  </layers>
-  <styles>
-    <style/>
-    <style/>
-    <style/>
-    <style/>
-  </styles>
-  <bounds>
-    <minx>143.83482400000003</minx>
-    <maxx>148.47914100000003</maxx>
-    <miny>-43.648056</miny>
-    <maxy>-39.573891</maxy>
-    <crs>EPSG:4326</crs>
-  </bounds>
-  <metadata>
-    <entry key="rawStyleList"></entry>
-  </metadata>
-</layerGroup>
+ *<layerGroup>
+ *  <name>tasmania</name>
+ *  <layers>
+ *    <layer>
+ *      <name>tasmania_state_boundaries</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_state_boundaries.xml" type="application/xml"/>
+ *    </layer>
+ *    <layer>
+ *      <name>tasmania_water_bodies</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_water_bodies.xml" type="application/xml"/>
+ *    </layer>
+ *    <layer>
+ *      <name>tasmania_roads</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_roads.xml" type="application/xml"/>
+ *    </layer>
+ *    <layer>
+ *      <name>tasmania_cities</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/tasmania_cities.xml" type="application/xml"/>
+ *    </layer>
+ *  </layers>
+ *  <styles>
+ *    <style/>
+ *    <style/>
+ *    <style/>
+ *    <style/>
+ *  </styles>
+ *  <bounds>
+ *    <minx>143.83482400000003</minx>
+ *    <maxx>148.47914100000003</maxx>
+ *    <miny>-43.648056</miny>
+ *    <maxy>-39.573891</maxy>
+ *    <crs>EPSG:4326</crs>
+ *  </bounds>
+ *  <metadata>
+ *    <entry key="rawStyleList"></entry>
+ *  </metadata>
+ *</layerGroup>
  * }</PRE>
+ *
  * @author etj
+ * @version $Id: $
  */
-
 public class RESTLayerGroup {
 	private final Element rootElem;
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayerGroup} object.
+     */
     public static RESTLayerGroup build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTLayerGroup(elem);
 	}
 
+	/**
+	 * <p>Constructor for RESTLayerGroup.</p>
+	 *
+	 * @param layerElem a {@link org.jdom.Element} object.
+	 */
 	public RESTLayerGroup(Element layerElem) {
 		this.rootElem = layerElem;
 	}
 
+	/**
+	 * <p>getName</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getName() {
 		return rootElem.getChildText("name");
 	}
 
+	/**
+	 * <p>getWorkspace</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getWorkspace() {
             Element rootLayer = rootElem.getChild("workspace");
             if (rootLayer != null) {
@@ -101,18 +123,38 @@ public class RESTLayerGroup {
             }	    	    
 	}
 	
+	/**
+	 * <p>getMode</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getMode() {
 	    return rootElem.getChildText("mode");
 	}
 	
+	/**
+	 * <p>getTitle</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTitle() {
 	    return rootElem.getChildText("title");
 	}
 	
+	/**
+	 * <p>getAbstract</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getAbstract() {
 	    return rootElem.getChildText("abstractTxt");
 	}
 	
+	/**
+	 * <p>getRootLayer</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getRootLayer() {
 	    Element rootLayer = rootElem.getChild("rootLayer");
 	    if (rootLayer != null) {
@@ -122,6 +164,11 @@ public class RESTLayerGroup {
 	    }
 	}
 	
+	/**
+	 * <p>getLayerList</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayerList} object.
+	 */
 	public RESTLayerList getLayerList() {
 	    if (rootElem.getChild("layers") != null) {
                 return new RESTLayerList(rootElem.getChild("layers"));
@@ -130,6 +177,11 @@ public class RESTLayerGroup {
 	    }
 	}
 
+        /**
+         * <p>getPublishedList</p>
+         *
+         * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTPublishedList} object.
+         */
         public RESTPublishedList getPublishedList() {
             if (rootElem.getChild("publishables") != null) {
                 return new RESTPublishedList(rootElem.getChild("publishables"));
@@ -138,25 +190,56 @@ public class RESTLayerGroup {
             }
         }	
 	
+	/**
+	 * <p>getCRS</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCRS() {
 		Element bounds = rootElem.getChild("bounds");
 		return bounds.getChildText("crs");
 	}
 
+	/**
+	 * <p>getBound</p>
+	 *
+	 * @param edge a {@link java.lang.String} object.
+	 * @return a double.
+	 */
 	protected double getBound(String edge) {
 		Element bounds = rootElem.getChild("bounds");
 		return Double.parseDouble(bounds.getChildText(edge));
 	}
 
+	/**
+	 * <p>getMinX</p>
+	 *
+	 * @return a double.
+	 */
 	public double getMinX() {
 		return getBound("minx");
 	}
+	/**
+	 * <p>getMaxX</p>
+	 *
+	 * @return a double.
+	 */
 	public double getMaxX() {
 		return getBound("maxx");
 	}
+	/**
+	 * <p>getMinY</p>
+	 *
+	 * @return a double.
+	 */
 	public double getMinY() {
 		return getBound("miny");
 	}
+	/**
+	 * <p>getMaxY</p>
+	 *
+	 * @return a double.
+	 */
 	public double getMaxY() {
 		return getBound("maxy");
 	}

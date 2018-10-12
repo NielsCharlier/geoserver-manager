@@ -32,23 +32,23 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
- * Encodes lists of entries with key attribute. 
+ * Encodes lists of entries with key attribute.
  * e.g.:
- * 
+ *
  * <PRE>
- * {@code 
+ * {@code
  *  <listName>
  *   <entry key="k1">val1</entry>
  *   <entry key="k2">val2</entry>
  *   <entry key="k3">val3</entry>
  * </listName>}
  * </PRE>
- * 
- * This can be also add compounded Elements 
+ *
+ * This can be also add compounded Elements
  * e.g.:
- * 
+ *
  * <PRE>
- * {@code 
+ * {@code
  * <listName>
  *  <entry key="time">
  *   	<dimensionInfo>
@@ -64,18 +64,18 @@ import org.jdom.filter.Filter;
  * 	</entry>
  * </listName>}
  * </PRE>
- * 
- * This can be also add list of compounded Elements 
- * 
+ *
+ * This can be also add list of compounded Elements
+ *
  * <PRE>
- * {@code 
+ * {@code
  * <listName>
  *  <entry>
  *   	<String>AllowMultithreading</String>
  * 		<enabled>false</enabled>
  * 	</entry>
  * 	<entry>
- * 		
+ *
  * 			<enabled>true</enabled>
  * 			<attribute>ele</attribute>
  * 			<presentation>LIST</presentation>
@@ -84,13 +84,15 @@ import org.jdom.filter.Filter;
  * </listName>
  * }
  * </PRE>
- * 
+ *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * 
+ * @version $Id: $
  */
 public class NestedElementEncoder extends XmlElement {
+	/** Constant <code>ENTRY="entry"</code> */
 	public final static String ENTRY = "entry";
+	/** Constant <code>KEY="key"</code> */
 	public final static String KEY = "key";
 
 	static class NestedElementFilter implements Filter {
@@ -149,10 +151,21 @@ public class NestedElementEncoder extends XmlElement {
 		}
 	};
 
+	/**
+	 * <p>Constructor for NestedElementEncoder.</p>
+	 *
+	 * @param listName a {@link java.lang.String} object.
+	 */
 	public NestedElementEncoder(String listName) {
 		super(listName);
 	}
 
+	/**
+	 * <p>set</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void set(final String key, final String value) {
 		// if some previous similar object is found
 		final Element search;
@@ -165,6 +178,12 @@ public class NestedElementEncoder extends XmlElement {
 		add(key, value);
 	}
 
+	/**
+	 * <p>set</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link org.jdom.Element} object.
+	 */
 	public void set(final String key, final Element value) {
 		// if some previous similar object is found
 		final Element search;
@@ -177,6 +196,12 @@ public class NestedElementEncoder extends XmlElement {
 		add(key, value);
 	}
 
+	/**
+	 * <p>add</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link org.jdom.Element} object.
+	 */
 	public void add(final String key, final Element value) {
 		final Element entryElem = new Element(ENTRY);
 		if (key != null)
@@ -187,6 +212,12 @@ public class NestedElementEncoder extends XmlElement {
 		this.addContent(entryElem);
 	}
 
+	/**
+	 * <p>add</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void add(final String key, final String value) {
 		final Element entryElem = new Element(ENTRY);
 
@@ -198,6 +229,12 @@ public class NestedElementEncoder extends XmlElement {
 		this.addContent(entryElem);
 	}
 
+	/**
+	 * <p>add</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param list a {@link java.util.List} object.
+	 */
 	public void add(final String key, final List<Element> list) {
 		final Element entryElem = new Element(ENTRY);
 		if (key != null)
@@ -212,6 +249,12 @@ public class NestedElementEncoder extends XmlElement {
 		this.addContent(entryElem);
 	}
 
+	/**
+	 * <p>set</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link java.util.List} object.
+	 */
 	public void set(final String key, final List<Element> value) {
 		// if some previous similar object is found
 		final Element search;
@@ -224,6 +267,7 @@ public class NestedElementEncoder extends XmlElement {
 		add(key, value);
 	}
 
+	/** {@inheritDoc} */
 	public boolean remove(final String key) {
 		// if some previous similar object is found
 		final Element search;

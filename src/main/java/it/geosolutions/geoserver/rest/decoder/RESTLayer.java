@@ -45,47 +45,49 @@ import org.jdom.Namespace;
  * <P>This is the XML REST representation:
  * <PRE>
  * {@code
-<layer>
-    <name>tasmania_cities</name>
-    <path>/</path>
-    <type>VECTOR</type>
-    <defaultStyle>
-        <name>capitals</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/capitals.xml" type="application/xml"/>
-    </defaultStyle>
-    <styles class="linked-hash-set">
-    	<style>
-      		<name>green</name>
-      		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/green.xml" type="application/xml"/>
-    	</style>
-  	</styles>
-    <resource class="featureType">
-        <name>tasmania_cities</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
-    </resource>
-    <enabled>true</enabled>
-    <queryable>true</queryable>
-    <advertised>true</advertised>
-    <attribution>
-        <logoWidth>0</logoWidth>
-        <logoHeight>0</logoHeight>
-    </attribution>
-    <authorityURLs>
-		<AuthorityURL>
-			<name>authority1</name>
-			<href>http://www.authority1.org</href>
-		</AuthorityURL>
-	</authorityURLs>
-	<identifiers>
-		<Identifier>
-			<authority>authority1</authority>
-			<identifier>identifier1</identifier>
-		</Identifier>
-	</identifiers>
-</layer>
+ *<layer>
+ *    <name>tasmania_cities</name>
+ *    <path>/</path>
+ *    <type>VECTOR</type>
+ *    <defaultStyle>
+ *        <name>capitals</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/capitals.xml" type="application/xml"/>
+ *    </defaultStyle>
+ *    <styles class="linked-hash-set">
+ *    	<style>
+ *      		<name>green</name>
+ *      		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/styles/green.xml" type="application/xml"/>
+ *    	</style>
+ *  	</styles>
+ *    <resource class="featureType">
+ *        <name>tasmania_cities</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
+ *    </resource>
+ *    <enabled>true</enabled>
+ *    <queryable>true</queryable>
+ *    <advertised>true</advertised>
+ *    <attribution>
+ *        <logoWidth>0</logoWidth>
+ *        <logoHeight>0</logoHeight>
+ *    </attribution>
+ *    <authorityURLs>
+ *		<AuthorityURL>
+ *			<name>authority1</name>
+ *			<href>http://www.authority1.org</href>
+ *		</AuthorityURL>
+ *	</authorityURLs>
+ *	<identifiers>
+ *		<Identifier>
+ *			<authority>authority1</authority>
+ *			<identifier>identifier1</identifier>
+ *		</Identifier>
+ *	</identifiers>
+ *</layer>
  * }</PRE>
+ *
  * @author etj
  * @author eblondel
+ * @version $Id: $
  */
 public class RESTLayer {
 	protected final Element layerElem;
@@ -112,6 +114,12 @@ public class RESTLayer {
 		}
 	};
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayer} object.
+     */
     public static RESTLayer build(String response) {
         if(response == null)
             return null;
@@ -123,39 +131,84 @@ public class RESTLayer {
             return null;
 	}
 
+	/**
+	 * <p>Constructor for RESTLayer.</p>
+	 *
+	 * @param layerElem a {@link org.jdom.Element} object.
+	 */
 	public RESTLayer(Element layerElem) {
 		this.layerElem = layerElem;
 	}
 
+	/**
+	 * <p>getEnabled</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getEnabled(){
 		return Boolean.parseBoolean(layerElem.getChildText("enabled"));
 	}
 	
+	/**
+	 * <p>getQueryable</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getQueryable(){
 		return Boolean.parseBoolean(layerElem.getChildText("queryable"));
 	}
 	
+	/**
+	 * <p>getAdvertised</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getAdvertised(){
 		return Boolean.parseBoolean(layerElem.getChildText("advertised"));
 	}
 	
+	/**
+	 * <p>getName</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getName() {
 		return layerElem.getChildText("name");
 	}
 
+	/**
+	 * <p>getTypeString</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTypeString() {
 		return layerElem.getChildText("type");
 	}
 
+	/**
+	 * <p>getType</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayer.Type} object.
+	 */
 	public Type getType() {
 		return Type.get(getTypeString());
 	}
 
+	/**
+	 * <p>getDefaultStyle</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDefaultStyle() {
 		Element defaultStyle = layerElem.getChild("defaultStyle");
 		return defaultStyle == null? null : defaultStyle.getChildText("name");
   	}
 	
+	/**
+	 * <p>getStyles</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyleList} object.
+	 */
 	public RESTStyleList getStyles() {
 		RESTStyleList styleList = null;
 		final Element stylesRoot = layerElem.getChild("styles");
@@ -165,21 +218,41 @@ public class RESTLayer {
 		return styleList;
 	}
 
+	/**
+	 * <p>getDefaultStyleWorkspace</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDefaultStyleWorkspace() {
 		Element defaultStyle = layerElem.getChild("defaultStyle");
 		return defaultStyle == null? null : defaultStyle.getChildText("workspace");
   	}
 
+	/**
+	 * <p>getTitle</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTitle() {
 		Element resource = layerElem.getChild("resource");
 		return resource.getChildText("title");
 	}
 
+	/**
+	 * <p>getAbstract</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getAbstract() {
 		Element resource = layerElem.getChild("resource");
 		return resource.getChildText("abstract");
 	}
 
+	/**
+	 * <p>getNameSpace</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNameSpace() {
 		Element resource = layerElem.getChild("resource");
 		return resource.getChild("namespace").getChildText("name");
@@ -210,6 +283,8 @@ public class RESTLayer {
      *  <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
      * </resource>
      * } </PRE>
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getResourceUrl() {
 	Element resource = layerElem.getChild("resource");
@@ -220,7 +295,7 @@ public class RESTLayer {
     
 	/**
 	 * Decodes the list of AuthorityURLInfo from the GeoServer Layer
-	 * 
+	 *
 	 * @return the list of GSAuthorityURLInfoEncoder
 	 */
 	public List<GSAuthorityURLInfoEncoder> getEncodedAuthorityURLInfoList() {
@@ -247,7 +322,7 @@ public class RESTLayer {
 
 	/**
 	 * Decodes the list of IdentifierInfo from the GeoServer Layer
-	 * 
+	 *
 	 * @return the list of IdentifierInfoEncoder
 	 */
 	public List<GSIdentifierInfoEncoder> getEncodedIdentifierInfoList() {

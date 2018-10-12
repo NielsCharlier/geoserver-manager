@@ -32,34 +32,47 @@ import org.jdom.Element;
 
 /**
  * Parse <TT>published</TT>s returned as XML REST objects.
- * 
+ *
  * This is the XML REST representation:
  * <pre>{@code
-  <publishables>
-    <published type="layer">
-      <name>sfdem</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/sfdem.xml" type="application/xml"/>
-    </published>
-    <published type="layer">
-      <name>bugsites</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/bugsites.xml" type="application/xml"/>
-    </published>
-  </publishables>
+ *  <publishables>
+ *    <published type="layer">
+ *      <name>sfdem</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/sfdem.xml" type="application/xml"/>
+ *    </published>
+ *    <published type="layer">
+ *      <name>bugsites</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/bugsites.xml" type="application/xml"/>
+ *    </published>
+ *  </publishables>
  * }</pre>
- * 
+ *
  * @author Davide Savazzi (geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTPublishedList extends RESTAbstractList<RESTPublished> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTPublishedList} object.
+     */
     public static RESTPublishedList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null ? null : new RESTPublishedList(elem);
     }
 
+    /**
+     * <p>Constructor for RESTPublishedList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTPublishedList(Element list) {
         super(list);
     }
     
+    /** {@inheritDoc} */
     protected RESTPublished createElement(Element el) {
         return new RESTPublished(el);
     }

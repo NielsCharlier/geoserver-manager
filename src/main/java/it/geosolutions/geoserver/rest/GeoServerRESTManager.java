@@ -34,16 +34,17 @@ import java.net.URL;
 
 /**
  * <i>The</i> single entry point to all of geoserver-manager functionality.
- * 
+ *
  * Instance this one, and use getters to use different components. These are:
  * <ul>
  * <li>getReader() simple, high-level access methods.
  * <li>getPublisher() simple, high-level pubhish methods.
  * <li>get<i>Foo</i>Manager, full-fledged management of catalog objects.
  * </ul>
- * 
+ *
  * @author Oscar Fonts
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
 
@@ -59,13 +60,13 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
 
     /**
      * Default constructor.
-     * 
+     *
      * Indicates connection parameters to remote GeoServer instance.
-     * 
+     *
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
-     * @throws IllegalArgumentException {@link GeoServerRESTAbstractManager#GeoServerRESTAbstractManager(URL, String, String)}
+     * @throws java.lang.IllegalArgumentException {@link GeoServerRESTAbstractManager#GeoServerRESTAbstractManager(URL, String, String)}
      */
     public GeoServerRESTManager(URL restURL, String username, String password)
             throws IllegalArgumentException {
@@ -80,26 +81,56 @@ public class GeoServerRESTManager extends GeoServerRESTAbstractManager {
         geoWebCacheRest = new GeoWebCacheREST(restURL, gsuser, gspass);
     }
 
+    /**
+     * <p>Getter for the field <code>publisher</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher} object.
+     */
     public GeoServerRESTPublisher getPublisher() {
         return publisher;
     }
 
+    /**
+     * <p>Getter for the field <code>reader</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.GeoServerRESTReader} object.
+     */
     public GeoServerRESTReader getReader() {
         return reader;
     }
 
+    /**
+     * <p>Getter for the field <code>storeManager</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager} object.
+     */
     public GeoServerRESTStoreManager getStoreManager() {
         return storeManager;
     }
 
+    /**
+     * <p>Getter for the field <code>styleManager</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTStyleManager} object.
+     */
     public GeoServerRESTStyleManager getStyleManager() {
         return styleManager;
     }
 
+    /**
+     * <p>Getter for the field <code>structuredGridCoverageReader</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTStructuredGridCoverageReaderManager} object.
+     */
     public GeoServerRESTStructuredGridCoverageReaderManager getStructuredGridCoverageReader() {
         return structuredGridCoverageReader;
     }
 
+    /**
+     * <p>Getter for the field <code>geoWebCacheRest</code>.</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.GeoWebCacheREST} object.
+     */
     public GeoWebCacheREST getGeoWebCacheRest() {
         return geoWebCacheRest;
     }

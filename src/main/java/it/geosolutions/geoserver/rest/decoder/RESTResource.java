@@ -41,40 +41,76 @@ import org.jdom.Namespace;
 
 /**
  * Parse a resource (FeatureType or Coverage) returned as XML REST objects.
- * 
+ *
  * @author Emanuele Tajariol etj@geo-solutions.it
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com | emmanuel.blondel@fao.org
  * @author Henry Rotzoll
- * 
+ * @version $Id: $
  */
 public class RESTResource {
     protected final Element rootElem;
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTResource} object.
+     */
     public static RESTResource build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null ? null : new RESTCoverage(elem);
     }
 
+    /**
+     * <p>Constructor for RESTResource.</p>
+     *
+     * @param resource a {@link org.jdom.Element} object.
+     */
     public RESTResource(Element resource) {
         this.rootElem = resource;
     }
 
+    /**
+     * <p>getName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return rootElem.getChildText("name");
     }
 
+    /**
+     * <p>getTitle</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getTitle() {
         return rootElem.getChildText("title");
     }
 
+    /**
+     * <p>getNativeName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNativeName() {
         return rootElem.getChildText("nativeName");
     }
 
+    /**
+     * <p>getAbstract</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getAbstract() {
         return rootElem.getChildText("abstract");
     }
 
+    /**
+     * <p>getKeywords</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getKeywords() {
         List<String> kwdsList = null;
 
@@ -91,18 +127,38 @@ public class RESTResource {
         return kwdsList;
     }
 
+    /**
+     * <p>getNameSpace</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNameSpace() {
         return rootElem.getChild("namespace").getChildText("name");
     }
 
+    /**
+     * <p>getStoreName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getStoreName() {
         return rootElem.getChild("store").getChildText("name");
     }
 
+    /**
+     * <p>getStoreType</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getStoreType() {
         return rootElem.getChild("store").getAttributeValue("class");
     }
 
+    /**
+     * <p>getStoreUrl</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getStoreUrl() {
         Element store = rootElem.getChild("store");
         Element atom = store.getChild("link",
@@ -110,10 +166,20 @@ public class RESTResource {
         return atom.getAttributeValue("href");
     }
 
+    /**
+     * <p>getNativeCRS</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNativeCRS() {
     	return rootElem.getChildText("nativeCRS");
     }
 
+	/**
+	 * <p>getNativeBoundingBox</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTBoundingBox} object.
+	 */
 	public RESTBoundingBox getNativeBoundingBox() {
 		RESTBoundingBox bbox = null;
 		Element bboxElement = rootElem.getChild("nativeBoundingBox");
@@ -123,6 +189,11 @@ public class RESTResource {
 		return bbox;
 	}
 	
+	/**
+	 * <p>getLatLonBoundingBox</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTBoundingBox} object.
+	 */
 	public RESTBoundingBox getLatLonBoundingBox() {
 		RESTBoundingBox bbox = null;
 		Element bboxElement = rootElem.getChild("latLonBoundingBox");
@@ -132,40 +203,69 @@ public class RESTResource {
 		return bbox;
 	}
 
+    /**
+     * <p>getCRS</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getCRS() {
     	RESTBoundingBox bbox = this.getLatLonBoundingBox();
     	return bbox.getCRS();
     }
 
+    /**
+     * <p>getMinX</p>
+     *
+     * @return a double.
+     */
     public double getMinX() {
         return this.getLatLonBoundingBox().getMinX();
     }
 
+    /**
+     * <p>getMaxX</p>
+     *
+     * @return a double.
+     */
     public double getMaxX() {
     	return this.getLatLonBoundingBox().getMaxX();
     }
 
+    /**
+     * <p>getMinY</p>
+     *
+     * @return a double.
+     */
     public double getMinY() {
     	return this.getLatLonBoundingBox().getMinY();
     }
 
+    /**
+     * <p>getMaxY</p>
+     *
+     * @return a double.
+     */
     public double getMaxY() {
     	return this.getLatLonBoundingBox().getMaxY();
     }
 
     /**
+     * <p>getAttributeList</p>
+     *
      * @deprecated use {@link RESTFeatureType#getAttributeList()}
-     * @return
-     * @throws UnsupportedOperationException
+     * @throws java.lang.UnsupportedOperationException
+     * @return a {@link java.util.List} object.
      */
     public List<Map<FeatureTypeAttribute, String>> getAttributeList() {
         throw new UnsupportedOperationException("This method is specific for RESTFeatureType");
     }
 
     /**
+     * <p>getEncodedAttributeList</p>
+     *
      * @deprecated use {@link RESTFeatureType#getEncodedAttributeList()}
-     * @return
-     * @throws UnsupportedOperationException
+     * @throws java.lang.UnsupportedOperationException
+     * @return a {@link java.util.List} object.
      */
     public List<GSAttributeEncoder> getEncodedAttributeList() {
         throw new UnsupportedOperationException("This method is specific for RESTFeatureType");
@@ -173,9 +273,8 @@ public class RESTResource {
 
     /**
      * Decodes the list of MetadataLinkInfo from the GeoServer Resource
-     * 
+     *
      * @since gs-2.4.x
-     * 
      * @return the list of GSMetadataLinkEncoder
      */
     public List<GSMetadataLinkInfoEncoder> getEncodedMetadataLinkInfoList() {
@@ -204,9 +303,8 @@ public class RESTResource {
 
     /**
      * Decodes the list of GSCoverageDimensionEncoder from the GeoServer Resource
-     * 
+     *
      * @since gs-2.4.x
-     * 
      * @return the list of GSCoverageDimensionEncoder
      */
     public List<GSCoverageDimensionEncoder> getEncodedDimensionsInfoList() {

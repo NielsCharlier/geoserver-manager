@@ -35,9 +35,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ * <p>Abstract ElementUtils class.</p>
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * 
+ * @version $Id: $
  */
 public abstract class ElementUtils {
 	/**
@@ -46,12 +47,13 @@ public abstract class ElementUtils {
 	private final static Logger LOGGER = LoggerFactory.getLogger(ElementUtils.class);
 
 	/**
-	 * 
+	 * <p>remove</p>
+	 *
 	 * @param root the root where to start searching to element to remove
 	 * @param el the element to remove (will be set to null since this node is unusable after removal)
 	 * @return true if the element EQUALS to the 'el' starting from root
 	 *         (including) is found, false if object 'el' is not found
-	 * 
+	 * @throws java.lang.IllegalArgumentException if any.
 	 */
 	public static boolean remove(final Element root, Element el) throws IllegalArgumentException {
 		if (root == null || el == null) {
@@ -81,12 +83,12 @@ public abstract class ElementUtils {
 
 	/**
 	 * Use {@link #contains(Element, Filter)} for an infinite depth search
-	 * 
-	 * @param root
-	 * @param filter
-	 * @param depth the max depth to search. 
-	 * @return
-	 * @throws IllegalArgumentException
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param filter a {@link org.jdom.filter.Filter} object.
+	 * @param depth the max depth to search.
+	 * @throws java.lang.IllegalArgumentException if any.
+	 * @return a {@link java.util.List} object.
 	 */
 	public static List<Element> search(final Element root,
 			final Filter filter, final int depth)
@@ -119,6 +121,13 @@ public abstract class ElementUtils {
 		return ret;
 	}
 
+	/**
+	 * <p>search</p>
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param filter a {@link org.jdom.filter.Filter} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<Element> search(final Element root, final Filter filter) {
 		if (root == null || filter == null) {
 			throw new IllegalArgumentException("Bad arguments: root=" + root
@@ -150,9 +159,12 @@ public abstract class ElementUtils {
 	}
 
 	/**
-	 * @param root
-	 * @param filter
+	 * <p>contains</p>
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param filter a {@link org.jdom.filter.Filter} object.
 	 * @return the FIRST element matching the passed filter or null
+	 * @throws java.lang.IllegalArgumentException if any.
 	 */
 	public static Element contains(final Element root, final Filter filter) throws IllegalArgumentException {
 		if (root == null || filter == null ) {
@@ -167,11 +179,14 @@ public abstract class ElementUtils {
 	}
 	
 	/**
-	 * @param root
-	 * @param name
-	 * @param val
+	 * <p>contains</p>
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @param val a {@link java.lang.String} object.
 	 * @return the FIRST element EQUALS to a node with name and a text value
 	 *         starting from root or null
+	 * @throws java.lang.IllegalArgumentException if any.
 	 */
 	public static Element contains(final Element root, final String name,
 			final String val) throws IllegalArgumentException {
@@ -200,12 +215,12 @@ public abstract class ElementUtils {
 	}
 
 	
-	/**
+        /**
          * return the FIRST element with name equals to the passed key
-         * 
-         * @param root
-         * @param name
-         * @return
+         *
+         * @param root a {@link org.jdom.Element} object.
+         * @param name a {@link java.lang.String} object.
+         * @return a {@link org.jdom.Element} object.
          */
         public static Element contains(final Element root, final String name){
             return contains(root, name, -1);
@@ -213,10 +228,12 @@ public abstract class ElementUtils {
 	
 	/**
 	 * return the FIRST element with name equals to the passed key
-	 * 
-	 * @param root
-	 * @param name
-	 * @return
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @param deep a int.
+	 * @return a {@link org.jdom.Element} object.
+	 * @throws java.lang.IllegalArgumentException if any.
 	 */
 	public static Element contains(final Element root, final String name, final int deep)
 			throws IllegalArgumentException {
@@ -246,12 +263,15 @@ public abstract class ElementUtils {
 	}
 
 	/**
-	 * @param root
-	 * @param el
+	 * <p>contains</p>
+	 *
+	 * @param root a {@link org.jdom.Element} object.
+	 * @param el a {@link org.jdom.Element} object.
 	 * @return the FIRST element EQUALS to the 'el' starting from root or null
 	 *         This tests for equality of this Content object to the supplied
 	 *         object. Content items are considered equal only if they are
 	 *         referentially equal (i.e. the same object).
+	 * @throws java.lang.IllegalArgumentException if any.
 	 */
 	public static Element contains(final Element root, final Element el)
 			throws IllegalArgumentException {

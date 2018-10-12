@@ -33,17 +33,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p>Util class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class Util {
 
+/** Constant <code>QUIET_ON_NOT_FOUND_PARAM="quietOnNotFound="</code> */
 public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound="; 
     
+    /** Constant <code>DEFAULT_QUIET_ON_NOT_FOUND=true</code> */
     public static final boolean DEFAULT_QUIET_ON_NOT_FOUND = true; 
 
     /**
      * Search for a stylename in global and in all workspaces.
+     *
+     * @param reader a {@link it.geosolutions.geoserver.rest.GeoServerRESTReader} object.
+     * @param stylename a {@link java.lang.String} object.
+     * @return a {@link java.util.List} object.
      */
     public static List<RESTStyle> searchStyles(GeoServerRESTReader reader, String stylename) {
 
@@ -69,6 +77,7 @@ public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound=";
     
     /**
      * Append the quietOnNotFound parameter to the input URL
+     *
      * @param quietOnNotFound parameter
      * @param url input url
      * @return a composed url with the parameter appended
@@ -79,18 +88,46 @@ public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound=";
         return composed;
     }
 
+    /**
+     * <p>safeList</p>
+     *
+     * @param list a {@link java.util.List} object.
+     * @param <T> a T object.
+     * @return a {@link java.util.List} object.
+     */
     public static <T> List<T> safeList(List<T> list) {
         return list == null ? Collections.EMPTY_LIST : list;
     }
 
+    /**
+     * <p>safeCollection</p>
+     *
+     * @param collection a {@link java.util.Collection} object.
+     * @param <T> a T object.
+     * @return a {@link java.util.Collection} object.
+     */
     public static <T> Collection<T> safeCollection(Collection<T> collection) {
         return collection == null ? Collections.EMPTY_SET : collection;
     }
 
+    /**
+     * <p>safeMap</p>
+     *
+     * @param map a {@link java.util.Map} object.
+     * @param <TK> a TK object.
+     * @param <TV> a TV object.
+     * @return a {@link java.util.Map} object.
+     */
     public static <TK, TV> Map<TK, TV> safeMap(Map<TK, TV> map) {
         return map == null ? Collections.EMPTY_MAP : map;
     }
 
+    /**
+     * <p>getParameterSeparator</p>
+     *
+     * @param url a {@link java.lang.String} object.
+     * @return a char.
+     */
     public static char getParameterSeparator(String url) {
         char parameterSeparator = '?';
         if (url.contains("?")) {
@@ -99,6 +136,12 @@ public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound=";
         return parameterSeparator;
     }
 
+    /**
+     * <p>getParameterSeparator</p>
+     *
+     * @param url a {@link java.lang.StringBuilder} object.
+     * @return a char.
+     */
     public static char getParameterSeparator(StringBuilder url) {
         char parameterSeparator = '?';
         if (url.indexOf("?") != -1) {
@@ -107,6 +150,14 @@ public static final String QUIET_ON_NOT_FOUND_PARAM = "quietOnNotFound=";
         return parameterSeparator;
     }
 
+    /**
+     * <p>appendParameter</p>
+     *
+     * @param url a {@link java.lang.StringBuilder} object.
+     * @param parameterName a {@link java.lang.String} object.
+     * @param parameterValue a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public static boolean appendParameter(StringBuilder url, String parameterName,
             String parameterValue) {
         boolean result = false;

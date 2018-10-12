@@ -65,13 +65,15 @@ import net.sf.json.JSONObject;
  * Connect to a GeoServer instance to publish or modify its contents via REST API.
  * <P>
  * There are no modifiable instance fields, so all the calls are thread-safe.
- * 
+ *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
  * @author Lennart Karsten - lennart.k@thinking-aloud.eu
+ * @version $Id: $
  */
 public class GeoServerRESTPublisher {
 
+    /** Constant <code>DEFAULT_CRS="EPSG:4326"</code> */
     public static final String DEFAULT_CRS = "EPSG:4326";
 
     /** The logger for this class */
@@ -99,7 +101,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Creates a <TT>GeoServerRESTPublisher</TT> to connect against a GeoServer instance with the given URL and user credentials.
-     * 
+     *
      * @param restURL the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
      * @param username auth credential
      * @param password auth credential
@@ -127,11 +129,10 @@ public class GeoServerRESTPublisher {
      * Issues a GeoServer BACKUP.
      * <P>
      * Won't include data, cached tiles, or logs. Use {@link #backup(String, boolean, boolean, boolean)} to control these parameters.
-     * 
+     *
      * @param backupDir the target Backup Dir String.
-     * 
      * @return <TT>id</TT> of the backup.
-     * @throws IllegalArgumentException if the backupDir is null or empty
+     * @throws java.lang.IllegalArgumentException if the backupDir is null or empty
      */
     public String backup(final String backupDir) throws IllegalArgumentException {
         /*
@@ -145,14 +146,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Issues a GeoServer BACKUP.
-     * 
+     *
      * @param backupDir the target Backup Dir String.
      * @param includedata whether or not include the data dir Boolean.
      * @param includegwc whether or not include the geowebcache dir Boolean.
      * @param includelog whether or not include the log dir Boolean.
-     * 
      * @return <TT>id</TT> of the backup.
-     * @throws IllegalArgumentException if the backupDir is null or empty.
+     * @throws java.lang.IllegalArgumentException if the backupDir is null or empty.
      */
     public String backup(final String backupDir, final boolean includedata,
             final boolean includegwc, final boolean includelog) throws IllegalArgumentException {
@@ -182,11 +182,10 @@ public class GeoServerRESTPublisher {
 
     /**
      * Issues a GeoServer RESTORE.
-     * 
+     *
      * @param backupDir the source backup dir.
-     * 
      * @return <TT>id</TT> of the backup.
-     * @throws IllegalArgumentException if the backupDir is null or empty
+     * @throws java.lang.IllegalArgumentException if the backupDir is null or empty
      */
     public String restore(final String backupDir) throws IllegalArgumentException {
         /*
@@ -219,9 +218,8 @@ public class GeoServerRESTPublisher {
      * <P>
      * GeoServer will automatically create an associated Namespace with the URI being "http://{workspaceName}". To specify a custom Namespace URI, use
      * {@link #createWorkspace(String, URI)}.
-     * 
+     *
      * @param workspace The name of the new workspace.
-     * 
      * @return <TT>true</TT> if the workspace was created.
      */
     public boolean createWorkspace(final String workspace) {
@@ -242,7 +240,7 @@ public class GeoServerRESTPublisher {
      * Create both a workspace and its associated namespace.
      * <P>
      * Note that this method is equivalent to {@link #createNamespace}.
-     * 
+     *
      * @param name Name for the new workspace, which will be also its associated namespace prefix.
      * @param uri Namespace URI. Cannot be empty.
      * @return <TT>true</TT> if the Workspace and its associated namespace were successfully created.
@@ -259,12 +257,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new Namespace. GeoServer will automatically create the corresponding Workspace.
-     * 
+     *
      * Prefix and URI are mandatory and cannot be empty. If a Namespace with the given prefix already exists, it won't be created.
-     * 
+     *
      * @param prefix The name of the new Namespace.
      * @param uri The URI of the new Namespace.
-     * 
      * @return <TT>true</TT> if the Namespace was successfully created.
      * @see <a href="http://docs.geoserver.org/stable/en/user/restconfig/rest-config-api.html#namespaces"> GeoServer Documentation</a>
      */
@@ -278,12 +275,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a Namespace URI.
-     * 
+     *
      * Prefix and URI are mandatory and cannot be empty. A Namespace with the given prefix should exist.
-     * 
+     *
      * @param prefix The prefix of an existing Namespace.
      * @param uri The new URI.
-     * 
      * @return <TT>true</TT> if the Namespace was successfully updated.
      */
     public boolean updateNamespace(final String prefix, final URI uri) {
@@ -296,12 +292,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a given Namespace. It will remove the associated Workspace as well.
-     * 
+     *
      * @param prefix The Namespace prefix
      * @param recurse The recurse parameter is used to recursively delete all resources contained in the workspace associated with this Namespace.
      *        This includes data stores, coverage stores, feature types, etc... Allowable values for this parameter are <i>true</i> or <i>false</i>.
      *        The default (safer) value is <i>false</i>.
-     * 
      * @return <TT>true</TT> if the Namespace was successfully removed.
      */
     public boolean removeNamespace(final String prefix, boolean recurse) {
@@ -318,9 +313,8 @@ public class GeoServerRESTPublisher {
 
     /**
      * Store and publish a Style.
-     * 
+     *
      * @param sldBody the full SLD document as a String.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody) {
@@ -329,12 +323,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Store and publish a Style, assigning it a name.
-     * 
+     *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body is null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      */
     public boolean publishStyle(final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -343,9 +336,8 @@ public class GeoServerRESTPublisher {
 
     /**
      * Store and publish a Style.
-     * 
+     *
      * @param sldFile the File containing the SLD document.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile) {
@@ -354,10 +346,9 @@ public class GeoServerRESTPublisher {
 
     /**
      * Store and publish a Style, assigning it a name.
-     * 
+     *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name) {
@@ -370,7 +361,6 @@ public class GeoServerRESTPublisher {
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody, String name, boolean raw) {
@@ -383,7 +373,6 @@ public class GeoServerRESTPublisher {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name, boolean raw) {
@@ -392,13 +381,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a Style.
-     * 
+     *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final File sldFile, final String name, boolean raw)
             throws IllegalArgumentException {
@@ -407,13 +395,12 @@ public class GeoServerRESTPublisher {
     
     /**
      * Update a Style.
-     * 
+     *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name, boolean raw)
             throws IllegalArgumentException {
@@ -422,12 +409,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a Style.
-     * 
+     *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -436,12 +422,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a Style.
-     * 
+     *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      */
     public boolean updateStyle(final File sldFile, final String name)
             throws IllegalArgumentException {
@@ -453,12 +438,11 @@ public class GeoServerRESTPublisher {
      * Remove a Style.
      * <P>
      * The Style will be unpublished, and (optionally) the SLD file will be removed.
-     * 
+     *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if styleName is null or empty.
+     * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      */
     public boolean removeStyle(String styleName, final boolean purge)
             throws IllegalArgumentException {
@@ -470,9 +454,8 @@ public class GeoServerRESTPublisher {
      * Remove a Style.
      * <P>
      * The Style will be unpublished and the related SLD file will be removed.
-     * 
+     *
      * @param styleName the name of the Style to remove.
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean removeStyle(String styleName) {
@@ -480,62 +463,111 @@ public class GeoServerRESTPublisher {
     }
 
     /**
+     * <p>publishStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldBody a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean publishStyleInWorkspace(String workspace, String sldBody) {
         return styleManager.publishStyleInWorkspace(workspace, sldBody);
     }
 
     /**
+     * <p>publishStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldBody a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean publishStyleInWorkspace(String workspace, String sldBody, String name) throws IllegalArgumentException {
         return styleManager.publishStyleInWorkspace(workspace, sldBody, name);
     }
 
     /**
+     * <p>publishStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#publishStyleInWorkspace(java.lang.String, java.io.File)
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldFile a {@link java.io.File} object.
+     * @return a boolean.
      */
     public boolean publishStyleInWorkspace(String workspace, File sldFile) {
         return styleManager.publishStyleInWorkspace(workspace, sldFile);
     }
 
     /**
+     * <p>publishStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#publishStyleInWorkspace(java.lang.String, java.io.File, java.lang.String)
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldFile a {@link java.io.File} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean publishStyleInWorkspace(String workspace, File sldFile, String name) {
         return styleManager.publishStyleInWorkspace(workspace, sldFile, name);
     }
 
     /**
+     * <p>updateStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#updateStyleInWorkspace(java.lang.String, java.lang.String, java.lang.String)
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldBody a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean updateStyleInWorkspace(String workspace, String sldBody, String name) throws IllegalArgumentException {
         return styleManager.updateStyleInWorkspace(workspace, sldBody, name);
     }
 
     /**
+     * <p>updateStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#updateStyleInWorkspace(java.lang.String, java.io.File, java.lang.String)
+     * @param workspace a {@link java.lang.String} object.
+     * @param sldFile a {@link java.io.File} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean updateStyleInWorkspace(String workspace, File sldFile, String name) throws IllegalArgumentException {
         return styleManager.updateStyleInWorkspace(workspace, sldFile, name);
     }
 
     /**
+     * <p>removeStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#removeStyleInWorkspace(java.lang.String, java.lang.String, boolean)
+     * @param workspace a {@link java.lang.String} object.
+     * @param styleName a {@link java.lang.String} object.
+     * @param purge a boolean.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeStyleInWorkspace(String workspace, String styleName, boolean purge) throws IllegalArgumentException {
         return styleManager.removeStyleInWorkspace(workspace, styleName, purge);
     }
 
     /**
+     * <p>removeStyleInWorkspace</p>
+     *
      * @since GeoServer 2.2
      * @see GeoServerRESTStyleManager#removeStyleInWorkspace(java.lang.String, java.lang.String)
+     * @param workspace a {@link java.lang.String} object.
+     * @param styleName a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean removeStyleInWorkspace(String workspace, String styleName) {
         return styleManager.removeStyleInWorkspace(workspace, styleName);
@@ -563,7 +595,7 @@ public class GeoServerRESTPublisher {
         DATASTORES;
 
         /**
-         * @deprecated use {@link StoreType#getTypeNameWithFormat(StoreType, Format)}
+         * @deprecated use {@link StoreType#getTypeNameWithFormat(it.geosolutions.geoserver.rest.GeoServerRESTPublisher.Format)}
          * @param type
          * @return
          */
@@ -805,9 +837,9 @@ public class GeoServerRESTPublisher {
 
     /**
      * Upload and publish data (vector or raster), and automatically create the associated Store if needed.
-     * 
+     *
      * This is a generic method; use {@link #createDataStore} and {@link #createCoverageStore} for vector and raster publishing respectively.
-     * 
+     *
      * @param workspace workspace where data will be published.
      * @param dsType Store type. See {@link DataStoreType}.
      * @param storeName Store name. Will be created if doesn't exist.
@@ -821,8 +853,8 @@ public class GeoServerRESTPublisher {
      *        details: <a href= "http://docs.geoserver.org/latest/en/user/restconfig/rest-config-api.html#id2" >dataStore</a> and <a href=
      *        "http://docs.geoserver.org/latest/en/user/restconfig/rest-config-api.html#id4" >coverageStore</a> operations.
      * @return {@code true} if the store was successfully created.
-     * @throws FileNotFoundException if local file does not exist when using the {@link UploadMethod#FILE} method.
-     * @throws IllegalArgumentException if any of the mandatory {@code workspace}, {@code dsType}, {@code storeName}, {@code method},
+     * @throws java.io.FileNotFoundException if local file does not exist when using the {@link UploadMethod#FILE} method.
+     * @throws java.lang.IllegalArgumentException if any of the mandatory {@code workspace}, {@code dsType}, {@code storeName}, {@code method},
      *         {@code extension}, {@code mimeType} or {@code uri} parameters are {@code null}.
      */
     public boolean createStore(String workspace, StoreType dsType, String storeName,
@@ -931,14 +963,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a PostGIS datastore.
-     * 
-     * @deprecated Will be deleted in next version 1.5.x, 
+     *
+     * @deprecated Will be deleted in next version 1.5.x,
      * use {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager} instead.
-     * 
      * @param workspace Name of the workspace to contain the database. This will also be the prefix of any layer names created from tables in the
      *        database.
      * @param datastoreEncoder the set of parameters to be set to the datastore (including connection params).
-     * 
      * @return <TT>true</TT> if the PostGIS datastore has been successfully created, <TT>false</TT> otherwise
      */
     public boolean createPostGISDatastore(String workspace,
@@ -950,7 +980,15 @@ public class GeoServerRESTPublisher {
     }
 
     /**
+     * <p>publishDBLayer</p>
+     *
      * @deprecated Will be removed in the next release.
+     * @param workspace a {@link java.lang.String} object.
+     * @param storename a {@link java.lang.String} object.
+     * @param layername a {@link java.lang.String} object.
+     * @param srs a {@link java.lang.String} object.
+     * @param defaultStyle a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean publishDBLayer(String workspace, String storename, String layername, String srs,
             String defaultStyle) {
@@ -969,11 +1007,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish and configure a new layer from an existing DataStore (v. gr. a layer from a DB table).
-     * 
+     *
      * @param workspace Workspace name where DataStore is.
      * @param storename DataStore name.
      * @param fte FeatureType configuration details using a {@link GSFeatureTypeEncoder}.
      * @return {@code true} if layer is successfully created.
+     * @param layerEncoder a {@link it.geosolutions.geoserver.rest.encoder.GSLayerEncoder} object.
      */
     public boolean publishDBLayer(final String workspace, final String storename,
             final GSFeatureTypeEncoder fte, final GSLayerEncoder layerEncoder) {
@@ -1035,16 +1074,15 @@ public class GeoServerRESTPublisher {
      * Upload an publish a local shapefile.
      * <P>
      * The SRS will be set to EPSG:4326.
-     * 
-     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
-     * 
+     *
+     * @see #publishShp(java.lang.String, java.lang.String, org.apache.commons.httpclient.NameValuePair[], java.lang.String, it.geosolutions.geoserver.rest.GeoServerRESTPublisher.UploadMethod, java.net.URI, java.lang.String, java.lang.String, it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy, java.lang.String)
      * @param workspace The workspace name.
      * @param storename The store name.
      * @param datasetname The layer name.
      * @param zipFile The zipped file to publish.
-     * 
      * @return {@code true} if the operation completed successfully.
-     * @throws FileNotFoundException , IllegalArgumentException
+     * @throws java.io.FileNotFoundException , IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean publishShp(String workspace, String storename, String datasetname, File zipFile)
             throws FileNotFoundException, IllegalArgumentException {
@@ -1054,14 +1092,16 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a shapefile.
-     * 
+     *
      * @param workspace the name of the workspace to use
      * @param storeName the name of the store to create
+     * @param storeName the name of the layer to configure
      * @param storeParams parameters to append to the url (can be null).<br>
      *        Accepted parameters are:<br>
      *        <ul>
      *        <li><b>charset</b> used to set the charset</li>
      *        </ul>
+     * @param storeName the name of the store to create
      * @param storeName the name of the layer to configure
      * @param method {@link UploadMethod}
      * @param shapefile the uri of the file containing the shapefile.It should be:
@@ -1076,9 +1116,9 @@ public class GeoServerRESTPublisher {
      * @param policy {@link ProjectionPolicy}
      * @param defaultStyle the default style to set (can be null).
      * @return true if success false otherwise
-     * 
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @param datasetName a {@link java.lang.String} object.
      */
     public boolean publishShp(String workspace, String storeName, NameValuePair[] storeParams,
             String datasetName, UploadMethod method, URI shapefile, String srs, String nativeCRS,
@@ -1179,7 +1219,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a shapefile.
-     * 
+     *
      * @param workspace the name of the workspace to use
      * @param storeName the name of the store to create
      * @param storeParams parameters to append to the url (can be null).<br>
@@ -1199,11 +1239,11 @@ public class GeoServerRESTPublisher {
      * @param policy {@link ProjectionPolicy}
      * @param defaultStyle the default style to set (can be null).
      * @return true if success false otherwise
-     * 
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
      * @deprecated use {@link #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, String)} instead as the behaviour of
      *             this method is misleading as it allows you to use wrong ProjectionPolicy values.
+     * @param datasetName a {@link java.lang.String} object.
      */
     public boolean publishShp(String workspace, String storeName, NameValuePair[] storeParams,
             String datasetName, UploadMethod method, URI shapefile, String srs,
@@ -1215,7 +1255,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a shapefile.
-     * 
+     *
      * @param workspace the name of the workspace to use
      * @param storeName the name of the store to create
      * @param storeParams parameters to append to the url (can be null).<br>
@@ -1233,9 +1273,9 @@ public class GeoServerRESTPublisher {
      * @param srs the SRS for this shapefile. It must be an ESPG code or GeoServer will choke.
      * @param defaultStyle the default style to set (can be null).
      * @return true if success false otherwise
-     * 
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @param datasetName a {@link java.lang.String} object.
      */
     public boolean publishShp(String workspace, String storeName, NameValuePair[] storeParams,
             String datasetName, UploadMethod method, URI shapefile, String srs, String defaultStyle)
@@ -1247,18 +1287,16 @@ public class GeoServerRESTPublisher {
     /**
      * Publish a zipped shapefile.
      * 
-     * @see  #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
-     * 
+     * @see #publishShp(java.lang.String, java.lang.String, org.apache.commons.httpclient.NameValuePair[], java.lang.String, it.geosolutions.geoserver.rest.GeoServerRESTPublisher.UploadMethod, java.net.URI, java.lang.String, java.lang.String, it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy, java.lang.String)
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
      * @param layerName the name of the layer to configure
      * @param zipFile The zipped file to publish
      * @param srs the srs for this shapefile. It will be forced to use this one in GeoServer using {@link ProjectionPolicy#FORCE_DECLARED}.
      * @param defaultStyle the default style to set (can be null).
-     * 
      * @return {@code true} if the operation completed successfully
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
      */
     public boolean publishShp(String workspace, String storename, String layerName, File zipFile,
             String srs, String defaultStyle) throws FileNotFoundException, IllegalArgumentException {
@@ -1269,18 +1307,16 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a zipped shapefile forcing the srs to the one provided.
-     * 
-     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
-     * 
+     *
+     * @see #publishShp(java.lang.String, java.lang.String, org.apache.commons.httpclient.NameValuePair[], java.lang.String, it.geosolutions.geoserver.rest.GeoServerRESTPublisher.UploadMethod, java.net.URI, java.lang.String, java.lang.String, it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy, java.lang.String)
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
      * @param layername the name of the layer to configure
      * @param zipFile The zipped file to publish
      * @param srs the CRS for this shapefile. It must be an EPSG CODE !
-     * 
      * @return {@code true} if the operation completed successfully.
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
      */
     public boolean publishShp(String workspace, String storename, String layername, File zipFile,
             String srs) throws FileNotFoundException {
@@ -1290,9 +1326,8 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a zipped shapefile.
-     * 
-     * @see #publishShp(String, String, NameValuePair[], String, UploadMethod, URI, String, ProjectionPolicy, String)
-     * 
+     *
+     * @see #publishShp(java.lang.String, java.lang.String, org.apache.commons.httpclient.NameValuePair[], java.lang.String, it.geosolutions.geoserver.rest.GeoServerRESTPublisher.UploadMethod, java.net.URI, java.lang.String, java.lang.String, it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy, java.lang.String)
      * @param workspace the name of the workspace to use
      * @param storename the name of the store to create
      * @param layername the name of the layer to configure
@@ -1304,8 +1339,8 @@ public class GeoServerRESTPublisher {
      *        <li><b>charset</b> used to set the charset</li>
      *        </ul>
      * @return {@code true} if the operation completed successfully.
-     * @throws FileNotFoundException if file to upload is not found
-     * @throws IllegalArgumentException if any of the mandatory arguments are {@code null}.
+     * @throws java.io.FileNotFoundException if file to upload is not found
+     * @throws java.lang.IllegalArgumentException if any of the mandatory arguments are {@code null}.
      */
     public boolean publishShp(String workspace, String storename, String layername, File zipFile,
             String srs, NameValuePair... params) throws FileNotFoundException,
@@ -1319,7 +1354,7 @@ public class GeoServerRESTPublisher {
      * Publish a collection of shapefiles.
      * <P>
      * Will automatically create the store and publish each shapefile as a layer.
-     * 
+     *
      * @param workspace the name of the workspace to use
      * @param storeName the name of the store to create
      * @param resource the shapefile collection. It can be:
@@ -1328,7 +1363,7 @@ public class GeoServerRESTPublisher {
      *        URL pointing to a shapefile collection in the wild web (not tested).
      *        </ul>
      * @return {@code true} if publication successful.
-     * @throws FileNotFoundException if the specified zip file does not exist.
+     * @throws java.io.FileNotFoundException if the specified zip file does not exist.
      */
     public boolean publishShpCollection(String workspace, String storeName, URI resource)
             throws FileNotFoundException {
@@ -1536,7 +1571,7 @@ public class GeoServerRESTPublisher {
      * @param storeName The store name to be used or created.
      * @param arcgrid The ArcGrid file.
      * @return true if success.
-     * @throws FileNotFoundException if ArcGrid file does not exist.
+     * @throws java.io.FileNotFoundException if ArcGrid file does not exist.
      */
     public boolean publishArcGrid(String workspace, String storeName, File arcgrid)
             throws FileNotFoundException {
@@ -1552,8 +1587,8 @@ public class GeoServerRESTPublisher {
      * @param coverageName the name of the coverage (if null the file name will be used)
      * @param arcgrid file to upload
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if workspace or arcgrid are null
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if workspace or arcgrid are null
      */
     public boolean publishArcGrid(final String workspace, final String storeName,
                                   final String coverageName, final File arcgrid) throws FileNotFoundException,
@@ -1582,9 +1617,8 @@ public class GeoServerRESTPublisher {
      * @param defaultStyle the default style to apply.
      * @param bbox An array of 4 doubles indicating envelope in EPSG:4326. Order is [Xmin, Ymin, Xmax, Ymax].
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if workspace or arcgrid are null
-     *
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if workspace or arcgrid are null
      */
     public boolean publishArcGrid(String workspace, String storeName, String coverageName,
                                   File arcgrid, String srs, ProjectionPolicy policy, String defaultStyle, double[] bbox)
@@ -1639,10 +1673,10 @@ public class GeoServerRESTPublisher {
      * @param srs the native CRS
      * @param policy projection policy. See {@link ProjectionPolicy}.
      * @param defaultStyle the default style to apply.
-     *
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if any of the mandatory parameters are null.
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if any of the mandatory parameters are null.
+     * @param coverageName a {@link java.lang.String} object.
      */
     public boolean publishExternalArcGrid(String workspace, String storeName, File arcgrid,
                                           String coverageName, String srs, ProjectionPolicy policy, String defaultStyle)
@@ -1674,10 +1708,9 @@ public class GeoServerRESTPublisher {
      * @param arcgrid the arcGrid to be published
      * @param coverageEncoder coverage details. See {@link GSCoverageEncoder}.
      * @param layerEncoder layer details, See {@link GSLayerEncoder}.
-     *
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if any of the mandatory parameters are null.
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if any of the mandatory parameters are null.
      */
     public RESTCoverageStore publishExternalArcGrid(final String workspace, final String storeName,
                                                     final File arcgrid, final GSCoverageEncoder coverageEncoder,
@@ -1727,12 +1760,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Upload and publish a GeoTIFF image.
-     * 
+     *
      * @param workspace Workspace to use
      * @param storeName The store name to be used or created.
      * @param geotiff The GeoTIFF file.
      * @return true if success.
-     * @throws FileNotFoundException if GeoTIFF file does not exist.
+     * @throws java.io.FileNotFoundException if GeoTIFF file does not exist.
      */
     public boolean publishGeoTIFF(String workspace, String storeName, File geotiff)
             throws FileNotFoundException {
@@ -1742,14 +1775,14 @@ public class GeoServerRESTPublisher {
 
     /**
      * Upload and publish a GeoTIFF image.
-     * 
+     *
      * @param workspace Workspace to use
      * @param storeName Name of the coveragestore (if null the file name will be used)
      * @param coverageName the name of the coverage (if null the file name will be used)
      * @param geotiff file to upload
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if workspace or geotiff are null
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if workspace or geotiff are null
      */
     public boolean publishGeoTIFF(final String workspace, final String storeName,
             final String coverageName, final File geotiff) throws FileNotFoundException,
@@ -1767,10 +1800,20 @@ public class GeoServerRESTPublisher {
     }
 
     /**
-     * Same as {@link #publishGeoTIFF(String, String, String, File, String, ProjectionPolicy, String, double[])} but without the last parameter
+     * Same as {@link #publishGeoTIFF(java.lang.String, java.lang.String, java.lang.String, java.io.File, java.lang.String, it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy, java.lang.String, double[])} but without the last parameter
      * (bbox). Kept here for backwards compatibility.
-     * 
+     *
      * @deprecated use the former method with bbox set to null.
+     * @param workspace a {@link java.lang.String} object.
+     * @param storeName a {@link java.lang.String} object.
+     * @param resourceName a {@link java.lang.String} object.
+     * @param geotiff a {@link java.io.File} object.
+     * @param srs a {@link java.lang.String} object.
+     * @param policy a {@link it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy} object.
+     * @param defaultStyle a {@link java.lang.String} object.
+     * @return a boolean.
+     * @throws java.io.FileNotFoundException if any.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean publishGeoTIFF(String workspace, String storeName, String resourceName,
             File geotiff, String srs, ProjectionPolicy policy, String defaultStyle)
@@ -1781,7 +1824,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Upload and publish a GeoTIFF image.
-     * 
+     *
      * @param workspace Workspace to use
      * @param storeName Name of the coveragestore (if null the file name will be used)
      * @param coverageName the name of the coverage (if null the file name will be used)
@@ -1791,9 +1834,8 @@ public class GeoServerRESTPublisher {
      * @param defaultStyle the default style to apply.
      * @param bbox An array of 4 doubles indicating envelope in EPSG:4326. Order is [Xmin, Ymin, Xmax, Ymax].
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if workspace or geotiff are null
-     * 
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if workspace or geotiff are null
      */
     public boolean publishGeoTIFF(String workspace, String storeName, String coverageName,
             File geotiff, String srs, ProjectionPolicy policy, String defaultStyle, double[] bbox)
@@ -1841,17 +1883,17 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a GeoTiff already in a filesystem readable by GeoServer.
-     * 
+     *
      * @param workspace an existing workspace
      * @param storeName the coverageStore to be created
      * @param geotiff the geoTiff to be published
      * @param srs the native CRS
      * @param policy projection policy. See {@link ProjectionPolicy}.
      * @param defaultStyle the default style to apply.
-     * 
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if any of the mandatory parameters are null.
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if any of the mandatory parameters are null.
+     * @param coverageName a {@link java.lang.String} object.
      */
     public boolean publishExternalGeoTIFF(String workspace, String storeName, File geotiff,
             String coverageName, String srs, ProjectionPolicy policy, String defaultStyle)
@@ -1877,16 +1919,15 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a GeoTiff already in a filesystem readable by GeoServer.
-     * 
+     *
      * @param workspace an existing workspace
      * @param storeName the coverageStore to be created
      * @param geotiff the geoTiff to be published
      * @param coverageEncoder coverage details. See {@link GSCoverageEncoder}.
      * @param layerEncoder layer details, See {@link GSLayerEncoder}.
-     * 
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException if file does not exists
-     * @throws IllegalArgumentException if any of the mandatory parameters are null.
+     * @throws java.io.FileNotFoundException if file does not exists
+     * @throws java.lang.IllegalArgumentException if any of the mandatory parameters are null.
      */
     public RESTCoverageStore publishExternalGeoTIFF(final String workspace, final String storeName,
             final File geotiff, final GSCoverageEncoder coverageEncoder,
@@ -1936,12 +1977,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a zipped worldimage file. It is assumed that the the zip-file contain the *.prj to set the srs.
-     * 
+     *
      * @param workspace Workspace to use
      * @param coveragestore Name of the coveragestore
      * @param zipFile zip file to upload
-     * 
      * @return true if the operation completed successfully.
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean publishWorldImage(String workspace, String coveragestore, File zipFile)
             throws FileNotFoundException {
@@ -1951,7 +1992,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a zipped worldimage file. It is assumed that the the zip-file contain the *.prj to set the srs.
-     * 
+     *
      * @param workspace Workspace to use
      * @param coveragestore Name of the coveragestore
      * @param zipFile zip file to upload
@@ -1962,6 +2003,7 @@ public class GeoServerRESTPublisher {
      *        <li><b>coverageName=name</b> coverageName parameter to append. Only works if configure is not set to {@link ParameterConfigure#NONE}.</li>
      *        </ul>
      * @return true if the operation completed successfully.
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean publishWorldImage(String workspace, String coveragestore, File zipFile,
             ParameterConfigure configure, NameValuePair... params) throws FileNotFoundException {
@@ -1975,12 +2017,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish imagemosaic as zip file.
-     * 
+     *
      * @param workspace Workspace to use
      * @param storeName Name of the coveragestore
      * @param zipFile file to upload
-     * 
      * @return true if the operation completed successfully.
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean publishImageMosaic(String workspace, String storeName, File zipFile)
             throws FileNotFoundException {
@@ -1990,7 +2032,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish imagemosaic as zip file.
-     * 
+     *
      * @param workspace Workspace to use
      * @param storeName Name of the coveragestore
      * @param zipFile file to upload
@@ -2000,8 +2042,8 @@ public class GeoServerRESTPublisher {
      *        <ul>
      *        <li><b>coverageName=name</b> coverageName parameter to append. Only works if configure is not set to ParameterConfigure.NONE.</li>
      *        </ul>
-     * 
      * @return true if the operation completed successfully.
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean publishImageMosaic(String workspace, String storeName, File zipFile,
             ParameterConfigure configure, NameValuePair... params) throws FileNotFoundException {
@@ -2011,14 +2053,14 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a Mosaic from a filesystem currently readable by GeoServer.
-     * 
+     *
      * @param workspace an existing workspace
      * @param storeName the name of the coverageStore to be created
      * @param mosaicDir the directory where the raster images are located
      * @param configure a specify if a coverage should be configured
-     * 
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException
+     * @throws java.io.FileNotFoundException if any.
+     * @param update a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.ParameterUpdate} object.
      */
     public RESTCoverageStore createExternaMosaicDatastore(String workspace, String storeName,
             File mosaicDir, ParameterConfigure configure, ParameterUpdate update)
@@ -2044,16 +2086,14 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a Mosaic already in a filesystem readable by GeoServer.
-     * 
+     *
      * @param workspace an existing workspace
      * @param storeName the name of the coverageStore to be created
      * @param mosaicDir the directory where the raster images are located
      * @param srs the coverage declared SRS
      * @param defaultStyle may be null
-     * 
      * @return true if the operation completed successfully.
-     * 
-     * @throws FileNotFoundException
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean publishExternalMosaic(String workspace, String storeName, File mosaicDir,
             String srs, String defaultStyle) throws FileNotFoundException {
@@ -2070,7 +2110,16 @@ public class GeoServerRESTPublisher {
     }
 
     /**
+     * <p>createExternalMosaic</p>
+     *
      * @deprecated use {@link #publishExternalMosaic(String, String, File, GSCoverageEncoder, GSLayerEncoder)}
+     * @param workspace a {@link java.lang.String} object.
+     * @param storeName a {@link java.lang.String} object.
+     * @param mosaicDir a {@link java.io.File} object.
+     * @param coverageEncoder a {@link it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder} object.
+     * @param layerEncoder a {@link it.geosolutions.geoserver.rest.encoder.GSLayerEncoder} object.
+     * @return a boolean.
+     * @throws java.io.FileNotFoundException if any.
      */
     public boolean createExternalMosaic(String workspace, String storeName, File mosaicDir,
             GSCoverageEncoder coverageEncoder, GSLayerEncoder layerEncoder)
@@ -2080,15 +2129,15 @@ public class GeoServerRESTPublisher {
 
     /**
      * Publish a Mosaic already in a filesystem readable by GeoServer.
-     * 
+     *
      * @param workspace an existing workspace
      * @param storeName the name of the coverageStore to be created
      * @param mosaicDir the directory where the raster images are located
      * @param coverageEncoder the set of parameters to be set to the coverage (bbox, srs, ...)
      * @param layerEncoder the set of parameters to be set to the layer (defaultstyle, wmspath, ...)
-     * 
      * @return true if the operation completed successfully.
-     * @throws FileNotFoundException
+     * @throws java.io.FileNotFoundException if any.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean publishExternalMosaic(String workspace, final String storeName, File mosaicDir,
             GSCoverageEncoder coverageEncoder, GSLayerEncoder layerEncoder)
@@ -2139,8 +2188,11 @@ public class GeoServerRESTPublisher {
      * First, the associated layer is removed, then the Coverage configuration itself.
      * <P>
      * <B>CHECKME</B> Maybe the coveragestore has to be removed as well.
-     * 
+     *
      * @return true if the operation completed successfully.
+     * @param workspace a {@link java.lang.String} object.
+     * @param storename a {@link java.lang.String} object.
+     * @param layerName a {@link java.lang.String} object.
      */
     public boolean unpublishCoverage(String workspace, String storename, String layerName) {
         try {
@@ -2201,8 +2253,11 @@ public class GeoServerRESTPublisher {
      * Removes the featuretype and the associated layer.
      * <P>
      * You may also want to {@link #removeDatastore(String, String) remove the datastore}.
-     * 
+     *
      * @return true if the operation completed successfully.
+     * @param workspace a {@link java.lang.String} object.
+     * @param storename a {@link java.lang.String} object.
+     * @param layerName a {@link java.lang.String} object.
      */
     public boolean unpublishFeatureType(String workspace, String storename, String layerName) {
         try {
@@ -2255,11 +2310,10 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove recursively a given Datastore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param storename The name of the Datastore to remove.
      * @return <TT>true</TT> if the datastore was successfully removed.
-     * 
      * @deprecated will be removed in next release use {@link GeoServerRESTPublisher#removeDatastore(String, String, boolean)}
      */
     public boolean removeDatastore(String workspace, String storename) {
@@ -2274,11 +2328,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a given Datastore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param storename The name of the Datastore to remove.
      * @param recurse if remove should be performed recursively
-     * @throws IllegalArgumentException if workspace or storename are null or empty
+     * @throws java.lang.IllegalArgumentException if workspace or storename are null or empty
      * @return <TT>true</TT> if the datastore was successfully removed.
      */
     public boolean removeDatastore(String workspace, String storename, final boolean recurse)
@@ -2286,6 +2340,16 @@ public class GeoServerRESTPublisher {
         return removeStore(workspace, storename, StoreType.DATASTORES, recurse, Purge.NONE);
     }
 
+    /**
+     * <p>removeDatastore</p>
+     *
+     * @param workspace a {@link java.lang.String} object.
+     * @param storename a {@link java.lang.String} object.
+     * @param recurse a boolean.
+     * @param purge a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.Purge} object.
+     * @return a boolean.
+     * @throws java.lang.IllegalArgumentException if any.
+     */
     public boolean removeDatastore(String workspace, String storename, final boolean recurse, final Purge purge)
             throws IllegalArgumentException {
         return removeStore(workspace, storename, StoreType.DATASTORES, recurse, purge);
@@ -2293,7 +2357,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove recursively a given CoverageStore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param storename The name of the CoverageStore to remove.
      * @return <TT>true</TT> if the CoverageStore was successfully removed.
@@ -2305,11 +2369,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a given CoverageStore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param storename The name of the CoverageStore to remove.
      * @param recurse if remove should be performed recursively
      * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeCoverageStore(final String workspace, final String storename,
             final boolean recurse) throws IllegalArgumentException {
@@ -2326,6 +2391,7 @@ public class GeoServerRESTPublisher {
      * @param recurse if remove should be performed recursively
      * @param purge the purge method
      * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeCoverageStore(final String workspace, final String storename,
             final boolean recurse, final Purge purge) throws IllegalArgumentException {
@@ -2336,13 +2402,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a given Datastore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param storename The name of the Datastore to remove.
      * @param type the {@link StoreType} type
      * @param recurse if remove should be performed recursively
      * @param purge the purge method
-     * @throws IllegalArgumentException if workspace or storename are null or empty
+     * @throws java.lang.IllegalArgumentException if workspace or storename are null or empty
      * @return <TT>true</TT> if the store was successfully removed.
      */
     public boolean removeStore(String workspace, String storename, StoreType type,
@@ -2379,7 +2445,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove the workspace given Workspace using default parameters
-     * 
+     *
      * @see #removeWorkspace(String, boolean)
      * @param workspace the workspace to remove
      * @return true if success, false otherwise
@@ -2391,12 +2457,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param recurse The recurse parameter is used to recursively delete all resources contained by the specified workspace. This includes data
      *        stores, coverage stores, feature types, etc... Allowable values for this parameter are <i>true</i> or <i>false</i>. The default value is
      *        <i>false</i>.
      * @return <TT>true</TT> if the WorkSpace was successfully removed.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeWorkspace(String workspace, boolean recurse)
             throws IllegalArgumentException {
@@ -2445,7 +2512,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a layer group.
-     * 
+     *
      * @param workspace the layer group workspace.
      * @param name the layer group name.
      * @return true if succeeded.
@@ -2479,7 +2546,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a layer group.
-     * 
+     *
      * @param name the layer group name.
      * @return true if succeeded.
      */
@@ -2489,9 +2556,9 @@ public class GeoServerRESTPublisher {
 
     /**
      * remove a generic given layer from a given workspace
-     * 
-     * @param workspace
-     * @param layerName
+     *
+     * @param workspace a {@link java.lang.String} object.
+     * @param layerName a {@link java.lang.String} object.
      * @return true if success
      */
     public boolean removeLayer(final String workspace, final String layerName) {
@@ -2538,13 +2605,13 @@ public class GeoServerRESTPublisher {
     // ==========================================================================
 
     /**
-     * 
-     * 
-     * @param workspace
-     * @param storeName
-     * @param storeType
+     * <p>reloadStore</p>
+     *
+     * @param workspace a {@link java.lang.String} object.
+     * @param storeName a {@link java.lang.String} object.
+     * @param storeType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
      * @return true if successfully reloaded
-     * @throws IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean reloadStore(String workspace, final String storeName, StoreType storeType)
             throws IllegalArgumentException {
@@ -2577,9 +2644,8 @@ public class GeoServerRESTPublisher {
 
     /**
      * Reload the target geoserver configuration
-     * 
+     *
      * @return true if success
-     * 
      * @see <a href="http://docs.geoserver.org/stable/en/user/restconfig/rest-config-api.html">GeoServer REST Config API</a>
      */
     public boolean reload() {
@@ -2590,9 +2656,8 @@ public class GeoServerRESTPublisher {
 
     /**
      * Reset the target geoserver configuration
-     * 
+     *
      * @return true if success
-     * 
      * @see <a href="http://docs.geoserver.org/stable/en/user/restconfig/rest-config-api.html">GeoServer REST Config API</a>
      */
     public boolean reset() {
@@ -2607,13 +2672,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Allows to configure some layer attributes such as DefaultStyle
-     * 
-     * @param workspace
+     *
+     * @param workspace a {@link java.lang.String} object.
      * @param resourceName the name of the resource to use (featureStore or coverageStore name)
      * @param layer the layer encoder used to configure the layer
      * @return true if success
-     * @throws IllegalArgumentException if some arguments are null or empty
-     * 
+     * @throws java.lang.IllegalArgumentException if some arguments are null or empty
      */
     public boolean configureLayer(final String workspace, final String resourceName,
             final GSLayerEncoder layer) throws IllegalArgumentException {
@@ -2648,7 +2712,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new LayerGroup using the specified encoder
-     * 
+     *
      * @param name name of the layer group
      * @param group group encoder
      * @return true if operation was successful
@@ -2659,7 +2723,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new LayerGroup using the specified encoder
-     * 
+     *
      * @param workspace name of the workspace
      * @param name name of the layer group
      * @param group group encoder
@@ -2691,7 +2755,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a LayerGroup using the specified encoder
-     * 
+     *
      * @param name name of the layer group
      * @param group group encoder
      * @return true if operation was successful
@@ -2702,7 +2766,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Update a LayerGroup using the specified encoder
-     * 
+     *
      * @param workspace name of the workspace
      * @param name name of the layer group
      * @param group group encoder
@@ -2731,7 +2795,7 @@ public class GeoServerRESTPublisher {
     
     /**
      * Configure an existing coverage in a given workspace and coverage store
-     * 
+     *
      * @param ce contains the coverage name to configure and the configuration to apply
      * @param wsname the workspace to search for existent coverage
      * @param csname the coverage store to search for existent coverage
@@ -2744,7 +2808,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * Configure an existing coverage in a given workspace and coverage store
-     * 
+     *
      * @param ce contains the coverage name to configure and the configuration to apply
      * @param wsname the workspace to search for existent coverage
      * @param csname the coverage store to search for existent coverage
@@ -2813,7 +2877,13 @@ public class GeoServerRESTPublisher {
     }
 
     /**
+     * <p>createCoverage</p>
+     *
      * @deprecated use {@link #createCoverage(String, String, GSCoverageEncoder)}
+     * @param ce a {@link it.geosolutions.geoserver.rest.encoder.coverage.GSCoverageEncoder} object.
+     * @param wsname a {@link java.lang.String} object.
+     * @param csname a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean createCoverage(final GSCoverageEncoder ce, final String wsname,
             final String csname) {
@@ -2822,12 +2892,12 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new coverage in a given workspace and coverage store
-     * 
+     *
      * @param wsname the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param ce contains the coverage name to create and the configuration to apply
      * @return true if success
-     * @throws IllegalArgumentException if arguments are null or empty
+     * @throws java.lang.IllegalArgumentException if arguments are null or empty
      */
     public boolean createCoverage(final String wsname, final String storeName,
             final GSCoverageEncoder ce) throws IllegalArgumentException {
@@ -2836,14 +2906,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new resource in a given workspace and store
-     * 
+     *
      * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param re contains the coverage name to create and the configuration to apply
-     * 
-     * 
      * @return true if success
-     * @throws IllegalArgumentException if arguments are null or empty
+     * @throws java.lang.IllegalArgumentException if arguments are null or empty
+     * @param dsType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
      */
     public boolean createResource(String workspace, StoreType dsType, String storeName,
             GSResourceEncoder re) throws IllegalArgumentException {
@@ -2885,14 +2954,13 @@ public class GeoServerRESTPublisher {
     
     /**
      * Configure resource in a given workspace and store
-     * 
+     *
      * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param resName contains the coverage name to create and the configuration to apply
-     *  
-     * 
      * @return true if success
-     * @throws IllegalArgumentException if arguments are null or empty
+     * @throws java.lang.IllegalArgumentException if arguments are null or empty
+     * @param dsType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
      */
     public boolean removeResource(String workspace, StoreType dsType, String storeName, String resName) throws IllegalArgumentException {
         /* @TODO For FeatureType: The list parameter is used to control the category of feature types that are returned. It can take one of the three
@@ -2927,16 +2995,14 @@ public class GeoServerRESTPublisher {
     }
     
     /**
-     * Configure a resource 
-     * 
+     * Configure a resource
+     *
      * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
-     * @param re contains the configuration to apply with the resource name 
-     * 
-     * 
-     * 
+     * @param re contains the configuration to apply with the resource name
      * @return true if success
-     * @throws IllegalArgumentException if arguments are null or empty
+     * @throws java.lang.IllegalArgumentException if arguments are null or empty
+     * @param dsType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
      */
     public boolean configureResource(String workspace, StoreType dsType, String storeName,
              GSResourceEncoder re) throws IllegalArgumentException {
@@ -2951,16 +3017,16 @@ public class GeoServerRESTPublisher {
     }
     
     /**
-     * Configure a resource 
-     * 
+     * Configure a resource
+     *
      * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param resourceName an existent resource name
+     * @param resourceName an existent resource name
      * @param re contains the configuration to apply, possibly new resource name
-     * 
-     * 
      * @return true if success
-     * @throws IllegalArgumentException if arguments are null or empty
+     * @throws java.lang.IllegalArgumentException if arguments are null or empty
+     * @param dsType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
      */
     public boolean configureResource(String workspace, StoreType dsType, String storeName,
             String resourceName, GSResourceEncoder re) throws IllegalArgumentException {
@@ -3004,6 +3070,9 @@ public class GeoServerRESTPublisher {
 
     /**
      * Appends ".DUMMY" to any string containing a dot (<i>sic</i>).
+     *
+     * @param s a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     protected String sanitize(String s) {
         if (s.indexOf(".") != -1) {
@@ -3063,7 +3132,7 @@ public class GeoServerRESTPublisher {
 
     /**
      * URL-encodes a String.
-     * 
+     *
      * @param s The original string.
      * @return The encoded string.
      */
@@ -3080,12 +3149,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a store or harvest the coverage from the provided <b>external</b> path.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param format the format of the file to upload
      * @param path the absolute path to the file to upload
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      */
     public boolean harvestExternal(String workspace, String coverageStore, String format,
@@ -3108,14 +3176,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Create a new ImageMosaic with the provided configuration provided as a zip file.
-     * 
+     *
      * <p>
      * This call configures all the coverages contained in the ImageMosaic.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param path the absolute path to the file to upload
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -3125,15 +3192,14 @@ public class GeoServerRESTPublisher {
     
     /**
      * Create a new ImageMosaic with the provided configuration provided as a zip file.
-     * 
+     *
      * <p>
      * With the options configure we can decide whether or not to configure or not the coverages contained in the ImageMosaic.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param path the absolute path to the file to upload
      * @param configureOpt tells GeoServer whether to configure all coverages in this mosaic (ALL) or none of them (NONE).
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -3186,13 +3252,13 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove a granule from a structured coverage by id.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
+     * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
+     * @param granuleId a {@link java.lang.String} object.
      */
     public boolean removeGranuleById(final String workspace, String coverageStore, String coverage,
             String granuleId) {
@@ -3214,15 +3280,14 @@ public class GeoServerRESTPublisher {
 
     /**
      * Remove granules from a structured coverage, by providing a CQL filter.
-     * 
+     *
      * @param workspace the GeoServer workspace
+     * @param coverageStore the GeoServer coverageStore
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
      * @param filter the absolute path to the file to upload
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws UnsupportedEncodingException
+     * @throws java.io.UnsupportedEncodingException if any.
      */
     public boolean removeGranulesByCQL(final String workspace, String coverageStore,
             String coverage, String filter) throws UnsupportedEncodingException {
@@ -3263,8 +3328,9 @@ public class GeoServerRESTPublisher {
 
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#postNewImport() postNewImport} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @return a int.
      */
     public int postNewImport() throws Exception {
         return importerManager.postNewImport();
@@ -3272,8 +3338,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#postNewTaskAsMultiPartForm(int, String) postNewTaskAsMultiPartForm} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @param i a int.
+     * @param data a {@link java.lang.String} object.
+     * @return a int.
      */
     public int postNewTaskAsMultiPartForm(int i, String data) throws Exception {
         return importerManager.postNewTaskAsMultiPartForm(i, data);
@@ -3281,8 +3350,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#getTask(int, int) getTask} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @param i a int.
+     * @param t a int.
+     * @return a {@link net.sf.json.JSONObject} object.
      */
     public JSONObject getTask(int i, int t) throws Exception {
         return importerManager.getTask(i, t);
@@ -3290,8 +3362,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#putTask(int, int, String) putTask} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @param i a int.
+     * @param t a int.
+     * @param json a {@link java.lang.String} object.
      */
     public void putTask(int i, int t, String json) throws Exception {
         importerManager.putTask(i, t, json);
@@ -3299,8 +3374,11 @@ public class GeoServerRESTPublisher {
 
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#putTaskLayer(int, int, String) putTaskLayer} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @param i a int.
+     * @param t a int.
+     * @param json a {@link java.lang.String} object.
      */
     public void putTaskLayer(int i, int t, String json) throws Exception {
         importerManager.putTaskLayer(i, t, json);
@@ -3308,8 +3386,9 @@ public class GeoServerRESTPublisher {
     
     /**
      * Refers to {@link it.geosolutions.geoserver.rest.manager.GeoServerRESTImporterManager#postImport(int) postImport} method
-     * 
-     * @throws Exception 
+     *
+     * @throws java.lang.Exception if any.
+     * @param i a int.
      */
     public void postImport(int i) throws Exception {
         importerManager.postImport(i);

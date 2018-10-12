@@ -36,13 +36,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * <p>JDOMBuilder class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class JDOMBuilder {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(JDOMBuilder.class);
 
+    /**
+     * <p>buildElement</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link org.jdom.Element} object.
+     */
     public static Element buildElement(String response) {
         if(response == null)
             return null;

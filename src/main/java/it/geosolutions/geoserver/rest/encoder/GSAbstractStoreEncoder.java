@@ -33,55 +33,107 @@ import org.jdom.Element;
 
 /**
  * Generic Store encoder.
- * 
+ *
  * Provides getters and setters for parameters common to all CoverageStore.
- * 
+ *
  * @author Carlo Cancellieri - GeoSolutions
+ * @version $Id: $
  */
 public abstract class GSAbstractStoreEncoder extends PropertyXMLEncoder {
 
     private final GeoServerRESTPublisher.StoreType type;
 
+    /**
+     * <p>Constructor for GSAbstractStoreEncoder.</p>
+     *
+     * @param type a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
+     * @param storeName a {@link java.lang.String} object.
+     */
     protected GSAbstractStoreEncoder(GeoServerRESTPublisher.StoreType type, String storeName) {
         super(type.getType());
         this.type=type;
     }
     
+    /**
+     * <p>getStoreType</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
+     */
     public StoreType getStoreType() {
         return this.type;
     }
     
+    /**
+     * <p>Setter for the field <code>type</code>.</p>
+     *
+     * @param type a {@link java.lang.String} object.
+     */
     public void setType(String type) {
         set("type", type);
     }
 
+    /**
+     * <p>Getter for the field <code>type</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getType() {
         return ElementUtils.contains(getRoot(), "type").getTextTrim();
     }
 
+    /**
+     * <p>setName</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     public void setName(String name) {
         ensureValidName(name);
         set("name", name);
     }
 
+    /**
+     * <p>getName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         Element e = ElementUtils.contains(getRoot(), "name");
         return e!=null?e.getTextTrim():null;
     }
 
+    /**
+     * <p>setDescription</p>
+     *
+     * @param description a {@link java.lang.String} object.
+     */
     public void setDescription(String description) {
         set("description", description);
     }
 
+    /**
+     * <p>getDescription</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDescription() {
         Element e = ElementUtils.contains(getRoot(), "description");
         return e!=null?e.getTextTrim():null;
     }
 
+    /**
+     * <p>setEnabled</p>
+     *
+     * @param enabled a boolean.
+     */
     public void setEnabled(boolean enabled) {
         set("enabled", Boolean.toString(enabled));
     }
 
+    /**
+     * <p>getEnabled</p>
+     *
+     * @return a boolean.
+     */
     public boolean getEnabled() {
         Element e = ElementUtils.contains(getRoot(), "name");
         if (e!=null)
@@ -92,9 +144,9 @@ public abstract class GSAbstractStoreEncoder extends PropertyXMLEncoder {
 
     /**
      * Check name validity.
-     * 
+     *
      * @param name the name
-     * @throws IllegalArgumentException if name is null or empty
+     * @throws java.lang.IllegalArgumentException if name is null or empty
      */
     protected void ensureValidName(String name) {
         if (name == null || name.isEmpty()) {
@@ -104,9 +156,9 @@ public abstract class GSAbstractStoreEncoder extends PropertyXMLEncoder {
 
     /**
      * Check type validity.
-     * 
+     *
      * @param type the type.
-     * @throws IllegalArgumentException if type is not valid
+     * @throws java.lang.IllegalArgumentException if type is not valid
      */
     protected void ensureValidType(String type) {
         if (!type.equals(getValidType())) {
@@ -116,6 +168,8 @@ public abstract class GSAbstractStoreEncoder extends PropertyXMLEncoder {
 
     /**
      * The type of the implementing store.
+     *
+     * @return a {@link java.lang.String} object.
      */
     protected abstract String getValidType();
 }

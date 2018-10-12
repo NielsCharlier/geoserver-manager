@@ -35,10 +35,10 @@ import org.jdom.filter.Filter;
 /**
  * GSVirtualTableEncoder - Encodes a metadata VirtualTable for a GeoServer
  * featureType.
- * 
+ *
  * Example (based on the example provided in the Geoserver documentation - see
  *  http://docs.geoserver.org/latest/en/user/data/database/sqlview.html#parameterizing-sql-views):
- * 
+ *
  * <pre>
  * {@code
  * 	// Set-up the vtGeom
@@ -46,16 +46,16 @@ import org.jdom.filter.Filter;
  * 	vtGeom.setName("the_geom");
  * 	vtGeom.setType("MultiPolygon");
  * 	vtGeom.setSrid("4326");
- * 
+ *
  * 	// Set-up 2 virtual table parameters
  * 	final VTParameterEncoder vtParam1 = new VTParameterEncoder("high",
  * 			"100000000", "^[\\d]+$");
  * 	final VTParameterEncoder vtParam2 = new VTParameterEncoder("low", "0",
  * 			"^[\\d]+$");
- * 
+ *
  * 	// sql
  * 	String sql = "select gid, state_name, the_geom from pgstates where persons between %low% and %high%";
- * 
+ *
  * 	// Set-up the virtual table
  * 	final GSVirtualTableEncoder vte = new GSVirtualTableEncoder();
  * 	vte.setName("popstates");
@@ -66,9 +66,9 @@ import org.jdom.filter.Filter;
  * 	vte.addVirtualTableParameter(vtParam2);
  * }
  * </pre>
- * 
+ *
  * For this example, the XML output is:
- * 
+ *
  * <pre>
  * {@code
  * <virtualTable>
@@ -93,15 +93,18 @@ import org.jdom.filter.Filter;
  * </virtualTable>
  * }
  * </pre>
- * 
+ *
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
  *         emmanuel.blondel@fao.org
- * 
+ * @version $Id: $
  */
 public class GSVirtualTableEncoder extends XmlElement {
 
+	/** Constant <code>NAME="name"</code> */
 	public final static String NAME = "name";
+	/** Constant <code>SQL="sql"</code> */
 	public final static String SQL = "sql";
+	/** Constant <code>KEYCOLUMN="keyColumn"</code> */
 	public final static String KEYCOLUMN = "keyColumn";
 
 	/**
@@ -113,7 +116,7 @@ public class GSVirtualTableEncoder extends XmlElement {
 
 	/**
 	 * Constructs directly a GSVirtualTableEncoder
-	 * 
+	 *
 	 * @param name (required)
 	 * @param sql (required)
 	 * @param keyColumns (optional)
@@ -129,12 +132,12 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Set-up quickly a GSVirtualTableEncoder
-	 * 
+	 *
 	 * @param name (must be the same as the featureType nativeName)
-	 * @param sql
-	 * @param keyColumns
-	 * @param geomEncList
-	 * @param paramEncList
+	 * @param sql a {@link java.lang.String} object.
+	 * @param keyColumns a {@link java.util.List} object.
+	 * @param geomEncList a {@link java.util.List} object.
+	 * @param paramEncList a {@link java.util.List} object.
 	 */
 	protected void setup(String name, String sql, List<String> keyColumns,
 			List<VTGeometryEncoder> geomEncList,
@@ -164,8 +167,10 @@ public class GSVirtualTableEncoder extends XmlElement {
 
 	/**
 	 * Add the 'name' node with a text value from 'name'
-	 * 
+	 *
 	 * REQUIRED to configure a virtual table
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	protected void addName(final String name){
 		add(NAME, name);
@@ -173,17 +178,19 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Set or modify the 'name' node with a text value from 'name'
-	 * 
+	 *
 	 * REQUIRED to configure a virtual table
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	public void setName(final String name) {
 		set(NAME, name);
 	}	
 	
-	/** 
+	/**
 	 * Get the name of the virtual table
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getName() {
 		final Element nameNode = ElementUtils.contains(getRoot(), NAME, 1);
@@ -195,8 +202,10 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Add the 'sql' node with a text value from 'sql'
-	 * 
+	 *
 	 * REQUIRED to configure a virtual table
+	 *
+	 * @param sql a {@link java.lang.String} object.
 	 */
 	protected void addSql(final String sql){
 		add(SQL, sql);
@@ -204,17 +213,19 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Set or modify the 'sql' node with a text value from 'sql'
-	 * 
+	 *
 	 * REQUIRED to configure a virtual table
+	 *
+	 * @param sql a {@link java.lang.String} object.
 	 */
 	public void setSql(final String sql) {
 		set(SQL, sql);
 	}	
 	
-	/** 
+	/**
 	 * Get the sql query
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getSql() {
 		final Element sqlNode = ElementUtils.contains(getRoot(), SQL, 1);
@@ -226,8 +237,8 @@ public class GSVirtualTableEncoder extends XmlElement {
 
 	/**
 	 * Adds a keyColumn
-	 * 
-	 * @param keycolumn
+	 *
+	 * @param keycolumn a {@link java.lang.String} object.
 	 */
 	public void addKeyColumn(String keycolumn){
 		final Element el = new Element(KEYCOLUMN);
@@ -237,8 +248,8 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Deletes a keyColumn
-	 * 
-	 * @param keycolumn
+	 *
+	 * @param keycolumn a {@link java.lang.String} object.
 	 * @return true if the keycolumn was removed
 	 */
 	public boolean delKeyColumn(final String keycolumn){
@@ -258,8 +269,8 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Adds a geometry to the VirtualTable
-	 * 
-	 * @param geomEnc
+	 *
+	 * @param geomEnc a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.VTGeometryEncoder} object.
 	 */
 	public void addVirtualTableGeometry(VTGeometryEncoder geomEnc){
 		this.getRoot().addContent(geomEnc.getRoot());
@@ -267,10 +278,10 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Adds quickly a geometry to the virtual table
-	 * 
-	 * @param name
-	 * @param geometryType
-	 * @param srid
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param geometryType a {@link java.lang.String} object.
+	 * @param srid a {@link java.lang.String} object.
 	 */
 	public void addVirtualTableGeometry(String name, String geometryType, String srid){
 		final VTGeometryEncoder gEnc = new VTGeometryEncoder();
@@ -280,8 +291,8 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Deletes a geometry from the VirtualTable
-	 * 
-	 * @param name
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 * @return true if the geometry was removed, otherwise false
 	 */
 	public boolean delVirtualTableGeometry(String name){
@@ -293,8 +304,8 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Adds a parameter to the VirtualTable
-	 * 
-	 * @param paramEnc
+	 *
+	 * @param paramEnc a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.VTParameterEncoder} object.
 	 */
 	public void addVirtualTableParameter(VTParameterEncoder paramEnc){
 		this.getRoot().addContent(paramEnc.getRoot());
@@ -302,10 +313,10 @@ public class GSVirtualTableEncoder extends XmlElement {
 
 	/**
 	 * Adds quickly a parameter to the VirtualTable
-	 * 
-	 * @param name
-	 * @param defaultValue
-	 * @param regexpValidator
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param defaultValue a {@link java.lang.String} object.
+	 * @param regexpValidator a {@link java.lang.String} object.
 	 */
 	public void addVirtualTableParameter(String name, String defaultValue, String regexpValidator){
 		final VTParameterEncoder pEnc = new VTParameterEncoder();
@@ -315,9 +326,9 @@ public class GSVirtualTableEncoder extends XmlElement {
 	
 	/**
 	 * Deletes a parameter from the VirtualTable
-	 * 
-	 * @param name
-	 * @return
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a boolean.
 	 */
 	public boolean delVirtualTableParameter(String name){
 		return (this.getRoot()
@@ -331,6 +342,12 @@ public class GSVirtualTableEncoder extends XmlElement {
 	 * a method to check either the virtual parameters as specified in the sql
 	 * query map those encoded in VTParameterEncoder, i.e. check the number and
 	 * names of parameters.
+	 */
+	/**
+	 * <p>validate</p>
+	 *
+	 * @return a boolean.
+	 * @throws java.lang.IllegalStateException if any.
 	 */
 	public boolean validate() throws IllegalStateException{
 		 throw new UnsupportedOperationException("not yet implemented");

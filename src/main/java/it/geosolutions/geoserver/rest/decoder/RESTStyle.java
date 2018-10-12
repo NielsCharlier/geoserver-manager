@@ -28,13 +28,21 @@ import it.geosolutions.geoserver.rest.decoder.utils.JDOMBuilder;
 import org.jdom.Element;
 
 /**
+ * <p>RESTStyle class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTStyle {
 
     private final Element elem;
 
+    /**
+     * <p>build</p>
+     *
+     * @param xml a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyle} object.
+     */
     public static RESTStyle build(String xml) {
         if (xml == null) {
             return null;
@@ -48,18 +56,38 @@ public class RESTStyle {
         }
     }
 
+    /**
+     * <p>Constructor for RESTStyle.</p>
+     *
+     * @param elem a {@link org.jdom.Element} object.
+     */
     protected RESTStyle(Element elem) {
         this.elem = elem;
     }
 
+    /**
+     * <p>getName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         return elem.getChildText("name");
     }
 
+    /**
+     * <p>getFileName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFileName() {
         return elem.getChildText("filename");
     }
 
+    /**
+     * <p>getWorkspace</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getWorkspace() {
         if(elem.getChild("workspace") != null)
             return elem.getChild("workspace").getChildText("name");

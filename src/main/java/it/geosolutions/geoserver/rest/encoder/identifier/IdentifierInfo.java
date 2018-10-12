@@ -25,12 +25,12 @@
 package it.geosolutions.geoserver.rest.encoder.identifier;
 
 /**
-* Enumeration of layer authorityURL members
-*
-* @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
-* emmanuel.blondel@fao.org
-*
-*/
+ * Enumeration of layer authorityURL members
+ *
+ * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
+ * emmanuel.blondel@fao.org
+ * @version $Id: $
+ */
 public enum IdentifierInfo {
 	
 	authority, identifier;

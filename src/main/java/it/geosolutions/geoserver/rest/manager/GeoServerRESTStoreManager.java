@@ -34,21 +34,22 @@ import java.net.URL;
 
 /**
  * Manage stores.
- * 
+ *
  * To pass connection parameters, use the encoders derived from
  * {@link GSAbstractDatastoreEncoder}.
- * 
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
 
     /**
      * Default constructor.
-     * 
+     *
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
-     * @throws IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public GeoServerRESTStoreManager(URL restURL, String username, String password)
         throws IllegalArgumentException {
@@ -57,7 +58,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
 
     /**
      * Create a store.
-     * 
+     *
      * @param workspace Name of the workspace to contain the store. This
      *            will also be the prefix of any layer names contained in the
      *            store.
@@ -74,7 +75,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
     
     /**
      * Update a store.
-     * 
+     *
      * @param workspace Name of the workspace that contains the store.
      * @param store the set of parameters to be set to the store (including connection parameters).
      * @return <TT>true</TT> if the store has been successfully updated,
@@ -87,11 +88,12 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
 
     /**
      * Update a store.
-     * 
+     *
      * @param workspace Name of the workspace that contains the store.
      * @param store the set of parameters to be set to the store (including connection parameters).
      * @return <TT>true</TT> if the store has been successfully updated,
      *         <TT>false</TT> otherwise
+     * @param storeName a {@link java.lang.String} object.
      */
     public boolean update(String workspace, String storeName, GSAbstractStoreEncoder store) {
         String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", workspace,"/", 
@@ -104,11 +106,12 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
     
     /**
      * Remove a given CoverageStore in a given Workspace.
-     * 
+     *
      * @param workspace The name of the workspace
      * @param store the set of parameters of the store
      * @param recurse if remove should be performed recursively
      * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean remove(final String workspace, final GSAbstractStoreEncoder store,
             final boolean recurse) throws IllegalArgumentException {

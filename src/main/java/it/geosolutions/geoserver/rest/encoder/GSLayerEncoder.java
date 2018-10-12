@@ -37,10 +37,10 @@ import org.jdom.filter.Filter;
  *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com 
- * 
+ * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com
+ *
  * The layer encoder is enabled by default
- * 
+ *
  * {@code
  * <layer>
  *      <name>{LAYERNAME}</name>
@@ -51,7 +51,7 @@ import org.jdom.filter.Filter;
  *      </defaultStyle>
  *      <resource class="coverage">
  *            <name>{RESOURCE_NAME}</name>
- *              <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" 
+ *              <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate"
  *                      href="http://{GSURL}/rest/workspaces/{WS}/coveragestores/{STORE}/coverages/{LAYER}.xml" type="application/xml"/>
  *      </resource>
  *      <attribution>
@@ -63,18 +63,21 @@ import org.jdom.filter.Filter;
  *              <logoType>image/png</logoType>
  *      </attribution>
  *      ...
- *      
+ *
  * </layer>
  * }
- * 
- * 
  * @since gs-2.2.x
+ * @version $Id: $
  */
 public class GSLayerEncoder extends PropertyXMLEncoder {
 	
+	/** Constant <code>STYLES="styles"</code> */
 	public final static String STYLES = "styles";
+	/** Constant <code>AUTHORITY_URLS="authorityURLs"</code> */
 	public final static String AUTHORITY_URLS="authorityURLs";
+	/** Constant <code>IDENTIFIERS="identifiers"</code> */
 	public final static String IDENTIFIERS="identifiers";
+	/** Constant <code>DEFAULT_STYLE="defaultStyle"</code> */
 	public final static String DEFAULT_STYLE = "defaultStyle";
 	
 	final private Element stylesEncoder = new Element(STYLES);
@@ -82,10 +85,18 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 	final private Element authorityURLListEncoder = new Element(AUTHORITY_URLS);
 	final private Element identifierListEncoder = new Element(IDENTIFIERS);
 	
+	/**
+	 * <p>Constructor for GSLayerEncoder.</p>
+	 */
 	public GSLayerEncoder() {
 	    this(true);
 	}
 	
+    /**
+     * <p>Constructor for GSLayerEncoder.</p>
+     *
+     * @param encodeLists a boolean.
+     */
     public GSLayerEncoder(boolean encodeLists) {
         super("layer");
         addEnabled();
@@ -134,7 +145,9 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
     
     /**
-     * @param enable true if layer should be set to enabled 
+     * <p>setEnabled</p>
+     *
+     * @param enable true if layer should be set to enabled
      */
     public void setEnabled(boolean enable){
     	if (enable)
@@ -162,20 +175,25 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     private final static String QUERYABLE = "queryable";
     /**
      * Add the 'queryable' node with a text value from 'queryable' (true as default)
+     *
+     * @param queryable a {@link java.lang.String} object.
      */
     protected void addQueryable(final String queryable) {
         add(QUERYABLE, queryable!=null?queryable.toString():"true");
     }
     /**
      * Set or modify the 'queryable' node with a text value from 'queryable' (true as default)
+     *
+     * @param queryable a {@link java.lang.Boolean} object.
      */
     public void setQueryable(final Boolean queryable) {
         set(QUERYABLE, queryable!=null?queryable.toString():"true");
     }
 
     /**
+     * <p>addWmsPath</p>
+     *
      * @see #setWmsPath(String)
-     * 
      * @param path the wms path to set
      */
     protected void addWmsPath(final String path) {
@@ -185,9 +203,9 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     /**
      * Default WMS Path The GeoServer WMS path is, by default, /geoserver/wms.
      * However you can change it to /geoserver/anythingyouwant
-     * 
+     *
      * @param path the wms path to set
-     * @throws IllegalArgumentException if path is null or empty
+     * @throws java.lang.IllegalArgumentException if path is null or empty
      */
     public void setWmsPath(final String path) throws IllegalArgumentException {
         if (path==null || path.isEmpty())
@@ -196,16 +214,21 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
 
     /**
+     * <p>addDefaultStyle</p>
+     *
      * @see #setDefaultStyle(String)
-     * @param defaultStyle 
+     * @param defaultStyle a {@link java.lang.String} object.
      */
     protected void addDefaultStyle(String defaultStyle) {
         add("defaultStyle", defaultStyle);
     }
     
     /**
+     * <p>addDefaultStyle</p>
+     *
      * @see #setDefaultStyle(String)
-     * @param defaultStyle 
+     * @param defaultStyle a {@link java.lang.String} object.
+     * @param workspace a {@link java.lang.String} object.
      */
     protected void addDefaultStyle(String workspace, String defaultStyle) {
         addContent(defaultStyleEncoder);
@@ -218,8 +241,10 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
 
     /**
+     * <p>setDefaultStyle</p>
+     *
      * @param defaultStyle The style that will be applied if no style is specified.
-     * @throws IllegalArgumentException if defaultStyle is null or empty
+     * @throws java.lang.IllegalArgumentException if defaultStyle is null or empty
      */
     public void setDefaultStyle(final String defaultStyle) throws IllegalArgumentException {
         if (defaultStyle==null || defaultStyle.isEmpty())
@@ -228,8 +253,11 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     }
     
     /**
+     * <p>setDefaultStyle</p>
+     *
      * @see GSLayerEncoder#setDefaultStyle(String)
-     * @param defaultStyle 
+     * @param defaultStyle a {@link java.lang.String} object.
+     * @param workspace a {@link java.lang.String} object.
      */
     public void setDefaultStyle(String workspace, String defaultStyle) {
         remove("defaultStyle");
@@ -238,8 +266,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     
 	/**
 	 * Add a style
-	 * 
-	 * @param style
+	 *
+	 * @param style a {@link java.lang.String} object.
 	 */
 	public void addStyle(String style) {
 		final Element el = new Element("style");
@@ -249,8 +277,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 
 	/**
 	 * delete a style from the list of available styles
-	 * 
-	 * @param style
+	 *
+	 * @param style a {@link java.lang.String} object.
 	 * @return true if something is removed, false otherwise
 	 */
 	public boolean delStyle(final String style) {
@@ -269,7 +297,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 	}
 	 
 	/**
-	 * 
+	 * <p>setAdvertised</p>
+	 *
 	 * @param advertised
 	 *            true if the layer should be advertised
 	 */
@@ -282,8 +311,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
     
 	/**
 	 * Add an authorityURLInfo to the GeoServer layer
-	 * 
-	 * @param authorityURLInfo
+	 *
+	 * @param authorityURLInfo a {@link it.geosolutions.geoserver.rest.encoder.authorityurl.GSAuthorityURLInfoEncoder} object.
 	 */
 	public void addAuthorityURL(GSAuthorityURLInfoEncoder authorityURLInfo) {
 		authorityURLListEncoder.addContent(authorityURLInfo.getRoot());
@@ -292,8 +321,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 	/**
 	 * Deletes a AuthorityURLInfo from the list using the authorityURL
 	 * (AuthorityURLInfo href)
-	 * 
-	 * @param authorityURL
+	 *
+	 * @param authorityURL a {@link java.lang.String} object.
 	 * @return true if something is removed, false otherwise
 	 */
 	public boolean delAuthorityURL(final String authorityURL) {
@@ -303,8 +332,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 
 	/**
 	 * Add an identifierInfo to the GeoServer layer
-	 * 
-	 * @param identifierInfo
+	 *
+	 * @param identifierInfo a {@link it.geosolutions.geoserver.rest.encoder.identifier.GSIdentifierInfoEncoder} object.
 	 */
 	public void addIdentifier(GSIdentifierInfoEncoder identifierInfo) {
 		identifierListEncoder.addContent(identifierInfo.getRoot());
@@ -313,8 +342,8 @@ public class GSLayerEncoder extends PropertyXMLEncoder {
 	/**
 	 * Deletes a IdentifierInfo from the list using the authority name
 	 * (IdentifierInfo authority)
-	 * 
-	 * @param authority
+	 *
+	 * @param authority a {@link java.lang.String} object.
 	 * @return true if something is removed, false otherwise
 	 */
 	public boolean delIdentifier(final String authority) {

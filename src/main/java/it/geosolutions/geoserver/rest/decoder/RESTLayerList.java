@@ -38,26 +38,38 @@ import org.jdom.Element;
  * <BR>This is an XML fragment:
  * <PRE>
  *{@code
-<layer>
-    <name>states</name>
-    <atom:link
-        xmlns:atom="http://www.w3.org/2005/Atom"
-        rel="alternate"
-        href="http://localhost:8080/geoserver/rest/layers/states.xml"
-        type="application/xml"/>
-</layer>
+ *<layer>
+ *    <name>states</name>
+ *    <atom:link
+ *        xmlns:atom="http://www.w3.org/2005/Atom"
+ *        rel="alternate"
+ *        href="http://localhost:8080/geoserver/rest/layers/states.xml"
+ *        type="application/xml"/>
+ *</layer>
  * }
  * </PRE>
-
+ *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTLayerList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayerList} object.
+     */
     public static RESTLayerList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTLayerList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTLayerList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTLayerList(Element list) {
         super(list);
     }

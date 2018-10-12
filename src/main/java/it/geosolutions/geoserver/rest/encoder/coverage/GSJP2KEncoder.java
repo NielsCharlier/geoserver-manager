@@ -36,9 +36,9 @@ import org.jdom.filter.Filter;
 
 /**
  * Should be used to encode a Jpeg2K coverage.
- * 
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * 
+ * @version $Id: $
  */
 public class GSJP2KEncoder extends GSCoverageEncoder {
 
@@ -48,6 +48,9 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
 
     final private NestedElementEncoder parameters = new NestedElementEncoder("parameters");
 
+    /**
+     * <p>Constructor for GSJP2KEncoder.</p>
+     */
     public GSJP2KEncoder() {
         // Link members to the parent
         addContent(parameters.getRoot());
@@ -106,7 +109,9 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
     private final static String useMultithreading = "USE_MULTITHREADING";
 
     /**
-     * @param val
+     * <p>addUseMultithreading</p>
+     *
+     * @param val a boolean.
      */
     protected void addUseMultithreading(final boolean val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -118,11 +123,21 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
 
     private final static Filter useMultithreadingFilter = new parametersFilter(useMultithreading);
 
+    /**
+     * <p>Setter for the field <code>useMultithreading</code>.</p>
+     *
+     * @param val a boolean.
+     */
     public void setUseMultithreading(final boolean val) {
         removeParameter(useMultithreadingFilter);
         addUseMultithreading(val);
     }
     
+    /**
+     * <p>Getter for the field <code>useMultithreading</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getUseMultithreading() {
         Element el=getParameter(useMultithreadingFilter);
         if (el!=null){
@@ -140,7 +155,9 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
     private final static String SUGGESTED_TILE_SIZE = "SUGGESTED_TILE_SIZE";
 
     /**
-     * @param val
+     * <p>addSuggestedTileSize</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addSuggestedTileSize(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -152,11 +169,21 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
     private final static Filter SUGGESTED_TILE_SIZEFilter = new parametersFilter(
             SUGGESTED_TILE_SIZE);
 
+    /**
+     * <p>setSuggestedTileSize</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setSuggestedTileSize(final String val) {
         removeParameter(SUGGESTED_TILE_SIZEFilter);
         addSuggestedTileSize(val);
     }
     
+    /**
+     * <p>getSuggestedTileSize</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSuggestedTileSize() {
         Element el=getParameter(SUGGESTED_TILE_SIZEFilter);
         if (el!=null){
@@ -175,7 +202,9 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
     private final static String USE_JAI_IMAGEREAD = "USE_JAI_IMAGEREAD";
 
     /**
-     * @param val
+     * <p>addUseJaiImageRead</p>
+     *
+     * @param val a boolean.
      */
     protected void addUseJaiImageRead(final boolean val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -186,11 +215,21 @@ public class GSJP2KEncoder extends GSCoverageEncoder {
 
     private final static Filter USE_JAI_IMAGEREADFilter = new parametersFilter(USE_JAI_IMAGEREAD);
 
+    /**
+     * <p>setUseJaiImageRead</p>
+     *
+     * @param val a boolean.
+     */
     public void setUseJaiImageRead(final boolean val) {
         removeParameter(USE_JAI_IMAGEREADFilter);
         addUseJaiImageRead(val);
     }
     
+    /**
+     * <p>getUseJaiImageRead</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getUseJaiImageRead() {
         Element el=getParameter(USE_JAI_IMAGEREADFilter);
         if (el!=null){

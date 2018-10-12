@@ -29,9 +29,10 @@ import it.geosolutions.geoserver.rest.encoder.utils.ElementUtils;
 
 /**
  * Encoder for an {@value #TYPE} datastore.
- *  
+ *
  * @author Gianni Barrotta
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
 
@@ -47,7 +48,7 @@ public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
     /**
      * Create an {@value #TYPE} datastore with default connection parameters,
      * given a store name, a server name, and a user name.
-     * 
+     *
      * The following default connection parameters are set:
      * <ul>
      *   <li>dbtype: {@value #DEFAULT_DB_TYPE}
@@ -57,7 +58,7 @@ public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
      *   <li>pool.timeOut: {@value #DEFAULT_CONNECTION_TIMEOUT}
      *   <li>datastore.allowNonSpatialTables: {@value #DEFAULT_ALLOW_NON_SPATIAL_TABLES}
      * </ul>
-     * 
+     *
      * @param name New datastore name
      * @param server New server name
      * @param user New user name
@@ -80,9 +81,9 @@ public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
     
     /**
      * Create an {@value #TYPE} datastore encoder from an existing store read from server.
-     * 
+     *
      * @param store The existing store.
-     * @throws IllegalArgumentException if store type or mandatory parameters are not valid
+     * @throws java.lang.IllegalArgumentException if store type or mandatory parameters are not valid
      */
     public GSArcSDEDatastoreEncoder(RESTDataStore store) {
     	super(store);
@@ -92,92 +93,202 @@ public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
 		ensureValidUser(store.getConnectionParameters().get("user"));
     }
 
+    /**
+     * <p>setDbType</p>
+     *
+     * @param dbtype a {@link java.lang.String} object.
+     */
     public void setDbType(String dbtype) {
         connectionParameters.set("dbtype", dbtype);
     }
     
+    /**
+     * <p>getDbType</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getDbType() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "dbtype").getTextTrim();
     }
     
+    /**
+     * <p>setServer</p>
+     *
+     * @param server a {@link java.lang.String} object.
+     */
     public void setServer(String server) {
     	ensureValidServer(server);
         connectionParameters.set("server", server);
     }
     
+    /**
+     * <p>getServer</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getServer() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "server").getTextTrim();
     }
 
+    /**
+     * <p>setPort</p>
+     *
+     * @param port a int.
+     */
     public void setPort(int port) {
         connectionParameters.set("port", Integer.toString(port));
     }
     
+    /**
+     * <p>getPort</p>
+     *
+     * @return a int.
+     */
     public int getPort() {
     	return Integer.parseInt(ElementUtils.contains(connectionParameters.getRoot(), "port").getTextTrim());
     }
 
+    /**
+     * <p>setInstance</p>
+     *
+     * @param instance a {@link java.lang.String} object.
+     */
     public void setInstance(String instance) {
         connectionParameters.set("instance", instance);
     }
     
+    /**
+     * <p>getInstance</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getInstance() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "instance").getTextTrim();
     }
 
+    /**
+     * <p>setUser</p>
+     *
+     * @param user a {@link java.lang.String} object.
+     */
     public void setUser(String user) {
     	ensureValidUser(user);
         connectionParameters.set("user", user);
     }
 
+    /**
+     * <p>getUser</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getUser() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "user").getTextTrim();
     }
     
+    /**
+     * <p>setPassword</p>
+     *
+     * @param password a {@link java.lang.String} object.
+     */
     public void setPassword(String password) {
         connectionParameters.set("password", password);
     }
 
+    /**
+     * <p>getPassword</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getPassword() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "password").getTextTrim();
     }
     
+    /**
+     * <p>setNamespace</p>
+     *
+     * @param namespace a {@link java.lang.String} object.
+     */
     public void setNamespace(String namespace) {
         connectionParameters.set("namespace", namespace);
     }
     
+    /**
+     * <p>getNamespace</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getNamespace() {
     	return ElementUtils.contains(connectionParameters.getRoot(), "namespace").getTextTrim();
     }
     
+    /**
+     * <p>setMinConnections</p>
+     *
+     * @param minConnections a int.
+     */
     public void setMinConnections(int minConnections) {
     	connectionParameters.set("pool.minConnections", Integer.toString(minConnections));
     }
     
+    /**
+     * <p>getMinConnections</p>
+     *
+     * @return a int.
+     */
     public int getMinConnections() {
     	return Integer.parseInt(ElementUtils.contains(connectionParameters.getRoot(), "pool.minConnections").getTextTrim());
     }
     
+    /**
+     * <p>setMaxConnections</p>
+     *
+     * @param maxConnections a int.
+     */
     public void setMaxConnections(int maxConnections) {
     	connectionParameters.set("pool.maxConnections", Integer.toString(maxConnections));
     }
     
+    /**
+     * <p>getMaxConnections</p>
+     *
+     * @return a int.
+     */
     public int getMaxConnections() {
     	return Integer.parseInt(ElementUtils.contains(connectionParameters.getRoot(), "pool.maxConnections").getTextTrim());
     }
     
+    /**
+     * <p>setConnectionTimeout</p>
+     *
+     * @param seconds a int.
+     */
     public void setConnectionTimeout(int seconds) {
     	connectionParameters.set("pool.timeOut", Integer.toString(seconds));
     }
     
+    /**
+     * <p>getConnectionTimeout</p>
+     *
+     * @return a int.
+     */
     public int getConnectionTimeout() {
     	return Integer.parseInt(ElementUtils.contains(connectionParameters.getRoot(), "pool.timeOut").getTextTrim());
     }
     
+    /**
+     * <p>setAllowNonSpatialTables</p>
+     *
+     * @param allowNonSpatialTables a boolean.
+     */
     public void setAllowNonSpatialTables(boolean allowNonSpatialTables) {
     	connectionParameters.set("datastore.allowNonSpatialTables", Boolean.toString(allowNonSpatialTables));
     }
     
+    /**
+     * <p>getAllowNonSpatialTables</p>
+     *
+     * @return a boolean.
+     */
     public boolean getAllowNonSpatialTables() {
     	return Boolean.parseBoolean(ElementUtils.contains(connectionParameters.getRoot(), "datastore.allowNonSpatialTables").getTextTrim());
     }
@@ -209,6 +320,8 @@ public class GSArcSDEDatastoreEncoder extends GSAbstractDatastoreEncoder {
     }
     
     /**
+     * <p>getValidType</p>
+     *
      * @return {@value #TYPE}
      */
     protected String getValidType() {

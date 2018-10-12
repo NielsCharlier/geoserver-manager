@@ -33,9 +33,10 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 /**
- * 
- * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * <p>XmlElement class.</p>
  *
+ * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public class XmlElement{
 	
@@ -46,10 +47,20 @@ public class XmlElement{
 	
 	private final static XMLOutputter OUTPUTTER = new XMLOutputter(Format.getCompactFormat());
 	
+	/**
+	 * <p>Constructor for XmlElement.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public XmlElement(final String name){
 		root=new Element(name);
 	}
 
+    /**
+     * <p>Constructor for XmlElement.</p>
+     *
+     * @param e a {@link org.jdom.Element} object.
+     */
     public XmlElement(final Element e) {
         root = e;
     }
@@ -63,7 +74,8 @@ public class XmlElement{
 
     /**
      * update the root of this node
-     * @param root
+     *
+     * @param root a {@link org.jdom.Element} object.
      */
     protected void setRoot(final Element root) {
         this.root = root;
@@ -71,30 +83,60 @@ public class XmlElement{
     
     /**
      * update the root of this node
+     *
      * @param name is the name of the root node
      */
     protected void setRoot(final String name){
         root=new Element(name);
     }
 
+	/**
+	 * <p>Getter for the field <code>root</code>.</p>
+	 *
+	 * @return a {@link org.jdom.Element} object.
+	 */
 	public Element getRoot(){
 		return root;
 	}
 	
+	/**
+	 * <p>add</p>
+	 *
+	 * @param nodename a {@link java.lang.String} object.
+	 * @param nodetext a {@link java.lang.String} object.
+	 */
 	protected void add(final String nodename, final String nodetext) {
     	add(nodename,new Text(nodetext));
     }
 	
+	/**
+	 * <p>add</p>
+	 *
+	 * @param nodename a {@link java.lang.String} object.
+	 * @param nodetext a {@link org.jdom.Content} object.
+	 */
 	protected void add(final String nodename, final Content nodetext) {
     	final Element el=new Element(nodename);
     	el.setContent(nodetext);
     	this.addContent(el);
     }
     
+	/**
+	 * <p>set</p>
+	 *
+	 * @param nodename a {@link java.lang.String} object.
+	 * @param nodetext a {@link java.lang.String} object.
+	 */
 	protected void set(final String nodename, final String nodetext) {
     	set(nodename,new Text(nodetext));
     }
 	
+	/**
+	 * <p>set</p>
+	 *
+	 * @param nodename a {@link java.lang.String} object.
+	 * @param nodeContent a {@link org.jdom.Content} object.
+	 */
 	protected void set(final String nodename, final Content nodeContent) {
     	final Element el=ElementUtils.contains(getRoot(),nodename);
     	if (el==null){
@@ -105,14 +147,31 @@ public class XmlElement{
     	}
     }
     
+	/**
+	 * <p>addContent</p>
+	 *
+	 * @param child a {@link org.jdom.Content} object.
+	 * @return a {@link org.jdom.Element} object.
+	 */
 	protected Element addContent(Content child){
 		return root.addContent(child);
 	}
 	
+	/**
+	 * <p>isEmpty</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isEmpty() {
         return root.getChildren().isEmpty();
     }
 	
+	/**
+	 * <p>remove</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean remove(final String key){
 		final Element el=ElementUtils.contains(root,key);
 		if (el!=null){
@@ -122,9 +181,7 @@ public class XmlElement{
 			return false;
 	}
 	
-	/**
-     * @return an xml String 
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
 		return OUTPUTTER.outputString(root);

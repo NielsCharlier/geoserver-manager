@@ -40,25 +40,31 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>
-  {@code
-<ELEMENTs>
-      <ELEMENT>
-        <name>elem1</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="url1" type="application/xml"/>
-      </ELEMENT>
-      <ELEMENT>
-        <name>elem2</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="url2" type="application/xml"/>
-      </ELEMENT>
-</ELEMENTs>
-}</PRE>
+ *  {@code
+ *<ELEMENTs>
+ *      <ELEMENT>
+ *        <name>elem1</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="url1" type="application/xml"/>
+ *      </ELEMENT>
+ *      <ELEMENT>
+ *        <name>elem2</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="url2" type="application/xml"/>
+ *      </ELEMENT>
+ *</ELEMENTs>
+ *}</PRE>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTAbstractList<ELEM extends NameLinkElem> implements Iterable<ELEM> {
 
     protected final List<Element> elementList;
 
+    /**
+     * <p>Constructor for RESTAbstractList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTAbstractList(Element list) {
         List<Element> tempList = new ArrayList<Element>();
         String baseName = null;
@@ -77,22 +83,48 @@ public class RESTAbstractList<ELEM extends NameLinkElem> implements Iterable<ELE
         elementList = Collections.unmodifiableList(tempList);
     }
 
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return elementList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return elementList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a ELEM object.
+     */
     public ELEM get(int index) {
         return createElement(elementList.get(index));
     }
 
+    /**
+     * <p>iterator</p>
+     *
+     * @return a {@link java.util.Iterator} object.
+     */
     public Iterator<ELEM> iterator() {
         return new RESTAbstractListIterator(elementList);
     }
 
+    /**
+     * <p>getNames</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<String> getNames() {
         List<String> names = new ArrayList<String>(elementList.size());
         for (ELEM elem: this) {
@@ -114,6 +146,12 @@ public class RESTAbstractList<ELEM extends NameLinkElem> implements Iterable<ELE
         }
     }
     
+    /**
+     * <p>createElement</p>
+     *
+     * @param el a {@link org.jdom.Element} object.
+     * @return a ELEM object.
+     */
     protected ELEM createElement(Element el) {
         return (ELEM)new NameLinkElem(el);
     }

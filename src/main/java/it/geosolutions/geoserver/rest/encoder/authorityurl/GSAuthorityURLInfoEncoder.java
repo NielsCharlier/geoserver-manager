@@ -31,29 +31,29 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
-* GSAuthorityURLInfoEncoder - encodes an authorityURL for a given GeoServer
-* layer as follows:
-* <pre>
-* {@code
-* final GSAuthorityURLInfoEncoder ae = new GSAuthorityURLInfoEncoder();
-* ae.setName("an authority");
-* ae.setHref("http://www.organization.org");
-* }
-* </pre>
-* For this example, the XML output is:
-* <pre>
-* {@code
-* <AuthorityURL>
-*   <name>an authority</name>
-*   <href>http://www.organization.org</href>
-* </AuthorityURL>
-* }
-* </pre>
-*
-* @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
-* emmanuel.blondel@fao.org
-*
-*/
+ * GSAuthorityURLInfoEncoder - encodes an authorityURL for a given GeoServer
+ * layer as follows:
+ * <pre>
+ * {@code
+ * final GSAuthorityURLInfoEncoder ae = new GSAuthorityURLInfoEncoder();
+ * ae.setName("an authority");
+ * ae.setHref("http://www.organization.org");
+ * }
+ * </pre>
+ * For this example, the XML output is:
+ * <pre>
+ * {@code
+ * <AuthorityURL>
+ *   <name>an authority</name>
+ *   <href>http://www.organization.org</href>
+ * </AuthorityURL>
+ * }
+ * </pre>
+ *
+ * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
+ * emmanuel.blondel@fao.org
+ * @version $Id: $
+ */
 public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
@@ -83,8 +83,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Get a Filter using the AuthorityURLInfo href (authorityURL)
-	 * 
-	 * @param href
+	 *
+	 * @param href a {@link java.lang.String} object.
 	 * @return the filter
 	 */
 	public static Filter getFilterByHref(String href) {
@@ -93,7 +93,6 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Constructs a new GSAuthorityURLInfoEncoder
-	 * 
 	 */
 	public GSAuthorityURLInfoEncoder() {
 		super("AuthorityURL");
@@ -101,7 +100,7 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Constructs quickly an AuthorityURL info
-	 * 
+	 *
 	 * @param name
 	 *            (required)
 	 * @param href
@@ -114,9 +113,9 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Set-up quickly an AuthorityURL info
-	 * 
-	 * @param name
-	 * @param href
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param href a {@link java.lang.String} object.
 	 */
 	protected void setup(String name, String href) {
 		set(AuthorityURLInfo.name.name(), name);
@@ -125,9 +124,9 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Set an AuthorityURLInfo member (name, href)
-	 * 
-	 * @param type
-	 * @param value
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.authorityurl.AuthorityURLInfo} object.
+	 * @param value a {@link java.lang.String} object.
 	 */
 	protected void setMember(AuthorityURLInfo type, String value) {
 		set(type.toString(), value);
@@ -135,8 +134,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Set the name
-	 * 
-	 * @param name
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	public void setName(String name) {
 		this.setMember(AuthorityURLInfo.name, name);
@@ -144,8 +143,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Set the href
-	 * 
-	 * @param href
+	 *
+	 * @param href a {@link java.lang.String} object.
 	 */
 	public void setHref(String href) {
 		this.setMember(AuthorityURLInfo.href, href);
@@ -153,8 +152,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes an AuthorityURLInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.authorityurl.AuthorityURLInfo} object.
 	 * @return true if the AuthorityURLInfo member is removed
 	 */
 	protected boolean delMember(AuthorityURLInfo type) {
@@ -164,7 +163,7 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes the authority name
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delName() {
@@ -173,7 +172,7 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes the href
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delHref() {
@@ -182,8 +181,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the value of the AuthorityURLInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.authorityurl.AuthorityURLInfo} object.
 	 * @return the value of the AuthorityURLInfo member
 	 */
 	protected String getMember(AuthorityURLInfo type) {
@@ -196,8 +195,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the name
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getName() {
 		return this.getMember(AuthorityURLInfo.name);
@@ -205,8 +204,8 @@ public class GSAuthorityURLInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the href
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getHref() {
 		return this.getMember(AuthorityURLInfo.href);

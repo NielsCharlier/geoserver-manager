@@ -33,22 +33,32 @@ import it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.GSVirtualTab
 import org.jdom.Element;
 
 /**
- * 
+ *
  * Encode a GeoServer resource as FeatureType
- * 
+ *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public class GSFeatureTypeEncoder extends GSResourceEncoder {
 
+    /** Constant <code>ATTRIBUTES="attributes"</code> */
     public final static String ATTRIBUTES = "attributes";
 
     final private Element attributes = new Element(ATTRIBUTES);
 
+    /**
+     * <p>Constructor for GSFeatureTypeEncoder.</p>
+     */
     public GSFeatureTypeEncoder() {
         this(true);
     }
     
+    /**
+     * <p>Constructor for GSFeatureTypeEncoder.</p>
+     *
+     * @param encodeLists a boolean.
+     */
     public GSFeatureTypeEncoder(boolean encodeLists) {
         super("featureType", encodeLists);
         if (encodeLists) {
@@ -68,10 +78,11 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
 
 
     /**
+     * <p>addMetadata</p>
+     *
      * @deprecated Use {@link GSResourceEncoder#addMetadataDimension(String, GSDimensionInfoEncoder)} this method will be removed soon
-     * @param key
-     * @param dimensionInfo
-     * 
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSFeatureDimensionInfoEncoder} object.
      */
     protected void addMetadata(String key, GSFeatureDimensionInfoEncoder dimensionInfo) {
         super.addMetadata(key, dimensionInfo);
@@ -79,37 +90,38 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
    
     
     /**
+     * <p>setMetadata</p>
+     *
      * @deprecated Use {@link GSResourceEncoder#setMetadataDimension(String, GSDimensionInfoEncoder)} this method will be removed soon
-     * @param key
-     * @param dimensionInfo
-     * 
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSFeatureDimensionInfoEncoder} object.
      */
     public void setMetadata(String key, GSFeatureDimensionInfoEncoder dimensionInfo) {
         super.setMetadata(key, dimensionInfo);
     }
     
     /**
-    * Add a VirtualTable (SQL View feature type)
-    * 
-    * @param virtualtable
-    */
+     * Add a VirtualTable (SQL View feature type)
+     *
+     * @param virtualtable a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.GSVirtualTableEncoder} object.
+     */
     protected void addMetadataVirtualTable(
     	final GSVirtualTableEncoder virtualtable) {
         super.addMetadata("JDBC_VIRTUAL_TABLE", virtualtable);
     }
     
     /**
-    * Set a VirtualTable (SQL View feature type)
-    * 
-    * @param virtualtable
-    */
+     * Set a VirtualTable (SQL View feature type)
+     *
+     * @param virtualtable a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.GSVirtualTableEncoder} object.
+     */
     public void setMetadataVirtualTable(final GSVirtualTableEncoder virtualtable) {
     	super.setMetadata("JDBC_VIRTUAL_TABLE", virtualtable);
     } 
     
     /**
      * Deletes the VirtualTable metadata
-     * 
+     *
      * @return true if deleted, false otherwise
      */
     public boolean delMetadataVirtualTable(){
@@ -118,8 +130,8 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
     
     /**
      * delete a keyword from the list
-     * 
-     * @param keyword
+     *
+     * @param keyword a {@link java.lang.String} object.
      * @return true if something is removed, false otherwise
      */
     public boolean delAttribute(final String keyword) {
@@ -130,6 +142,8 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
     }
 
     /**
+     * <p>addAttribute</p>
+     *
      * @param attribute the attribute to add
      */
     protected void addAttribute(GSAttributeEncoder attribute) {
@@ -137,6 +151,8 @@ public class GSFeatureTypeEncoder extends GSResourceEncoder {
     }
 
     /**
+     * <p>setAttribute</p>
+     *
      * @param attribute the attribute to set (overriding an attribute with the same name if present)
      */
     public void setAttribute(GSAttributeEncoder attribute) {

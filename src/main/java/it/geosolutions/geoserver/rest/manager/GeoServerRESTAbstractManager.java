@@ -32,9 +32,10 @@ import java.net.URL;
 /**
  * Abstract manager, common functionality and interface for all
  * GeoServerREST<i>Foo</i>Manager classes.
- * 
+ *
  * @author Oscar Fonts
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public abstract class GeoServerRESTAbstractManager {
 
@@ -44,12 +45,13 @@ public abstract class GeoServerRESTAbstractManager {
 
     /**
      * Default constructor.
-     * 
+     *
      * Indicates connection parameters to remote GeoServer instance.
-     * 
+     *
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public GeoServerRESTAbstractManager(URL restURL, String username, String password)
         throws IllegalArgumentException {

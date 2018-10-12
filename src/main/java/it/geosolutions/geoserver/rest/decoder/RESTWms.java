@@ -39,65 +39,77 @@ import org.jdom.Element;
  * <P>This is the XML REST representation:
  * <PRE>
  *{@code
-<wmsLayer>
-	<name>comunilazio</name>
-	<nativeName>lait:comunilazio</nativeName>
-	<namespace>
-		<name>arit</name>
-		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/namespaces/arit.xml" type="application/xml"/>
-	</namespace>
-	<title>comunilazio</title>
-	<description/>
-	<keywords>
-		<string>features</string>
-		<string>comunilazio</string>
-	</keywords>
-	<nativeCRS>
-		GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]]
-	</nativeCRS>
-	<srs>EPSG:4326</srs>
-	<nativeBoundingBox>
-		<minx>11.4482128</minx>
-		<maxx>14.0288013</maxx>
-		<miny>40.7848334</miny>
-		<maxy>42.8396541</maxy>
-		<crs>EPSG:4326</crs>
-	</nativeBoundingBox>
-	<latLonBoundingBox>
-		<minx>11.4482128</minx>
-		<maxx>14.0288013</maxx>
-		<miny>40.7848334</miny>
-		<maxy>42.8396541</maxy>
-		<crs>
-			GEOGCS["WGS84(DD)", DATUM["WGS84", SPHEROID["WGS84", 6378137.0, 298.257223563]], PRIMEM["Greenwich", 0.0], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH]]
-		</crs>
-	</latLonBoundingBox>
-	<projectionPolicy>FORCE_DECLARED</projectionPolicy>
-	<enabled>true</enabled>
-	<metadata>
-		<entry key="cachingEnabled">false</entry>
-	</metadata>
-	<store class="wmsStore">
-		<name>regione</name>
-		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/workspaces/arit/wmsstores/regione.xml" type="application/xml"/>
-	</store>
-</wmsLayer>
+ *<wmsLayer>
+ *	<name>comunilazio</name>
+ *	<nativeName>lait:comunilazio</nativeName>
+ *	<namespace>
+ *		<name>arit</name>
+ *		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/namespaces/arit.xml" type="application/xml"/>
+ *	</namespace>
+ *	<title>comunilazio</title>
+ *	<description/>
+ *	<keywords>
+ *		<string>features</string>
+ *		<string>comunilazio</string>
+ *	</keywords>
+ *	<nativeCRS>
+ *		GEOGCS["WGS 84", DATUM["World Geodetic System 1984", SPHEROID["WGS 84", 6378137.0, 298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]], PRIMEM["Greenwich", 0.0, AUTHORITY["EPSG","8901"]], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH], AUTHORITY["EPSG","4326"]]
+ *	</nativeCRS>
+ *	<srs>EPSG:4326</srs>
+ *	<nativeBoundingBox>
+ *		<minx>11.4482128</minx>
+ *		<maxx>14.0288013</maxx>
+ *		<miny>40.7848334</miny>
+ *		<maxy>42.8396541</maxy>
+ *		<crs>EPSG:4326</crs>
+ *	</nativeBoundingBox>
+ *	<latLonBoundingBox>
+ *		<minx>11.4482128</minx>
+ *		<maxx>14.0288013</maxx>
+ *		<miny>40.7848334</miny>
+ *		<maxy>42.8396541</maxy>
+ *		<crs>
+ *			GEOGCS["WGS84(DD)", DATUM["WGS84", SPHEROID["WGS84", 6378137.0, 298.257223563]], PRIMEM["Greenwich", 0.0], UNIT["degree", 0.017453292519943295], AXIS["Geodetic longitude", EAST], AXIS["Geodetic latitude", NORTH]]
+ *		</crs>
+ *	</latLonBoundingBox>
+ *	<projectionPolicy>FORCE_DECLARED</projectionPolicy>
+ *	<enabled>true</enabled>
+ *	<metadata>
+ *		<entry key="cachingEnabled">false</entry>
+ *	</metadata>
+ *	<store class="wmsStore">
+ *		<name>regione</name>
+ *		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/workspaces/arit/wmsstores/regione.xml" type="application/xml"/>
+ *	</store>
+ *</wmsLayer>
  * }</PRE>
  *
  * @author cip
+ * @version $Id: $
  */
 public class RESTWms extends RESTResource {
 
 
+    /** {@inheritDoc} */
     public static RESTWms build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTWms(elem);
 	}
 
+	/**
+	 * <p>Constructor for RESTWms.</p>
+	 *
+	 * @param resource a {@link org.jdom.Element} object.
+	 */
 	public RESTWms(Element resource) {
 		super(resource);
 	}
 
+	/**
+	 * <p>Constructor for RESTWms.</p>
+	 *
+	 * @param resource a {@link it.geosolutions.geoserver.rest.decoder.RESTResource} object.
+	 */
 	public RESTWms(RESTResource resource) {
 		super(resource.rootElem);
 	}
@@ -120,18 +132,38 @@ public class RESTWms extends RESTResource {
 //		return rootElem.getChildText("title");
 //	}
 
+	/**
+	 * <p>getNativeCRS</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNativeCRS() {
 		return rootElem.getChildText("nativeCRS");
 	}
 
+	/**
+	 * <p>getSRS</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getSRS() {
 		return rootElem.getChildText("srs");
 	}
 	
+	/**
+	 * <p>getMetadataList</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTMetadataList} object.
+	 */
 	public RESTMetadataList getMetadataList() {
         return new RESTMetadataList(rootElem.getChild("metadata"));
     }
 	
+	/**
+	 * <p>getDimensionInfo</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<RESTDimensionInfo> getDimensionInfo() {
         List<RESTDimensionInfo> listDim = new ArrayList<RESTDimensionInfo>();
         for (RESTMetadataList.RESTMetadataElement el : getMetadataList()){
@@ -144,7 +176,7 @@ public class RESTWms extends RESTResource {
 		
     /**
      * Retrieves the list of parameters for this wms.
-     * 
+     *
      * @return a {@link Map} where the key is the name for the parameter and the value is the value for the parameter.
      */
     @SuppressWarnings("unchecked")
@@ -165,6 +197,7 @@ public class RESTWms extends RESTResource {
         return paramsList;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

@@ -33,11 +33,12 @@ import java.util.Map;
 
 /**
  * Generic Datastore encoder.
- * 
+ *
  * Provides getters and setters for parameters common to all Datastores, an internal placeholder for specific connection parameters, and a constructor
  * to read parameters from a {@link RESTDataStore}.
- * 
+ *
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public abstract class GSAbstractDatastoreEncoder extends GSAbstractStoreEncoder {
 
@@ -80,6 +81,8 @@ public abstract class GSAbstractDatastoreEncoder extends GSAbstractStoreEncoder 
 
     /**
      * The type of the implementing datastore.
+     *
+     * @return a {@link java.lang.String} object.
      */
     protected abstract String getValidType();
 

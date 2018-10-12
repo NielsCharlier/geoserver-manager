@@ -26,12 +26,21 @@
 package it.geosolutions.geoserver.rest.encoder.metadata;
 
 
+/**
+ * <p>GSFeatureDimensionInfoEncoder class.</p>
+ *
+ * @author niels
+ * @version $Id: $
+ */
 public class GSFeatureDimensionInfoEncoder extends GSDimensionInfoEncoder {
+	/** Constant <code>ATTRIBUTE="attribute"</code> */
 	public final static String ATTRIBUTE="attribute";
+	/** Constant <code>END_ATTRIBUTE="endAttribute"</code> */
 	public final static String END_ATTRIBUTE="endAttribute";
 	
 	/**
 	 * if this dimension is enabled this constructor should be called.
+	 *
 	 * @param attribute the attribute field name to use as dimension
 	 */
 	public GSFeatureDimensionInfoEncoder(final String attribute){
@@ -41,6 +50,7 @@ public class GSFeatureDimensionInfoEncoder extends GSDimensionInfoEncoder {
 	
 	/**
 	 * Change the attribute used as dimension
+	 *
 	 * @param attribute the attribute to use as dimension
 	 */
 	public void setAttribute(final String attribute){
@@ -49,6 +59,7 @@ public class GSFeatureDimensionInfoEncoder extends GSDimensionInfoEncoder {
 	
 	/**
 	 * Set the end attribute used in the dimension (optional)
+	 *
 	 * @param endAttribute the dimension end attribute
 	 */
 	public void setEndAttribute(final String endAttribute){

@@ -28,16 +28,28 @@ package it.geosolutions.geoserver.rest.decoder.utils;
 import org.jdom.Element;
 
 /**
+ * <p>NameLinkElem class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class NameLinkElem {
         private final Element elem;
 
+        /**
+         * <p>Constructor for NameLinkElem.</p>
+         *
+         * @param elem a {@link org.jdom.Element} object.
+         */
         public NameLinkElem(Element elem) {
             this.elem = elem;
         }
 
+        /**
+         * <p>getName</p>
+         *
+         * @return a {@link java.lang.String} object.
+         */
         public String getName() {
             return elem.getChildText("name");
         }

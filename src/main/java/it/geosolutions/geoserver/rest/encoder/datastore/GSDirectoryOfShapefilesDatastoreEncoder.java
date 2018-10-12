@@ -30,8 +30,9 @@ import java.net.URL;
 
 /**
  * Encoder for a {@value #TYPE} datastore.
- * 
+ *
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public class GSDirectoryOfShapefilesDatastoreEncoder extends GSShapefileDatastoreEncoder {
 
@@ -39,7 +40,7 @@ public class GSDirectoryOfShapefilesDatastoreEncoder extends GSShapefileDatastor
 
     /**
      * Create a {@value #TYPE} datastore with default connection parameters, given a store name and a url (the store location).
-     * 
+     *
      * @param name New datastore name
      * @param url The shapefile location in the server, relative to $GEOSERVER_DATA_DIR.
      */
@@ -50,15 +51,17 @@ public class GSDirectoryOfShapefilesDatastoreEncoder extends GSShapefileDatastor
 
     /**
      * Create a {@value #TYPE} datastore encoder from an existing store read from server.
-     * 
+     *
      * @param store The existing store.
-     * @throws IllegalArgumentException if store type or mandatory parameters are not valid
+     * @throws java.lang.IllegalArgumentException if store type or mandatory parameters are not valid
      */
     public GSDirectoryOfShapefilesDatastoreEncoder(RESTDataStore store) {
         super(store);
     }
 
     /**
+     * <p>getValidType</p>
+     *
      * @return {@value #TYPE}
      */
     protected String getValidType() {

@@ -31,8 +31,9 @@ import org.jdom.Element;
 
 /**
  * LayerGroup encoder for GeoServer &lt; 2.3
- * 
+ *
  * @author Davide Savazzi (geo-solutions.it)
+ * @version $Id: $
  */
 public class GSLayerGroupEncoder extends PropertyXMLEncoder {
 
@@ -43,23 +44,47 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
     protected Element stylesElem;
     
     
+    /**
+     * <p>Constructor for GSLayerGroupEncoder.</p>
+     */
     public GSLayerGroupEncoder() {
         super("layerGroup");
     }
 
     
+    /**
+     * <p>setWorkspace</p>
+     *
+     * @param workspace a {@link java.lang.String} object.
+     */
     public void setWorkspace(String workspace) {
         workspaceElem = elem("workspace", elem("name", workspace));
     }
     
+    /**
+     * <p>setName</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     public void setName(String name) {
         nameElem = elem("name", name);
     }
         
+    /**
+     * <p>addLayer</p>
+     *
+     * @param layer a {@link java.lang.String} object.
+     */
     public void addLayer(String layer) {
         addLayer(layer, null);
     }
     
+    /**
+     * <p>addLayer</p>
+     *
+     * @param layer a {@link java.lang.String} object.
+     * @param styleName a {@link java.lang.String} object.
+     */
     public void addLayer(String layer, String styleName) {
         initPublishables("layers");
         
@@ -72,6 +97,15 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
         }
     }
     
+    /**
+     * <p>setBounds</p>
+     *
+     * @param crs a {@link java.lang.String} object.
+     * @param minx a double.
+     * @param maxx a double.
+     * @param miny a double.
+     * @param maxy a double.
+     */
     public void setBounds(String crs, double minx, double maxx, double miny, double maxy) {
         boundsElem = elem("bounds", 
                 elem("minx", Double.toString(minx)),
@@ -81,6 +115,11 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
                 elem("crs", "class", "projected").setText(crs));
     }
     
+    /**
+     * <p>initPublishables</p>
+     *
+     * @param publishablesTag a {@link java.lang.String} object.
+     */
     protected void initPublishables(String publishablesTag) {
         if (publishablesElem == null) {
             publishablesElem = new Element(publishablesTag);
@@ -91,6 +130,11 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
         }
     }    
     
+    /**
+     * <p>addToRoot</p>
+     *
+     * @param elements a {@link org.jdom.Element} object.
+     */
     protected void addToRoot(Element ... elements) {
         for (Element e : elements) {
             if (e != null) {
@@ -99,14 +143,36 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
         }
     }
     
+    /**
+     * <p>elem</p>
+     *
+     * @param tag a {@link java.lang.String} object.
+     * @param attributeName a {@link java.lang.String} object.
+     * @param attributeValue a {@link java.lang.String} object.
+     * @return a {@link org.jdom.Element} object.
+     */
     protected Element elem(String tag, String attributeName, String attributeValue) {
         return new Element(tag).setAttribute(attributeName, attributeValue);
     }    
     
+    /**
+     * <p>elem</p>
+     *
+     * @param tag a {@link java.lang.String} object.
+     * @param text a {@link java.lang.String} object.
+     * @return a {@link org.jdom.Element} object.
+     */
     protected Element elem(String tag, String text) {
         return new Element(tag).setText(text);
     }
     
+    /**
+     * <p>elem</p>
+     *
+     * @param tag a {@link java.lang.String} object.
+     * @param children a {@link org.jdom.Element} object.
+     * @return a {@link org.jdom.Element} object.
+     */
     protected Element elem(String tag, Element ... children) {
         Element parent = new Element(tag);
         for (Element child : children) {
@@ -115,6 +181,7 @@ public class GSLayerGroupEncoder extends PropertyXMLEncoder {
         return parent;
     }    
     
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         addToRoot(nameElem, workspaceElem, boundsElem, publishablesElem, stylesElem);        

@@ -44,97 +44,99 @@ import org.jdom.Element;
  * <P>This is the XML REST representation:
  * <PRE>
  * {@code
-<featureType>
-  <name>tasmania_cities</name>
-  <nativeName>tasmania_cities</nativeName>
-  <namespace>
-    <name>topp</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/namespaces/topp.xml" type="application/xml"/>
-  </namespace>
-  <title>Tasmania cities</title>
-  <abstract>Cities in Tasmania (actually, just the capital)</abstract>
-  <keywords>
-    <string>cities</string>
-    <string>Tasmania</string>
-  </keywords>
-  <nativeCRS>GEOGCS[&quot;GCS_WGS_1984&quot;,
-  DATUM[&quot;WGS_1984&quot;,
-    SPHEROID[&quot;WGS_1984&quot;, 6378137.0, 298.257223563]],
-  PRIMEM[&quot;Greenwich&quot;, 0.0],
-  UNIT[&quot;degree&quot;, 0.017453292519943295],
-  AXIS[&quot;Longitude&quot;, EAST],
-  AXIS[&quot;Latitude&quot;, NORTH]]</nativeCRS>
-  <srs>EPSG:4326</srs>
-  <nativeBoundingBox>
-    <minx>147.2910004483</minx>
-    <maxx>147.2910004483</maxx>
-    <miny>-42.851001816890005</miny>
-    <maxy>-42.851001816890005</maxy>
-    <crs>EPSG:4326</crs>
-  </nativeBoundingBox>
-  <latLonBoundingBox>
-    <minx>145.19754</minx>
-    <maxx>148.27298000000002</maxx>
-    <miny>-43.423512</miny>
-    <maxy>-40.852802</maxy>
-    <crs>EPSG:4326</crs>
-  </latLonBoundingBox>
-  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
-  <enabled>true</enabled>
-  <metadata>
-    <entry key="cacheAgeMax">3600</entry>
-    <entry key="indexingEnabled">false</entry>
-    <entry key="kml.regionateFeatureLimit">10</entry>
-    <entry key="cachingEnabled">true</entry>
-    <entry key="dirName">tasmania_cities</entry>
-  </metadata>
-  <store class="dataStore">
-    <name>taz_shapes</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes.xml" type="application/xml"/>
-  </store>
-  <attributes>
-    <attribute>
-      <name>the_geom</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-    <attribute>
-      <name>CITY_NAME</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-    <attribute>
-      <name>ADMIN_NAME</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-    <attribute>
-      <name>CNTRY_NAME</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-    <attribute>
-      <name>STATUS</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-    <attribute>
-      <name>POP_CLASS</name>
-      <minOccurs>0</minOccurs>
-      <maxOccurs>1</maxOccurs>
-      <nillable>false</nillable>
-    </attribute>
-  </attributes>
-  <maxFeatures>0</maxFeatures>
-  <numDecimals>0</numDecimals>
-</featureType>
+ *<featureType>
+ *  <name>tasmania_cities</name>
+ *  <nativeName>tasmania_cities</nativeName>
+ *  <namespace>
+ *    <name>topp</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/namespaces/topp.xml" type="application/xml"/>
+ *  </namespace>
+ *  <title>Tasmania cities</title>
+ *  <abstract>Cities in Tasmania (actually, just the capital)</abstract>
+ *  <keywords>
+ *    <string>cities</string>
+ *    <string>Tasmania</string>
+ *  </keywords>
+ *  <nativeCRS>GEOGCS[&quot;GCS_WGS_1984&quot;,
+ *  DATUM[&quot;WGS_1984&quot;,
+ *    SPHEROID[&quot;WGS_1984&quot;, 6378137.0, 298.257223563]],
+ *  PRIMEM[&quot;Greenwich&quot;, 0.0],
+ *  UNIT[&quot;degree&quot;, 0.017453292519943295],
+ *  AXIS[&quot;Longitude&quot;, EAST],
+ *  AXIS[&quot;Latitude&quot;, NORTH]]</nativeCRS>
+ *  <srs>EPSG:4326</srs>
+ *  <nativeBoundingBox>
+ *    <minx>147.2910004483</minx>
+ *    <maxx>147.2910004483</maxx>
+ *    <miny>-42.851001816890005</miny>
+ *    <maxy>-42.851001816890005</maxy>
+ *    <crs>EPSG:4326</crs>
+ *  </nativeBoundingBox>
+ *  <latLonBoundingBox>
+ *    <minx>145.19754</minx>
+ *    <maxx>148.27298000000002</maxx>
+ *    <miny>-43.423512</miny>
+ *    <maxy>-40.852802</maxy>
+ *    <crs>EPSG:4326</crs>
+ *  </latLonBoundingBox>
+ *  <projectionPolicy>FORCE_DECLARED</projectionPolicy>
+ *  <enabled>true</enabled>
+ *  <metadata>
+ *    <entry key="cacheAgeMax">3600</entry>
+ *    <entry key="indexingEnabled">false</entry>
+ *    <entry key="kml.regionateFeatureLimit">10</entry>
+ *    <entry key="cachingEnabled">true</entry>
+ *    <entry key="dirName">tasmania_cities</entry>
+ *  </metadata>
+ *  <store class="dataStore">
+ *    <name>taz_shapes</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes.xml" type="application/xml"/>
+ *  </store>
+ *  <attributes>
+ *    <attribute>
+ *      <name>the_geom</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *    <attribute>
+ *      <name>CITY_NAME</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *    <attribute>
+ *      <name>ADMIN_NAME</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *    <attribute>
+ *      <name>CNTRY_NAME</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *    <attribute>
+ *      <name>STATUS</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *    <attribute>
+ *      <name>POP_CLASS</name>
+ *      <minOccurs>0</minOccurs>
+ *      <maxOccurs>1</maxOccurs>
+ *      <nillable>false</nillable>
+ *    </attribute>
+ *  </attributes>
+ *  <maxFeatures>0</maxFeatures>
+ *  <numDecimals>0</numDecimals>
+ *</featureType>
  * }</PRE>
+ *
  * @author etj
+ * @version $Id: $
  */
 public class RESTFeatureType extends RESTResource {
 
@@ -159,15 +161,26 @@ public class RESTFeatureType extends RESTResource {
         }
     }
 
+    /** {@inheritDoc} */
     public static RESTFeatureType build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTFeatureType(elem);
 	}
 
+	/**
+	 * <p>Constructor for RESTFeatureType.</p>
+	 *
+	 * @param resource a {@link org.jdom.Element} object.
+	 */
 	public RESTFeatureType(Element resource) {
 		super(resource);
 	}
 
+	/**
+	 * <p>Constructor for RESTFeatureType.</p>
+	 *
+	 * @param resource a {@link it.geosolutions.geoserver.rest.decoder.RESTResource} object.
+	 */
 	public RESTFeatureType(RESTResource resource) {
 		super(resource.rootElem);
 	}
@@ -200,6 +213,8 @@ public class RESTFeatureType extends RESTResource {
      *   <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/topp/datastores/taz_shapes/featuretypes/tasmania_cities.xml" type="application/xml"/>
      * </resource>
      * }</PRE>
+     *
+     * @return a {@link java.lang.Iterable} object.
      */
 //    public String getStoreUrl() {
 //		Element store = rootElem.getChild("store");
@@ -229,7 +244,6 @@ public class RESTFeatureType extends RESTResource {
 //	public double getMaxY() {
 //		return getLatLonEdge("maxy");
 //	}
-
     public Iterable<Attribute> getAttributes() {
 
         return new Iterable<Attribute>() {
@@ -239,6 +253,11 @@ public class RESTFeatureType extends RESTResource {
         };
     }
 
+    /**
+     * <p>attributesIterator</p>
+     *
+     * @return a {@link java.util.Iterator} object.
+     */
     public Iterator<Attribute> attributesIterator() {
         Element attrs = rootElem.getChild("attributes");
         return new JDOMListIterator<Attribute>(attrs.getChildren()) {
@@ -253,7 +272,9 @@ public class RESTFeatureType extends RESTResource {
     }
     
     /**
-     * @return
+     * <p>getAttributeList</p>
+     *
+     * @return a {@link java.util.List} object.
      */
     public List<Map<FeatureTypeAttribute, String>> getAttributeList() {
         List<Map<FeatureTypeAttribute, String>> attrsList = null;
@@ -276,6 +297,11 @@ public class RESTFeatureType extends RESTResource {
         return attrsList;
     }
 
+    /**
+     * <p>getEncodedAttributeList</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<GSAttributeEncoder> getEncodedAttributeList() {
         List<GSAttributeEncoder> attrsList = null;
 

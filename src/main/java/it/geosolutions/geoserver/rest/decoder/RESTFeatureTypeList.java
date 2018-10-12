@@ -38,24 +38,36 @@ import org.jdom.Element;
  * <BR>This is an XML fragment:
  * <PRE>
  *{@code
-<featureType>
-    <name>states</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" 
-	   href="http://localhost:8080/geoserver/rest/workspaces/topp/featuretypes/states.xml" 
-	   type="application/xml"/>
-</featureType>
+ *<featureType>
+ *    <name>states</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate"
+ *	   href="http://localhost:8080/geoserver/rest/workspaces/topp/featuretypes/states.xml"
+ *	   type="application/xml"/>
+ *</featureType>
  * }
  * </PRE>
  *
  * @author wumpz
+ * @version $Id: $
  */
 public class RESTFeatureTypeList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTFeatureTypeList} object.
+     */
     public static RESTFeatureTypeList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTFeatureTypeList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTFeatureTypeList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTFeatureTypeList(Element list) {
         super(list);
     }
