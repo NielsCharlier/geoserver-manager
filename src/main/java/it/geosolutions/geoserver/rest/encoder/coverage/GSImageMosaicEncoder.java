@@ -36,10 +36,10 @@ import org.jdom.filter.Filter;
 
 /**
  * Use this encoder for ImageMosaic coverages.
- * 
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
  * @author Simone Giannecchini, GeoSolutions SAS
- * 
+ * @version $Id: $
  */
 @SuppressWarnings("unchecked")
 public class GSImageMosaicEncoder extends GSCoverageEncoder {
@@ -50,6 +50,9 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     final private NestedElementEncoder parameters = new NestedElementEncoder("parameters");
 
+    /**
+     * <p>Constructor for GSImageMosaicEncoder.</p>
+     */
     public GSImageMosaicEncoder() {
         // Link members to the parent
         addContent(parameters.getRoot());
@@ -100,10 +103,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
         return null;
     }
 
+    /** Constant <code>allowMultithreading="AllowMultithreading"</code> */
     public final static String allowMultithreading = "AllowMultithreading";
 
     /**
-     * @param val
+     * <p>addAllowMultithreading</p>
+     *
+     * @param val a boolean.
      */
     protected void addAllowMultithreading(final boolean val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -116,11 +122,21 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     private final static Filter allowMultithreadingFilter = new parametersFilter(
             allowMultithreading);
 
+    /**
+     * <p>Setter for the field <code>allowMultithreading</code>.</p>
+     *
+     * @param val a boolean.
+     */
     public void setAllowMultithreading(final boolean val) {
         removeParameter(allowMultithreadingFilter);
         addAllowMultithreading(val);
     }
 
+    /**
+     * <p>Getter for the field <code>allowMultithreading</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getAllowMultithreading() {
         Element el = getParameter(allowMultithreadingFilter);
         if (el != null) {
@@ -138,10 +154,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // Filter
     //
+    /** Constant <code>filter="Filter"</code> */
     public final static String filter = "Filter";
 
     /**
-     * @param val
+     * <p>addFilter</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addFilter(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -152,10 +171,20 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter filterFilter = new parametersFilter(filter);
 
+    /**
+     * <p>Setter for the field <code>filter</code>.</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setFilter(final String val) {
         removeParameter(filterFilter);
         addFilter(val);
     }
+    /**
+     * <p>Getter for the field <code>filter</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getFilter() {
         Element el = getParameter(filterFilter);
         if (el != null) {
@@ -173,10 +202,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // MaxAllowedTiles
     //
+    /** Constant <code>maxAllowedTiles="MaxAllowedTiles"</code> */
     public final static String maxAllowedTiles = "MaxAllowedTiles";
     
     /**
-     * @param val
+     * <p>addMaxAllowedTiles</p>
+     *
+     * @param val a int.
      */
     protected void addMaxAllowedTiles(final int val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -187,11 +219,21 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter maxAllowedTilesFilter = new parametersFilter(maxAllowedTiles);
 
+    /**
+     * <p>Setter for the field <code>maxAllowedTiles</code>.</p>
+     *
+     * @param val a int.
+     */
     public void setMaxAllowedTiles(final int val) {
         removeParameter(maxAllowedTilesFilter);
         addMaxAllowedTiles(val);
     }
     
+    /**
+     * <p>Getter for the field <code>maxAllowedTiles</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getMaxAllowedTiles() {
         Element el = getParameter(maxAllowedTilesFilter);
         if (el != null) {
@@ -210,10 +252,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // InputTransparentColor
     //
+    /** Constant <code>inputTransparentColor="InputTransparentColor"</code> */
     public final static String inputTransparentColor = "InputTransparentColor";
 
     /**
-     * @param val
+     * <p>addInputTransparentColor</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addInputTransparentColor(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -225,11 +270,21 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     private final static Filter inputTransparentColorFilter = new parametersFilter(
             inputTransparentColor);
 
+    /**
+     * <p>Setter for the field <code>inputTransparentColor</code>.</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setInputTransparentColor(final String val) {
         removeParameter(inputTransparentColorFilter);
         addInputTransparentColor(val);
     }
     
+    /**
+     * <p>Getter for the field <code>inputTransparentColor</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getInputTransparentColor() {
         Element el = getParameter(inputTransparentColorFilter);
         if (el != null) {
@@ -248,10 +303,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // OutputTransparentColor
     //
+    /** Constant <code>outputTransparentColor="OutputTransparentColor"</code> */
     public final static String outputTransparentColor = "OutputTransparentColor";
 
     /**
-     * @param val
+     * <p>addOutputTransparentColor</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addOutputTransparentColor(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -263,10 +321,20 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     private final static Filter outputTransparentColorFilter = new parametersFilter(
             outputTransparentColor);
 
+    /**
+     * <p>Setter for the field <code>outputTransparentColor</code>.</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setOutputTransparentColor(final String val) {
         removeParameter(outputTransparentColorFilter);
         addInputTransparentColor(val);
     }
+    /**
+     * <p>Getter for the field <code>outputTransparentColor</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getOutputTransparentColor() {
         Element el = getParameter(outputTransparentColorFilter);
         if (el != null) {
@@ -284,10 +352,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // SUGGESTED_TILE_SIZE
     //
+    /** Constant <code>SUGGESTED_TILE_SIZE="SUGGESTED_TILE_SIZE"</code> */
     public final static String SUGGESTED_TILE_SIZE = "SUGGESTED_TILE_SIZE";
 
     /**
-     * @param val
+     * <p>addSUGGESTED_TILE_SIZE</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addSUGGESTED_TILE_SIZE(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -299,11 +370,21 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     private final static Filter SUGGESTED_TILE_SIZEFilter = new parametersFilter(
             SUGGESTED_TILE_SIZE);
 
+    /**
+     * <p>setSUGGESTED_TILE_SIZE</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setSUGGESTED_TILE_SIZE(final String val) {
         removeParameter(SUGGESTED_TILE_SIZEFilter);
         addSUGGESTED_TILE_SIZE(val);
     }
 
+    /**
+     * <p>getSuggestedTileSize</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSuggestedTileSize() {
         Element el = getParameter(SUGGESTED_TILE_SIZEFilter);
         if (el != null) {
@@ -322,10 +403,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // USE_JAI_IMAGEREAD
     //
+    /** Constant <code>USE_JAI_IMAGEREAD="USE_JAI_IMAGEREAD"</code> */
     public final static String USE_JAI_IMAGEREAD = "USE_JAI_IMAGEREAD";
 
     /**
-     * @param val
+     * <p>addUSE_JAI_IMAGEREAD</p>
+     *
+     * @param val a boolean.
      */
     protected void addUSE_JAI_IMAGEREAD(final boolean val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -336,11 +420,21 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter USE_JAI_IMAGEREADFilter = new parametersFilter(USE_JAI_IMAGEREAD);
 
+    /**
+     * <p>setUSE_JAI_IMAGEREAD</p>
+     *
+     * @param val a boolean.
+     */
     public void setUSE_JAI_IMAGEREAD(final boolean val) {
         removeParameter(USE_JAI_IMAGEREADFilter);
         addUSE_JAI_IMAGEREAD(val);
     }
 
+    /**
+     * <p>getUseJaiImageRead</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getUseJaiImageRead() {
         Element el = getParameter(USE_JAI_IMAGEREADFilter);
         if (el != null) {
@@ -358,10 +452,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // BackgroundValues
     //
+    /** Constant <code>backgroundValues="BackgroundValues"</code> */
     public final static String backgroundValues = "BackgroundValues";
 
     /**
-     * @param val
+     * <p>addBackgroundValues</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addBackgroundValues(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -372,10 +469,20 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter backgroundValuesFilter = new parametersFilter(backgroundValues);
 
+    /**
+     * <p>Setter for the field <code>backgroundValues</code>.</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setBackgroundValues(final String val) {
         removeParameter(backgroundValuesFilter);
         addBackgroundValues(val);
     }
+    /**
+     * <p>Getter for the field <code>backgroundValues</code>.</p>
+     *
+     * @return a {@link java.lang.Boolean} object.
+     */
     public Boolean getBackgroundValues() {
         Element el = getParameter(backgroundValuesFilter);
         if (el != null) {
@@ -393,10 +500,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     //
     // SORTING
     //
+    /** Constant <code>SORTING="SORTING"</code> */
     public final static String SORTING = "SORTING";
 
     /**
-     * @param val
+     * <p>addSORTING</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addSORTING(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -407,6 +517,11 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter SORTING_FILTER = new parametersFilter(SORTING);
 
+    /**
+     * <p>setSORTING</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setSORTING(final String val) {
         removeParameter(SORTING_FILTER);
         addBackgroundValues(val);
@@ -416,10 +531,13 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
     // SORTING
     //
     
+    /** Constant <code>MERGEBEHAVIOR="MergeBehavior"</code> */
     public final static String MERGEBEHAVIOR = "MergeBehavior";
 
     /**
-     * @param val
+     * <p>addMergeBehavior</p>
+     *
+     * @param val a {@link java.lang.String} object.
      */
     protected void addMergeBehavior(final String val) {
         final List<Element> list = new ArrayList<Element>(2);
@@ -430,6 +548,11 @@ public class GSImageMosaicEncoder extends GSCoverageEncoder {
 
     private final static Filter MERGEBEHAVIOR_FILTER = new parametersFilter(MERGEBEHAVIOR);
 
+    /**
+     * <p>setMergeBehavior</p>
+     *
+     * @param val a {@link java.lang.String} object.
+     */
     public void setMergeBehavior(final String val) {
         removeParameter(MERGEBEHAVIOR_FILTER);
         addBackgroundValues(val);

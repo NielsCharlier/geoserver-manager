@@ -40,129 +40,141 @@ import org.jdom.Element;
  * <P>This is the XML REST representation:
  * <PRE>
  *{@code
-<coverage>
-  <name>sfdem</name>
-  <nativeName>sfdem</nativeName>
-  <namespace>
-    <name>sf</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/namespaces/sf.xml" type="application/xml"/>
-  </namespace>
-  <title>sfdem is a Tagged Image File Format with Geographic information</title>
-  <description>Generated from sfdem</description>
-  <keywords>
-    <string>WCS</string>
-    <string>sfdem</string>
-    <string>sfdem</string>
-  </keywords>
-  <nativeCRS class="projected">PROJCS[&quot;NAD27 / UTM zone 13N&quot;,
-  GEOGCS[&quot;NAD27&quot;,
-    DATUM[&quot;North American Datum 1927&quot;,
-      SPHEROID[&quot;Clarke 1866&quot;, 6378206.4, 294.9786982138982, AUTHORITY[&quot;EPSG&quot;,&quot;7008&quot;]],
-      TOWGS84[-4.2, 135.4, 181.9, 0.0, 0.0, 0.0, 0.0],
-      AUTHORITY[&quot;EPSG&quot;,&quot;6267&quot;]],
-    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
-    UNIT[&quot;degree&quot;, 0.017453292519943295],
-    AXIS[&quot;Geodetic longitude&quot;, EAST],
-    AXIS[&quot;Geodetic latitude&quot;, NORTH],
-    AUTHORITY[&quot;EPSG&quot;,&quot;4267&quot;]],
-  PROJECTION[&quot;Transverse_Mercator&quot;],
-  PARAMETER[&quot;central_meridian&quot;, -105.0],
-  PARAMETER[&quot;latitude_of_origin&quot;, 0.0],
-  PARAMETER[&quot;scale_factor&quot;, 0.9996],
-  PARAMETER[&quot;false_easting&quot;, 500000.0],
-  PARAMETER[&quot;false_northing&quot;, 0.0],
-  UNIT[&quot;m&quot;, 1.0],
-  AXIS[&quot;Easting&quot;, EAST],
-  AXIS[&quot;Northing&quot;, NORTH],
-  AUTHORITY[&quot;EPSG&quot;,&quot;26713&quot;]]</nativeCRS>
-  <srs>EPSG:26713</srs>
-  <nativeBoundingBox>
-    <minx>589980.0</minx>
-    <maxx>609000.0</maxx>
-    <miny>4913700.0</miny>
-    <maxy>4928010.0</maxy>
-    <crs class="projected">EPSG:26713</crs>
-  </nativeBoundingBox>
-  <latLonBoundingBox>
-    <minx>-103.87108701853181</minx>
-    <maxx>-103.62940739432703</maxx>
-    <miny>44.370187074132616</miny>
-    <maxy>44.5016011535299</maxy>
-    <crs>EPSG:4326</crs>
-  </latLonBoundingBox>
-  <enabled>true</enabled>
-  <metadata>
-    <entry key="dirName">sfdem_sfdem</entry>
-  </metadata>
-  <store class="coverageStore">
-    <name>sfdem</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/sf/coveragestores/sfdem.xml" type="application/xml"/>
-  </store>
-  <nativeFormat>GeoTIFF</nativeFormat>
-  <grid dimension="2">
-    <range>
-      <low>0 0</low>
-      <high>634 477</high>
-    </range>
-    <transform>
-      <scaleX>30.0</scaleX>
-      <scaleY>-30.0</scaleY>
-      <shearX>0.0</shearX>
-      <shearY>0.0</shearY>
-      <translateX>589995.0</translateX>
-      <translateY>4927995.0</translateY>
-    </transform>
-    <crs>EPSG:26713</crs>
-  </grid>
-  <supportedFormats>
-    <string>ARCGRID</string>
-    <string>IMAGEMOSAIC</string>
-    <string>GTOPO30</string>
-    <string>GEOTIFF</string>
-    <string>GIF</string>
-    <string>PNG</string>
-    <string>JPEG</string>
-    <string>TIFF</string>
-  </supportedFormats>
-  <interpolationMethods>
-    <string>nearest neighbor</string>
-    <string>bilinear</string>
-    <string>bicubic</string>
-  </interpolationMethods>
-  <defaultInterpolationMethod>nearest neighbor</defaultInterpolationMethod>
-  <dimensions>
-    <coverageDimension>
-      <name>GRAY_INDEX</name>
-      <description>GridSampleDimension[-9.999999933815813E36,-9.999999933815813E36]</description>
-      <range>
-        <min>-9.999999933815813E36</min>
-        <max>-9.999999933815813E36</max>
-      </range>
-    </coverageDimension>
-  </dimensions>
-  <requestSRS>
-    <string>EPSG:26713</string>
-  </requestSRS>
-  <responseSRS>
-    <string>EPSG:26713</string>
-  </responseSRS>
-</coverage>
+ *<coverage>
+ *  <name>sfdem</name>
+ *  <nativeName>sfdem</nativeName>
+ *  <namespace>
+ *    <name>sf</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/namespaces/sf.xml" type="application/xml"/>
+ *  </namespace>
+ *  <title>sfdem is a Tagged Image File Format with Geographic information</title>
+ *  <description>Generated from sfdem</description>
+ *  <keywords>
+ *    <string>WCS</string>
+ *    <string>sfdem</string>
+ *    <string>sfdem</string>
+ *  </keywords>
+ *  <nativeCRS class="projected">PROJCS[&quot;NAD27 / UTM zone 13N&quot;,
+ *  GEOGCS[&quot;NAD27&quot;,
+ *    DATUM[&quot;North American Datum 1927&quot;,
+ *      SPHEROID[&quot;Clarke 1866&quot;, 6378206.4, 294.9786982138982, AUTHORITY[&quot;EPSG&quot;,&quot;7008&quot;]],
+ *      TOWGS84[-4.2, 135.4, 181.9, 0.0, 0.0, 0.0, 0.0],
+ *      AUTHORITY[&quot;EPSG&quot;,&quot;6267&quot;]],
+ *    PRIMEM[&quot;Greenwich&quot;, 0.0, AUTHORITY[&quot;EPSG&quot;,&quot;8901&quot;]],
+ *    UNIT[&quot;degree&quot;, 0.017453292519943295],
+ *    AXIS[&quot;Geodetic longitude&quot;, EAST],
+ *    AXIS[&quot;Geodetic latitude&quot;, NORTH],
+ *    AUTHORITY[&quot;EPSG&quot;,&quot;4267&quot;]],
+ *  PROJECTION[&quot;Transverse_Mercator&quot;],
+ *  PARAMETER[&quot;central_meridian&quot;, -105.0],
+ *  PARAMETER[&quot;latitude_of_origin&quot;, 0.0],
+ *  PARAMETER[&quot;scale_factor&quot;, 0.9996],
+ *  PARAMETER[&quot;false_easting&quot;, 500000.0],
+ *  PARAMETER[&quot;false_northing&quot;, 0.0],
+ *  UNIT[&quot;m&quot;, 1.0],
+ *  AXIS[&quot;Easting&quot;, EAST],
+ *  AXIS[&quot;Northing&quot;, NORTH],
+ *  AUTHORITY[&quot;EPSG&quot;,&quot;26713&quot;]]</nativeCRS>
+ *  <srs>EPSG:26713</srs>
+ *  <nativeBoundingBox>
+ *    <minx>589980.0</minx>
+ *    <maxx>609000.0</maxx>
+ *    <miny>4913700.0</miny>
+ *    <maxy>4928010.0</maxy>
+ *    <crs class="projected">EPSG:26713</crs>
+ *  </nativeBoundingBox>
+ *  <latLonBoundingBox>
+ *    <minx>-103.87108701853181</minx>
+ *    <maxx>-103.62940739432703</maxx>
+ *    <miny>44.370187074132616</miny>
+ *    <maxy>44.5016011535299</maxy>
+ *    <crs>EPSG:4326</crs>
+ *  </latLonBoundingBox>
+ *  <enabled>true</enabled>
+ *  <metadata>
+ *    <entry key="dirName">sfdem_sfdem</entry>
+ *  </metadata>
+ *  <store class="coverageStore">
+ *    <name>sfdem</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/sf/coveragestores/sfdem.xml" type="application/xml"/>
+ *  </store>
+ *  <nativeFormat>GeoTIFF</nativeFormat>
+ *  <grid dimension="2">
+ *    <range>
+ *      <low>0 0</low>
+ *      <high>634 477</high>
+ *    </range>
+ *    <transform>
+ *      <scaleX>30.0</scaleX>
+ *      <scaleY>-30.0</scaleY>
+ *      <shearX>0.0</shearX>
+ *      <shearY>0.0</shearY>
+ *      <translateX>589995.0</translateX>
+ *      <translateY>4927995.0</translateY>
+ *    </transform>
+ *    <crs>EPSG:26713</crs>
+ *  </grid>
+ *  <supportedFormats>
+ *    <string>ARCGRID</string>
+ *    <string>IMAGEMOSAIC</string>
+ *    <string>GTOPO30</string>
+ *    <string>GEOTIFF</string>
+ *    <string>GIF</string>
+ *    <string>PNG</string>
+ *    <string>JPEG</string>
+ *    <string>TIFF</string>
+ *  </supportedFormats>
+ *  <interpolationMethods>
+ *    <string>nearest neighbor</string>
+ *    <string>bilinear</string>
+ *    <string>bicubic</string>
+ *  </interpolationMethods>
+ *  <defaultInterpolationMethod>nearest neighbor</defaultInterpolationMethod>
+ *  <dimensions>
+ *    <coverageDimension>
+ *      <name>GRAY_INDEX</name>
+ *      <description>GridSampleDimension[-9.999999933815813E36,-9.999999933815813E36]</description>
+ *      <range>
+ *        <min>-9.999999933815813E36</min>
+ *        <max>-9.999999933815813E36</max>
+ *      </range>
+ *    </coverageDimension>
+ *  </dimensions>
+ *  <requestSRS>
+ *    <string>EPSG:26713</string>
+ *  </requestSRS>
+ *  <responseSRS>
+ *    <string>EPSG:26713</string>
+ *  </responseSRS>
+ *</coverage>
  * }</PRE>
  *
  * @author etj
+ * @version $Id: $
  */
 public class RESTCoverage extends RESTResource {
 
 
+    /** {@inheritDoc} */
     public static RESTCoverage build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTCoverage(elem);
 	}
 
+	/**
+	 * <p>Constructor for RESTCoverage.</p>
+	 *
+	 * @param resource a {@link org.jdom.Element} object.
+	 */
 	public RESTCoverage(Element resource) {
 		super(resource);
 	}
 
+	/**
+	 * <p>Constructor for RESTCoverage.</p>
+	 *
+	 * @param resource a {@link it.geosolutions.geoserver.rest.decoder.RESTResource} object.
+	 */
 	public RESTCoverage(RESTResource resource) {
 		super(resource.rootElem);
 	}
@@ -171,10 +183,20 @@ public class RESTCoverage extends RESTResource {
 //		return rootElem.getChildText("name");
 //	}
 
+	/**
+	 * <p>getNativeCoverageName</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNativeCoverageName() {
 		return rootElem.getChildText("nativeCoverageName");
 	}
 
+	/**
+	 * <p>getNativeFormat</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNativeFormat() {
 		return rootElem.getChildText("nativeFormat");
 	}
@@ -187,18 +209,38 @@ public class RESTCoverage extends RESTResource {
 //		return rootElem.getChildText("title");
 //	}
 
+	/**
+	 * <p>getNativeCRS</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNativeCRS() {
 		return rootElem.getChildText("nativeCRS");
 	}
 
+	/**
+	 * <p>getSRS</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getSRS() {
 		return rootElem.getChildText("srs");
 	}
 	
+	/**
+	 * <p>getMetadataList</p>
+	 *
+	 * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTMetadataList} object.
+	 */
 	public RESTMetadataList getMetadataList() {
             return new RESTMetadataList(rootElem.getChild("metadata"));
         }
 	
+	/**
+	 * <p>getDimensionInfo</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<RESTDimensionInfo> getDimensionInfo() {
             List<RESTDimensionInfo> listDim = new ArrayList<RESTDimensionInfo>();
             for (RESTMetadataList.RESTMetadataElement el : getMetadataList()){
@@ -212,7 +254,7 @@ public class RESTCoverage extends RESTResource {
 	
     /**
      * Retrieves the list of parameters for this coverage.
-     * 
+     *
      * @return a {@link Map} where the key is the name for the parameter and the value is the value for the parameter.
      */
     @SuppressWarnings("unchecked")
@@ -233,6 +275,7 @@ public class RESTCoverage extends RESTResource {
         return paramsList;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

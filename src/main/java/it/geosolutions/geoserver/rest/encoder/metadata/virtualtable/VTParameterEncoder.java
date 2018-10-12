@@ -33,7 +33,7 @@ import org.jdom.filter.Filter;
 /**
  * VTParameterEncoder - Encodes a metadata VirtualTable parameter for a
  * GeoServer featureType, as follows:
- * 
+ *
  * <pre>
  * { @code
  * 	final VTParameterEncoder vtParam = new VTParameterEncoder();
@@ -42,9 +42,9 @@ import org.jdom.filter.Filter;
  * 	vtParam.setRegexpValidator("^[\\w\\d\\s]+$");
  * }
  * </pre>
- * 
+ *
  * For this example, the XML output is:
- * 
+ *
  * <pre>
  * {@code
  * <parameter>
@@ -54,10 +54,10 @@ import org.jdom.filter.Filter;
  * </parameter>
  * }
  * </pre>
- * 
+ *
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
  *         emmanuel.blondel@fao.org
- * 
+ * @version $Id: $
  */
 public class VTParameterEncoder extends XmlElement {
 
@@ -85,10 +85,10 @@ public class VTParameterEncoder extends XmlElement {
 		}
 	}
 
-	/** 
+	/**
 	 * Get a Filter using the VTParameter name
-	 * 
-	 * @param name
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 * @return the filter
 	 */
 	public static Filter getFilterByName(String name) {
@@ -104,7 +104,7 @@ public class VTParameterEncoder extends XmlElement {
 
 	/**
 	 * Constructs quickly a VTParameterEncoder
-	 * 
+	 *
 	 * @param name (required)
 	 * @param defaultValue (required)
 	 * @param regexpValidator (required)
@@ -116,10 +116,10 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Set-up quickly a VirtualTable parameter
-	 * 
-	 * @param name
-	 * @param defaultValue
-	 * @param regexpValidator
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param defaultValue a {@link java.lang.String} object.
+	 * @param regexpValidator a {@link java.lang.String} object.
 	 */
 	protected void setup(String name, String defaultValue, String regexpValidator) {
 		setName(name);
@@ -129,9 +129,9 @@ public class VTParameterEncoder extends XmlElement {
 
 	/**
 	 * Set a VirtualTableParameter member
-	 * 
-	 * @param type
-	 * @param value
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.VTParameter} object.
+	 * @param value a {@link java.lang.String} object.
 	 */
 	protected void setMember(VTParameter type,
 			String value) {
@@ -140,8 +140,8 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Set the parameter name
-	 * 
-	 * @param name
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	public void setName(String name){
 		this.setMember(VTParameter.name, name);
@@ -149,8 +149,8 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Set the parameter default value
-	 * 
-	 * @param value
+	 *
+	 * @param value a {@link java.lang.String} object.
 	 */
 	public void setDefaultValue(String value){
 		this.setMember(VTParameter.defaultValue, value);
@@ -158,8 +158,8 @@ public class VTParameterEncoder extends XmlElement {
 
 	/**
 	 * Set the parameter regexp validator
-	 * 
-	 * @param validator
+	 *
+	 * @param validator a {@link java.lang.String} object.
 	 */
 	public void setRegexpValidator(String validator){
 		this.setMember(VTParameter.regexpValidator, validator);
@@ -167,9 +167,9 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Deletes a VirtualTableParameter member
-	 * 
-	 * @param type
-	 * @return
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.VTParameter} object.
+	 * @return a boolean.
 	 */
 	protected boolean delMember(VTParameter type) {
 		return ElementUtils.remove(this.getRoot(), this.getRoot().getChild(type.toString()));
@@ -177,7 +177,7 @@ public class VTParameterEncoder extends XmlElement {
 
 	/**
 	 * Deletes the name
-	 * 
+	 *
 	 * @return true if removed, false otherwise
 	 */
 	public boolean delName(){
@@ -186,7 +186,7 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Deletes the default value
-	 * 
+	 *
 	 * @return true if removed, false otherwise
 	 */
 	public boolean delDefaultValue(){
@@ -195,7 +195,7 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Deletes the Regexp validator
-	 * 
+	 *
 	 * @return true if removed, false otherwise
 	 */
 	public boolean delRegexpValidator(){
@@ -205,9 +205,9 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Get a VirtualTableParameter member
-	 * 
-	 * @param type
-	 * @return
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadata.virtualtable.VTParameter} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	protected String getMember(VTParameter type) {
 		Element el = getRoot().getChild(type.toString());
@@ -219,8 +219,8 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Get the parameter name
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getName(){
 		return this.getMember(VTParameter.name);
@@ -228,8 +228,8 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Get the parameter default value
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getDefaultValue(){
 		return this.getMember(VTParameter.defaultValue);
@@ -237,8 +237,8 @@ public class VTParameterEncoder extends XmlElement {
 	
 	/**
 	 * Get the parameter regexp validator
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getRegexpValidator(){
 		return this.getMember(VTParameter.regexpValidator);

@@ -63,13 +63,16 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Low level HTTP utilities.
+ *
+ * @author niels
+ * @version $Id: $
  */
 public class HTTPUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(HTTPUtils.class);
 
     /**
      * Performs an HTTP GET on the given URL.
-     * 
+     *
      * @param url The URL where to connect to.
      * @return The HTTP response as a String if the HTTP response code was 200
      *         (OK).
@@ -81,7 +84,7 @@ public class HTTPUtils {
     /**
      * Performs an HTTP GET on the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
@@ -126,15 +129,24 @@ public class HTTPUtils {
 
     /**
      * Executes a request using the GET method and parses the result as a json object.
-     * 
-     *  
+     *
      * @return The result parsed as json.
+     * @param url a {@link java.lang.String} object.
+     * @param username a {@link java.lang.String} object.
+     * @param pw a {@link java.lang.String} object.
+     * @throws java.lang.Exception if any.
      */
     public static JSON getAsJSON(String url, String username, String pw) throws Exception {
         String response = get(url, username, pw);
         return json(response);
     }
     
+    /**
+     * <p>json</p>
+     *
+     * @param content a {@link java.lang.String} object.
+     * @return a {@link net.sf.json.JSON} object.
+     */
     public static JSON json(String content) {
         return JSONSerializer.toJSON(content);
     }
@@ -142,14 +154,13 @@ public class HTTPUtils {
     /**
      * PUTs a File to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param file The File to be sent.
      * @param contentType The content-type to advert in the PUT.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, File file, String contentType, String username, String pw) {
@@ -159,14 +170,14 @@ public class HTTPUtils {
     /**
      * PUTs a String to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The content to be sent as a String.
      * @param contentType The content-type to advert in the PUT.
+     * @param contentType The content-type to advert in the PUT.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, String content, String contentType, String username, String pw) {
@@ -181,13 +192,12 @@ public class HTTPUtils {
     /**
      * PUTs a String representing an XML document to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The XML content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String putXml(String url, String content, String username, String pw) {
@@ -197,13 +207,12 @@ public class HTTPUtils {
     /**
      * PUTs a String representing an JSON Object to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The JSON Object to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String putJson(String url, String content, String username, String pw) {
@@ -213,13 +222,12 @@ public class HTTPUtils {
     /**
      * Performs a PUT to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param requestEntity The request to be sent.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String put(String url, RequestEntity requestEntity, String username, String pw) {
@@ -229,14 +237,13 @@ public class HTTPUtils {
     /**
      * POSTs a File to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param file The File to be sent.
      * @param contentType The content-type to advert in the POST.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, File file, String contentType, String username, String pw) {
@@ -246,14 +253,14 @@ public class HTTPUtils {
     /**
      * POSTs a String to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The content to be sent as a String.
      * @param contentType The content-type to advert in the POST.
+     * @param contentType The content-type to advert in the POST.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, String content, String contentType, String username, String pw) {
@@ -268,13 +275,12 @@ public class HTTPUtils {
     /**
      * POSTs a list of files as attachments to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param dir The folder containing the attachments.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postMultipartForm(String url, File dir, String username, String pw) {
@@ -299,13 +305,12 @@ public class HTTPUtils {
     /**
      * POSTs a String representing an XML document to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The XML content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postXml(String url, String content, String username, String pw) {
@@ -315,13 +320,12 @@ public class HTTPUtils {
     /**
      * POSTs a String representing an JSON Object to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param content The JSON content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String postJson(String url, String content, String username, String pw) {
@@ -331,13 +335,12 @@ public class HTTPUtils {
     /**
      * Performs a POST to the given URL. <BR>
      * Basic auth is used if both username and pw are not null.
-     * 
+     *
      * @param url The URL where to connect to.
      * @param requestEntity The request to be sent.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return The HTTP response as a String if the HTTP response code was 200
-     *         (OK).
+     * @return the HTTP response or <TT>null</TT> on errors.
      * @return the HTTP response or <TT>null</TT> on errors.
      */
     public static String post(String url, RequestEntity requestEntity, String username, String pw) {
@@ -400,6 +403,14 @@ public class HTTPUtils {
         }
     }
 
+    /**
+     * <p>delete</p>
+     *
+     * @param url a {@link java.lang.String} object.
+     * @param user a {@link java.lang.String} object.
+     * @param pw a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public static boolean delete(String url, final String user, final String pw) {
 
         DeleteMethod httpMethod = null;
@@ -441,12 +452,23 @@ public class HTTPUtils {
     }
 
     /**
+     * <p>httpPing</p>
+     *
      * @return true if the server response was an HTTP_OK
+     * @param url a {@link java.lang.String} object.
      */
     public static boolean httpPing(String url) {
         return httpPing(url, null, null);
     }
 
+    /**
+     * <p>httpPing</p>
+     *
+     * @param url a {@link java.lang.String} object.
+     * @param username a {@link java.lang.String} object.
+     * @param pw a {@link java.lang.String} object.
+     * @return a boolean.
+     */
     public static boolean httpPing(String url, String username, String pw) {
 
         GetMethod httpMethod = null;
@@ -477,12 +499,12 @@ public class HTTPUtils {
 
     /**
      * Used to query for REST resources.
-     * 
+     *
      * @param url The URL of the REST resource to query about.
-     * @param username
-     * @param pw
+     * @param username a {@link java.lang.String} object.
+     * @param pw a {@link java.lang.String} object.
      * @return true on 200, false on 404.
-     * @throws RuntimeException on unhandled status or exceptions.
+     * @throws java.lang.RuntimeException on unhandled status or exceptions.
      */
     public static boolean exists(String url, String username, String pw) {
 
@@ -533,8 +555,10 @@ public class HTTPUtils {
     }
 
     /**
-     * @param geoserverURL
-     * @return recursively remove ending slashes 
+     * <p>decurtSlash</p>
+     *
+     * @param geoserverURL a {@link java.lang.String} object.
+     * @return recursively remove ending slashes
      */
     public static String decurtSlash(String geoserverURL) {
         if (geoserverURL!=null && geoserverURL.endsWith("/")) {
@@ -544,6 +568,8 @@ public class HTTPUtils {
     }
     
     /**
+     * <p>append</p>
+     *
      * @param str a string array
      * @return create a StringBuilder appending all the passed arguments
      */
@@ -562,6 +588,7 @@ public class HTTPUtils {
     
     /**
      * Wrapper for {@link #append(String...)}
+     *
      * @param base base URL
      * @param str strings to append
      * @return the base URL with parameters attached

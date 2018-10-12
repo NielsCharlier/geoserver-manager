@@ -32,14 +32,19 @@ import org.jdom.Element;
 
 /**
  * LayerGroup encoder for GeoServer &gt;= 2.3
- * 
+ *
  * @author Davide Savazzi (geo-solutions.it)
+ * @version $Id: $
  */
 public class GSLayerGroupEncoder23 extends GSLayerGroupEncoder {
 
+    /** Constant <code>MODE_SINGLE="SINGLE"</code> */
     public static final String MODE_SINGLE = "SINGLE";
+    /** Constant <code>MODE_NAMED="NAMED"</code> */
     public static final String MODE_NAMED = "NAMED";
+    /** Constant <code>MODE_CONTAINER="CONTAINER"</code> */
     public static final String MODE_CONTAINER = "CONTAINER";
+    /** Constant <code>MODE_EO="EO"</code> */
     public static final String MODE_EO = "EO";
     private static final Set<String> modes;
     static {
@@ -56,14 +61,29 @@ public class GSLayerGroupEncoder23 extends GSLayerGroupEncoder {
     private Element rootLayerElem;
     private Element rootLayerStyleElem;
     
+    /**
+     * <p>setTitle</p>
+     *
+     * @param title a {@link java.lang.String} object.
+     */
     public void setTitle(String title) {
         titleElem = elem("title", title);
     }
     
+    /**
+     * <p>setAbstract</p>
+     *
+     * @param abstractTxt a {@link java.lang.String} object.
+     */
     public void setAbstract(String abstractTxt) {
         abstractElem = elem("abstractTxt", abstractTxt);
     }
     
+    /**
+     * <p>setMode</p>
+     *
+     * @param mode a {@link java.lang.String} object.
+     */
     public void setMode(String mode) {
         if (!modes.contains(mode)) {
             throw new IllegalArgumentException("Invalid mode: " + mode);
@@ -72,11 +92,18 @@ public class GSLayerGroupEncoder23 extends GSLayerGroupEncoder {
         modeElem = elem("mode", mode);
     }
 
+    /**
+     * <p>setRootLayer</p>
+     *
+     * @param layer a {@link java.lang.String} object.
+     * @param style a {@link java.lang.String} object.
+     */
     public void setRootLayer(String layer, String style) {
         rootLayerElem = elem("rootLayer", elem("name", layer));
         rootLayerStyleElem = elem("rootLayerStyle", elem("name", style));
     }
     
+    /** {@inheritDoc} */
     @Override
     public void addLayer(String layer, String styleName) {
         initPublishables("publishables");
@@ -92,6 +119,11 @@ public class GSLayerGroupEncoder23 extends GSLayerGroupEncoder {
         }
     }
     
+    /**
+     * <p>addLayerGroup</p>
+     *
+     * @param group a {@link java.lang.String} object.
+     */
     public void addLayerGroup(String group) {
         initPublishables("publishables");
         
@@ -102,6 +134,7 @@ public class GSLayerGroupEncoder23 extends GSLayerGroupEncoder {
         stylesElem.addContent(new Element("style"));        
     }
     
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         addToRoot(titleElem, abstractElem, modeElem, rootLayerElem, rootLayerStyleElem);                

@@ -28,9 +28,10 @@ import it.geosolutions.geoserver.rest.decoder.RESTDataStore;
 
 /**
  * Encoder for an {@value #TYPE} datastore.
- *  
+ *
  * @author Gianni Barrotta
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
 
@@ -49,7 +50,7 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
     /**
      * Create an {@value #TYPE} datastore with default connection parameters,
      * given a store name, and a database name.
-     * 
+     *
      * The following default connection parameters are set:
      * <ul>
      *   <li>min connections: {@value #DEFAULT_MIN_CONNECTIONS}
@@ -60,9 +61,9 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
      *   <li>preparedStatements: {@value #DEFAULT_PREPARED_STATEMENTS}
      *   <li>Max open prepared statements: {@value #DEFAULT_MAX_OPEN_PREPARED_STATEMENTS}
      * </ul>
-     * 
+     *
      * @param name New datastore name
-     * @param database 
+     * @param database a {@link java.lang.String} object.
      */
     public GSOracleNGDatastoreEncoder(String name, String database) {
         super(name);
@@ -85,9 +86,9 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
     
     /**
      * Create an {@value #TYPE} datastore encoder from an existing store read from server.
-     * 
+     *
      * @param store The existing store.
-     * @throws IllegalArgumentException if store type or mandatory parameters are not valid
+     * @throws java.lang.IllegalArgumentException if store type or mandatory parameters are not valid
      */
     public GSOracleNGDatastoreEncoder(RESTDataStore store) {
     	super(store);
@@ -96,82 +97,182 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
 		ensureValidDatabase(store.getConnectionParameters().get("database"));
     }
     
+    /**
+     * <p>setHost</p>
+     *
+     * @param host a {@link java.lang.String} object.
+     */
     public void setHost(String host) {
         connectionParameters.set("host", host);
     }
 
+    /**
+     * <p>setPort</p>
+     *
+     * @param port a int.
+     */
     public void setPort(int port) {
         connectionParameters.set("port", Integer.toString(port));
     }
 
+    /**
+     * <p>setNamespace</p>
+     *
+     * @param namespace a {@link java.lang.String} object.
+     */
     public void setNamespace(String namespace) {
         connectionParameters.set("namespace", namespace);
     }
     
+    /**
+     * <p>setDatabase</p>
+     *
+     * @param database a {@link java.lang.String} object.
+     */
     public void setDatabase(String database) {
         connectionParameters.set("database", database);
     }
 
+    /**
+     * <p>setSchema</p>
+     *
+     * @param schema a {@link java.lang.String} object.
+     */
     public void setSchema(String schema) {
         connectionParameters.set("schema", schema);
     }
 
+    /**
+     * <p>setUser</p>
+     *
+     * @param user a {@link java.lang.String} object.
+     */
     public void setUser(String user) {
         connectionParameters.set("user", user);
     }
 
+    /**
+     * <p>setPassword</p>
+     *
+     * @param password a {@link java.lang.String} object.
+     */
     public void setPassword(String password) {
         connectionParameters.set("passwd", password);
     }
     
+    /**
+     * <p>setDatabaseType</p>
+     *
+     * @param dbtype a {@link java.lang.String} object.
+     */
     public void setDatabaseType(String dbtype) {
         connectionParameters.set("dbtype", dbtype);
     }
 
+    /**
+     * <p>setJndiReferenceName</p>
+     *
+     * @param jndiReferenceName a {@link java.lang.String} object.
+     */
     public void setJndiReferenceName(String jndiReferenceName) {
         connectionParameters.set("jndiReferenceName", jndiReferenceName);
     }
 
+    /**
+     * <p>setExposePrimaryKeys</p>
+     *
+     * @param exposePrimaryKeys a boolean.
+     */
     public void setExposePrimaryKeys(boolean exposePrimaryKeys) {
     	connectionParameters.set("Expose primary keys", Boolean.toString(exposePrimaryKeys));
     }
     
+    /**
+     * <p>setMaxConnections</p>
+     *
+     * @param maxConnections a int.
+     */
     public void setMaxConnections(int maxConnections) {
     	connectionParameters.set("max connections", Integer.toString(maxConnections));
     }
     
+    /**
+     * <p>setMinConnections</p>
+     *
+     * @param minConnections a int.
+     */
     public void setMinConnections(int minConnections) {
     	connectionParameters.set("min connections", Integer.toString(minConnections));
     }
     
+    /**
+     * <p>setFetchSize</p>
+     *
+     * @param fetchSize a int.
+     */
     public void setFetchSize(int fetchSize) {
     	connectionParameters.set("fetch size", Integer.toString(fetchSize));
     }
     
+    /**
+     * <p>setConnectionTimeout</p>
+     *
+     * @param seconds a int.
+     */
     public void setConnectionTimeout(int seconds) {
     	connectionParameters.set("Connection timeout", Integer.toString(seconds));
     }
     
+    /**
+     * <p>setValidateConnections</p>
+     *
+     * @param validateConnections a boolean.
+     */
     public void setValidateConnections(boolean validateConnections) {
     	connectionParameters.set("validate connections", Boolean.toString(validateConnections));
     }
     
+    /**
+     * <p>setPrimaryKeyMetadataTable</p>
+     *
+     * @param primaryKeyMetadataTable a {@link java.lang.String} object.
+     */
     public void setPrimaryKeyMetadataTable(String primaryKeyMetadataTable) {
     	connectionParameters.set("Primary key metadata table", primaryKeyMetadataTable);
     }
     
+    /**
+     * <p>setLooseBBox</p>
+     *
+     * @param looseBBox a boolean.
+     */
     public void setLooseBBox(boolean looseBBox) {
     	connectionParameters.set("Loose bbox", Boolean.toString(looseBBox));
     }
     
+    /**
+     * <p>setPreparedStatements</p>
+     *
+     * @param preparedStatements a boolean.
+     */
     public void setPreparedStatements(boolean preparedStatements) {
     	connectionParameters.set("preparedStatements", Boolean.toString(preparedStatements));
     }
     
+    /**
+     * <p>setMaxOpenPreparedStatements</p>
+     *
+     * @param maxOpenPreparedStatements a int.
+     */
     public void setMaxOpenPreparedStatements(int maxOpenPreparedStatements) {
     	connectionParameters.set("Max open prepared statements", Integer.toString(maxOpenPreparedStatements));
     }
     
+    /**
+     * <p>setEstimatedExtends</p>
+     *
+     * @param estimatedExtends a boolean.
+     */
     public void setEstimatedExtends(boolean estimatedExtends){
     	connectionParameters.set("Estimated extends", Boolean.toString(estimatedExtends));
     }
@@ -190,6 +291,8 @@ public class GSOracleNGDatastoreEncoder extends GSAbstractDatastoreEncoder {
     }
     
     /**
+     * <p>getValidType</p>
+     *
      * @return {@value #TYPE}
      */
     protected String getValidType() {

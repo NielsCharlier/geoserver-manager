@@ -50,8 +50,10 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
+ * <p>GeoServerRESTStyleManager class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
@@ -63,6 +65,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public GeoServerRESTStyleManager(URL restURL, String username, String password)
             throws IllegalArgumentException {
@@ -71,21 +74,23 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
     /**
      * Check if a Style exists in the configured GeoServer instance.
+     *
      * @param name the name of the style to check for.
      * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
-     * @throws RuntimeException if any other HTTP code than 200 or 404 was retrieved.
+     * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String name) throws RuntimeException {
         return existsStyle(name, Util.DEFAULT_QUIET_ON_NOT_FOUND);
     }
     
-    /**
-     * Check if a Style exists in the configured GeoServer instance. User can choose if log a possible exception or not
-     * @param name the name of the style to check for.
-     * @param quietOnNotFound if true, mute exception if false is returned
-     * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
-     * @throws RuntimeException if any other HTTP code than 200 or 404 was retrieved.
-     */
+   /**
+    * Check if a Style exists in the configured GeoServer instance. User can choose if log a possible exception or not
+    *
+    * @param name the name of the style to check for.
+    * @param quietOnNotFound if true, mute exception if false is returned
+    * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
+    * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
+    */
    public boolean existsStyle(String name, boolean quietOnNotFound) {
        String url = buildXmlUrl(null, name);
        String composed = Util.appendQuietOnNotFound(quietOnNotFound, url);
@@ -107,6 +112,12 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         return RESTStyleList.build(response);
     }
 
+    /**
+     * <p>getStyle</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyle} object.
+     */
     public RESTStyle getStyle(String name) {
         String url = buildXmlUrl(null, name);
         if (LOGGER.isDebugEnabled()) {
@@ -119,6 +130,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
     /**
      * Get the SLD body of a Style.
+     *
+     * @param styleName a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     public String getSLD(String styleName) {
         String url = buildUrl(null, styleName, ".sld");
@@ -134,16 +148,25 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     //=========================================================================
 
     /**
+     * <p>existsStyle</p>
      *
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean existsStyle(String workspace, String name) {
         return existsStyle(workspace, name, Util.DEFAULT_QUIET_ON_NOT_FOUND);
     }
     
-    /**
+   /**
+    * <p>existsStyle</p>
     *
     * @since GeoServer 2.6
+    * @param workspace a {@link java.lang.String} object.
+    * @param name a {@link java.lang.String} object.
+    * @param quietOnNotFound a boolean.
+    * @return a boolean.
     */
    public boolean existsStyle(String workspace, String name, boolean quietOnNotFound) {
        String url = buildXmlUrl(workspace, name);
@@ -156,6 +179,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @return summary info about Styles as a {@link RESTStyleList}
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public RESTStyleList getStyles(String workspace) {
         String url = "/rest/workspaces/"+workspace+"/styles.xml";
@@ -168,8 +192,12 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     }
 
     /**
+     * <p>getStyle</p>
      *
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStyle} object.
      */
     public RESTStyle getStyle(String workspace, String name) {
         String url = buildXmlUrl(workspace, name);
@@ -183,7 +211,11 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
     /**
      * Get the SLD body of a Style.
+     *
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
      */
     public String getSLD(String workspace, String name) {
         String url = buildUrl(workspace, name, ".sld");
@@ -201,7 +233,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldBody the full SLD document as a String.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody) {
@@ -226,9 +257,8 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body is null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      */
     public boolean publishStyle(final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -252,7 +282,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldFile the File containing the SLD document.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile) {
@@ -264,7 +293,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name) {
@@ -281,7 +309,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(final String sldBody, final String name, final boolean raw) {
@@ -313,7 +340,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean publishStyle(final File sldFile, final String name, final boolean raw) {
@@ -336,13 +362,12 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     
     /**
      * Update a Style.
-     * 
+     *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final File sldFile, final String name, final boolean raw) 
             throws IllegalArgumentException {
@@ -371,13 +396,12 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     
     /**
      * Update a Style.
-     * 
+     *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * 
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name, final boolean raw) 
             throws IllegalArgumentException {
@@ -409,9 +433,8 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -438,9 +461,8 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      */
     public boolean updateStyle(final File sldFile, final String name)
             throws IllegalArgumentException {
@@ -466,9 +488,8 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if styleName is null or empty.
+     * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      */
     public boolean removeStyle(String styleName, final boolean purge)
             throws IllegalArgumentException {
@@ -500,7 +521,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * The Style will be unpublished and the related SLD file will be removed.
      *
      * @param styleName the name of the Style to remove.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      */
     public boolean removeStyle(String styleName) {
@@ -522,9 +542,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldBody the full SLD document as a String.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean publishStyleInWorkspace(final String workspace, String sldBody) {
         try {
@@ -542,10 +562,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body is null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean publishStyleInWorkspace(final String workspace, final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -562,9 +582,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldFile the File containing the SLD document.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean publishStyleInWorkspace(final String workspace, File sldFile) {
         return publishStyleInWorkspace(workspace, sldFile, null);
@@ -575,9 +595,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean publishStyleInWorkspace(final String workspace, File sldFile, String name) {
         String sUrl = buildPostUrl(workspace, name);
@@ -591,9 +611,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param zipFile the ZIP file.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean publishStyleZippedInWorkspace(final String workspace, File zipFile, String name) {
         String sUrl = buildPostUrl(workspace, name);
@@ -607,10 +627,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the style body or name are null or empty.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean updateStyleInWorkspace(final String workspace, final String sldBody, final String name)
             throws IllegalArgumentException {
@@ -632,10 +652,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean updateStyleInWorkspace(final String workspace, final File sldFile, final String name)
             throws IllegalArgumentException {
@@ -658,10 +678,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param zipFile the zip file.
      * @param name the Style name.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean updateStyleZippedInWorkspace(final String workspace, final File zipFile, final String name)
             throws IllegalArgumentException {
@@ -686,10 +706,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
-     * @throws IllegalArgumentException if styleName is null or empty.
+     * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean removeStyleInWorkspace(final String workspace, String styleName, final boolean purge)
             throws IllegalArgumentException {
@@ -719,9 +739,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * The Style will be unpublished and the related SLD file will be removed.
      *
      * @param styleName the name of the Style to remove.
-     *
      * @return <TT>true</TT> if the operation completed successfully.
      * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
      */
     public boolean removeStyleInWorkspace(final String workspace, String styleName) {
         try {
@@ -740,9 +760,10 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
     /**
      * Creates a URL for the given stylename with the name in querystring
+     *
      * @param workspace nullable workspace name
      * @param name style name
-     * @return
+     * @return a {@link java.lang.String} object.
      */
     protected String buildPostUrl(final String workspace, String name) {
         StringBuilder sUrl = new StringBuilder(gsBaseUrl.toString()).append("/rest");
@@ -758,15 +779,24 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     }
 
 
+    /**
+     * <p>buildXmlUrl</p>
+     *
+     * @param workspace a {@link java.lang.String} object.
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link java.lang.String} object.
+     */
     protected String buildXmlUrl(final String workspace, final String name) {
         return buildUrl(workspace, name, ".xml");
     }
 
     /**
      * Creates a URL for the given stylename with the name in the REST path
+     *
      * @param workspace nullable workspace name
      * @param name style name
      * @param ext nullable output extension (e.g. ".xml" ".sld")
+     * @return a {@link java.lang.String} object.
      */
     protected String buildUrl(final String workspace, final String name, final String ext) {
         StringBuilder sUrl = new StringBuilder(gsBaseUrl.toString()).append("/rest");

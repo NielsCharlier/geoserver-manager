@@ -37,49 +37,50 @@ import org.jdom.Namespace;
 /**
  * This decode turns index format for a GeoServer StructuredGridCoverageReader into something
  * useful, giving access to the definition of the single attributes.
- * 
+ *
  * <P>This is the XML REST representation:
  * <PRE>
-  {@code
-
-<?xml version="1.0" encoding="UTF-8"?>
-<wfs:FeatureCollection xmlns:gf="http://www.geoserver.org/rest/granules" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml">
-  <gml:boundedBy>
-    <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
-      <gml:coord>
-        <gml:X>5.0</gml:X>
-        <gml:Y>45.0</gml:Y>
-      </gml:coord>
-      <gml:coord>
-        <gml:X>14.875</gml:X>
-        <gml:Y>50.9375</gml:Y>
-      </gml:coord>
-    </gml:Box>
-  </gml:boundedBy>
-  <gml:featureMember>
-    <gf:V fid="V.337">
-      <gf:the_geom>
-        <gml:Polygon>
-          <gml:outerBoundaryIs>
-            <gml:LinearRing>
-              <gml:coordinates>5.0,45.0 5.0,50.9375 14.875,50.9375 14.875,45.0 5.0,45.0</gml:coordinates>
-            </gml:LinearRing>
-          </gml:outerBoundaryIs>
-        </gml:Polygon>
-      </gf:the_geom>
-      <gf:location>..\\polyphemus\\polyphemus_20130302.nc</gf:location>
-      <gf:imageindex>672</gf:imageindex>
-      <gf:time>2013-03-01T23:00:00Z</gf:time>
-      <gf:elevation>10.0</gf:elevation>
-      <gf:fileDate>2013-03-01T23:00:00Z</gf:fileDate>
-      <gf:updated>2013-04-08T05:40:29.061Z</gf:updated>
-    </gf:V>
-  </gml:featureMember>
-</wfs:FeatureCollection>
-
-}</PRE>
- * @author Simone Giannecchini, GeoSolutions SAS
+ *  {@code
  *
+ *<?xml version="1.0" encoding="UTF-8"?>
+ *<wfs:FeatureCollection xmlns:gf="http://www.geoserver.org/rest/granules" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml">
+ *  <gml:boundedBy>
+ *    <gml:Box srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">
+ *      <gml:coord>
+ *        <gml:X>5.0</gml:X>
+ *        <gml:Y>45.0</gml:Y>
+ *      </gml:coord>
+ *      <gml:coord>
+ *        <gml:X>14.875</gml:X>
+ *        <gml:Y>50.9375</gml:Y>
+ *      </gml:coord>
+ *    </gml:Box>
+ *  </gml:boundedBy>
+ *  <gml:featureMember>
+ *    <gf:V fid="V.337">
+ *      <gf:the_geom>
+ *        <gml:Polygon>
+ *          <gml:outerBoundaryIs>
+ *            <gml:LinearRing>
+ *              <gml:coordinates>5.0,45.0 5.0,50.9375 14.875,50.9375 14.875,45.0 5.0,45.0</gml:coordinates>
+ *            </gml:LinearRing>
+ *          </gml:outerBoundaryIs>
+ *        </gml:Polygon>
+ *      </gf:the_geom>
+ *      <gf:location>..\\polyphemus\\polyphemus_20130302.nc</gf:location>
+ *      <gf:imageindex>672</gf:imageindex>
+ *      <gf:time>2013-03-01T23:00:00Z</gf:time>
+ *      <gf:elevation>10.0</gf:elevation>
+ *      <gf:fileDate>2013-03-01T23:00:00Z</gf:fileDate>
+ *      <gf:updated>2013-04-08T05:40:29.061Z</gf:updated>
+ *    </gf:V>
+ *  </gml:featureMember>
+ *</wfs:FeatureCollection>
+ *
+ *}</PRE>
+ *
+ * @author Simone Giannecchini, GeoSolutions SAS
+ * @version $Id: $
  */
 public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructuredCoverageGranulesList.RESTStructuredCoverageGranule> {
 
@@ -91,6 +92,8 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
     private final Element bbox;
     
     /**
+     * <p>Getter for the field <code>bbox</code>.</p>
+     *
      * @return the bbox
      */
     public Element getBbox() {
@@ -98,7 +101,9 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
     }
 
     /**
-     * @param featureCollection
+     * <p>Constructor for RESTStructuredCoverageGranulesList.</p>
+     *
+     * @param featureCollection a {@link org.jdom.Element} object.
      */
     @SuppressWarnings("unchecked")
     protected RESTStructuredCoverageGranulesList(Element featureCollection) {
@@ -122,6 +127,12 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
        granulesList = Collections.unmodifiableList(tmpList);
     }
     
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStructuredCoverageGranulesList} object.
+     */
     public static RESTStructuredCoverageGranulesList build(String response) {
         if(response == null)
             return null;
@@ -134,14 +145,30 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
         }
     }
     
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return granulesList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return granulesList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStructuredCoverageGranulesList.RESTStructuredCoverageGranule} object.
+     */
     public RESTStructuredCoverageGranule get(int index) {
         return granulesList.get(index);
     }
@@ -149,6 +176,7 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
+    /** {@inheritDoc} */
     @Override
     public Iterator<RESTStructuredCoverageGranule> iterator() {
         return granulesList.iterator();
@@ -247,6 +275,7 @@ public class RESTStructuredCoverageGranulesList implements Iterable<RESTStructur
 
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

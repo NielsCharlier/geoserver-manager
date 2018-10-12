@@ -34,13 +34,14 @@ import it.geosolutions.geoserver.rest.encoder.utils.ElementUtils;
 
 /**
  * Creates an XML
- * 
+ *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * 
+ * @version $Id: $
  */
 public class GSCoverageEncoder extends GSResourceEncoder {
 
+    /** Constant <code>NATIVECOVERAGENAME="nativeCoverageName"</code> */
     public final static String NATIVECOVERAGENAME = "nativeCoverageName";
 
     private final static String NATIVE_FORMAT="nativeFormat";
@@ -50,14 +51,23 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     private final static String RESPONSE_SRS="responseSRS";
         
     private final Element supportedFormatsListEncoder = new Element(SUPPORTED_FORMATS);
+    /** Constant <code>DIMENSIONS="dimensions"</code> */
     public final static String DIMENSIONS = "dimensions";
     
     final private Element dimensionsEncoder = new Element(DIMENSIONS);
     
+    /**
+     * <p>Constructor for GSCoverageEncoder.</p>
+     */
     public GSCoverageEncoder() {
         this(true);
     }
     
+    /**
+     * <p>Constructor for GSCoverageEncoder.</p>
+     *
+     * @param encodeLists a boolean.
+     */
     public GSCoverageEncoder(boolean encodeLists) {
         super("coverage", encodeLists);
         if (encodeLists) {
@@ -76,8 +86,10 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     }
 
     /**
-     * @param key
-     * @param dimensionInfo
+     * <p>addMetadata</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder} object.
      * @deprecated Use {@link GSResourceEncoder#addMetadataDimension(String, GSDimensionInfoEncoder)} this method will be removed soon
      */
     protected void addMetadata(String key, GSDimensionInfoEncoder dimensionInfo) {
@@ -85,9 +97,11 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     }
 
     /**
+     * <p>setMetadata</p>
+     *
      * @deprecated Use {@link GSResourceEncoder#setMetadataDimension(String, GSDimensionInfoEncoder)} this method will be removed soon
-     * @param key
-     * @param dimensionInfo
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder} object.
      */
     public void setMetadata(String key, GSDimensionInfoEncoder dimensionInfo) {
         super.setMetadata(key, dimensionInfo);
@@ -95,6 +109,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Add the 'nativeFormat' node with a text value
+     *
+     * @param format a {@link java.lang.String} object.
      */
     public void setNativeFormat(String format) {
         set(NATIVE_FORMAT, format);
@@ -102,6 +118,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 	
     /**
      * Add the 'supportedFormat' node with a text value
+     *
+     * @param format a {@link java.lang.String} object.
      */
     public void addSupportedFormats(String format) {
         final Element el = new Element("string");
@@ -111,6 +129,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     
     /**
      * Add the 'requestSRS' node with a text value
+     *
+     * @param srs a {@link java.lang.String} object.
      */
     public void setRequestSRS(String srs) {
         final Element el = new Element("string");
@@ -120,6 +140,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Add the 'responseSRS' node with a text value
+     *
+     * @param srs a {@link java.lang.String} object.
      */
     public void setResponseSRS(String srs) {
         final Element el = new Element("string");
@@ -129,9 +151,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
     
     /**
      * Adds a CoverageDimensionInfo to the GeoServer Resource
-     * 
-     * @param coverageDimensionInfo
-     * 
+     *
+     * @param coverageDimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.dimensions.GSCoverageDimensionEncoder} object.
      */
     public void addCoverageDimensionInfo(GSCoverageDimensionEncoder coverageDimensionInfo) {
         if (ElementUtils.contains(getRoot(), DIMENSIONS) == null)
@@ -141,13 +162,13 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Adds quickly a CoverageDimensionInfo to the GeoServer Resource
-     * 
-     * @param name
-     * @param description
-     * @param rangeMin
-     * @param rangeMax
-     * @param unit
-     * @param dimensionType
+     *
+     * @param name a {@link java.lang.String} object.
+     * @param description a {@link java.lang.String} object.
+     * @param rangeMin a {@link java.lang.String} object.
+     * @param rangeMax a {@link java.lang.String} object.
+     * @param unit a {@link java.lang.String} object.
+     * @param dimensionType a {@link java.lang.String} object.
      */
     public void addCoverageDimensionInfo(String name, String description, String rangeMin,
             String rangeMax, String unit, String dimensionType) {
@@ -158,8 +179,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Deletes a CoverageDimensionInfo from the list using the CoverageDimension Name (CoverageDimensionInfo content)
-     * 
-     * @param coverageDimensionName
+     *
+     * @param coverageDimensionName a {@link java.lang.String} object.
      * @return true if something is removed, false otherwise
      */
     public boolean delCoverageDimensionInfo(final String coverageDimensionName) {
@@ -169,8 +190,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Add the 'nativeCoverageName' node with a text value from 'name'
-     * 
-     * 
+     *
+     * @param nativeCoverageName a {@link java.lang.String} object.
      */
     public void addNativeCoverageName(final String nativeCoverageName) {
         add(NATIVECOVERAGENAME, nativeCoverageName);
@@ -178,8 +199,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Set the 'nativeCoverageName' node with a text value from 'name'
-     * 
-     * 
+     *
+     * @param nativeCoverageName a {@link java.lang.String} object.
      */
     public void setNativeCoverageName(final String nativeCoverageName) {
         set(NATIVECOVERAGENAME, nativeCoverageName);
@@ -187,8 +208,8 @@ public class GSCoverageEncoder extends GSResourceEncoder {
 
     /**
      * Get the nativeCoverageName
-     * 
-     * @return
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getNativeCoverageName() {
         final Element nativeCoverageNameNode = ElementUtils.contains(getRoot(), NATIVECOVERAGENAME, 1);

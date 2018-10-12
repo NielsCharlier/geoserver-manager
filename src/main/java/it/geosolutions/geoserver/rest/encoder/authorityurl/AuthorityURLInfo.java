@@ -26,10 +26,10 @@ package it.geosolutions.geoserver.rest.encoder.authorityurl;
 
 /**
  * Enumeration of layer authorityURL members
- * 
+ *
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
  *         emmanuel.blondel@fao.org
- * 
+ * @version $Id: $
  */
 public enum AuthorityURLInfo {
 

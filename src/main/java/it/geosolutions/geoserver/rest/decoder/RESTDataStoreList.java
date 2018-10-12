@@ -34,14 +34,26 @@ import org.jdom.Element;
  * Parses list of summary data about Datastores.
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTDataStoreList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTDataStoreList} object.
+     */
     public static RESTDataStoreList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTDataStoreList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTDataStoreList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTDataStoreList(Element list) {
         super(list);
     }

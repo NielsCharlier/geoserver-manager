@@ -32,27 +32,38 @@ import org.jdom.Element;
 
 /**
  * Parse a <TT>published</TT> returned as XML REST objects.
- * 
+ *
  * This is the XML REST representation:
  * <pre>{@code
-    <published type="layer">
-      <name>sfdem</name>
-      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/sfdem.xml" type="application/xml"/>
-    </published>
+ *    <published type="layer">
+ *      <name>sfdem</name>
+ *      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layers/sfdem.xml" type="application/xml"/>
+ *    </published>
  * }</pre>
- * 
+ *
  * @author Davide Savazzi (geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTPublished extends NameLinkElem {
 
     private final String type;
     
+    /**
+     * <p>Constructor for RESTPublished.</p>
+     *
+     * @param elem a {@link org.jdom.Element} object.
+     */
     public RESTPublished(Element elem) {
         super(elem);
         
         type = elem.getAttributeValue("type");
     }
 
+    /**
+     * <p>Getter for the field <code>type</code>.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getType() {
         return type;
     }

@@ -26,6 +26,9 @@ package it.geosolutions.geoserver.rest.encoder.feature;
 
 /**
  * Enumeration of featureType attribute members
+ *
+ * @author niels
+ * @version $Id: $
  */
 public enum FeatureTypeAttribute {
     name, minOccurs, maxOccurs, nillable, binding, length

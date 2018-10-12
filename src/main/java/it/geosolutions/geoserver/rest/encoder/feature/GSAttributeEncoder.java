@@ -34,9 +34,10 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
- * 
- * @author carlo cancellieri - GeoSolutions
+ * <p>GSAttributeEncoder class.</p>
  *
+ * @author carlo cancellieri - GeoSolutions
+ * @version $Id: $
  */
 public class GSAttributeEncoder extends PropertyXMLEncoder {
     
@@ -59,28 +60,59 @@ public class GSAttributeEncoder extends PropertyXMLEncoder {
         }
     }
     
+    /**
+     * <p>getFilterByName</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a {@link org.jdom.filter.Filter} object.
+     */
     public static Filter getFilterByName(String name){
         return new filterByName(name);
     }
 
+    /**
+     * <p>Constructor for GSAttributeEncoder.</p>
+     */
     public GSAttributeEncoder() {
         super("attribute");
     }
     
+    /**
+     * <p>setup</p>
+     *
+     * @param attributes a {@link java.util.Map} object.
+     */
     public void setup(Map<FeatureTypeAttribute, String> attributes){
         for (Entry<FeatureTypeAttribute,String> attr:attributes.entrySet()){
             set(attr.getKey().toString(),attr.getValue());
         }
     }
     
+    /**
+     * <p>setAttribute</p>
+     *
+     * @param type a {@link it.geosolutions.geoserver.rest.encoder.feature.FeatureTypeAttribute} object.
+     * @param value a {@link java.lang.String} object.
+     */
     public void setAttribute(FeatureTypeAttribute type, String value){
         set(type.toString(),value);
     }
     
+    /**
+     * <p>delAttribute</p>
+     *
+     * @param type a {@link it.geosolutions.geoserver.rest.encoder.feature.FeatureTypeAttribute} object.
+     */
     public void delAttribute(FeatureTypeAttribute type){
         ElementUtils.remove(this.getRoot(), get(type.toString()));
     }
     
+    /**
+     * <p>getAttribute</p>
+     *
+     * @param type a {@link it.geosolutions.geoserver.rest.encoder.feature.FeatureTypeAttribute} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String getAttribute(FeatureTypeAttribute type){
         Element el = get(type.toString());
         if (el!=null)

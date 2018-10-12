@@ -29,15 +29,19 @@ import java.util.List;
 import org.jdom.Element;
 
 /**
- * @author DamianoG
+ * <p>RESTMetadataList class.</p>
  *
+ * @author DamianoG
+ * @version $Id: $
  */
 public class RESTMetadataList implements Iterable<RESTMetadataList.RESTMetadataElement> {
 
     private final List<Element> metadataList;
     
     /**
-     * @param list
+     * <p>Constructor for RESTMetadataList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
      */
     protected RESTMetadataList(Element list) {
        List<Element> tmpList = new ArrayList<Element>();
@@ -47,14 +51,30 @@ public class RESTMetadataList implements Iterable<RESTMetadataList.RESTMetadataE
        metadataList = Collections.unmodifiableList(tmpList);
     }
     
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return metadataList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return metadataList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTMetadataList.RESTMetadataElement} object.
+     */
     public RESTMetadataElement get(int index) {
         return new RESTMetadataElement(metadataList.get(index));
     }
@@ -62,6 +82,7 @@ public class RESTMetadataList implements Iterable<RESTMetadataList.RESTMetadataE
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
+    /** {@inheritDoc} */
     @Override
     public Iterator<RESTMetadataElement> iterator() {
         return new RESTMetadataIterator(metadataList);

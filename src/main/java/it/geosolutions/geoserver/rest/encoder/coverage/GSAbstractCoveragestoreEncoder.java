@@ -29,15 +29,20 @@ import it.geosolutions.geoserver.rest.encoder.GSAbstractStoreEncoder;
 
 /**
  * Generic CoverageStore encoder.
- * 
+ *
  * Provides getters and setters for parameters common to all CoverageStore.
- * 
+ *
  * @author Carlo Cancellieri - GeoSolutions
- * 
  * @deprecated TODO complete specialization
+ * @version $Id: $
  */
 public abstract class GSAbstractCoveragestoreEncoder extends GSAbstractStoreEncoder {
 
+    /**
+     * <p>Constructor for GSAbstractCoveragestoreEncoder.</p>
+     *
+     * @param storeName a {@link java.lang.String} object.
+     */
     protected GSAbstractCoveragestoreEncoder(String storeName) {
         super(StoreType.COVERAGESTORES,storeName);
         // Add mandatory parameter

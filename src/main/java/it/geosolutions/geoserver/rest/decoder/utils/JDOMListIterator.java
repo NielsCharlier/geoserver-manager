@@ -31,27 +31,53 @@ import java.util.List;
 import org.jdom.Element;
 
 /**
+ * <p>Abstract JDOMListIterator class.</p>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public abstract class JDOMListIterator<ELEM> implements Iterator<ELEM> {
 
     private final Iterator<Element> iter;
 
+    /**
+     * <p>Constructor for JDOMListIterator.</p>
+     *
+     * @param orig a {@link java.util.List} object.
+     */
     public JDOMListIterator(List<Element> orig) {
         iter = orig.iterator();
     }
 
+    /**
+     * <p>hasNext</p>
+     *
+     * @return a boolean.
+     */
     public boolean hasNext() {
         return iter.hasNext();
     }
 
+    /**
+     * <p>next</p>
+     *
+     * @return a ELEM object.
+     */
     public ELEM next() {
         return transform(iter.next());
     }
 
+    /**
+     * <p>transform</p>
+     *
+     * @param listItem a {@link org.jdom.Element} object.
+     * @return a ELEM object.
+     */
     public abstract ELEM transform(Element listItem);
 
+    /**
+     * <p>remove</p>
+     */
     public void remove() {
         throw new UnsupportedOperationException("Not supported.");
     }

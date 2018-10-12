@@ -38,13 +38,20 @@ import org.jdom.Element;
 /**
  * Parses list of summary data about Workspaces.
  * <BR>Single items are handled by {@link RESTShortWorkspace}.
-
+ *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTWorkspaceList implements Iterable<RESTWorkspaceList.RESTShortWorkspace> {
 
     private final List<Element> wsList;
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTWorkspaceList} object.
+     */
     public static RESTWorkspaceList build(String response) {
         if(response == null)
             return null;
@@ -56,6 +63,11 @@ public class RESTWorkspaceList implements Iterable<RESTWorkspaceList.RESTShortWo
             return null;
 	}
 
+    /**
+     * <p>Constructor for RESTWorkspaceList.</p>
+     *
+     * @param wslistroot a {@link org.jdom.Element} object.
+     */
     protected RESTWorkspaceList(Element wslistroot) {
         List<Element> tmpList = new ArrayList<Element>();
         for (Element wselem : (List<Element>) wslistroot.getChildren("workspace")) {
@@ -65,18 +77,39 @@ public class RESTWorkspaceList implements Iterable<RESTWorkspaceList.RESTShortWo
         wsList = Collections.unmodifiableList(tmpList);
     }
 
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return wsList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return wsList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTWorkspaceList.RESTShortWorkspace} object.
+     */
     public RESTShortWorkspace get(int index) {
         return new RESTShortWorkspace(wsList.get(index));
     }
 
+    /**
+     * <p>iterator</p>
+     *
+     * @return a {@link java.util.Iterator} object.
+     */
     public Iterator<RESTShortWorkspace> iterator() {
         return new RESTWSListIterator(wsList);
     }

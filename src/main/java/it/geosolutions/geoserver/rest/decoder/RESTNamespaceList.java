@@ -39,11 +39,18 @@ import org.jdom.Element;
  * <BR>Single items are handled by {@link RESTShortNamespace}.
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTNamespaceList implements Iterable<RESTNamespaceList.RESTShortNamespace> {
 
     private final List<Element> nsList;
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTNamespaceList} object.
+     */
     public static RESTNamespaceList build(String response) {
         if(response == null)
             return null;
@@ -55,6 +62,11 @@ public class RESTNamespaceList implements Iterable<RESTNamespaceList.RESTShortNa
             return null;
 	}
 
+    /**
+     * <p>Constructor for RESTNamespaceList.</p>
+     *
+     * @param wslistroot a {@link org.jdom.Element} object.
+     */
     protected RESTNamespaceList(Element wslistroot) {
         List<Element> tmpList = new ArrayList<Element>();
         for (Element wselem : (List<Element>) wslistroot.getChildren("namespace")) {
@@ -64,18 +76,39 @@ public class RESTNamespaceList implements Iterable<RESTNamespaceList.RESTShortNa
         nsList = Collections.unmodifiableList(tmpList);
     }
 
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return nsList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return nsList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTNamespaceList.RESTShortNamespace} object.
+     */
     public RESTShortNamespace get(int index) {
         return new RESTShortNamespace(nsList.get(index));
     }
 
+    /**
+     * <p>iterator</p>
+     *
+     * @return a {@link java.util.Iterator} object.
+     */
     public Iterator<RESTShortNamespace> iterator() {
         return new RESTNSListIterator(nsList);
     }

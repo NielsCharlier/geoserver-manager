@@ -31,29 +31,29 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
-* GSIdentifierInfoEncoder - encodes an Identifier for a given GeoServer
-* layer as follows:
-* <pre>
-* {@code
-* final GSIdentifierInfoEncoder ie = new GSIdentifierInfoEncoder();
-* ie.setAuthority("an authority");
-* ie.setIdentifier("an identifier");
-* }
-* </pre>
-* For this example, the XML output is:
-* <pre>
-* {@code
-* <Identifier>
-*   <authority>an authority</authority>
-*   <identifier>an identifier</identifier>
-* </Identifier>
-* }
-* </pre>
-*
-* @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
-* emmanuel.blondel@fao.org
-*
-*/
+ * GSIdentifierInfoEncoder - encodes an Identifier for a given GeoServer
+ * layer as follows:
+ * <pre>
+ * {@code
+ * final GSIdentifierInfoEncoder ie = new GSIdentifierInfoEncoder();
+ * ie.setAuthority("an authority");
+ * ie.setIdentifier("an identifier");
+ * }
+ * </pre>
+ * For this example, the XML output is:
+ * <pre>
+ * {@code
+ * <Identifier>
+ *   <authority>an authority</authority>
+ *   <identifier>an identifier</identifier>
+ * </Identifier>
+ * }
+ * </pre>
+ *
+ * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
+ * emmanuel.blondel@fao.org
+ * @version $Id: $
+ */
 public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
@@ -83,8 +83,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Get a Filter using the IdentifierInfo authority
-	 * 
-	 * @param authority
+	 *
+	 * @param authority a {@link java.lang.String} object.
 	 * @return the filter
 	 */
 	public static Filter getFilterByHref(String authority) {
@@ -93,7 +93,6 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Constructs a new GSIdentifierInfoEncoder
-	 * 
 	 */
 	public GSIdentifierInfoEncoder() {
 		super("Identifier");
@@ -101,7 +100,7 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Constructs quickly an Identifier info
-	 * 
+	 *
 	 * @param authority
 	 *            (required)
 	 * @param identifier
@@ -114,9 +113,9 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Set-up quickly an Identifier info
-	 * 
-	 * @param authority
-	 * @param identifier
+	 *
+	 * @param authority a {@link java.lang.String} object.
+	 * @param identifier a {@link java.lang.String} object.
 	 */
 	protected void setup(String authority, String identifier) {
 		set(IdentifierInfo.authority.name(), authority);
@@ -125,9 +124,9 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Set an IdentifierInfo member (authority, identifier)
-	 * 
-	 * @param type
-	 * @param value
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.identifier.IdentifierInfo} object.
+	 * @param value a {@link java.lang.String} object.
 	 */
 	protected void setMember(IdentifierInfo type, String value) {
 		set(type.toString(), value);
@@ -135,8 +134,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Set the authority
-	 * 
-	 * @param authority
+	 *
+	 * @param authority a {@link java.lang.String} object.
 	 */
 	public void setAuthority(String authority) {
 		this.setMember(IdentifierInfo.authority, authority);
@@ -144,8 +143,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Set the identifier
-	 * 
-	 * @param identifier
+	 *
+	 * @param identifier a {@link java.lang.String} object.
 	 */
 	public void setIdentifier(String identifier) {
 		this.setMember(IdentifierInfo.identifier, identifier);
@@ -153,8 +152,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes an IdentifierInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.identifier.IdentifierInfo} object.
 	 * @return true if the IdentifierInfo member is removed
 	 */
 	protected boolean delMember(IdentifierInfo type) {
@@ -164,7 +163,7 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes the authority
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delAuthority() {
@@ -173,7 +172,7 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes the identifier
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delIdentifier() {
@@ -182,8 +181,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the value of the IdentifierInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.identifier.IdentifierInfo} object.
 	 * @return the value of the IdentifierInfo member
 	 */
 	protected String getMember(IdentifierInfo type) {
@@ -196,8 +195,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the authority
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getAuthority() {
 		return this.getMember(IdentifierInfo.authority);
@@ -205,8 +204,8 @@ public class GSIdentifierInfoEncoder extends XmlElement {
 
 	/**
 	 * Get the identifier
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getIdentifier() {
 		return this.getMember(IdentifierInfo.identifier);

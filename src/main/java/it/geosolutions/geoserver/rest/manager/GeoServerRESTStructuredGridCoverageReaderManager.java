@@ -43,8 +43,9 @@ import org.slf4j.LoggerFactory;
 /**
  * Manage GeoTools StructuredGridCoverageReader. It allows to create a store from a file or harvest the coverages contained in a file, to delete
  * granules from an existing coverage and eventually to get information about the granules inside a StructuredGridCoverageReader.
- * 
+ *
  * @author Simone Giannecchini, GeoSolutions
+ * @version $Id: $
  */
 public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerRESTAbstractManager {
     
@@ -71,11 +72,11 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Default constructor.
-     * 
+     *
      * @param restURL GeoServer REST API endpoint
      * @param username GeoServer REST API authorized username
      * @param password GeoServer REST API password for the former username
-     * @throws IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public GeoServerRESTStructuredGridCoverageReaderManager(URL restURL, String username,
             String password) throws IllegalArgumentException {
@@ -84,14 +85,13 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
     
     /**
      * Create a new ImageMosaic with the provided configuration provided as a zip file.
-     * 
+     *
      * <p>
      * This call configures all the coverages contained in the ImageMosaic.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param path the absolute path to the file to upload
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -101,15 +101,14 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
     
     /**
      * Create a new ImageMosaic with the provided configuration provided as a zip file.
-     * 
+     *
      * <p>
      * With the options configure we can decide whether or not to configure or not the coverages contained in the ImageMosaic.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param path the absolute path to the file to upload
      * @param configureOpt tells GeoServer whether to configure all coverages in this mosaic (ALL) or none of them (NONE).
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -162,12 +161,11 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
     
     /**
      * Create a store or harvest the coverage from the provided <b>external</b> path.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param format the format of the file to upload
      * @param path the absolute path to the file to upload
-     * 
      * @return <code>true</code> if the call succeeds or <code>false</code> otherwise.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
@@ -208,16 +206,14 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Remove granules from a structured coverage, by providing a CQL filter.
-     * 
+     *
      * @param workspace the GeoServer workspace
+     * @param coverageStore the GeoServer coverageStore
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
      * @param filter the absolute path to the file to upload
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws UnsupportedEncodingException
-     * 
+     * @throws java.io.UnsupportedEncodingException if any.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public boolean removeGranulesByCQL(final String workspace, String coverageStore,
@@ -270,15 +266,14 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Remove a granule from a structured coverage by id.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
+     * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
+     * @param granuleId a {@link java.lang.String} object.
      */
     public boolean removeGranuleById(final String workspace, String coverageStore, String coverage,
             String granuleId) {
@@ -319,13 +314,12 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Get information about the schema of the index for a structured coverage.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
+     * @param coverageStore the GeoServer coverageStore
      * @param coverage the format of the file to upload
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageIndexSchema getGranuleIndexSchema(final String workspace,
@@ -347,15 +341,13 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Get information about all the granules for a coverage with optional filter and paging.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
+     * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws UnsupportedEncodingException
-     * 
+     * @throws java.io.UnsupportedEncodingException if any.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace,
@@ -366,18 +358,16 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
     
     /**
      * Get information about the granules for a coverage with optional filter and paging.
-     * 
+     *
      * @param workspace the GeoServer workspace
+     * @param coverageStore the GeoServer coverageStore
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage
      * @param filter the format of the file to upload, can be <code>null</code> to include all the granules
      * @param offset the start page, can be <code>null</code> or an integer
      * @param limit the dimension of the page, can be <code>null</code> or a positive integer
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * @throws UnsupportedEncodingException
-     * 
+     * @throws java.io.UnsupportedEncodingException if any.
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
      */
     public RESTStructuredCoverageGranulesList getGranules(final String workspace,
@@ -421,15 +411,13 @@ public class GeoServerRESTStructuredGridCoverageReaderManager extends GeoServerR
 
     /**
      * Get information about a granule for a structured coverage.
-     * 
+     *
      * @param workspace the GeoServer workspace
      * @param coverageStore the GeoServer coverageStore
      * @param id the ID of the granule to get information for
-     * 
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.
-     * 
-     * 
      * @since geoserver-2.4.0, geoserver-mng-1.6.0
+     * @param coverage a {@link java.lang.String} object.
      */
     public RESTStructuredCoverageGranulesList getGranuleById(final String workspace,
             String coverageStore, String coverage, String id) {

@@ -39,26 +39,31 @@ import org.jdom.Element;
 import org.jdom.filter.Filter;
 
 /**
- * 
+ *
  * Encode a GeoServer resource.
- * 
+ *
  * @see GSDimensionInfoEncoder
  * @see GSFeatureDimensionInfoEncoder
- * 
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com | emmanuel.blondel@fao.org
  * @author Henry Rotzoll
+ * @version $Id: $
  */
 public abstract class GSResourceEncoder extends PropertyXMLEncoder {
+    /** Constant <code>NAME="name"</code> */
     public final static String NAME = "name";
 
+    /** Constant <code>NATIVENAME="nativeName"</code> */
     public final static String NATIVENAME = "nativeName";
 
+    /** Constant <code>METADATA="metadata"</code> */
     public final static String METADATA = "metadata";
 
+    /** Constant <code>KEYWORDS="keywords"</code> */
     public final static String KEYWORDS = "keywords";
 
+    /** Constant <code>METADATALINKS="metadataLinks"</code> */
     public final static String METADATALINKS = "metadataLinks";
 
     final private GSMetadataEncoder metadata = new GSMetadataEncoder();
@@ -73,14 +78,22 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         }
     }
     
+    /**
+     * <p>Constructor for GSResourceEncoder.</p>
+     *
+     * @param rootName a {@link java.lang.String} object.
+     */
     protected GSResourceEncoder(final String rootName) {
         this(rootName, true);        
     }
 
     /**
+     * <p>Constructor for GSResourceEncoder.</p>
+     *
      * @param rootName Actually 'feature' or 'coverage'
      * @see GSFeatureTypeEncoder
      * @see GSCoverageEncoder
+     * @param encodeLists a boolean.
      */
     protected GSResourceEncoder(final String rootName, boolean encodeLists) {
         super(rootName);
@@ -124,12 +137,18 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         }
     }
 
+    /**
+     * <p>setEnabled</p>
+     *
+     * @param enabled a boolean.
+     */
     public void setEnabled(boolean enabled) {
         set("enabled", (enabled) ? "true" : "false");
     }
     
     /**
-     * 
+     * <p>setAdvertised</p>
+     *
      * @param advertised
      *            true if the resource should be advertised
      */
@@ -138,25 +157,31 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     }
 
     /**
-     * @param key
-     * @param dimensionInfo
+     * <p>addMetadata</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.utils.XmlElement} object.
      */
     protected void addMetadata(String key, XmlElement dimensionInfo) {
         metadata.add(key, dimensionInfo.getRoot());
     }
 
     /**
+     * <p>Setter for the field <code>metadata</code>.</p>
+     *
      * @deprecated Use {@link #setMetadataDimension(String, GSDimensionInfoEncoder)} this method will be set as protected for internal use only
-     * @param key
-     * @param dimensionInfo
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.utils.XmlElement} object.
      */
     public void setMetadata(String key, XmlElement dimensionInfo) {
         metadata.set(key, dimensionInfo.getRoot());
     }
 
     /**
-     * @param key
-     * @param dimensionInfo
+     * <p>addMetadataDimension</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder} object.
      */
     protected void addMetadataDimension(String key, GSDimensionInfoEncoder dimensionInfo) {
         addMetadataDimension(key, dimensionInfo, false);
@@ -164,7 +189,7 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the metadata for a custom dimension.
-     * 
+     *
      * @param key the name of the dimension
      * @param dimensionInfo {@link GSDimensionInfoEncoder} with additional information about the dimension
      * @param custom is the dimension custom or not?
@@ -178,17 +203,29 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         }
     }
 
+    /**
+     * <p>setMetadataDimension</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.metadata.GSDimensionInfoEncoder} object.
+     */
     public void setMetadataDimension(String key, GSDimensionInfoEncoder dimensionInfo) {
         setMetadataDimension(key, dimensionInfo, false);
     }
 
+    /**
+     * <p>setMetadataString</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     */
     public void setMetadataString(String key, String value) {
         metadata.set(key, value);
     }
 
     /**
      * Set the metadata for a custom dimension.
-     * 
+     *
      * @param key the name of the dimension
      * @param dimensionInfo {@link GSDimensionInfoEncoder} with additional information about the dimension
      * @param custom is the dimension custom or not?
@@ -203,6 +240,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     }
 
     /**
+     * <p>delMetadata</p>
+     *
      * @param key the name of the metadata to add (f.e.: elevation, time)
      * @return true if something is removed, false otherwise
      */
@@ -210,6 +249,11 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         return metadata.remove(key);
     }
 
+    /**
+     * <p>addKeyword</p>
+     *
+     * @param keyword a {@link java.lang.String} object.
+     */
     public void addKeyword(String keyword) {
         checkKeyword(keyword);
         putKeyword(keyword);
@@ -220,12 +264,12 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
      * <keywords>
      *  <string>WCS</string>
      *  <string>ImageMosaic</string>
-     *  <string>srtm30</string> 
+     *  <string>srtm30</string>
      *  <string>KEYWORD\@language=LANGUAGE\;\@vocabulary=VOCABULARY\;</string>
-     *  <string>KEYWORD_2\@vocabulary=VOCABULARY_2\;</string> 
-     *  <string>KEYWORD_3\@language=LANGUAGE_3\;</string> </keywords> 
+     *  <string>KEYWORD_2\@vocabulary=VOCABULARY_2\;</string>
+     *  <string>KEYWORD_3\@language=LANGUAGE_3\;</string> </keywords>
      * }</PRE>
-     * 
+     *
      * @param keyword mandatory keyword ('\' characters are not permitted)
      * @param language optional parameter
      * @param vocabulary optional parameter
@@ -237,8 +281,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * delete a keyword from the list
-     * 
-     * @param keyword
+     *
+     * @param keyword a {@link java.lang.String} object.
      * @return true if something is removed, false otherwise
      */
     public boolean delKeyword(final String keyword) {
@@ -247,9 +291,11 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * delete a keyword from the list
-     * 
-     * @param keyword
+     *
+     * @param keyword a {@link java.lang.String} object.
      * @return true if something is removed, false otherwise
+     * @param language a {@link java.lang.String} object.
+     * @param vocabulary a {@link java.lang.String} object.
      */
     public boolean delKeyword(final String keyword, final String language, final String vocabulary) {
         return removeKeyword(keyword, language, vocabulary);
@@ -298,9 +344,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Adds a MetadataLinkInfo to the GeoServer Resource
-     * 
-     * @param  metadataLinkInfo
-     * 
+     *
+     * @param  metadataLinkInfo a {@link it.geosolutions.geoserver.rest.encoder.metadatalink.GSMetadataLinkInfoEncoder} object.
      */
     public void addMetadataLinkInfo(GSMetadataLinkInfoEncoder metadataLinkInfo) {
         metadataLinksListEncoder.addContent(metadataLinkInfo.getRoot());
@@ -308,11 +353,10 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Adds quickly a MetadataLinkInfo to the GeoServer Resource
-     * 
-     * 
-     * @param type
-     * @param metadataType
-     * @param content
+     *
+     * @param type a {@link java.lang.String} object.
+     * @param metadataType a {@link java.lang.String} object.
+     * @param content a {@link java.lang.String} object.
      */
     public void addMetadataLinkInfo(String type, String metadataType, String content) {
         final GSMetadataLinkInfoEncoder mde = new GSMetadataLinkInfoEncoder(type, metadataType,
@@ -322,8 +366,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Deletes a metadataLinkInfo from the list using the metadataURL (MetadataLinkInfo content)
-     * 
-     * @param metadataURL
+     *
+     * @param metadataURL a {@link java.lang.String} object.
      * @return true if something is removed, false otherwise
      */
     public boolean delMetadataLinkInfo(final String metadataURL) {
@@ -352,7 +396,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * NONE, REPROJECT_TO_DECLARED, FORCE_DECLARED
-     * 
+     *
+     * @param policy a {@link it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy} object.
      */
     protected void addProjectionPolicy(ProjectionPolicy policy) {
         add(PROJECTIONPOLICY, policy.toString());
@@ -360,6 +405,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * NONE, REPROJECT_TO_DECLARED, FORCE_DECLARED
+     *
+     * @param policy a {@link it.geosolutions.geoserver.rest.encoder.GSResourceEncoder.ProjectionPolicy} object.
      */
     public void setProjectionPolicy(ProjectionPolicy policy) {
         set(PROJECTIONPOLICY, policy.toString());
@@ -367,8 +414,10 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'name' node with a text value from 'name'
-     * 
+     *
      * REQUIRED to configure a resource
+     *
+     * @param name a {@link java.lang.String} object.
      */
     protected void addName(final String name) {
         add(NAME, name);
@@ -376,13 +425,20 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'name' node with a text value from 'name'
-     * 
+     *
      * REQUIRED to configure a resource
+     *
+     * @param name a {@link java.lang.String} object.
      */
     public void setName(final String name) {
         set(NAME, name);
     }
 
+    /**
+     * <p>getName</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getName() {
         final Element nameNode = ElementUtils.contains(getRoot(), NAME, 1);
         if (nameNode != null)
@@ -393,8 +449,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'nativename' node with a text value from 'name'
-     * 
-     * 
+     *
+     * @param nativename a {@link java.lang.String} object.
      */
     protected void addNativeName(final String nativename) {
         add(NATIVENAME, nativename);
@@ -402,9 +458,10 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'nativename' node with a text value from 'name'
-     * 
+     *
      * if not specified, the nativeName will be set with the value of the 'name' node.
-     * 
+     *
+     * @param nativename a {@link java.lang.String} object.
      */
     public void setNativeName(final String nativename) {
         set(NATIVENAME, nativename);
@@ -412,8 +469,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Get the nativeName
-     * 
-     * @return
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getNativeName() {
         final Element nameNode = ElementUtils.contains(getRoot(), NATIVENAME, 1);
@@ -427,7 +484,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'description' node with a text value from 'description'
-     * 
+     *
+     * @param description a {@link java.lang.String} object.
      */
     protected void addDescription(final String description) {
         add(DESCRIPTION, description);
@@ -435,6 +493,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'description' node with a text value from 'description'
+     *
+     * @param description a {@link java.lang.String} object.
      */
     public void setDescription(final String description) {
         set(DESCRIPTION, description);
@@ -444,7 +504,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'abstract' node with a text value from 'abstract'
-     * 
+     *
+     * @param _abstract a {@link java.lang.String} object.
      */
     protected void addAbstract(final String _abstract) {
         add(ABSTRACT, _abstract);
@@ -452,6 +513,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'abstract' node with a text value from 'abstract'
+     *
+     * @param _abstract a {@link java.lang.String} object.
      */
     public void setAbstract(final String _abstract) {
         set(ABSTRACT, _abstract);
@@ -461,7 +524,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'title' node with a text value from 'title'
-     * 
+     *
+     * @param title a {@link java.lang.String} object.
      */
     protected void addTitle(final String title) {
         add(TITLE, title);
@@ -469,6 +533,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'title' node with a text value from 'title'
+     *
+     * @param title a {@link java.lang.String} object.
      */
     public void setTitle(final String title) {
         set(TITLE, title);
@@ -478,6 +544,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'SRS' node with a text value from 'srs'
+     *
+     * @param srs a {@link java.lang.String} object.
      */
     protected void addSRS(final String srs) {
         add(SRS, srs);
@@ -485,6 +553,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'SRS' node with a text value from 'srs'
+     *
+     * @param srs a {@link java.lang.String} object.
      */
     public void setSRS(final String srs) {
         set(SRS, srs);
@@ -494,6 +564,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Add the 'nativeCRS' node with a text value from 'nativeCRS'
+     *
+     * @param nativeCRS a {@link java.lang.String} object.
      */
     protected void addNativeCRS(final String nativeCRS) {
         add(NATIVECRS, nativeCRS);
@@ -501,6 +573,8 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
 
     /**
      * Set or modify the 'nativeCRS' node with a text value from 'nativeCRS'
+     *
+     * @param nativeCRS a {@link java.lang.String} object.
      */
     public void setNativeCRS(final String nativeCRS) {
         set(NATIVECRS, nativeCRS);
@@ -517,12 +591,13 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     private final static String LATLONBBCRS = "latLonBoundingBox/crs";
 
     /**
-     * 
-     * @param minx
-     * @param maxy
-     * @param maxx
-     * @param miny
-     * @param crs
+     * <p>addLatLonBoundingBox</p>
+     *
+     * @param minx a double.
+     * @param maxy a double.
+     * @param maxx a double.
+     * @param miny a double.
+     * @param crs a {@link java.lang.String} object.
      */
     protected void addLatLonBoundingBox(double minx, double miny, double maxx, double maxy,
             final String crs) {
@@ -533,6 +608,15 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         add(LATLONBBCRS, crs);
     }
 
+    /**
+     * <p>setLatLonBoundingBox</p>
+     *
+     * @param minx a double.
+     * @param miny a double.
+     * @param maxx a double.
+     * @param maxy a double.
+     * @param crs a {@link java.lang.String} object.
+     */
     public void setLatLonBoundingBox(double minx, double miny, double maxx, double maxy,
             final String crs) {
         set(LATLONBBMINX, String.valueOf(minx));
@@ -553,11 +637,13 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     private final static String NATIVEBBCRS = "nativeBoundingBox/crs";
 
     /**
-     * @param minx
-     * @param maxy
-     * @param maxx
-     * @param miny
-     * @param crs
+     * <p>addNativeBoundingBox</p>
+     *
+     * @param minx a double.
+     * @param maxy a double.
+     * @param maxx a double.
+     * @param miny a double.
+     * @param crs a {@link java.lang.String} object.
      */
     protected void addNativeBoundingBox(double minx, double miny, double maxx, double maxy,
             final String crs) {
@@ -568,6 +654,15 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
         add(NATIVEBBCRS, crs);
     }
 
+    /**
+     * <p>setNativeBoundingBox</p>
+     *
+     * @param minx a double.
+     * @param miny a double.
+     * @param maxx a double.
+     * @param maxy a double.
+     * @param crs a {@link java.lang.String} object.
+     */
     public void setNativeBoundingBox(double minx, double miny, double maxx, double maxy,
             final String crs) {
         set(NATIVEBBMINX, String.valueOf(minx));

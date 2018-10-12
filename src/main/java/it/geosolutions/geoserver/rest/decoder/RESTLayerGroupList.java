@@ -35,32 +35,44 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>
-  {@code
-<layerGroups>
-      <layerGroup>
-        <name>tiger-ny</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/tiger-ny.xml" type="application/xml"/>
-      </layerGroup>
-      <layerGroup>
-        <name>spearfish</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/spearfish.xml" type="application/xml"/>
-      </layerGroup>
-      <layerGroup>
-        <name>tasmania</name>
-        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/tasmania.xml" type="application/xml"/>
-      </layerGroup>
-</layerGroups>
-}</PRE>
+ *  {@code
+ *<layerGroups>
+ *      <layerGroup>
+ *        <name>tiger-ny</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/tiger-ny.xml" type="application/xml"/>
+ *      </layerGroup>
+ *      <layerGroup>
+ *        <name>spearfish</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/spearfish.xml" type="application/xml"/>
+ *      </layerGroup>
+ *      <layerGroup>
+ *        <name>tasmania</name>
+ *        <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/layergroups/tasmania.xml" type="application/xml"/>
+ *      </layerGroup>
+ *</layerGroups>
+ *}</PRE>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTLayerGroupList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTLayerGroupList} object.
+     */
     public static RESTLayerGroupList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTLayerGroupList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTLayerGroupList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTLayerGroupList(Element list) {
         super(list);
     }

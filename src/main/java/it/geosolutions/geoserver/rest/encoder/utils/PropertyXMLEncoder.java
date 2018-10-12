@@ -31,38 +31,62 @@ import org.jdom.Element;
  * Creates an XML document by mapping properties to XML nodes.
  * You can set the root element name in the constructor. Any key/value pair will
  * be encoded as {@code <key>value</key>} node.
- * 
- * Any key containing one or more slash ("/") will be encoded as nested nodes; 
+ *
+ * Any key containing one or more slash ("/") will be encoded as nested nodes;
  * e.g.:
- * 
+ *
  * <PRE>
- * {@code 
+ * {@code
  *          key = "k1/k2/k3", value = "value" }
  * </pre>
- * 
+ *
  * will be encoded as
- * 
+ *
  * <PRE>
  * {@code        <k1><k2><k3>value</k3></k2></k1> }
  * </pre>
- * 
+ *
  * @author ETj (etj at geo-solutions.it)
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
+ * @version $Id: $
  */
 public class PropertyXMLEncoder extends XmlElement {
 
+	/**
+	 * <p>Constructor for PropertyXMLEncoder.</p>
+	 *
+	 * @param rootName a {@link java.lang.String} object.
+	 */
 	public PropertyXMLEncoder(final String rootName) {
 		super(rootName);
 	}
 
+        /**
+         * <p>Constructor for PropertyXMLEncoder.</p>
+         *
+         * @param root a {@link org.jdom.Element} object.
+         */
         public PropertyXMLEncoder(Element root) {
             super(root);
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param deep a int.
+     * @return a {@link org.jdom.Element} object.
+     */
     protected Element get(final String key, int deep) {
             return get(getRoot(), key);
         }
 	
+	/**
+	 * <p>get</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @return a {@link org.jdom.Element} object.
+	 */
 	protected Element get(final String key) {
 		return get(getRoot(), key);
 	}
@@ -80,6 +104,12 @@ public class PropertyXMLEncoder extends XmlElement {
 		}
 	}
 
+	/**
+	 * <p>set</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	protected void set(final String key, final String value) {
 		if (key != null && value != null) {
 			set(getRoot(), key, value);
@@ -110,6 +140,12 @@ public class PropertyXMLEncoder extends XmlElement {
 		}
 	}
 
+	/**
+	 * <p>add</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	protected void add(final String key, final String value) {
 		if (key != null && value != null) {
 			add(this.getRoot(), key, value);

@@ -24,8 +24,10 @@ package it.geosolutions.geoserver.rest.decoder;
 import org.jdom.Element;
 
 /**
- * @author DamianoG
+ * <p>RESTDimensionInfo class.</p>
  *
+ * @author DamianoG
+ * @version $Id: $
  */
 public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     
@@ -33,11 +35,15 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     private String presentation;
     private String resolution;
     
+    /** Constant <code>TIME="time"</code> */
     public static final String TIME = "time";
+    /** Constant <code>ELEVATION="elevation"</code> */
     public static final String ELEVATION = "elevation";
     
     /**
-     * @param elem
+     * <p>Constructor for RESTDimensionInfo.</p>
+     *
+     * @param elem a {@link org.jdom.Element} object.
      */
     public RESTDimensionInfo(Element elem) {
         super(elem);
@@ -49,6 +55,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>isEnabled</p>
+     *
      * @return the enabled
      */
     public boolean isEnabled() {
@@ -56,6 +64,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>Setter for the field <code>enabled</code>.</p>
+     *
      * @param enabled the enabled to set
      */
     public void setEnabled(boolean enabled) {
@@ -63,6 +73,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>Getter for the field <code>presentation</code>.</p>
+     *
      * @return the presentation
      */
     public String getPresentation() {
@@ -70,6 +82,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>Setter for the field <code>presentation</code>.</p>
+     *
      * @param presentation the presentation to set
      */
     public void setPresentation(String presentation) {
@@ -77,6 +91,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>Getter for the field <code>resolution</code>.</p>
+     *
      * @return the resolution
      */
     public String getResolution() {
@@ -84,6 +100,8 @@ public class RESTDimensionInfo extends RESTMetadataList.RESTMetadataElement{
     }
 
     /**
+     * <p>Setter for the field <code>resolution</code>.</p>
+     *
      * @param resolution the resolution to set
      */
     public void setResolution(String resolution) {

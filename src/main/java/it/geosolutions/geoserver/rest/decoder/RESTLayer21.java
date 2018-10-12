@@ -11,10 +11,10 @@ import org.jdom.Element;
 /**
  * Parse <TT>Layer</TT>s returned as XML REST objects. Applicable to GS 2.1 for
  * decoding: - AuthorityURLs - Identifiers - advertised property value
- * 
+ *
  * <P>
  * This is the XML REST representation:
- * 
+ *
  * <PRE>
  *  {@code
  *  <layer>
@@ -48,16 +48,23 @@ import org.jdom.Element;
  * </layer>
  *  }
  * </PRE>
- * 
+ *
  * @author eblondel
+ * @version $Id: $
  */
 public class RESTLayer21 extends RESTLayer{
 
    
+	/**
+	 * <p>Constructor for RESTLayer21.</p>
+	 *
+	 * @param layerElem a {@link org.jdom.Element} object.
+	 */
 	public RESTLayer21(Element layerElem) {
 		super(layerElem);
 	}
 
+	/** {@inheritDoc} */
 	public static RESTLayer21 build(String response) {
         if(response == null)
             return null;
@@ -71,7 +78,8 @@ public class RESTLayer21 extends RESTLayer{
 	
 	/**
 	 * Decodes the advertised property from the Geoserver Layer
-	 * 
+	 *
+	 * @return a boolean.
 	 */
 	public boolean getAdvertised(){
 		boolean advertised = true;
@@ -93,7 +101,7 @@ public class RESTLayer21 extends RESTLayer{
 	
 	/**
 	 * Decodes the list of AuthorityURLInfo from the GeoServer Layer
-	 * 
+	 *
 	 * @return the list of GSAuthorityURLInfoEncoder
 	 */
 	public List<GSAuthorityURLInfoEncoder> getEncodedAuthorityURLInfoList() {
@@ -135,7 +143,7 @@ public class RESTLayer21 extends RESTLayer{
 
 	/**
 	 * Decodes the list of IdentifierInfo from the GeoServer Layer
-	 * 
+	 *
 	 * @return the list of IdentifierInfoEncoder
 	 */
 	public List<GSIdentifierInfoEncoder> getEncodedIdentifierInfoList() {

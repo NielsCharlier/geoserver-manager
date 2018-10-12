@@ -34,13 +34,12 @@ import org.jdom.Element;
 
 /**
  * Encode an XML for about/version.xml
- * 
- * 
- * 
+ *
  * @author Carlo Cancellieri - carlo.cancellieri@geo-solutions.it
- * 
+ * @version $Id: $
  */
 public class GSVersionDecoder extends XmlElement {
+    /** Constant <code>ABOUT="about"</code> */
     public final static String ABOUT = "about";
 
     private GSAboutResource geoserver;
@@ -100,8 +99,8 @@ public class GSVersionDecoder extends XmlElement {
 
     /**
      * Load the string representation into this encoder
-     * 
-     * @param document
+     *
+     * @param document a {@link java.lang.String} object.
      */
     public GSVersionDecoder(String document) {
         Element root=JDOMBuilder.buildElement(document);
@@ -114,6 +113,9 @@ public class GSVersionDecoder extends XmlElement {
         }
     }
 
+    /**
+     * <p>Constructor for GSVersionDecoder.</p>
+     */
     public GSVersionDecoder() {
         create();
     }
@@ -124,24 +126,42 @@ public class GSVersionDecoder extends XmlElement {
         addContent(geoserver.getRoot());
     }
     
+    /**
+     * <p>getGeoServer</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.about.GSVersionDecoder.GSAboutResource} object.
+     */
     public GSAboutResource getGeoServer(){
         return geoserver;
     }
 
+    /**
+     * <p>getVersion</p>
+     *
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.about.GSVersionDecoder.VERSION} object.
+     */
     public VERSION getVersion() {
         Element e = ElementUtils.contains(geoserver.version, GSAboutResource.VERSION);
         return VERSION.getVersion(e.getTextTrim());
     }
     
     /**
+     * <p>compareTo</p>
+     *
      * @see Enum#compareTo(Enum)
-     * @param v
-     * @return
+     * @param v a {@link it.geosolutions.geoserver.rest.decoder.about.GSVersionDecoder.VERSION} object.
+     * @return a int.
      */
     public int compareTo(VERSION v) {
         return getVersion().compareTo(v);
     }
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.about.GSVersionDecoder} object.
+     */
     public static GSVersionDecoder build(String response) {
         return new GSVersionDecoder(response);
     }

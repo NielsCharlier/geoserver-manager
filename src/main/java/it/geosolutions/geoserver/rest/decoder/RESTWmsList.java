@@ -35,23 +35,35 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>{@code <wmsLayers>
-	<wmsLayer>
-		<name>comunilazio</name>
-		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/workspaces/arit/wmsstores/regione/wmslayers/comunilazio.xml" type="application/xml"/>
-	</wmsLayer>
-</wmsLayers>
+ *	<wmsLayer>
+ *		<name>comunilazio</name>
+ *		<atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://172.27.30.25:8080/geoserver/rest/workspaces/arit/wmsstores/regione/wmslayers/comunilazio.xml" type="application/xml"/>
+ *	</wmsLayer>
+ *</wmsLayers>
  *
-}</PRE>
+ *}</PRE>
  *
- * @author cip 
+ * @author cip
+ * @version $Id: $
  */
 public class RESTWmsList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTWmsList} object.
+     */
     public static RESTWmsList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTWmsList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTWmsList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTWmsList(Element list) {
         super(list);
     }

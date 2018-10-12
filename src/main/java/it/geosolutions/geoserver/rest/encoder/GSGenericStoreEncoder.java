@@ -26,10 +26,26 @@ package it.geosolutions.geoserver.rest.encoder;
 import it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType;
 import it.geosolutions.geoserver.rest.encoder.utils.NestedElementEncoder;
 
+/**
+ * <p>GSGenericStoreEncoder class.</p>
+ *
+ * @author niels
+ * @version $Id: $
+ */
 public class GSGenericStoreEncoder extends GSAbstractStoreEncoder {
 
     private String type;
 
+    /**
+     * <p>Constructor for GSGenericStoreEncoder.</p>
+     *
+     * @param storeType a {@link it.geosolutions.geoserver.rest.GeoServerRESTPublisher.StoreType} object.
+     * @param workspace a {@link java.lang.String} object.
+     * @param type a {@link java.lang.String} object.
+     * @param storeName a {@link java.lang.String} object.
+     * @param url a {@link java.lang.String} object.
+     * @param enabled a {@link java.lang.Boolean} object.
+     */
     public GSGenericStoreEncoder(StoreType storeType, String workspace, String type, String storeName, 
             String url, Boolean enabled) {
         super(storeType, storeName);
@@ -57,6 +73,7 @@ public class GSGenericStoreEncoder extends GSAbstractStoreEncoder {
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     protected String getValidType() {
         return type;

@@ -36,7 +36,7 @@ import org.jdom.Element;
 /**
  * This decode turns index format for a GeoServer StructuredGridCoverageReader into something
  * useful, giving access to the definition of the single attributes.
- * 
+ *
  * <P>This is the XML REST representation:
  * <PRE>
  * {@code
@@ -95,15 +95,18 @@ import org.jdom.Element;
  *   <atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="alternate" href="http://localhost:8080/geoserver/rest/workspaces/it.geosolutions/coveragestores/polyphemus/coverages/V/index/granules.xml" type="application/xml"/>
  * </Schema>
  * }</PRE>
- * @author Simone Giannecchini, GeoSolutions SAS
  *
+ * @author Simone Giannecchini, GeoSolutions SAS
+ * @version $Id: $
  */
 public class RESTStructuredCoverageIndexSchema implements Iterable<RESTStructuredCoverageIndexSchema.RESTStructuredCoverageIndexAttribute> {
 
     private final List<RESTStructuredCoverageIndexAttribute> attributeList;
     
     /**
-     * @param schema
+     * <p>Constructor for RESTStructuredCoverageIndexSchema.</p>
+     *
+     * @param schema a {@link org.jdom.Element} object.
      */
     @SuppressWarnings("unchecked")
     protected RESTStructuredCoverageIndexSchema(Element schema) {
@@ -124,6 +127,12 @@ public class RESTStructuredCoverageIndexSchema implements Iterable<RESTStructure
        attributeList = Collections.unmodifiableList(tmpList);
     }
     
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStructuredCoverageIndexSchema} object.
+     */
     public static RESTStructuredCoverageIndexSchema build(String response) {
         if(response == null)
             return null;
@@ -136,14 +145,30 @@ public class RESTStructuredCoverageIndexSchema implements Iterable<RESTStructure
         }
     }
     
+    /**
+     * <p>size</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return attributeList.size();
     }
 
+    /**
+     * <p>isEmpty</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return attributeList.isEmpty();
     }
 
+    /**
+     * <p>get</p>
+     *
+     * @param index a int.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTStructuredCoverageIndexSchema.RESTStructuredCoverageIndexAttribute} object.
+     */
     public RESTStructuredCoverageIndexAttribute get(int index) {
         return attributeList.get(index);
     }
@@ -151,6 +176,7 @@ public class RESTStructuredCoverageIndexSchema implements Iterable<RESTStructure
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
+    /** {@inheritDoc} */
     @Override
     public Iterator<RESTStructuredCoverageIndexAttribute> iterator() {
         return attributeList.iterator();

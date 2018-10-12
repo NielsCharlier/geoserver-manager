@@ -51,10 +51,10 @@ import org.jdom.filter.Filter;
  * </metadataLink>
  * }
  * </pre>
- * 
+ *
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com |
  *         emmanuel.blondel@fao.org
- * 
+ * @version $Id: $
  */
 public class GSMetadataLinkInfoEncoder extends XmlElement {
 
@@ -82,19 +82,18 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 		}
 	}
 
-	/** 
+	/**
 	 * Get a Filter using the MetadataLinkInfo content (metadataURL)
-	 * 
-	 * @param content
+	 *
+	 * @param content a {@link java.lang.String} object.
 	 * @return the filter
 	 */
 	public static Filter getFilterByContent(String content) {
 		return new filterByContent(content);
 	}
 
-	/** 
+	/**
 	 * Constructs a new GSMetadataLinkInfoEncoder
-	 * 
 	 */
 	public GSMetadataLinkInfoEncoder() {
 		super("metadataLink");
@@ -102,7 +101,7 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 
 	/**
 	 * Constructs quickly a MetadataLink info
-	 * 
+	 *
 	 * @param type (required)
 	 * @param metadataType (required)
 	 * @param content (required)
@@ -112,12 +111,12 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 		this.setup(type, metadataType, content);
 	}
 	
-	/** 
+	/**
 	 * Set-up quickly a metadataLinkInfo
-	 * 
-	 * @param type
-	 * @param metadataType
-	 * @param content
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param metadataType a {@link java.lang.String} object.
+	 * @param content a {@link java.lang.String} object.
 	 */
 	protected void setup(String type, String metadataType, String content) {
 		set(ResourceMetadataLinkInfo.type.name(), type);
@@ -125,11 +124,11 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 		set(ResourceMetadataLinkInfo.content.name(), content);
 	}
 	
-	/** 
+	/**
 	 * Set a MetadataLinkInfo member (type, metadataType or content)
-	 * 
-	 * @param type
-	 * @param value
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadatalink.ResourceMetadataLinkInfo} object.
+	 * @param value a {@link java.lang.String} object.
 	 */
 	protected void setMember(ResourceMetadataLinkInfo type,
 			String value) {
@@ -138,8 +137,8 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 
 	/**
 	 * Set the mime type
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link java.lang.String} object.
 	 */
 	public void setType(String type){
 		this.setMember(ResourceMetadataLinkInfo.type, type);
@@ -147,8 +146,8 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Set the metadata type
-	 * 
-	 * @param metadataType
+	 *
+	 * @param metadataType a {@link java.lang.String} object.
 	 */
 	public void setMetadataType(String metadataType){
 		this.setMember(ResourceMetadataLinkInfo.metadataType, metadataType);
@@ -156,17 +155,17 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Set the content
-	 * 
-	 * @param content
+	 *
+	 * @param content a {@link java.lang.String} object.
 	 */
 	public void setContent(String content){
 		this.setMember(ResourceMetadataLinkInfo.content, content);
 	}
 	
-	/** 
+	/**
 	 * Deletes a MetadataLinkInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadatalink.ResourceMetadataLinkInfo} object.
 	 * @return true if the metadataLinkInfo member is removed
 	 */
 	protected boolean delMember(ResourceMetadataLinkInfo type) {
@@ -175,7 +174,7 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 
 	/**
 	 * Deletes the type
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delType(){
@@ -184,7 +183,7 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Deletes the metadata type
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delMetadataType(){
@@ -193,17 +192,17 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Deletes the content
-	 * 
+	 *
 	 * @return true if removed
 	 */
 	public boolean delContent(){
 		return this.delMember(ResourceMetadataLinkInfo.content);
 	}
 	
-	/** 
+	/**
 	 * Get the value of the MetadataLinkInfo member
-	 * 
-	 * @param type
+	 *
+	 * @param type a {@link it.geosolutions.geoserver.rest.encoder.metadatalink.ResourceMetadataLinkInfo} object.
 	 * @return the value of the MetadataLinkInfo member
 	 */
 	protected String getMember(ResourceMetadataLinkInfo type) {
@@ -216,8 +215,8 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Get the mime type
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getType(){
 		return this.getMember(ResourceMetadataLinkInfo.type);		
@@ -225,8 +224,8 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Get the metadata type
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getMetadataType(){
 		return this.getMember(ResourceMetadataLinkInfo.metadataType);
@@ -234,8 +233,8 @@ public class GSMetadataLinkInfoEncoder extends XmlElement {
 	
 	/**
 	 * Get the content
-	 * 
-	 * @return
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getContent(){
 		return this.getMember(ResourceMetadataLinkInfo.content);

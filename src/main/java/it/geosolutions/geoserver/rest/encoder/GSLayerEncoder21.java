@@ -42,15 +42,15 @@ import java.util.LinkedHashMap;
  * Layer encoder for Geoserver = 2.1
  *
  * @author Emmanuel Blondel - emmanuel.blondel1@gmail.com
- * 
+ *
  * The layer encoder is enabled by default
- * 
  * @since gs-2.1.x
- * 
+ * @version $Id: $
  */
 public class GSLayerEncoder21 extends GSLayerEncoder {
 	
 
+	/** Constant <code>METADATA="metadata"</code> */
 	public final static String METADATA = "metadata";
 	final private GSMetadataEncoder metadata = new GSMetadataEncoder();
 	public Map<String,String> authorityURLList;
@@ -62,6 +62,9 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
 		}
 	}
 	
+    /**
+     * <p>Constructor for GSLayerEncoder21.</p>
+     */
     public GSLayerEncoder21() {
     	super();
         addContent(metadata.getRoot());
@@ -69,24 +72,23 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
     }
 
 	/**
-	 * @param key
-	 * @param dimensionInfo
+	 * <p>addMetadata</p>
+	 *
+	 * @param key a {@link java.lang.String} object.
+	 * @param dimensionInfo a {@link it.geosolutions.geoserver.rest.encoder.utils.XmlElement} object.
 	 */
 	protected void addMetadata(String key, XmlElement dimensionInfo) {
 		metadata.add(key, dimensionInfo.getRoot());
 	}
 	
-	/**
+    /**
      * advertise the layer
      */
     protected void addAdvertised(){
        metadata.add("advertised", "true");
     }
 	
-	/**
-	 * 
-	 * @param advertised true if the layer should be advertised
-	 */
+	/** {@inheritDoc} */
 	public void setAdvertised(boolean advertised){
 		if(advertised){
 			metadata.add("advertised", "true");
@@ -96,9 +98,9 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
 	}
 		
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Add an authorityURLInfo to the GeoServer layer
-	 * 
-	 * @param authorityURLInfo
 	 */
 	public void addAuthorityURL(GSAuthorityURLInfoEncoder authorityURLInfo){	
 		if(authorityURLList == null){
@@ -117,11 +119,10 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
 	
 	
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Deletes a AuthorityURLInfo from the list using the authorityURL
 	 * (AuthorityURLInfo href)
-	 * 
-	 * @param authorityURL
-	 * @return true if something is removed, false otherwise
 	 */
 	public boolean delAuthorityURL(final String authorityURL){
 		boolean delete = false;
@@ -146,9 +147,9 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Add an identifierInfo to the GeoServer layer
-	 * 
-	 * @param identifierInfo
 	 */
 	public void addIdentifier(GSIdentifierInfoEncoder identifierInfo){
 		if(identifierList == null){
@@ -180,11 +181,10 @@ public class GSLayerEncoder21 extends GSLayerEncoder {
 	}
 	
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Deletes a IdentifierInfo from the list using the authority
 	 * name (IdentifierInfo authority)
-	 * 
-	 * @param authority
-	 * @return true if something is removed, false otherwise
 	 */
 	public boolean delIdentifier(final String authority){
 		boolean delete = false;

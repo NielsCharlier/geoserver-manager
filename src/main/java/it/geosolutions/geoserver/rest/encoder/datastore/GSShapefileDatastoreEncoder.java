@@ -33,8 +33,9 @@ import java.nio.charset.Charset;
 
 /**
  * Encoder for a {@value #TYPE} datastore.
- * 
+ *
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
 	
@@ -49,7 +50,7 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
     /**
      * Create a {@value #TYPE} datastore with default connection parameters,
      * given a store name and a url (the store location).
-     * 
+     *
      * The following default connection parameters are set:
      * <ul>
      *   <li>enabled: {@value #DEFAULT_ENABLED}
@@ -58,7 +59,7 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
      *   <li>memory mapped buffer: {@value #DEFAULT_MEMORY_MAPPED_BUFFER}
      *   <li>cache and reuse memory maps: {@value #DEFAULT_CACHE_AND_REUSE_MEMORY_MAPS}
      * </ul>
-     * 
+     *
      * @param name New datastore name
      * @param url The shapefile location in the server, relative to $GEOSERVER_DATA_DIR.
      */
@@ -81,9 +82,9 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
     
     /**
      * Create a {@value #TYPE} datastore encoder from an existing store read from server.
-     * 
+     *
      * @param store The existing store.
-     * @throws IllegalArgumentException if store type or mandatory parameters are not valid
+     * @throws java.lang.IllegalArgumentException if store type or mandatory parameters are not valid
      */
     public GSShapefileDatastoreEncoder(RESTDataStore store) {
     	super(store);
@@ -96,11 +97,21 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
 		}
     }
     
+    /**
+     * <p>setUrl</p>
+     *
+     * @param url a {@link java.net.URL} object.
+     */
     public void setUrl(URL url) {
     	ensureValidURL(url);
     	connectionParameters.set("url", url.toString());
     }
     
+    /**
+     * <p>getUrl</p>
+     *
+     * @return a {@link java.net.URL} object.
+     */
     public URL getUrl() {
     	try {
 			return new URL(ElementUtils.contains(connectionParameters.getRoot(), "description").getTextTrim());
@@ -109,34 +120,74 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
 		}
     }
     
+    /**
+     * <p>setCharset</p>
+     *
+     * @param charset a {@link java.nio.charset.Charset} object.
+     */
     public void setCharset(Charset charset) {
     	connectionParameters.set("charset", charset.name());
     }
     
+    /**
+     * <p>getCharset</p>
+     *
+     * @return a {@link java.nio.charset.Charset} object.
+     */
     public Charset getCharset() {
     	return Charset.forName(ElementUtils.contains(connectionParameters.getRoot(), "charset").getTextTrim());
     }
 
+    /**
+     * <p>setCreateSpatialIndex</p>
+     *
+     * @param createSpatialIndex a boolean.
+     */
     public void setCreateSpatialIndex(boolean createSpatialIndex) {
     	connectionParameters.set("create spatial index", Boolean.toString(createSpatialIndex));
     }
     
+    /**
+     * <p>getCreateSpatialIndex</p>
+     *
+     * @return a boolean.
+     */
     public boolean getCreateSpatialIndex() {
     	return Boolean.parseBoolean(ElementUtils.contains(connectionParameters.getRoot(), "create spatial index").getTextTrim());
     }
     
+    /**
+     * <p>setMemoryMappedBuffer</p>
+     *
+     * @param memoryMappedBuffer a boolean.
+     */
     public void setMemoryMappedBuffer(boolean memoryMappedBuffer) {
     	connectionParameters.set("memory mapped buffer", Boolean.toString(memoryMappedBuffer));
     }
     
+    /**
+     * <p>getMemoryMappedBuffer</p>
+     *
+     * @return a boolean.
+     */
     public boolean getMemoryMappedBuffer() {
     	return Boolean.parseBoolean(ElementUtils.contains(connectionParameters.getRoot(), "memory mapped buffer").getTextTrim());
     }
     
+    /**
+     * <p>setCacheAndReuseMemoryMaps</p>
+     *
+     * @param cacheAndReuseMemoryMaps a boolean.
+     */
     public void setCacheAndReuseMemoryMaps(boolean cacheAndReuseMemoryMaps) {
     	connectionParameters.set("cache and reuse memory maps", Boolean.toString(cacheAndReuseMemoryMaps));
     }
     
+    /**
+     * <p>getCacheAndReuseMemoryMaps</p>
+     *
+     * @return a boolean.
+     */
     public boolean getCacheAndReuseMemoryMaps() {
     	return Boolean.parseBoolean(ElementUtils.contains(connectionParameters.getRoot(), "cache and reuse memory maps").getTextTrim());
     }    
@@ -155,6 +206,8 @@ public class GSShapefileDatastoreEncoder extends GSAbstractDatastoreEncoder {
     }
     
     /**
+     * <p>getValidType</p>
+     *
      * @return {@value #TYPE}
      */
     protected String getValidType() {

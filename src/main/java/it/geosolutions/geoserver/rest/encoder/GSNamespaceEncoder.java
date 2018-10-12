@@ -33,19 +33,23 @@ import java.net.URI;
  * Namespace XML encoder. Namespaces must contain a non empty prefix and a URI:
  *
  * @author Oscar Fonts
+ * @version $Id: $
  */
 public class GSNamespaceEncoder extends PropertyXMLEncoder {
 
+	/** Constant <code>NAMESPACE="namespace"</code> */
 	public final static String NAMESPACE="namespace";
+	/** Constant <code>PREFIX="prefix"</code> */
 	public final static String PREFIX="prefix";
+	/** Constant <code>URI="uri"</code> */
 	public final static String URI="uri";
 
     /**
      * Create a namespace XML encoder.
-     * 
+     *
      * @param prefix the namespace prefix
      * @param uri the namespace URI
-     * @throws IllegalArgumentException if prefix or uri are null or empty
+     * @throws java.lang.IllegalArgumentException if prefix or uri are null or empty
      */
     public GSNamespaceEncoder(String prefix, URI uri) {
     	super(NAMESPACE);
@@ -59,6 +63,7 @@ public class GSNamespaceEncoder extends PropertyXMLEncoder {
     
     /**
      * Get the namespace prefix.
+     *
      * @return the prefix
      */
     public String getPrefix() {
@@ -67,8 +72,9 @@ public class GSNamespaceEncoder extends PropertyXMLEncoder {
 
     /**
      * Change the namespace prefix.
+     *
      * @param prefix the new prefix
-     * @throws IllegalArgumentException if prefix is null or empty
+     * @throws java.lang.IllegalArgumentException if prefix is null or empty
      */
     public void setPrefix(final String prefix) {
     	ensureValidPrefix(prefix);
@@ -77,6 +83,7 @@ public class GSNamespaceEncoder extends PropertyXMLEncoder {
     
     /**
      * Get the namespace uri.
+     *
      * @return the uri
      */
     public URI getURI() {
@@ -86,8 +93,9 @@ public class GSNamespaceEncoder extends PropertyXMLEncoder {
     
     /**
      * change the nampespace uri.
+     *
      * @param uri the new uri
-     * @throws IllegalArgumentException if uri is null or empty
+     * @throws java.lang.IllegalArgumentException if uri is null or empty
      */
     public void setURI(final URI uri) {
     	ensureValidURI(uri);

@@ -35,26 +35,38 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>{@code <coverageStores>
-  <coverageStore>
-    <name>sfdem</name>
-    <atom:link xmlns:atom="http://www.w3.org/2005/Atom"
-            rel="alternate"
-            href="http://localhost:8080/geoserver/rest/workspaces/sf/coveragestores/sfdem.xml"
-            type="application/xml"/>
-  </coverageStore>
-</coverageStores>
+ *  <coverageStore>
+ *    <name>sfdem</name>
+ *    <atom:link xmlns:atom="http://www.w3.org/2005/Atom"
+ *            rel="alternate"
+ *            href="http://localhost:8080/geoserver/rest/workspaces/sf/coveragestores/sfdem.xml"
+ *            type="application/xml"/>
+ *  </coverageStore>
+ *</coverageStores>
  *
-}</PRE>
+ *}</PRE>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTCoverageStoreList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTCoverageStoreList} object.
+     */
     public static RESTCoverageStoreList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTCoverageStoreList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTCoverageStoreList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTCoverageStoreList(Element list) {
         super(list);
     }

@@ -35,27 +35,39 @@ import org.jdom.Element;
  *
  * <P>This is the XML REST representation:
  * <PRE>{@code <coverages>
-  <coverage>
-    <name>5-25-1-120-11-DOF</name>
-    <atom:link 
-        xmlns:atom="http://www.w3.org/2005/Atom" 
-        rel="alternate" 
-        href="http://localhost:8080/geoserver/rest/workspaces/pippo/coveragestores/pippoLayer/coverages/5-25-1-120-11-DOF.xml" 
-        type="application/xml"/>
-  </coverage>
-</coverages>
+ *  <coverage>
+ *    <name>5-25-1-120-11-DOF</name>
+ *    <atom:link
+ *        xmlns:atom="http://www.w3.org/2005/Atom"
+ *        rel="alternate"
+ *        href="http://localhost:8080/geoserver/rest/workspaces/pippo/coveragestores/pippoLayer/coverages/5-25-1-120-11-DOF.xml"
+ *        type="application/xml"/>
+ *  </coverage>
+ *</coverages>
  *
-}</PRE>
+ *}</PRE>
  *
  * @author ETj (etj at geo-solutions.it)
+ * @version $Id: $
  */
 public class RESTCoverageList extends RESTAbstractList<NameLinkElem> {
 
+    /**
+     * <p>build</p>
+     *
+     * @param response a {@link java.lang.String} object.
+     * @return a {@link it.geosolutions.geoserver.rest.decoder.RESTCoverageList} object.
+     */
     public static RESTCoverageList build(String response) {
         Element elem = JDOMBuilder.buildElement(response);
         return elem == null? null : new RESTCoverageList(elem);
 	}
 
+    /**
+     * <p>Constructor for RESTCoverageList.</p>
+     *
+     * @param list a {@link org.jdom.Element} object.
+     */
     protected RESTCoverageList(Element list) {
         super(list);
     }
