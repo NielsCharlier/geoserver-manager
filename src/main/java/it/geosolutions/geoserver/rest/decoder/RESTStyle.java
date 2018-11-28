@@ -82,6 +82,28 @@ public class RESTStyle {
     public String getFileName() {
         return elem.getChildText("filename");
     }
+    
+    /**
+     * <p>getFormat</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getFormat() {     
+        return elem.getChildText("format");
+    }
+    
+    /**
+     * <p>getVersion</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
+    public String getVersion() {       
+        if(elem.getChild("languageVersion") != null) {
+            return elem.getChild("languageVersion").getChildText("version");
+        } else {
+            return null;
+        }
+    }
 
     /**
      * <p>getWorkspace</p>
