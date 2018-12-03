@@ -646,6 +646,42 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
                 "application/vnd.ogc.sld+xml", gsuser, gspass);
         return result != null;
     }
+    
+        
+    /**
+     * Update a Style.
+     *
+     * @param sldBody the new SLD document as a String.
+     * @param name the Style name.
+     * @param raw the raw format
+     * @return <TT>true</TT> if the operation completed successfully.
+     * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
+     */
+    public boolean updateStyleInWorkspace(final String sldBody, final String workspace, 
+            final String name, final boolean raw) 
+            throws IllegalArgumentException {
+        /*
+         * This is the equivalent call with cUrl:
+         *
+         * {@code curl -u admin:geoserver -XPUT \ -H 'Content-type: application/vnd.ogc.sld+xml' \ -d @$FULLSLD \
+         * http://$GSIP:$GSPORT/$SERVLET/rest/styles?name=$name&raw=$raw}
+         */
+        if (sldBody == null || sldBody.isEmpty()) {
+            throw new IllegalArgumentException("The style body may not be null or empty");
+        } else if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The style name may not be null or empty");
+        }
+        
+        StringBuilder sUrl = new StringBuilder(buildUrl(workspace, name, null));
+        Util.appendParameter(sUrl, "raw", ""+raw);
+        String contentType = GeoServerRESTPublisher.Format.SLD.getContentType();
+        if(!this.checkSLD10Version(sldBody)){
+            contentType = GeoServerRESTPublisher.Format.SLD_1_1_0.getContentType();
+        }
+        LOGGER.debug("PUTting style " + name + " to " + sUrl + " using version: " + contentType);
+        String result = HTTPUtils.put(sUrl.toString(), sldBody, contentType, gsuser, gspass);
+        return result != null;
+    }
 
     /**
      * Update a Style.
