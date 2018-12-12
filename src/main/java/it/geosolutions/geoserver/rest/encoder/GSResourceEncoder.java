@@ -165,6 +165,10 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
     protected void addMetadata(String key, XmlElement dimensionInfo) {
         metadata.add(key, dimensionInfo.getRoot());
     }
+    
+    public void addMetadata(String key, Element custom) {
+        metadata.add(key, custom);
+    }
 
     /**
      * <p>Setter for the field <code>metadata</code>.</p>
@@ -221,6 +225,16 @@ public abstract class GSResourceEncoder extends PropertyXMLEncoder {
      */
     public void setMetadataString(String key, String value) {
         metadata.set(key, value);
+    }
+    
+    /**
+     * <p>addMetadataString</p>
+     *
+     * @param key a {@link java.lang.String} object.
+     * @param value a {@link java.lang.String} object.
+     */
+    public void addMetadataString(String key, String value) {
+        metadata.add(key, value);
     }
 
     /**
