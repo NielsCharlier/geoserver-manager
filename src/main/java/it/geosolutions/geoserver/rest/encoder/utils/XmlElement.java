@@ -45,8 +45,9 @@ public class XmlElement{
 
     private static final long serialVersionUID = 1L;
 	
-	private final static XMLOutputter OUTPUTTER = new XMLOutputter(Format.getCompactFormat());
-	
+    //RAW format so that newlines are preserved!
+        private final static XMLOutputter OUTPUTTER = new XMLOutputter(Format.getRawFormat());
+        
 	/**
 	 * <p>Constructor for XmlElement.</p>
 	 *
