@@ -201,7 +201,7 @@ public class GeoWebCacheREST {
      */
     public boolean truncateLayer(final String layerName) {
         final String url = restURL + "/gwc/rest/masstruncate";
-        final String xml = "<truncateLayer><layerName>" + HTTPUtils.enc(layerName) + "</layerName></truncateLayer>";
+        final String xml = "<truncateLayer><layerName>" + layerName + "</layerName></truncateLayer>";
         
         String sendResult = HTTPUtils.postXml(url, xml, gsuser, gspass);
         if (sendResult != null) {
