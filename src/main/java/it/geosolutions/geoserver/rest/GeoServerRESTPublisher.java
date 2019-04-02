@@ -283,7 +283,7 @@ public class GeoServerRESTPublisher {
      * @return <TT>true</TT> if the Namespace was successfully updated.
      */
     public boolean updateNamespace(final String prefix, final URI uri) {
-        final String sUrl = restURL + "/rest/namespaces/" + encode(prefix);
+        final String sUrl = restURL + "/rest/namespaces/" + HTTPUtils.enc(prefix);
         final GSNamespaceEncoder nsenc = new GSNamespaceEncoder(prefix, uri);
         final String nsxml = nsenc.toString();
         final String result = HTTPUtils.put(sUrl, nsxml, "application/xml", gsuser, gspass);
@@ -866,7 +866,8 @@ public class GeoServerRESTPublisher {
             throw new IllegalArgumentException("Null argument");
         }
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
-                .append(workspace).append("/").append(dsType).append("/").append(storeName)
+                .append(HTTPUtils.enc(workspace)).append("/").append(dsType).append("/")
+                .append(HTTPUtils.enc(storeName))
                 .append("/").append(method).append(".").append(extension);
 
         if (configure != null) {
@@ -973,7 +974,7 @@ public class GeoServerRESTPublisher {
      */
     public boolean createPostGISDatastore(String workspace,
             GSPostGISDatastoreEncoder datastoreEncoder) {
-        String sUrl = restURL + "/rest/workspaces/" + workspace + "/datastores/";
+        String sUrl = restURL + "/rest/workspaces/" + HTTPUtils.enc(workspace) + "/datastores/";
         String xml = datastoreEncoder.toString();
         String result = HTTPUtils.postXml(sUrl, xml, gsuser, gspass);
         return result != null;
@@ -1027,7 +1028,7 @@ public class GeoServerRESTPublisher {
          */
         String ftypeXml = fte.toString();
         StringBuilder postUrl = new StringBuilder(restURL).append("/rest/workspaces/")
-                .append(workspace).append("/datastores/").append(storename).append("/featuretypes");
+                .append(HTTPUtils.enc(workspace)).append("/datastores/").append(HTTPUtils.enc(storename)).append("/featuretypes");
 
         final String layername = fte.getName();
         if (layername == null || layername.isEmpty()) {
@@ -2076,7 +2077,8 @@ public class GeoServerRESTPublisher {
                         + "' not exists locally. Continue: please check existance on the remote server.");
         }
 
-        String sUrl = restURL + "/rest/workspaces/" + workspace + "/coveragestores/" + storeName
+        String sUrl = restURL + "/rest/workspaces/" + HTTPUtils.enc(workspace) + "/coveragestores/" + 
+                HTTPUtils.enc(storeName)
                 + "/external.imagemosaic?configure=" + configure.toString() + "&update="
                 + update.toString();
         String sendResult = HTTPUtils.put(sUrl, mosaicDir.toURI().toString(), "text/plain", gsuser,
@@ -2213,9 +2215,9 @@ public class GeoServerRESTPublisher {
                 fqLayerName = workspace + ":" + layerName;
             }
             // delete related layer
-            URL deleteLayerUrl = new URL(restURL + "/rest/layers/" + fqLayerName);
+            URL deleteLayerUrl = new URL(restURL + "/rest/layers/" + HTTPUtils.enc(fqLayerName));
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Going to delete " + "/rest/layers/" + fqLayerName);
+                LOGGER.debug("Going to delete " + "/rest/layers/" + HTTPUtils.enc(fqLayerName));
             }
             boolean layerDeleted = HTTPUtils
                     .delete(deleteLayerUrl.toExternalForm(), gsuser, gspass);
@@ -2224,19 +2226,21 @@ public class GeoServerRESTPublisher {
                 return false;
             }
             // delete the coverage
-            URL deleteCovUrl = new URL(restURL + "/rest/workspaces/" + workspace
-                    + "/coveragestores/" + storename + "/coverages/" + layerName);
+            URL deleteCovUrl = new URL(restURL + "/rest/workspaces/" + HTTPUtils.enc(workspace)
+                    + "/coveragestores/" + HTTPUtils.enc(storename) + "/coverages/" + HTTPUtils.enc(layerName));
             if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Going to delete " + "/rest/workspaces/" + workspace
-                        + "/coveragestores/" + storename + "/coverages/" + layerName);
+                LOGGER.debug("Going to delete " + "/rest/workspaces/" + HTTPUtils.enc(workspace)
+                        + "/coveragestores/" + HTTPUtils.enc(storename) + "/coverages/" + HTTPUtils.enc(layerName));
             }
             boolean covDeleted = HTTPUtils.delete(deleteCovUrl.toExternalForm(), gsuser, gspass);
             if (!covDeleted) {
-                LOGGER.warn("Could not delete coverage " + workspace + ":" + storename + "/"
-                        + layerName + ", but layer was deleted.");
+                LOGGER.warn("Could not delete coverage " + HTTPUtils.enc(workspace) + ":" + 
+                        HTTPUtils.enc(storename) + "/"
+                        + HTTPUtils.enc(layerName) + ", but layer was deleted.");
             } else {
-                LOGGER.info("Coverage successfully deleted " + workspace + ":" + storename + "/"
-                        + layerName);
+                LOGGER.info("Coverage successfully deleted " + HTTPUtils.enc(workspace) + ":" + 
+                        HTTPUtils.enc(storename) + "/"
+                        + HTTPUtils.enc(layerName));
             }
             return covDeleted;
 
@@ -2278,7 +2282,7 @@ public class GeoServerRESTPublisher {
                 fqLayerName = workspace + ":" + layerName;
             }
             // delete related layer
-            URL deleteLayerUrl = new URL(restURL + "/rest/layers/" + fqLayerName);
+            URL deleteLayerUrl = new URL(restURL + "/rest/layers/" + HTTPUtils.enc(fqLayerName));
             boolean layerDeleted = HTTPUtils
                     .delete(deleteLayerUrl.toExternalForm(), gsuser, gspass);
             if (!layerDeleted) {
@@ -2286,8 +2290,8 @@ public class GeoServerRESTPublisher {
                 return false;
             }
             // delete the coverage
-            URL deleteFtUrl = new URL(restURL + "/rest/workspaces/" + workspace + "/datastores/"
-                    + storename + "/featuretypes/" + layerName);
+            URL deleteFtUrl = new URL(restURL + "/rest/workspaces/" + HTTPUtils.enc(workspace) + "/datastores/"
+                    + HTTPUtils.enc(storename) + "/featuretypes/" + HTTPUtils.enc(layerName));
             boolean ftDeleted = HTTPUtils.delete(deleteFtUrl.toExternalForm(), gsuser, gspass);
             if (!ftDeleted) {
                 LOGGER.warn("Could not delete featuretype " + workspace + ":" + storename + "/"
@@ -2420,8 +2424,8 @@ public class GeoServerRESTPublisher {
                 throw new IllegalArgumentException("Arguments may not be empty!");
 
             final StringBuilder url = new StringBuilder(restURL);
-            url.append("/rest/workspaces/").append(workspace).append("/").append(type).append("/")
-                    .append(storename);
+            url.append("/rest/workspaces/").append(HTTPUtils.enc(workspace)).append("/").append(type).append("/")
+                    .append(HTTPUtils.enc(storename));
             url.append("?recurse=").append(recurse);
             if(purge != null)
                 url.append("&purge=").append(purge);
@@ -2475,7 +2479,7 @@ public class GeoServerRESTPublisher {
                 throw new IllegalArgumentException("Arguments may not be empty!");
 
             StringBuffer url = new StringBuffer(restURL).append("/rest/workspaces/").append(
-                    workspace);
+                    HTTPUtils.enc(workspace));
             if (recurse)
                 url.append("?recurse=true");
 
@@ -2520,9 +2524,9 @@ public class GeoServerRESTPublisher {
     public boolean removeLayerGroup(String workspace, String name) {
         String url = restURL + "/rest";
         if (workspace == null) {
-            url += "/layergroups/" + name;
+            url += "/layergroups/" + HTTPUtils.enc(name);
         } else {
-            url += "/workspaces/" + workspace + "/layergroups/" + name;
+            url += "/workspaces/" + HTTPUtils.enc(workspace) + "/layergroups/" + HTTPUtils.enc(name);
         }
 
         try {
@@ -2585,7 +2589,7 @@ public class GeoServerRESTPublisher {
             return false;
         }
 
-        final String url = restURL + "/rest/layers/" + fqLayerName;
+        final String url = restURL + "/rest/layers/" + HTTPUtils.enc(fqLayerName);
 
         boolean result = HTTPUtils.delete(url, gsuser, gspass);
         if (result) {
@@ -2615,8 +2619,8 @@ public class GeoServerRESTPublisher {
      */
     public boolean reloadStore(String workspace, final String storeName, StoreType storeType)
             throws IllegalArgumentException {
-        final String url = HTTPUtils.append(this.restURL, "/rest/workspaces/", workspace, "/",
-                storeType.toString(), "/", storeName, ".xml").toString();
+        final String url = HTTPUtils.append(this.restURL, "/rest/workspaces/", HTTPUtils.enc(workspace), "/",
+                storeType.toString(), "/", HTTPUtils.enc(storeName), ".xml").toString();
         final String store = HTTPUtils.get(url, this.gsuser, this.gspass);
 
         if (store != null) {
@@ -2694,7 +2698,7 @@ public class GeoServerRESTPublisher {
 
         final String fqLayerName = workspace + ":" + resourceName;
 
-        final String url = restURL + "/rest/layers/" + fqLayerName;
+        final String url = restURL + "/rest/layers/" + HTTPUtils.enc(fqLayerName);
 
         String layerXml = layer.toString();
         String sendResult = HTTPUtils.putXml(url, layerXml, gsuser, gspass);
@@ -2735,7 +2739,7 @@ public class GeoServerRESTPublisher {
             url += "/layergroups/";
         } else {
             group.setWorkspace(workspace);
-            url += "/workspaces/" + workspace + "/layergroups/";
+            url += "/workspaces/" + HTTPUtils.enc(workspace) + "/layergroups/";
         }
 
         group.setName(name);
@@ -2775,9 +2779,9 @@ public class GeoServerRESTPublisher {
     public boolean configureLayerGroup(String workspace, String name, GSLayerGroupEncoder group) {
         String url = restURL + "/rest";
         if (workspace == null) {
-            url += "/layergroups/" + name;
+            url += "/layergroups/" + HTTPUtils.enc(name);
         } else {
-            url += "/workspaces/" + workspace + "/layergroups/" + name;
+            url += "/workspaces/" + HTTPUtils.enc(workspace) + "/layergroups/" + HTTPUtils.enc(name);
         }
 
         String sendResult = HTTPUtils.putXml(url, group.toString(), gsuser, gspass);
@@ -2857,8 +2861,9 @@ public class GeoServerRESTPublisher {
         }
 
         // configure the selected coverage
-        final String url = restURL + "/rest/workspaces/" + wsname + "/coveragestores/" + csname
-                + "/coverages/" + coverageName + ".xml";
+        final String url = restURL + "/rest/workspaces/" + HTTPUtils.enc(wsname) + "/coveragestores/" 
+                + HTTPUtils.enc(csname)
+                + "/coverages/" + HTTPUtils.enc(coverageName) + ".xml";
 
         final String xmlBody = ce.toString();
         final String sendResult = HTTPUtils.putXml(url, xmlBody, gsuser, gspass);
@@ -2927,7 +2932,7 @@ public class GeoServerRESTPublisher {
             throw new IllegalArgumentException("Null argument");
         }
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
-                .append(workspace).append("/").append(dsType).append("/").append(storeName)
+                .append(HTTPUtils.enc(workspace)).append("/").append(dsType).append("/").append(HTTPUtils.enc(storeName))
                 .append("/").append(dsType.getTypeNameWithFormat(Format.XML));
 
         final String resourceName = re.getName();
@@ -2975,8 +2980,8 @@ public class GeoServerRESTPublisher {
             throw new IllegalArgumentException("Null argument");
         }        
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
-                .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(resName)
+                .append(HTTPUtils.enc(workspace)).append("/").append(dsType).append("/").append(HTTPUtils.enc(storeName))
+                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(HTTPUtils.enc(resName))
                 .append(".xml");
 
         final boolean sendResult = HTTPUtils.delete(sbUrl.toString(), gsuser, gspass);
@@ -3048,8 +3053,8 @@ public class GeoServerRESTPublisher {
         }
 
         StringBuilder sbUrl = new StringBuilder(restURL).append("/rest/workspaces/")
-                .append(workspace).append("/").append(dsType).append("/").append(storeName)
-                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(resourceName)
+                .append(HTTPUtils.enc(workspace)).append("/").append(dsType).append("/").append(HTTPUtils.enc(storeName))
+                .append("/").append(dsType.getTypeName().toLowerCase()).append("/").append(HTTPUtils.enc(resourceName))
                 .append(".xml");
 
         final String xmlBody = re.toString();
@@ -3128,21 +3133,6 @@ public class GeoServerRESTPublisher {
             }
         }
         return sbUrl.toString();
-    }
-
-    /**
-     * URL-encodes a String.
-     *
-     * @param s The original string.
-     * @return The encoded string.
-     */
-    protected String encode(String s) {
-        // try {
-        // return URLEncoder.encode(s,"UTF-8");
-        // } catch (UnsupportedEncodingException e) {
-        // LOGGER.warn("Error encoding :"+s+" with UTF-8: "+e.getLocalizedMessage());
-        return URLEncoder.encode(s);
-        // }
     }
 
     // ==> StructuredCoverageGridReader
