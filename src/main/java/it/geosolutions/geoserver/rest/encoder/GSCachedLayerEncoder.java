@@ -29,6 +29,7 @@ import it.geosolutions.geoserver.rest.decoder.utils.JDOMBuilder;
 import it.geosolutions.geoserver.rest.encoder.utils.ElementUtils;
 import it.geosolutions.geoserver.rest.encoder.utils.PropertyXMLEncoder;
 
+
 import org.jdom.Element;
 
 /**
@@ -48,14 +49,17 @@ public class GSCachedLayerEncoder extends PropertyXMLEncoder {
     /** Constant <code>PARAMETER_FILTERS="parameterFilters"</code> */
     public final static String PARAMETER_FILTERS = "parameterFilters";
 
-    final private Element mimeFormatsListEncoder = new Element(MIME_FORMATS);
+    final private Element mimeFormatsListEncoder;
 
-    final private Element gridSubsetsListEncoder = new Element(GRIDSUBSETS);
+    final private Element gridSubsetsListEncoder;
 
-    final private Element parameterFiltersListEncoder = new Element(PARAMETER_FILTERS);
+    final private Element parameterFiltersListEncoder;
     
     private GSCachedLayerEncoder(Element root) {
         super(root);
+        this.mimeFormatsListEncoder = root.getChild(MIME_FORMATS);
+        this.gridSubsetsListEncoder = root.getChild(GRIDSUBSETS);
+        this.parameterFiltersListEncoder = root.getChild(PARAMETER_FILTERS);
     }
     
     /**
@@ -88,6 +92,9 @@ public class GSCachedLayerEncoder extends PropertyXMLEncoder {
     public GSCachedLayerEncoder(boolean encodeLists) {
         super("GeoServerLayer");
         setEnabled(true);
+        mimeFormatsListEncoder = new Element(MIME_FORMATS);
+        gridSubsetsListEncoder = new Element(GRIDSUBSETS);
+        parameterFiltersListEncoder = new Element(PARAMETER_FILTERS);
         if (encodeLists) {
             addContent(mimeFormatsListEncoder);
             addContent(gridSubsetsListEncoder);
@@ -348,7 +355,74 @@ public class GSCachedLayerEncoder extends PropertyXMLEncoder {
         final Element elName = new Element("gridSetName");
         elName.setText(gridSetName);
         el.addContent(elName);
+        if (zoomStart != null) {
+            final Element elZoomStart = new Element("zoomStart");
+            elZoomStart.setText(zoomStart.toString());
+            el.addContent(elZoomStart);
+        }
+        if (zoomStop != null) {
+            final Element elZoomStop = new Element("zoomStop");
+            elZoomStop.setText(zoomStop.toString());
+            el.addContent(elZoomStop);
+        }
+        if (minCachedLevel != null) {
+            final Element elMin = new Element("minCachedLevel");
+            elMin.setText(minCachedLevel.toString());
+            el.addContent(elMin);
+        }
+        if (maxCachedLevel != null) {
+            final Element elMax = new Element("maxCachedLevel");
+            elMax.setText(maxCachedLevel.toString());
+            el.addContent(elMax);
+        }
         gridSubsetsListEncoder.addContent(el);
+    }
+    
+    public String getGridSubsetName(int index) {
+        return ((Element) gridSubsetsListEncoder.getChildren().get(index))
+                .getChildText("gridSetName").trim();
+    }
+
+    public Integer getGridSubsetZoomStart(int index) {
+        String s = ((Element) gridSubsetsListEncoder.getChildren().get(index))
+                .getChildText("zoomStart");
+        return s == null ? null : Integer.parseInt(s);
+    }
+
+    public Integer getGridSubsetZoomStop(int index) {
+        String s = ((Element) gridSubsetsListEncoder.getChildren().get(index))
+                .getChildText("zoomStop");
+        return s == null ? null : Integer.parseInt(s);
+    }
+
+    public Integer getGridSubsetMinCachedLevel(int index) {
+        String s = ((Element) gridSubsetsListEncoder.getChildren().get(index))
+                .getChildText("minCachedLevel");
+        return s == null ? null : Integer.parseInt(s);
+    }
+
+    public Integer getGridSubsetMaxCachedLevel(int index) {
+        String s = ((Element) gridSubsetsListEncoder.getChildren().get(index))
+                .getChildText("maxCachedLevel");
+        return s == null ? null : Integer.parseInt(s);
+    }   
+    
+    public String getMimeFormat(int index) {
+        return ((Element) mimeFormatsListEncoder.getChildren().get(index)).getValue().trim();
+    }
+
+    public String getParameterFilterKey(int index) {
+        return ((Element) parameterFiltersListEncoder.getChildren().get(index)).getChildText("key").trim();
+    }
+
+    public String getParameterFilterDefaultValue(int index) {
+        return ((Element) parameterFiltersListEncoder.getChildren().get(index))
+                .getChildText("defaultValue").trim();
+    }
+
+    public String getParameterFilterType(int index) {
+        return ((Element) parameterFiltersListEncoder.getChildren().get(index))
+                .getName();
     }
 
 }
