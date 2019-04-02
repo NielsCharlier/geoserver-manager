@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -182,7 +181,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param workspace a {@link java.lang.String} object.
      */
     public RESTStyleList getStyles(String workspace) {
-        String url = "/rest/workspaces/"+workspace+"/styles.xml";
+        String url = "/rest/workspaces/"+ HTTPUtils.enc(workspace) +"/styles.xml";
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("### Retrieving Styles list from " + url);
         }
@@ -758,7 +757,6 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         if(styleName.contains(":"))
             LOGGER.warn("Style name is going to be changed ["+styleName+"]");
         styleName = styleName.replaceAll(":", "_");
-        styleName = URLEncoder.encode(styleName);
 
         String sUrl = buildUrl(workspace, styleName, null);
 
@@ -805,11 +803,11 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         StringBuilder sUrl = new StringBuilder(gsBaseUrl.toString()).append("/rest");
 
         if(workspace != null)
-            sUrl.append("/workspaces/").append(workspace);
+            sUrl.append("/workspaces/").append(HTTPUtils.enc(workspace));
 
         sUrl.append("/styles");
         if ( name != null && !name.isEmpty()) {
-            sUrl.append("?name=").append(URLEncoder.encode(name));
+            sUrl.append("?name=").append(HTTPUtils.enc(name));
         }
         return sUrl.toString();
     }
@@ -838,9 +836,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
         StringBuilder sUrl = new StringBuilder(gsBaseUrl.toString()).append("/rest");
 
         if(workspace != null)
-            sUrl.append("/workspaces/").append(workspace);
+            sUrl.append("/workspaces/").append(HTTPUtils.enc(workspace));
 
-        sUrl.append("/styles/").append(URLEncoder.encode(name));
+        sUrl.append("/styles/").append(HTTPUtils.enc(name));
                 
         if(ext != null)
             sUrl.append(ext);

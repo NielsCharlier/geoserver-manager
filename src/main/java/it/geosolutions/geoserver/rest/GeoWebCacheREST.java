@@ -91,10 +91,10 @@ public class GeoWebCacheREST {
             throw new IllegalArgumentException("Missing layer name");
         }        
 
-        final String url = restURL + "/gwc/rest/layers/" + layerName + ".xml";
+        final String url = restURL + "/gwc/rest/layers/" + HTTPUtils.enc(layerName) + ".xml";
 
         String layerXml = layer.toString();
-        String sendResult = HTTPUtils.putXml(url, layerXml, gsuser, gspass);
+        String sendResult = HTTPUtils.putXml(url, HTTPUtils.enc(layerXml), gsuser, gspass);
         if (sendResult != null) {
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info("Cached layer successfully configured: " + layerName);
@@ -128,7 +128,7 @@ public class GeoWebCacheREST {
             throw new IllegalArgumentException("Missing layer name");
         }        
 
-        final String url = restURL + "/gwc/rest/layers/" + layerName + ".xml";
+        final String url = restURL + "/gwc/rest/layers/" + HTTPUtils.enc(layerName) + ".xml";
 
         String layerXml = layer.toString();
         String sendResult = HTTPUtils.postXml(url, layerXml, gsuser, gspass);
@@ -158,7 +158,7 @@ public class GeoWebCacheREST {
             throw new IllegalArgumentException("Empty argument");
         }     
 
-        final String url = restURL + "/gwc/rest/layers/" + layerName + ".xml";
+        final String url = restURL + "/gwc/rest/layers/" + HTTPUtils.enc(layerName) + ".xml";
 
         return GSCachedLayerEncoder.build(HTTPUtils.get(url, gsuser, gspass));
     }
@@ -177,7 +177,7 @@ public class GeoWebCacheREST {
             throw new IllegalArgumentException("Empty argument");
         }     
 
-        final String url = restURL + "/gwc/rest/layers/" + layerName + ".xml";
+        final String url = restURL + "/gwc/rest/layers/" + HTTPUtils.enc(layerName) + ".xml";
 
         boolean sendResult = HTTPUtils.delete(url, gsuser, gspass);
         
@@ -201,7 +201,7 @@ public class GeoWebCacheREST {
      */
     public boolean truncateLayer(final String layerName) {
         final String url = restURL + "/gwc/rest/masstruncate";
-        final String xml = "<truncateLayer><layerName>" + layerName + "</layerName></truncateLayer>";
+        final String xml = "<truncateLayer><layerName>" + HTTPUtils.enc(layerName) + "</layerName></truncateLayer>";
         
         String sendResult = HTTPUtils.postXml(url, xml, gsuser, gspass);
         if (sendResult != null) {

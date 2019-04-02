@@ -67,7 +67,8 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      *         <TT>false</TT> otherwise
      */
     public boolean create(String workspace, GSAbstractStoreEncoder store) {
-        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", workspace, "/", store.getStoreType().toString(),".",Format.XML.toString()).toString();
+        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", HTTPUtils.enc(workspace), "/", 
+                store.getStoreType().toString(),".",Format.XML.toString()).toString();
         String xml = store.toString();
         String result = HTTPUtils.postXml(sUrl, xml, gsuser, gspass);
         return result != null;
@@ -96,9 +97,9 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * @param storeName a {@link java.lang.String} object.
      */
     public boolean update(String workspace, String storeName, GSAbstractStoreEncoder store) {
-        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", workspace,"/", 
+        String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", HTTPUtils.enc(workspace),"/", 
                 store.getStoreType().toString(),"/",
-                storeName,".",Format.XML.toString()).toString();
+                HTTPUtils.enc(storeName),".",Format.XML.toString()).toString();
         String xml = store.toString();
         String result = HTTPUtils.putXml(sUrl, xml, gsuser, gspass);
         return result != null;
@@ -120,7 +121,8 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
 //            if (workspace.isEmpty() || storename.isEmpty())
 //                throw new IllegalArgumentException("Arguments may not be empty!");
 
-            final StringBuilder url=HTTPUtils.append(gsBaseUrl,"/rest/workspaces/",workspace,"/", store.getStoreType().toString(), "/",store.getName());
+            final StringBuilder url=HTTPUtils.append(gsBaseUrl,"/rest/workspaces/",HTTPUtils.enc(workspace),"/", 
+                    store.getStoreType().toString(), "/",HTTPUtils.enc(store.getName()));
             if (recurse)
                 url.append("?recurse=true");
             URL deleteStore;

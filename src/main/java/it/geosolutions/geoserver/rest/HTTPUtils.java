@@ -34,6 +34,7 @@ import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +70,14 @@ import org.slf4j.LoggerFactory;
  */
 public class HTTPUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(HTTPUtils.class);
+    
+    public static String enc(String str) {
+        try {
+            return URLEncoder.encode(str, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return str;
+        }
+    }
 
     /**
      * Performs an HTTP GET on the given URL.

@@ -29,7 +29,6 @@ import it.geosolutions.geoserver.rest.manager.GeoServerRESTStoreManager;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTStructuredGridCoverageReaderManager;
 import it.geosolutions.geoserver.rest.manager.GeoServerRESTStyleManager;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
