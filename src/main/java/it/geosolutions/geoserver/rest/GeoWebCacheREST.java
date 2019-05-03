@@ -94,7 +94,7 @@ public class GeoWebCacheREST {
         final String url = restURL + "/gwc/rest/layers/" + HTTPUtils.enc(layerName) + ".xml";
 
         String layerXml = layer.toString();
-        String sendResult = HTTPUtils.putXml(url, HTTPUtils.enc(layerXml), gsuser, gspass);
+        String sendResult = HTTPUtils.putXml(url, layerXml, gsuser, gspass);
         if (sendResult != null) {
             if (LOGGER.isInfoEnabled()) {
                 LOGGER.info("Cached layer successfully configured: " + layerName);
