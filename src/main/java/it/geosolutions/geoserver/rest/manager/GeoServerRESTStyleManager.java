@@ -29,6 +29,8 @@ import it.geosolutions.geoserver.rest.HTTPUtils;
 import it.geosolutions.geoserver.rest.Util;
 import it.geosolutions.geoserver.rest.decoder.RESTStyle;
 import it.geosolutions.geoserver.rest.decoder.RESTStyleList;
+import it.geosolutions.geoserver.rest.encoder.GSStyleEncoder;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -705,6 +707,31 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
 
         final String result = HTTPUtils.put(sUrl, sldFile,
                 "application/vnd.ogc.sld+xml", gsuser, gspass);
+        return result != null;
+    }
+
+    /**
+     * Update a Style.
+     *
+     * @param sldFile the File containing the SLD document.
+     * @param name the Style name.
+     * @return <TT>true</TT> if the operation completed successfully.
+     * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
+     * @since GeoServer 2.2
+     * @param workspace a {@link java.lang.String} object.
+     */
+    public boolean updateStyleInWorkspace(final String workspace, final GSStyleEncoder encoder, final String name)
+            throws IllegalArgumentException {
+
+        if (encoder == null) {
+            throw new IllegalArgumentException("Unable to updateStyle using a null parameter encoder");
+        } else if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The style name may not be null or empty");
+        }
+
+        final String sUrl = buildUrl(workspace, name, null);
+
+        final String result = HTTPUtils.putXml(sUrl, encoder.toString(), gsuser, gspass);
         return result != null;
     }
     
