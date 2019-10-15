@@ -40,7 +40,7 @@ import org.jdom.Element;
 import org.jdom.Namespace;
 
 /**
- * Parse <TT>Layer</TT>s returned as XML REST objects.
+ * Parse Layers returned as XML REST objects.
  *
  * <P>This is the XML REST representation:
  * <PRE>

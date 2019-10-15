@@ -169,8 +169,8 @@ public class HTTPUtils {
      * @param contentType The content-type to advert in the PUT.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String put(String url, File file, String contentType, String username, String pw) {
         return put(url, new FileRequestEntity(file, contentType), username, pw);
@@ -186,8 +186,8 @@ public class HTTPUtils {
      * @param contentType The content-type to advert in the PUT.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String put(String url, String content, String contentType, String username, String pw) {
         try {
@@ -206,8 +206,8 @@ public class HTTPUtils {
      * @param content The XML content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String putXml(String url, String content, String username, String pw) {
         return put(url, content, "text/xml", username, pw);
@@ -221,8 +221,8 @@ public class HTTPUtils {
      * @param content The JSON Object to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String putJson(String url, String content, String username, String pw) {
         return put(url, content, "application/json", username, pw);
@@ -236,8 +236,8 @@ public class HTTPUtils {
      * @param requestEntity The request to be sent.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String put(String url, RequestEntity requestEntity, String username, String pw) {
         return send(new PutMethod(url), url, requestEntity, username, pw);
@@ -252,8 +252,8 @@ public class HTTPUtils {
      * @param contentType The content-type to advert in the POST.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String post(String url, File file, String contentType, String username, String pw) {
         return post(url, new FileRequestEntity(file, contentType), username, pw);
@@ -269,8 +269,8 @@ public class HTTPUtils {
      * @param contentType The content-type to advert in the POST.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String post(String url, String content, String contentType, String username, String pw) {
         try {
@@ -289,8 +289,8 @@ public class HTTPUtils {
      * @param dir The folder containing the attachments.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String postMultipartForm(String url, File dir, String username, String pw) {
         try {
@@ -319,8 +319,8 @@ public class HTTPUtils {
      * @param content The XML content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String postXml(String url, String content, String username, String pw) {
         return post(url, content, "text/xml", username, pw);
@@ -334,8 +334,8 @@ public class HTTPUtils {
      * @param content The JSON content to be sent as a String.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String postJson(String url, String content, String username, String pw) {
         return post(url, content, "application/json", username, pw);
@@ -349,8 +349,8 @@ public class HTTPUtils {
      * @param requestEntity The request to be sent.
      * @param username Basic auth credential. No basic auth if null.
      * @param pw Basic auth credential. No basic auth if null.
-     * @return the HTTP response or <TT>null</TT> on errors.
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
+     * @return the HTTP response or null on errors.
      */
     public static String post(String url, RequestEntity requestEntity, String username, String pw) {
         return send(new PostMethod(url), url, requestEntity, username, pw);
@@ -369,7 +369,7 @@ public class HTTPUtils {
      * are accepted as successful codes; in these cases the response string will
      * be returned.
      * 
-     * @return the HTTP response or <TT>null</TT> on errors.
+     * @return the HTTP response or null on errors.
      */
     private static String send(final EntityEnclosingMethod httpMethod, String url,
                                RequestEntity requestEntity, String username, String pw) {

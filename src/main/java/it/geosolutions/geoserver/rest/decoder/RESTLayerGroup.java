@@ -30,7 +30,7 @@ import it.geosolutions.geoserver.rest.decoder.utils.JDOMBuilder;
 import org.jdom.Element;
 
 /**
- * Parse <TT>LayerGroup</TT>s returned as XML REST objects.
+ * Parse LayerGroups returned as XML REST objects.
  *
  * <P>This is the XML REST representation:
  * <PRE>

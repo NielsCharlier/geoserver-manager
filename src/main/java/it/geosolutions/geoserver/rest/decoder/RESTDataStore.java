@@ -34,7 +34,7 @@ import java.util.Map;
 import org.jdom.Element;
 
 /**
- * Parse <TT>DataStore</TT>s returned as XML REST objects.
+ * Parse DataStores returned as XML REST objects.
  * <P>
  * This is the XML document returned by GeoServer when requesting a DataStore:
  * <PRE>

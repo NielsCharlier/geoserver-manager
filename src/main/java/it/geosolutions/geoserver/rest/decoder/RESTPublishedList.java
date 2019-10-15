@@ -31,7 +31,7 @@ import org.jdom.Element;
 
 
 /**
- * Parse <TT>published</TT>s returned as XML REST objects.
+ * Parse publisheds returned as XML REST objects.
  *
  * This is the XML REST representation:
  * <pre>{@code

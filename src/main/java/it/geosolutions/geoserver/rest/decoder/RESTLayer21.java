@@ -9,7 +9,7 @@ import java.util.List;
 import org.jdom.Element;
 
 /**
- * Parse <TT>Layer</TT>s returned as XML REST objects. Applicable to GS 2.1 for
+ * Parse Layers returned as XML REST objects. Applicable to GS 2.1 for
  * decoding: - AuthorityURLs - Identifiers - advertised property value
  *
  * <P>

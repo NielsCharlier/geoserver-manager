@@ -63,8 +63,8 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      *            will also be the prefix of any layer names contained in the
      *            store.
      * @param store the set of parameters to be set to the store (including connection parameters).
-     * @return <TT>true</TT> if the store has been successfully created,
-     *         <TT>false</TT> otherwise
+     * @return true if the store has been successfully created,
+     *         false otherwise
      */
     public boolean create(String workspace, GSAbstractStoreEncoder store) {
         String sUrl = HTTPUtils.append(gsBaseUrl, "/rest/workspaces/", HTTPUtils.enc(workspace), "/", 
@@ -79,8 +79,8 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      *
      * @param workspace Name of the workspace that contains the store.
      * @param store the set of parameters to be set to the store (including connection parameters).
-     * @return <TT>true</TT> if the store has been successfully updated,
-     *         <TT>false</TT> otherwise
+     * @return true if the store has been successfully updated,
+     *         false otherwise
      */
     public boolean update(String workspace, GSAbstractStoreEncoder store) {
         return update(workspace, store.getName(), store);
@@ -92,8 +92,8 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      *
      * @param workspace Name of the workspace that contains the store.
      * @param store the set of parameters to be set to the store (including connection parameters).
-     * @return <TT>true</TT> if the store has been successfully updated,
-     *         <TT>false</TT> otherwise
+     * @return true if the store has been successfully updated,
+     *         false otherwise
      * @param storeName a {@link java.lang.String} object.
      */
     public boolean update(String workspace, String storeName, GSAbstractStoreEncoder store) {
@@ -111,7 +111,7 @@ public class GeoServerRESTStoreManager extends GeoServerRESTAbstractManager {
      * @param workspace The name of the workspace
      * @param store the set of parameters of the store
      * @param recurse if remove should be performed recursively
-     * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @return true if the CoverageStore was successfully removed.
      * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean remove(final String workspace, final GSAbstractStoreEncoder store,

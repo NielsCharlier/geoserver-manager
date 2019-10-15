@@ -80,7 +80,7 @@ public class GeoServerRESTPublisher {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeoServerRESTPublisher.class);
 
     /**
-     * GeoServer instance base URL. E.g.: <TT>http://localhost:8080/geoserver</TT>.
+     * GeoServer instance base URL. E.g.: http://localhost:8080/geoserver.
      */
     private final String restURL;
 
@@ -100,9 +100,9 @@ public class GeoServerRESTPublisher {
     private final GeoServerRESTImporterManager importerManager;
 
     /**
-     * Creates a <TT>GeoServerRESTPublisher</TT> to connect against a GeoServer instance with the given URL and user credentials.
+     * Creates a GeoServerRESTPublisher to connect against a GeoServer instance with the given URL and user credentials.
      *
-     * @param restURL the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param restURL the base GeoServer URL (e.g.: http://localhost:8080/geoserver)
      * @param username auth credential
      * @param password auth credential
      */
@@ -131,7 +131,7 @@ public class GeoServerRESTPublisher {
      * Won't include data, cached tiles, or logs. Use {@link #backup(String, boolean, boolean, boolean)} to control these parameters.
      *
      * @param backupDir the target Backup Dir String.
-     * @return <TT>id</TT> of the backup.
+     * @return id of the backup.
      * @throws java.lang.IllegalArgumentException if the backupDir is null or empty
      */
     public String backup(final String backupDir) throws IllegalArgumentException {
@@ -151,7 +151,7 @@ public class GeoServerRESTPublisher {
      * @param includedata whether or not include the data dir Boolean.
      * @param includegwc whether or not include the geowebcache dir Boolean.
      * @param includelog whether or not include the log dir Boolean.
-     * @return <TT>id</TT> of the backup.
+     * @return id of the backup.
      * @throws java.lang.IllegalArgumentException if the backupDir is null or empty.
      */
     public String backup(final String backupDir, final boolean includedata,
@@ -184,7 +184,7 @@ public class GeoServerRESTPublisher {
      * Issues a GeoServer RESTORE.
      *
      * @param backupDir the source backup dir.
-     * @return <TT>id</TT> of the backup.
+     * @return id of the backup.
      * @throws java.lang.IllegalArgumentException if the backupDir is null or empty
      */
     public String restore(final String backupDir) throws IllegalArgumentException {
@@ -220,7 +220,7 @@ public class GeoServerRESTPublisher {
      * {@link #createWorkspace(String, URI)}.
      *
      * @param workspace The name of the new workspace.
-     * @return <TT>true</TT> if the workspace was created.
+     * @return true if the workspace was created.
      */
     public boolean createWorkspace(final String workspace) {
         /*
@@ -243,7 +243,7 @@ public class GeoServerRESTPublisher {
      *
      * @param name Name for the new workspace, which will be also its associated namespace prefix.
      * @param uri Namespace URI. Cannot be empty.
-     * @return <TT>true</TT> if the Workspace and its associated namespace were successfully created.
+     * @return true if the Workspace and its associated namespace were successfully created.
      */
     public boolean createWorkspace(final String name, final URI uri) {
         // This is really an alias to createNamespace, as GeoServer
@@ -262,7 +262,7 @@ public class GeoServerRESTPublisher {
      *
      * @param prefix The name of the new Namespace.
      * @param uri The URI of the new Namespace.
-     * @return <TT>true</TT> if the Namespace was successfully created.
+     * @return true if the Namespace was successfully created.
      * @see <a href="http://docs.geoserver.org/stable/en/user/restconfig/rest-config-api.html#namespaces"> GeoServer Documentation</a>
      */
     public boolean createNamespace(final String prefix, final URI uri) {
@@ -280,7 +280,7 @@ public class GeoServerRESTPublisher {
      *
      * @param prefix The prefix of an existing Namespace.
      * @param uri The new URI.
-     * @return <TT>true</TT> if the Namespace was successfully updated.
+     * @return true if the Namespace was successfully updated.
      */
     public boolean updateNamespace(final String prefix, final URI uri) {
         final String sUrl = restURL + "/rest/namespaces/" + HTTPUtils.enc(prefix);
@@ -297,7 +297,7 @@ public class GeoServerRESTPublisher {
      * @param recurse The recurse parameter is used to recursively delete all resources contained in the workspace associated with this Namespace.
      *        This includes data stores, coverage stores, feature types, etc... Allowable values for this parameter are <i>true</i> or <i>false</i>.
      *        The default (safer) value is <i>false</i>.
-     * @return <TT>true</TT> if the Namespace was successfully removed.
+     * @return true if the Namespace was successfully removed.
      */
     public boolean removeNamespace(final String prefix, boolean recurse) {
         // Hack: We are instead calling removeWorkspace, as DELETE on
@@ -315,7 +315,7 @@ public class GeoServerRESTPublisher {
      * Store and publish a Style.
      *
      * @param sldBody the full SLD document as a String.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody) {
         return styleManager.publishStyle(sldBody);
@@ -326,7 +326,7 @@ public class GeoServerRESTPublisher {
      *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      */
     public boolean publishStyle(final String sldBody, final String name)
@@ -338,7 +338,7 @@ public class GeoServerRESTPublisher {
      * Store and publish a Style.
      *
      * @param sldFile the File containing the SLD document.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile) {
         return styleManager.publishStyle(sldFile);
@@ -349,7 +349,7 @@ public class GeoServerRESTPublisher {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name) {
         return styleManager.publishStyle(sldFile, name);
@@ -361,7 +361,7 @@ public class GeoServerRESTPublisher {
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody, String name, boolean raw) {
         return styleManager.publishStyle(sldBody, name, raw);
@@ -373,7 +373,7 @@ public class GeoServerRESTPublisher {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name, boolean raw) {
         return styleManager.publishStyle(sldFile, name, raw);
@@ -385,7 +385,7 @@ public class GeoServerRESTPublisher {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final File sldFile, final String name, boolean raw)
@@ -399,7 +399,7 @@ public class GeoServerRESTPublisher {
      * @param sldBody the new SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name, boolean raw)
@@ -412,7 +412,7 @@ public class GeoServerRESTPublisher {
      *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name)
@@ -425,7 +425,7 @@ public class GeoServerRESTPublisher {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      */
     public boolean updateStyle(final File sldFile, final String name)
@@ -441,7 +441,7 @@ public class GeoServerRESTPublisher {
      *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      */
     public boolean removeStyle(String styleName, final boolean purge)
@@ -456,7 +456,7 @@ public class GeoServerRESTPublisher {
      * The Style will be unpublished and the related SLD file will be removed.
      *
      * @param styleName the name of the Style to remove.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean removeStyle(String styleName) {
         return styleManager.removeStyle(styleName);
@@ -970,7 +970,7 @@ public class GeoServerRESTPublisher {
      * @param workspace Name of the workspace to contain the database. This will also be the prefix of any layer names created from tables in the
      *        database.
      * @param datastoreEncoder the set of parameters to be set to the datastore (including connection params).
-     * @return <TT>true</TT> if the PostGIS datastore has been successfully created, <TT>false</TT> otherwise
+     * @return true if the PostGIS datastore has been successfully created, false otherwise
      */
     public boolean createPostGISDatastore(String workspace,
             GSPostGISDatastoreEncoder datastoreEncoder) {
@@ -1096,7 +1096,6 @@ public class GeoServerRESTPublisher {
      *
      * @param workspace the name of the workspace to use
      * @param storeName the name of the store to create
-     * @param storeName the name of the layer to configure
      * @param storeParams parameters to append to the url (can be null).<br>
      *        Accepted parameters are:<br>
      *        <ul>
@@ -2317,7 +2316,7 @@ public class GeoServerRESTPublisher {
      *
      * @param workspace The name of the workspace
      * @param storename The name of the Datastore to remove.
-     * @return <TT>true</TT> if the datastore was successfully removed.
+     * @return true if the datastore was successfully removed.
      * @deprecated will be removed in next release use {@link GeoServerRESTPublisher#removeDatastore(String, String, boolean)}
      */
     public boolean removeDatastore(String workspace, String storename) {
@@ -2337,7 +2336,7 @@ public class GeoServerRESTPublisher {
      * @param storename The name of the Datastore to remove.
      * @param recurse if remove should be performed recursively
      * @throws java.lang.IllegalArgumentException if workspace or storename are null or empty
-     * @return <TT>true</TT> if the datastore was successfully removed.
+     * @return true if the datastore was successfully removed.
      */
     public boolean removeDatastore(String workspace, String storename, final boolean recurse)
             throws IllegalArgumentException {
@@ -2364,7 +2363,7 @@ public class GeoServerRESTPublisher {
      *
      * @param workspace The name of the workspace
      * @param storename The name of the CoverageStore to remove.
-     * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @return true if the CoverageStore was successfully removed.
      * @deprecated use {@link #removeCoverageStore(String, String, boolean)}
      */
     public boolean removeCoverageStore(String workspace, String storename) {
@@ -2377,7 +2376,7 @@ public class GeoServerRESTPublisher {
      * @param workspace The name of the workspace
      * @param storename The name of the CoverageStore to remove.
      * @param recurse if remove should be performed recursively
-     * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @return true if the CoverageStore was successfully removed.
      * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeCoverageStore(final String workspace, final String storename,
@@ -2394,7 +2393,7 @@ public class GeoServerRESTPublisher {
      * @param storename The name of the CoverageStore to remove.
      * @param recurse if remove should be performed recursively
      * @param purge the purge method
-     * @return <TT>true</TT> if the CoverageStore was successfully removed.
+     * @return true if the CoverageStore was successfully removed.
      * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeCoverageStore(final String workspace, final String storename,
@@ -2413,7 +2412,7 @@ public class GeoServerRESTPublisher {
      * @param recurse if remove should be performed recursively
      * @param purge the purge method
      * @throws java.lang.IllegalArgumentException if workspace or storename are null or empty
-     * @return <TT>true</TT> if the store was successfully removed.
+     * @return true if the store was successfully removed.
      */
     public boolean removeStore(String workspace, String storename, StoreType type,
             final boolean recurse, final Purge purge) throws IllegalArgumentException {
@@ -2466,7 +2465,7 @@ public class GeoServerRESTPublisher {
      * @param recurse The recurse parameter is used to recursively delete all resources contained by the specified workspace. This includes data
      *        stores, coverage stores, feature types, etc... Allowable values for this parameter are <i>true</i> or <i>false</i>. The default value is
      *        <i>false</i>.
-     * @return <TT>true</TT> if the WorkSpace was successfully removed.
+     * @return true if the WorkSpace was successfully removed.
      * @throws java.lang.IllegalArgumentException if any.
      */
     public boolean removeWorkspace(String workspace, boolean recurse)
@@ -3027,7 +3026,6 @@ public class GeoServerRESTPublisher {
      * @param workspace the workspace to search for existent coverage
      * @param storeName an existent store name to use as data source
      * @param resourceName an existent resource name
-     * @param resourceName an existent resource name
      * @param re contains the configuration to apply, possibly new resource name
      * @return true if success
      * @throws java.lang.IllegalArgumentException if arguments are null or empty
@@ -3244,7 +3242,6 @@ public class GeoServerRESTPublisher {
      * Remove a granule from a structured coverage by id.
      *
      * @param workspace the GeoServer workspace
-     * @param coverageStore the GeoServer coverageStore
      * @param coverageStore the GeoServer coverageStore
      * @param coverage the name of the target coverage from which we are going to remove
      * @return <code>null</code> in case the call does not succeed, or an instance of {@link RESTStructuredCoverageGranulesList}.

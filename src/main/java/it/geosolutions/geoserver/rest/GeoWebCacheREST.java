@@ -43,7 +43,7 @@ public class GeoWebCacheREST {
     private static final Logger LOGGER = LoggerFactory.getLogger(GeoWebCacheREST.class);
     
     /**
-     * GeoServer instance base URL. E.g.: <TT>http://localhost:8080/geoserver</TT>.
+     * GeoServer instance base URL. E.g.: http://localhost:8080/geoserver.
      */
     private final String restURL;
 
@@ -58,9 +58,9 @@ public class GeoWebCacheREST {
     private final String gspass;
     
     /**
-     * Creates a <TT>GeoServerRESTPublisher</TT> to connect against a GeoServer instance with the given URL and user credentials.
+     * Creates a GeoServerRESTPublisher to connect against a GeoServer instance with the given URL and user credentials.
      *
-     * @param restURL the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param restURL the base GeoServer URL (e.g.: http://localhost:8080/geoserver)
      * @param username auth credential
      * @param password auth credential
      */

@@ -69,7 +69,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Connect to a GeoServer instance to read its data.
- * <BR>Info are returned as <TT>Strings</TT> or, for complex data, as XML elements
+ * <BR>Info are returned as Strings or, for complex data, as XML elements
  * wrapped in proper parsers (e.g.: {@link RESTLayer}, {@link RESTCoverageStore}, ...).
  *
  * @author ETj (etj at geo-solutions.it)
@@ -86,24 +86,24 @@ public class GeoServerRESTReader {
     private GeoServerRESTStyleManager styleManager;
 
     /**
-     * Creates a <TT>GeoServerRESTReader</TT> for a given GeoServer instance and
+     * Creates a GeoServerRESTReader for a given GeoServer instance and
      * no auth credentials.
      * <P><B><I>Note that GeoServer 2.0 REST interface requires username/password credentials by
      * default, if not otherwise configured. </I></B>.
      *
-     * @param gsUrl the base GeoServer URL(e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param gsUrl the base GeoServer URL(e.g.: http://localhost:8080/geoserver)
      */
     public GeoServerRESTReader(URL gsUrl) {
         baseurl = init(gsUrl, null, null);
     }
 
     /**
-     * Creates a <TT>GeoServerRESTReader</TT> for a given GeoServer instance and
+     * Creates a GeoServerRESTReader for a given GeoServer instance and
      * no auth credentials.
      * <P><B><I>Note that GeoServer 2.0 REST interface requires username/password credentials by
      * default, if not otherwise configured. </I></B>.
      *
-     * @param gsUrl the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param gsUrl the base GeoServer URL (e.g.: http://localhost:8080/geoserver)
      * @throws java.net.MalformedURLException if any.
      */
     public GeoServerRESTReader(String gsUrl) throws MalformedURLException {
@@ -111,10 +111,10 @@ public class GeoServerRESTReader {
     }
 
     /**
-     * Creates a <TT>GeoServerRESTReader</TT> for a given GeoServer instance
+     * Creates a GeoServerRESTReader for a given GeoServer instance
      * with the given auth credentials.
      *
-     * @param gsUrl the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param gsUrl the base GeoServer URL (e.g.: http://localhost:8080/geoserver)
      * @param username username auth credential
      * @param password password auth credential
      * @throws java.net.MalformedURLException if any.
@@ -124,10 +124,10 @@ public class GeoServerRESTReader {
     }
 
     /**
-     * Creates a <TT>GeoServerRESTReader</TT> for a given GeoServer instance
+     * Creates a GeoServerRESTReader for a given GeoServer instance
      * with the given auth credentials.
      *
-     * @param gsUrl the base GeoServer URL (e.g.: <TT>http://localhost:8080/geoserver</TT>)
+     * @param gsUrl the base GeoServer URL (e.g.: http://localhost:8080/geoserver)
      * @param username username auth credential
      * @param password password auth credential
      */
@@ -167,12 +167,12 @@ public class GeoServerRESTReader {
     /**
      * Check if a GeoServer instance is running at the given URL.
      * <BR>
-     * Return <TT>true</TT> if the configured GeoServer is up and replies to REST requests.
+     * Return true if the configured GeoServer is up and replies to REST requests.
      * <BR>
      * Send a HTTP GET request to the configured URL.<BR>
-     * Return <TT>true</TT> if a HTTP 200 code (OK) is read from the HTTP response;
+     * Return true if a HTTP 200 code (OK) is read from the HTTP response;
      * any other response code, or connection error, will return a
-     * <TT>false</TT> boolean.
+     * false boolean.
      *
      * @return true if a GeoServer instance was found at the configured URL.
      */
@@ -205,7 +205,7 @@ public class GeoServerRESTReader {
      * Check if a Style exists in the configured GeoServer instance.
      *
      * @param styleName the name of the style to check for.
-     * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
+     * @return true on HTTP 200, false on HTTP 404
      * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String styleName) throws RuntimeException {
@@ -217,7 +217,7 @@ public class GeoServerRESTReader {
      *
      * @param styleName the name of the style to check for.
      * @param quietOnNotFound if true, mute exception if false is returned
-     * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
+     * @return true on HTTP 200, false on HTTP 404
      * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String styleName, boolean quietOnNotFound) throws RuntimeException {

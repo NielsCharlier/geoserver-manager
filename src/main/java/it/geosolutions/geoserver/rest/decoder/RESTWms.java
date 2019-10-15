@@ -34,7 +34,7 @@ import java.util.Map;
 import org.jdom.Element;
 
 /**
- * Parse <TT>WMS</TT>s returned as XML REST objects.
+ * Parse WMSs returned as XML REST objects.
  *
  * <P>This is the XML REST representation:
  * <PRE>

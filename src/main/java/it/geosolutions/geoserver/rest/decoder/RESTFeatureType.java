@@ -39,7 +39,7 @@ import java.util.Map;
 import org.jdom.Element;
 
 /**
- * Parse <TT>FeatureType</TT>s returned as XML REST objects.
+ * Parse FeatureTypes returned as XML REST objects.
  *
  * <P>This is the XML REST representation:
  * <PRE>

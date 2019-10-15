@@ -44,12 +44,12 @@ import java.net.MalformedURLException;
  *
  * <P>
  * The target postgis instance can be customized by defining the following env vars: <ul>
- * <LI><TT>pgHost</TT> (default <TT>localhost</TT>)</LI>
- * <LI><TT>pgPort</TT> (default: <TT>5432</TT>)</LI>
- * <LI><TT>pgDatabase</TT> (default: <TT>test</TT>)</LI>
- * <LI><TT>pgSchema</TT> (default: <TT>public</TT>)</LI>
- * <LI><TT>pgUser</TT> (default: <TT>utest</TT>)</LI>
- * <LI><TT>pgPassword</TT> (default: <TT>ptest</TT>)</LI>
+ * <LI>pgHost (default localhost)</LI>
+ * <LI>pgPort (default: 5432)</LI>
+ * <LI>pgDatabase (default: test)</LI>
+ * <LI>pgSchema (default: public)</LI>
+ * <LI>pgUser (default: utest)</LI>
+ * <LI>pgPassword (default: ptest)</LI>
  * </ul>
  *
  * @author etj

@@ -52,13 +52,13 @@ import org.slf4j.LoggerFactory;
 /**
  * Initializes REST params.
  * <P>
- * <B>These tests are destructive, so you have to explicitly enable them</B> by setting the env var <TT>resttest</TT> to <TT>true</TT>.
+ * <B>These tests are destructive, so you have to explicitly enable them</B> by setting the env var resttest to true.
  * <P>
  * The target geoserver instance can be customized by defining the following env vars:
  * <ul>
- * <LI><TT>resturl</TT> (default <TT>http://localhost:8080/geoserver</TT>)</LI>
- * <LI><TT>restuser</TT> (default: <TT>admin</TT>)</LI>
- * <LI><TT>restpw</TT> (default: <TT>geoserver</TT>)</LI>
+ * <LI>resturl (default http://localhost:8080/geoserver)</LI>
+ * <LI>restuser (default: admin)</LI>
+ * <LI>restpw (default: geoserver)</LI>
  * </ul>
  * 
  * @author etj

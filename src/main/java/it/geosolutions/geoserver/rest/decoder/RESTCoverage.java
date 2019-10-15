@@ -35,7 +35,7 @@ import java.util.Map;
 import org.jdom.Element;
 
 /**
- * Parse <TT>Coverage</TT>s returned as XML REST objects.
+ * Parse Coverages returned as XML REST objects.
  *
  * <P>This is the XML REST representation:
  * <PRE>

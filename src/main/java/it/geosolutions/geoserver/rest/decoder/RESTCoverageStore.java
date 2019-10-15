@@ -30,7 +30,7 @@ import it.geosolutions.geoserver.rest.decoder.utils.JDOMBuilder;
 import org.jdom.Element;
 
 /**
- * Parse <TT>CoverageStore</TT>s returned as XML REST objects.
+ * Parse CoverageStores returned as XML REST objects.
  * <P>
  * This is the XML document returned by GeoServer when requesting a CoverageStore:
  * <PRE>

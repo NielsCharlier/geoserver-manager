@@ -77,7 +77,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Check if a Style exists in the configured GeoServer instance.
      *
      * @param name the name of the style to check for.
-     * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
+     * @return true on HTTP 200, false on HTTP 404
      * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
      */
     public boolean existsStyle(String name) throws RuntimeException {
@@ -89,7 +89,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     *
     * @param name the name of the style to check for.
     * @param quietOnNotFound if true, mute exception if false is returned
-    * @return <TT>true</TT> on HTTP 200, <TT>false</TT> on HTTP 404
+    * @return true on HTTP 200, false on HTTP 404
     * @throws java.lang.RuntimeException if any other HTTP code than 200 or 404 was retrieved.
     */
    public boolean existsStyle(String name, boolean quietOnNotFound) {
@@ -234,7 +234,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldBody the full SLD document as a String.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(String sldBody) {
         /*
@@ -258,7 +258,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      */
     public boolean publishStyle(final String sldBody, final String name)
@@ -283,7 +283,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldFile the File containing the SLD document.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile) {
         return publishStyle(sldFile, null);
@@ -294,7 +294,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(File sldFile, String name) {
         String sUrl = buildPostUrl(null, name);
@@ -310,7 +310,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(final String sldBody, final String name, final boolean raw) {
         /*
@@ -341,7 +341,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean publishStyle(final File sldFile, final String name, final boolean raw) {
         /*
@@ -367,7 +367,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final File sldFile, final String name, final boolean raw) 
@@ -401,7 +401,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldBody the new SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name, final boolean raw) 
@@ -434,7 +434,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyle(final String sldBody, final String name)
@@ -462,7 +462,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      */
     public boolean updateStyle(final File sldFile, final String name)
@@ -489,7 +489,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      */
     public boolean removeStyle(String styleName, final boolean purge)
@@ -522,7 +522,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * The Style will be unpublished and the related SLD file will be removed.
      *
      * @param styleName the name of the Style to remove.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      */
     public boolean removeStyle(String styleName) {
         try {
@@ -543,7 +543,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldBody the full SLD document as a String.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
      */
@@ -563,7 +563,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the full SLD document as a String.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body is null or empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -583,7 +583,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * Store and publish a Style.
      *
      * @param sldFile the File containing the SLD document.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
      */
@@ -596,7 +596,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
      */
@@ -612,7 +612,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param zipFile the ZIP file.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
      */
@@ -628,7 +628,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldBody the new SLD document as a String.
      * @param name the Style name to update.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -655,7 +655,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * @param sldBody the new SLD document as a String.
      * @param name the Style name.
      * @param raw the raw format
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the style body or name are null or empty.
      */
     public boolean updateStyleInWorkspace(final String sldBody, final String workspace, 
@@ -689,7 +689,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param sldFile the File containing the SLD document.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -713,9 +713,9 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
     /**
      * Update a Style.
      *
-     * @param sldFile the File containing the SLD document.
+     * @param encoder the style metadata.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -740,7 +740,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param zipFile the zip file.
      * @param name the Style name.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if the sldFile file or name are null or name is empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -768,7 +768,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      *
      * @param styleName the name of the Style to remove.
      * @param purge remove the related SLD file from disk.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @throws java.lang.IllegalArgumentException if styleName is null or empty.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
@@ -800,7 +800,7 @@ public class GeoServerRESTStyleManager extends GeoServerRESTAbstractManager {
      * The Style will be unpublished and the related SLD file will be removed.
      *
      * @param styleName the name of the Style to remove.
-     * @return <TT>true</TT> if the operation completed successfully.
+     * @return true if the operation completed successfully.
      * @since GeoServer 2.2
      * @param workspace a {@link java.lang.String} object.
      */

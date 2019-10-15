@@ -30,7 +30,7 @@ import it.geosolutions.geoserver.rest.decoder.utils.JDOMBuilder;
 import org.jdom.Element;
 
 /**
- * Parse <TT>WmsStore</TT>s returned as XML REST objects.
+ * Parse WmsStores returned as XML REST objects.
  * <P>
  * This is the XML document returned by GeoServer when requesting a WmsStore:
  * <PRE>

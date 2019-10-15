@@ -31,7 +31,7 @@ import java.net.URI;
 import org.jdom.Element;
 
 /**
- * Parse <TT>namespace</TT>s returned as XML REST objects.
+ * Parse namespaces returned as XML REST objects.
  *
  * This is the XML REST representation:
  * <pre>{@code
