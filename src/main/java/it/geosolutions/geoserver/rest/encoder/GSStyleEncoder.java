@@ -118,5 +118,19 @@ public class GSStyleEncoder extends PropertyXMLEncoder {
         legend.addContent(elHeight);
         addContent(legend);
     }
+    
+    public void setFormat(String format) {
+        Element elFormat = new Element("format");
+        elFormat.setText(format);
+        addContent(elFormat);
+    }
+    
+    public void setLanguageVersion(String version) {
+        Element elLanguageVersion = new Element("languageVersion");
+        Element elVersion = new Element("version");
+        elVersion.setText(version);
+        elLanguageVersion.addContent(elVersion);
+        addContent(elLanguageVersion);
+    }
 
 }
